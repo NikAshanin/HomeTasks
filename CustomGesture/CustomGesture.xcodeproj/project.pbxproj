@@ -58,11 +58,11 @@
 		7F6C267F1FBB3669008A981B /* CustomGesture */ = {
 			isa = PBXGroup;
 			children = (
-				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
+				5F357CB81FBE0C04008E93A0 /* OLetterRecognizer.swift */,
+				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
 				5F357CB61FBE0C04008E93A0 /* ellipse.png */,
-				5F357CB81FBE0C04008E93A0 /* OLetterRecognizer.swift */,
 				7F6C26871FBB3669008A981B /* Assets.xcassets */,
 				7F6C26891FBB3669008A981B /* LaunchScreen.storyboard */,
 				7F6C268C1FBB3669008A981B /* Info.plist */,
