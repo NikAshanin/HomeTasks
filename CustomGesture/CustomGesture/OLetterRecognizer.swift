@@ -11,7 +11,7 @@ final class OLetterRecognizer: UIGestureRecognizer {
         static let enumCount = 4
     }
 
-    private let accuracy: CGFloat = 50
+    private let accuracy: CGFloat = 30
     private var firstTap: CGPoint?
     private var allTouchesPoints: [CGPoint] = []
     private var directions: [Direction] = []
@@ -51,10 +51,8 @@ final class OLetterRecognizer: UIGestureRecognizer {
         } else if currentPoint.x > previousPoint.x && currentPoint.y < previousPoint.y {
             isDirectionChanged = directions.appendIfNotEqualToLastElement(newElement: .toTopRight)
         }
-        if isDirectionChanged {
-            if directions.count > 5 {
+        if isDirectionChanged && directions.count > 5 {
                 state = .failed
-            }
         }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
