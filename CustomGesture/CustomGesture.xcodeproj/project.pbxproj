@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002951441FBF43A900E7191C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 002951431FBF43A900E7191C /* .swiftlint.yml */; };
 		002951461FBF445900E7191C /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002951451FBF445900E7191C /* CircleView.swift */; };
 		002951481FBF446800E7191C /* CircleGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002951471FBF446800E7191C /* CircleGestureRecognizer.swift */; };
 		7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26801FBB3669008A981B /* AppDelegate.swift */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		002951431FBF43A900E7191C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .swiftlint.yml; path = "../../../Library/Mobile Documents/com~apple~CloudDocs/Desktop/Swift/Epam/Circle_Gesture/.swiftlint.yml"; sourceTree = "<group>"; };
 		002951451FBF445900E7191C /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		002951471FBF446800E7191C /* CircleGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizer.swift; sourceTree = "<group>"; };
 		7F6C267D1FBB3669008A981B /* CustomGesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomGesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,7 +42,6 @@
 		7F6C26741FBB3668008A981B = {
 			isa = PBXGroup;
 			children = (
-				002951431FBF43A900E7191C /* .swiftlint.yml */,
 				7F6C267F1FBB3669008A981B /* CustomGesture */,
 				7F6C267E1FBB3669008A981B /* Products */,
 			);
@@ -134,7 +131,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				002951441FBF43A900E7191C /* .swiftlint.yml in Resources */,
 				7F6C268B1FBB3669008A981B /* LaunchScreen.storyboard in Resources */,
 				7F6C26881FBB3669008A981B /* Assets.xcassets in Resources */,
 				7F6C26861FBB3669008A981B /* Main.storyboard in Resources */,
