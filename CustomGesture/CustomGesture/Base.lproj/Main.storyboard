@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDL-tu-E5s" customClass="CircleView" customModule="Circle_Gesture" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDL-tu-E5s" customClass="CircleView" customModule="CustomGesture" customModuleProvider="target">
                                 <rect key="frame" x="37" y="133" width="300" height="400"/>
                                 <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -93,7 +93,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="BCT-DA-fzt">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" id="eTb-WS-JeH" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" modalTransitionStyle="crossDissolve" id="eTb-WS-JeH" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qxp-fY-vPH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

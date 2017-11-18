@@ -21,11 +21,6 @@ final class GestureViewController: UIViewController {
         guard let tabBar = storyboard?.instantiateViewController(withIdentifier: identifier) as? UITabBarController else {
             return
         }
-        tabBar.modalTransitionStyle = .crossDissolve
         present(tabBar, animated: true)
-    }
-
-    private func createCircleView() {
-
     }
 }
