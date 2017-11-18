@@ -41,8 +41,10 @@ final class CalculatorViewController: UIViewController {
         }
     }
     private let decimalSeparator = formatter.decimalSeparator ?? "."
+    private let calculation = Calculation()
     private var stillTyping = false
     private var secondButtons = false
+    private var redoArray: [String] = []
     private let secondButtonsDictionary = [
         "eˣ": "yˣ",
         "10ˣ": "2ˣ",
@@ -69,6 +71,13 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(undo))
+        rightSwipe.direction = .right
+        resultView.addGestureRecognizer(rightSwipe)
+
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(redo))
+        leftSwipe.direction = .left
+        resultView.addGestureRecognizer(leftSwipe)
     }
 
     @IBAction private func digitPressed(_ sender: UIButton) {
@@ -113,8 +122,59 @@ final class CalculatorViewController: UIViewController {
                 return
         }
         if stillTyping {
-
+            calculation.setOperand(operand)
+            stillTyping = false
         }
+        calculation.performOperation(mathSign)
+        result = calculation.result
+    }
+
+    @IBAction private func radianButtonPressed(_ sender: UIButton) {
+        if radianButton.currentTitle == "Rad" {
+            radianButton.setTitle("Deg", for: .normal)
+            radianLabel.isHidden = false
+            calculation.isRadian = true
+        } else {
+            radianButton.setTitle("Rad", for: .normal)
+            radianLabel.isHidden = true
+            calculation.isRadian = false
+        }
+    }
+
+    @IBAction private func clear(_ sender: UIButton) {
+        calculation.clearAll()
+        stillTyping = false
+        result = 0
+        redoArray = []
+    }
+    @objc private func undo() {
+        if stillTyping {
+            guard var text = resultLabel.text else {
+                return
+            }
+            redoArray.append(String(describing: text.last))
+            text.remove(at: text.index(before: text.endIndex))
+            resultLabel.text = text
+            if text.isEmpty {
+                stillTyping = false
+                resultLabel.text = "0"
+            }
+        } else {
+            redoArray.removeAll(keepingCapacity: false)
+            calculation.undoCalculationParameter()
+            result = calculation.result
+        }
+    }
+
+    @objc private func redo() {
+        guard let text = resultLabel.text else {
+            return
+        }
+        if !redoArray.isEmpty && stillTyping {
+            resultLabel.text = text + redoArray.removeLast()
+            print(redoArray)
+        }
+        calculation.redoCalculationParameter()
     }
 
     private func changeButtons() {

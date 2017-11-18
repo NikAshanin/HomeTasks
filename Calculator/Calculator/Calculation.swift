@@ -10,13 +10,13 @@ import Foundation
 final class Calculation {
 
     private var operand: Double = 0
-    private var isRadian = false
-    private var undoParameters: [CalculationPatameter] = []
+    private var undoParameters: [CalculationParameter] = []
+    var isRadian = false
     var result: Double {
         return operand
     }
 
-    private enum CalculationPatameter {
+    private enum CalculationParameter {
         case operand(Double)
         case operation(String)
     }
@@ -30,6 +30,7 @@ final class Calculation {
         case binary((Double, Double) -> Double)
         case equal
     }
+
     private var operationsDictionary = [
         "Rand": Operation.rand { Double(arc4random()) / Double(UInt32.max) },
         "e": Operation.number(M_E),
@@ -88,7 +89,7 @@ final class Calculation {
             return
 
         }
-        stackArray.append(CalculationParameters.operation(mathSign))
+        calculationParameters.append(CalculationParameter.operation(mathSign))
         switch operation {
         case .rand(let function):
             operand = function()
@@ -107,5 +108,74 @@ final class Calculation {
         case .equal:
             executeBinaryOperation()
         }
+    }
+
+    private var calculationParameters: [CalculationParameter] = []
+    private var calculationSequence: [CalculationParameter] {
+        get {
+            return calculationParameters
+        }
+        set {
+            clear()
+            for obj in newValue {
+                switch obj {
+                case .operand(let operand):
+                    setOperand(operand)
+                case .operation(let mathSign):
+                    performOperation(mathSign)
+                }
+            }
+        }
+    }
+
+    private func executeBinaryOperation() {
+        guard let binaryOperation = binaryOperation else {
+            return
+        }
+        operand = binaryOperation.perform(with: operand)
+        self.binaryOperation = nil
+    }
+
+    func clearAll() {
+        clear()
+        undoParameters.removeAll(keepingCapacity: false)
+    }
+    private func clear() {
+        operand = 0
+        binaryOperation = nil
+        calculationParameters.removeAll(keepingCapacity: false)
+    }
+
+    func setOperand(_ operand: Double) {
+        self.operand = operand
+        calculationParameters.append(CalculationParameter.operand(operand))
+    }
+    func undoCalculationParameter() {
+        guard !calculationParameters.isEmpty else {
+            return
+
+        }
+        undoParameters.append(calculationParameters.removeLast())
+        calculationSequence = calculationParameters
+    }
+
+    func redoCalculationParameter() {
+        if !undoParameters.isEmpty, let last = undoParameters.last {
+            calculationParameters.append(last)
+            calculationSequence = calculationParameters
+            undoParameters = Array(undoParameters.dropLast())
+        }
+    }
+    // Factorial with gamma function for all complex numbers except the non-positive integers
+    static private func factorial(_ value: Double) -> Double {
+        var factorial: Double = 0
+
+        if (fmod(value, floor(value)) == 0) {
+            factorial = round(exp(lgamma(value + 1)))
+        } else {
+            factorial = exp(lgamma(value + 1))
+            print(factorial)
+        }
+        return factorial
     }
 }
