@@ -149,10 +149,11 @@ final class CalculatorViewController: UIViewController {
     }
     @objc private func undo() {
         if stillTyping {
-            guard var text = resultLabel.text else {
+            guard var text = resultLabel.text,
+            let last = text.last else {
                 return
             }
-            redoArray.append(String(describing: text.last))
+            redoArray.append(String(describing: last))
             text.remove(at: text.index(before: text.endIndex))
             resultLabel.text = text
             if text.isEmpty {
