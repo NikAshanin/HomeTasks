@@ -24,15 +24,15 @@ class ORecognizer: UIGestureRecognizer {
         }
         return nil
     }
-    var sqrtX: CGFloat! {
+    var squareX: CGFloat! {
         if let nowPoint = currentPoint {
-            return distantionSqrtForX(pointA: midPoint, andPointB: nowPoint)
+            return distantionSquareForX(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
-    var sqrtY: CGFloat! {
+    var squareY: CGFloat! {
         if let nowPoint = currentPoint {
-            return distantionSqrtForY(pointA: midPoint, andPointB: nowPoint)
+            return distantionSquareForY(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
@@ -54,11 +54,11 @@ class ORecognizer: UIGestureRecognizer {
         }
         return angle
     }
-    func distantionSqrtForX(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
+    func distantionSquareForX(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
         let dx = CGFloat(pointA.x - pointB.x)
         return dx*dx
     }
-    func distantionSqrtForY(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
+    func distantionSquareForY(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
         let dy = CGFloat(pointA.y - pointB.y)
         return dy*dy
     }
@@ -71,7 +71,7 @@ class ORecognizer: UIGestureRecognizer {
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
-        if let x = sqrtX, let y = sqrtY {
+        if let x = squareX, let y = squareY {
             
             if (x / (innerX! * innerX!) + y / (innerY! * innerY!)) <= 1 {
                 state = .failed
