@@ -7,12 +7,12 @@ final class GestureViewController: UIViewController {
         super.viewDidLoad()
         imageView.image = #imageLiteral(resourceName: "circle.jpg")
         imageView.contentMode = .scaleAspectFit
-        let oRecognizer = ORecognizer (midPoint: self.view.center, target: self, action: #selector(oRecognized))
+        let oRecognizer = ORecognizer (midPoint: view.center, target: self, action: #selector(oRecognized))
         view.addGestureRecognizer(oRecognizer)
     }
     @objc private func oRecognized() {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar")
-        self.present(homeViewController, animated: true, completion: nil)
+        present(homeViewController, animated: true, completion: nil)
     }
 }

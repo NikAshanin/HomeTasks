@@ -2,7 +2,6 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 let numberpi = CGFloat(Double.pi)
-
 extension CGFloat {
     var degrees: CGFloat {
         return self * 180 / numberpi
@@ -10,34 +9,34 @@ extension CGFloat {
 }
 
 class ORecognizer: UIGestureRecognizer {
-    var midPoint = CGPoint.zero
-    var innerX: CGFloat?
-    var innerY: CGFloat?
-    var firstAngle: CGFloat?
-    var outerX: CGFloat?
-    var outerY: CGFloat?
+    var midPoint: CGPoint!
+    var innerX: CGFloat!
+    var innerY: CGFloat!
+    var firstAngle: CGFloat!
+    var outerX: CGFloat!
+    var outerY: CGFloat!
     var strokePart: UInt = 0
-    var currentPoint: CGPoint?
-    var previousPoint: CGPoint?
-    var angle: CGFloat? {
-        if let nowPoint = self.currentPoint {
-            return self.angleForPoint(point: nowPoint)
+    var currentPoint: CGPoint!
+    var previousPoint: CGPoint!
+    var angle: CGFloat! {
+        if let nowPoint = currentPoint {
+            return angleForPoint(point: nowPoint)
         }
         return nil
     }
-    var absX: CGFloat? {
-        if let nowPoint = self.currentPoint {
-            return self.absForX(pointA: self.midPoint, andPointB: nowPoint)
+    var absX: CGFloat! {
+        if let nowPoint = currentPoint {
+            return absForX(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
-    var absY: CGFloat? {
-        if let nowPoint = self.currentPoint {
-            return self.absForY(pointA: self.midPoint, andPointB: nowPoint)
+    var absY: CGFloat! {
+        if let nowPoint = currentPoint {
+            return absForY(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
-    init(midPoint: CGPoint, innerX: CGFloat?, innerY: CGFloat?, outerX: CGFloat?, outerY: CGFloat?, target: AnyObject?, action: Selector) {
+    init(midPoint: CGPoint, innerX: CGFloat, innerY: CGFloat, outerX: CGFloat, outerY: CGFloat, target: AnyObject, action: Selector) {
         super.init(target: target, action: action)
         self.midPoint = midPoint
         self.innerX = innerX
@@ -46,7 +45,7 @@ class ORecognizer: UIGestureRecognizer {
         self.outerY = outerY
     }
     convenience init(midPoint: CGPoint, target: AnyObject?, action: Selector) {
-        self.init(midPoint: midPoint, innerX: 80, innerY: 135, outerX: 150, outerY: 200, target: target, action: action)
+        self.init(midPoint: midPoint, innerX: 80, innerY: 135, outerX: 150, outerY: 200, target: target!, action: action)
     }
     func angleForPoint(point: CGPoint) -> CGFloat {
         var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + numberpi/2
@@ -56,11 +55,11 @@ class ORecognizer: UIGestureRecognizer {
         return angle
     }
     func absForX(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
-        let dx = abs(Float(pointA.x - pointB.x))
+        let dx = Float(pointA.x - pointB.x)
         return CGFloat(dx*dx)
     }
     func absForY(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
-        let dy = abs(Float(pointA.y - pointB.y))
+        let dy = Float(pointA.y - pointB.y)
         return CGFloat(dy*dy)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -72,8 +71,8 @@ class ORecognizer: UIGestureRecognizer {
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
-        if let x = self.absX, let y = self.absY {
-
+        if let x = absX, let y = absY {
+            
             if (x / (innerX! * innerX!) + y / (innerY! * innerY!)) <= 1 {
                 state = .failed
             }
@@ -85,8 +84,8 @@ class ORecognizer: UIGestureRecognizer {
             return
         }
         if let firstTouch = touches.first {
-            currentPoint = firstTouch.location(in: self.view)
-            previousPoint = firstTouch.previousLocation(in: self.view)
+            currentPoint = firstTouch.location(in: view)
+            previousPoint = firstTouch.previousLocation(in: view)
         }
         if strokePart == 0 &&
             (angle?.degrees)! > CGFloat(225) && (angle?.degrees)! <= CGFloat(315) {
@@ -116,11 +115,12 @@ class ORecognizer: UIGestureRecognizer {
     override func reset() {
         super.reset()
         strokePart = 0
-        currentPoint = nil
         previousPoint = nil
+        currentPoint = nil
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesEnded(touches, with: event)
         reset()
     }
 }
+
