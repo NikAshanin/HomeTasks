@@ -33,6 +33,9 @@ opt_in_rules:
 
   - vertical_parameter_alignment_on_call
 
+disabled_rules: 
+  - trailing_whitespace
+
 excluded:
   - Carthage
   - Pods
@@ -60,4 +63,4 @@ identifier_name:
     - y
     - z
 
-warning_threshold: 1
+#warning_threshold: 1
