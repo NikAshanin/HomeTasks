@@ -24,15 +24,15 @@ class ORecognizer: UIGestureRecognizer {
         }
         return nil
     }
-    var absX: CGFloat! {
+    var sqrtX: CGFloat! {
         if let nowPoint = currentPoint {
-            return absForX(pointA: midPoint, andPointB: nowPoint)
+            return distantionSqrtForX(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
-    var absY: CGFloat! {
+    var sqrtY: CGFloat! {
         if let nowPoint = currentPoint {
-            return absForY(pointA: midPoint, andPointB: nowPoint)
+            return distantionSqrtForY(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
@@ -54,13 +54,13 @@ class ORecognizer: UIGestureRecognizer {
         }
         return angle
     }
-    func absForX(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
-        let dx = Float(pointA.x - pointB.x)
-        return CGFloat(dx*dx)
+    func distantionSqrtForX(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
+        let dx = CGFloat(pointA.x - pointB.x)
+        return dx*dx
     }
-    func absForY(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
-        let dy = Float(pointA.y - pointB.y)
-        return CGFloat(dy*dy)
+    func distantionSqrtForY(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
+        let dy = CGFloat(pointA.y - pointB.y)
+        return dy*dy
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesBegan(touches, with: event)
@@ -71,7 +71,7 @@ class ORecognizer: UIGestureRecognizer {
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
-        if let x = absX, let y = absY {
+        if let x = sqrtX, let y = sqrtY {
             
             if (x / (innerX! * innerX!) + y / (innerY! * innerY!)) <= 1 {
                 state = .failed
