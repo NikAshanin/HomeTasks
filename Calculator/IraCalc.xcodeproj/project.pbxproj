@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		497FC2B21FBA1386001067E7 /* OperationStackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FC2B11FBA1386001067E7 /* OperationStackController.swift */; };
+		49B0C9141FA32191000866CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0C9131FA32191000866CF /* AppDelegate.swift */; };
+		49B0C9161FA32191000866CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0C9151FA32191000866CF /* ViewController.swift */; };
+		49B0C9191FA32191000866CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B0C9171FA32191000866CF /* Main.storyboard */; };
+		49B0C91B1FA32191000866CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B0C91A1FA32191000866CF /* Assets.xcassets */; };
+		49B0C91E1FA32191000866CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B0C91C1FA32191000866CF /* LaunchScreen.storyboard */; };
+		49FF14C01FA3B307004F30F2 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FF14BF1FA3B307004F30F2 /* Calculator.swift */; };
+		50D9024A44665061B01CE162 /* Pods_IraCalc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB01673B7C5BE004C20CF9B /* Pods_IraCalc.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3405934FF848F36C0B9E1676 /* Pods-IraCalc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IraCalc.release.xcconfig"; path = "Pods/Target Support Files/Pods-IraCalc/Pods-IraCalc.release.xcconfig"; sourceTree = "<group>"; };
+		497FC2B11FBA1386001067E7 /* OperationStackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationStackController.swift; sourceTree = "<group>"; };
+		49B0C9101FA32191000866CF /* IraCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IraCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49B0C9131FA32191000866CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49B0C9151FA32191000866CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49B0C9181FA32191000866CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49B0C91A1FA32191000866CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49B0C91D1FA32191000866CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		49B0C91F1FA32191000866CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49FF14BF1FA3B307004F30F2 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		7DB01673B7C5BE004C20CF9B /* Pods_IraCalc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IraCalc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4FEB4A9E7EAE6C938C8FB74 /* Pods-IraCalc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IraCalc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IraCalc/Pods-IraCalc.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49B0C90D1FA32191000866CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50D9024A44665061B01CE162 /* Pods_IraCalc.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EA9DE9E6142CECBE75586ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D4FEB4A9E7EAE6C938C8FB74 /* Pods-IraCalc.debug.xcconfig */,
+				3405934FF848F36C0B9E1676 /* Pods-IraCalc.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		49B0C9071FA32190000866CF = {
+			isa = PBXGroup;
+			children = (
+				49B0C9121FA32191000866CF /* IraCalc */,
+				49B0C9111FA32191000866CF /* Products */,
+				2EA9DE9E6142CECBE75586ED /* Pods */,
+				D71674E5EDADF15736049957 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49B0C9111FA32191000866CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49B0C9101FA32191000866CF /* IraCalc.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49B0C9121FA32191000866CF /* IraCalc */ = {
+			isa = PBXGroup;
+			children = (
+				49B0C9261FA321ED000866CF /* Supporting Files */,
+				49B0C9151FA32191000866CF /* ViewController.swift */,
+				49B0C9171FA32191000866CF /* Main.storyboard */,
+				49FF14BF1FA3B307004F30F2 /* Calculator.swift */,
+				497FC2B11FBA1386001067E7 /* OperationStackController.swift */,
+			);
+			path = IraCalc;
+			sourceTree = "<group>";
+		};
+		49B0C9261FA321ED000866CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49B0C9131FA32191000866CF /* AppDelegate.swift */,
+				49B0C91A1FA32191000866CF /* Assets.xcassets */,
+				49B0C91C1FA32191000866CF /* LaunchScreen.storyboard */,
+				49B0C91F1FA32191000866CF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D71674E5EDADF15736049957 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DB01673B7C5BE004C20CF9B /* Pods_IraCalc.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49B0C90F1FA32191000866CF /* IraCalc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49B0C9221FA32191000866CF /* Build configuration list for PBXNativeTarget "IraCalc" */;
+			buildPhases = (
+				32E4EC547E3F26B3204585BB /* [CP] Check Pods Manifest.lock */,
+				49B0C90C1FA32191000866CF /* Sources */,
+				49B0C90D1FA32191000866CF /* Frameworks */,
+				49B0C90E1FA32191000866CF /* Resources */,
+				49817E561FA65D4E005DD605 /* Swiftlint */,
+				DAC6A7459C34F309BB8BF448 /* [CP] Embed Pods Frameworks */,
+				A894B20618598B7CF15E76EB /* [CP] Copy Pods Resources */,
+				4999711B1FA79F62000B01B4 /* CopyPaste Detection */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IraCalc;
+			productName = IraCalc;
+			productReference = 49B0C9101FA32191000866CF /* IraCalc.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49B0C9081FA32190000866CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Ira;
+				TargetAttributes = {
+					49B0C90F1FA32191000866CF = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 49B0C90B1FA32190000866CF /* Build configuration list for PBXProject "IraCalc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49B0C9071FA32190000866CF;
+			productRefGroup = 49B0C9111FA32191000866CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49B0C90F1FA32191000866CF /* IraCalc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49B0C90E1FA32191000866CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49B0C91E1FA32191000866CF /* LaunchScreen.storyboard in Resources */,
+				49B0C91B1FA32191000866CF /* Assets.xcassets in Resources */,
+				49B0C9191FA32191000866CF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32E4EC547E3F26B3204585BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IraCalc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49817E561FA65D4E005DD605 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
+		};
+		4999711B1FA79F62000B01B4 /* CopyPaste Detection */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "CopyPaste Detection";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#Running CPD\n#pmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 100 --lanfuage swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n#Running script\n#php ./cpd_script.php -cpd-xml cpd-output.xml";
+		};
+		A894B20618598B7CF15E76EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IraCalc/Pods-IraCalc-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAC6A7459C34F309BB8BF448 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IraCalc/Pods-IraCalc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49B0C90C1FA32191000866CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				497FC2B21FBA1386001067E7 /* OperationStackController.swift in Sources */,
+				49B0C9161FA32191000866CF /* ViewController.swift in Sources */,
+				49B0C9141FA32191000866CF /* AppDelegate.swift in Sources */,
+				49FF14C01FA3B307004F30F2 /* Calculator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		49B0C9171FA32191000866CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49B0C9181FA32191000866CF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49B0C91C1FA32191000866CF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49B0C91D1FA32191000866CF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49B0C9201FA32191000866CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		49B0C9211FA32191000866CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49B0C9231FA32191000866CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4FEB4A9E7EAE6C938C8FB74 /* Pods-IraCalc.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IraCalc/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iraapp.IraCalc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		49B0C9241FA32191000866CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3405934FF848F36C0B9E1676 /* Pods-IraCalc.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IraCalc/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iraapp.IraCalc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49B0C90B1FA32190000866CF /* Build configuration list for PBXProject "IraCalc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49B0C9201FA32191000866CF /* Debug */,
+				49B0C9211FA32191000866CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49B0C9221FA32191000866CF /* Build configuration list for PBXNativeTarget "IraCalc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49B0C9231FA32191000866CF /* Debug */,
+				49B0C9241FA32191000866CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49B0C9081FA32190000866CF /* Project object */;
+}
