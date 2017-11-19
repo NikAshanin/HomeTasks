@@ -11,7 +11,7 @@ class CircleGestureRecognizer: UIGestureRecognizer {
 
     var innerRadius: CGFloat?
     var outerRadius: CGFloat?
-    var midPoint = CGPoint.zero
+    let midPoint: CGPoint
 
     // Distance between touch and middle point
     private var distance: CGFloat? {
@@ -43,8 +43,8 @@ class CircleGestureRecognizer: UIGestureRecognizer {
     }
 
     private func distanceBetween(pointA: CGPoint, and pointB: CGPoint) -> CGFloat {
-        let x = CGFloat(pointA.x - pointB.x)
-        let y = CGFloat(pointA.y - pointB.y)
+        let x = pointA.x - pointB.x
+        let y = pointA.y - pointB.y
         return CGFloat(sqrt(x * x + y * y))
     }
 
