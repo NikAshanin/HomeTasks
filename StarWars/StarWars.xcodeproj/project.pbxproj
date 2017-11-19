@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00C8F20A1FC1A0B00010CEBC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F2091FC1A0B00010CEBC /* Networking.swift */; };
 		00C8F20C1FC21BB20010CEBC /* EmptyTableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F20B1FC21BB20010CEBC /* EmptyTableViewHelper.swift */; };
+		00C8F20E1FC224D40010CEBC /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F20D1FC224D40010CEBC /* Film.swift */; };
 		11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C651FBDB6D2008C570F /* AppDelegate.swift */; };
 		11396C681FBDB6D2008C570F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* ViewController.swift */; };
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		00C8F2091FC1A0B00010CEBC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		00C8F20B1FC21BB20010CEBC /* EmptyTableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewHelper.swift; sourceTree = "<group>"; };
+		00C8F20D1FC224D40010CEBC /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		11396C621FBDB6D2008C570F /* StarWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11396C651FBDB6D2008C570F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11396C671FBDB6D2008C570F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
+				00C8F20D1FC224D40010CEBC /* Film.swift */,
 			);
 			path = StarWars;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C8F20E1FC224D40010CEBC /* Film.swift in Sources */,
 				00C8F20A1FC1A0B00010CEBC /* Networking.swift in Sources */,
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,

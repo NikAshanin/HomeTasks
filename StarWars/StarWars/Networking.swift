@@ -9,7 +9,7 @@ import Foundation
 
 final class Networking {
     typealias JSONDictionary = [String: Any]
-    typealias Film = (title: String, year: Date)
+//    typealias Film = (title: String, year: Date)
 
     private let session = URLSession(configuration: .default)
     private var films: [Film] = []
@@ -72,13 +72,13 @@ final class Networking {
                 }
                 guard let filmsJSON = filmsJSON,
                     let title = filmsJSON["title"] as? String,
-                    let year = filmsJSON["release_date"] as? String,
-                    let yearDate = formatter.date(from: year) else {
+                    let date = filmsJSON["release_date"] as? String,
+                    let releaseDate = formatter.date(from: date) else {
                         print("no title")
                         return
                 }
 
-                self?.films.append((title, yearDate))
+                self?.films.append(Film(title: title, releaseDate: releaseDate))
                 self?.group.leave()
             }.resume()
         }
