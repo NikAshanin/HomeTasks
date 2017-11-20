@@ -6,13 +6,13 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var searchTextField: UITextField! { didSet { searchTextField.delegate = self } }
-    
+
     private let urlTemplate = "https://swapi.co/api/people/?search="
     private let formatter = DateFormatter()
     private var allCharacters = [Character]()
     private var characters = [Character]()
     private var lastUrl: URL?
-    
+
     private var url: URL? {
         var newUrl: URL?
         if let validSearchText = searchText?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
@@ -20,7 +20,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         return newUrl
     }
-    
+
     var searchText: String? {
         didSet {
             spinner.startAnimating()
@@ -33,11 +33,11 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     private func fetchCharacters() {
         lastUrl = url
         if let url = lastUrl {
@@ -56,7 +56,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             group.wait()
         }
     }
-    
+
     private func checkFetchedCharacters() {
         let countOfCharacters = getValidCharacters()
         if countOfCharacters == 0 {
@@ -68,7 +68,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self?.spinner.stopAnimating()
         }
     }
-    
+
     private func getValidCharacters() -> Int {
         characters = allCharacters.filter {character in
             if let searchText = searchText, character.name.lowercased().contains(searchText.lowercased()) {
@@ -78,7 +78,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         return characters.count
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return characters.count
     }
@@ -86,32 +86,32 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characters[section].films.count
     }
-    
+
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
-     
+
         let films = characters[indexPath.section].films
         let filmName = films[indexPath.row]
         cell.textLabel?.text = filmName.0
-     
+
         return cell
      }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return characters[section].name
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dateString = characters[indexPath.section].films[indexPath.row].1
         formatter.dateFormat = "yyyy-mm-dd"
         guard let data = formatter.date(from: dateString) else {
-            return 
+            return
         }
         formatter.dateFormat = "yyyy"
         let year = formatter.string(from: data)
         dateLabel.text = "Этот фильм вышел в \(year) году"
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchTextField {
             searchText = textField.text

@@ -3,9 +3,9 @@ import Foundation
 class Character {
 
     let name: String
-    let films: [(String, String)]   
+    let films: [(String, String)]
     private let info: [String: Any]
-    
+
     init(info: [String: Any]) {
         self.info = info
         guard let name = info["name"] as? String, let filmsUrl = info["films"] as? [String] else {
