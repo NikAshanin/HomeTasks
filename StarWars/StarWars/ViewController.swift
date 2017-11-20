@@ -1,10 +1,10 @@
 import UIKit
 
-final class ViewController: UIViewController{
+final class ViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var dateOfFilmLabel: UILabel!
-    @IBOutlet weak var nameStaffLabel: UILabel!
+    @IBOutlet weak private var nameStaffLabel: UILabel!
     var staff = Staff(name: "", url: "", filmsURL: [], arrayFilm: [])
 //    let dateformatter = DateFormatter()
     let queue = DispatchQueue.global()
@@ -25,7 +25,7 @@ extension ViewController: UITextFieldDelegate {
     return true
   }
 }
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return staff.arrayFilm.isEmpty ? 1 : staff.arrayFilm.count
   }
@@ -35,7 +35,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard staff.arrayFilm[indexPath.row].date != "Error" else{
+    guard staff.arrayFilm[indexPath.row].date != "Error" else {
       return
     }
     dateOfFilmLabel.isHidden = false
@@ -43,29 +43,29 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     self.dateOfFilmLabel.text = "Фильм вышел: \(year)"
   }
 }
-extension ViewController{
-  func downLoad(){
+extension ViewController {
+  func downLoad() {
     let session = URLSession.shared
     var dataTask: URLSessionDataTask?
-    guard let clearSearchText = searchTextField.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+    guard let clearSearchText = searchTextField.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
       return
     }
     let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)")
     dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
-      guard let data = data else{
+      guard let data = data else {
         return
       }
         let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
         if let failUpload = json["count"] {
-          if let count = failUpload as? Int, count == 0{
-            let film = Film.init("Error", "Ничего не найдено")
+          if let count = failUpload as? Int, count == 0 {
+            let film = Film("Error", "Ничего не найдено")
             self?.staff.arrayFilm.append(film)
             DispatchQueue.main.async {
               self?.tableView.reloadData()
               self?.nameStaffLabel.text = ":(("
             }
-          } else if let results = json["results"] as? [[String: Any]]{
-              for result in results{
+          } else if let results = json["results"] as? [[String: Any]] {
+              for result in results {
                 self?.staff.name = result["name"] as! String
                 self?.staff.url = result["url"] as! String
                 self?.staff.filmsURL = result["films"] as! [String]
@@ -78,8 +78,7 @@ extension ViewController{
     })
     dataTask?.resume()
   }
-  
-  func uploadInfoFilms(_ url: String){
+  func uploadInfoFilms(_ url: String) {
     queue.async {
       let session = URLSession.shared
       var dataTask: URLSessionDataTask?
