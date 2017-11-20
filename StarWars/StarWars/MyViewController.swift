@@ -6,15 +6,25 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var searchTextField: UITextField! { didSet { searchTextField.delegate = self } }
     
+    private let urlTemplate = "https://swapi.co/api/people/?search="
+    private var allCharacters = [Character]()
     private var characters = [Character]()
-    private var url: URL = URL(string: "https://swapi.co/api/people/?page=1")!
+    private var url: URL? {
+        if let validSearchText = searchText?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            return URL(string: urlTemplate + String(validSearchText))
+        }
+        return nil
+    }
     private let formatter = DateFormatter()
     
     var searchText: String? {
         didSet {
             searchTextField.resignFirstResponder()
             characters.removeAll()
-            fetchCharacters()
+            tableView.reloadData()
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                self?.checkFetchedCharacters()
+            }
         }
     }
     
@@ -23,28 +33,43 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func fetchCharacters() {
-        let session = URLSession(configuration: .default)
-        let task  = session.dataTask(with: url) { [weak self] (data, _, _) in
-            if let data = data,
-                let pageJson = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
-                let characters = pageJson["results"] as? [[String: Any]] {
-                self?.characters = characters.map { Character(info: $0) }
-                self?.searchCharacter()
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+        if let url = url {
+            print(url)
+            let session = URLSession(configuration: .default)
+            let group = DispatchGroup()
+            group.enter()
+            let task  = session.dataTask(with: url) { [weak self] (data, _, _) in
+                if let data = data,
+                    let searchResult = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+                    let characters = searchResult["results"] as? [[String: Any]] {
+                    self?.allCharacters += characters.map { Character(info: $0) }
                 }
+                group.leave()
             }
+            task.resume()
+            group.wait()
         }
-        task.resume()
     }
     
-    private func searchCharacter() {
-        characters = characters.filter {character in
-            if let searchText = searchText, character.name.contains(searchText) {
+    private func checkFetchedCharacters() {
+        let countOfCharacters = getValidCharacters()
+        if countOfCharacters == 0 {
+            fetchCharacters()
+            getValidCharacters()
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+    
+    private func getValidCharacters() -> Int {
+        characters = allCharacters.filter {character in
+            if let searchText = searchText, character.name.lowercased().contains(searchText.lowercased()) {
                 return true
             }
             return false
         }
+        return characters.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,12 +95,12 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var dateString = characters[indexPath.section].films[indexPath.row].1
+        let dateString = characters[indexPath.section].films[indexPath.row].1
         formatter.dateFormat = "yyyy-mm-dd"
         let data = formatter.date(from: dateString)
-        formatter.dateFormat = "MMM d, yyyy"
-        dateString = formatter.string(from: data!)
-        dateLabel.text = dateString
+        formatter.dateFormat = "yyyy"
+        let year = formatter.string(from: data!)
+        dateLabel.text = "Этот фильм вышел в \(year) году"
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
