@@ -63,6 +63,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pSb-4c-omN">
+                                <rect key="frame" x="162" y="327" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3m9-QU-8dt"/>
+                                    <constraint firstAttribute="width" constant="50" id="txZ-Og-mD8"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -71,10 +79,12 @@
                             <constraint firstItem="irV-Ss-IfD" firstAttribute="leading" secondItem="1HY-37-Hrt" secondAttribute="leading" id="9DE-Oy-Jo1"/>
                             <constraint firstItem="irV-Ss-IfD" firstAttribute="top" secondItem="rvn-HS-sIx" secondAttribute="bottom" id="COQ-Q2-oTE"/>
                             <constraint firstItem="1HY-37-Hrt" firstAttribute="trailing" secondItem="TMa-S3-OTk" secondAttribute="trailing" id="CW2-xa-wLy"/>
+                            <constraint firstItem="pSb-4c-omN" firstAttribute="centerX" secondItem="rvn-HS-sIx" secondAttribute="centerX" id="cIP-FR-LIf"/>
                             <constraint firstItem="rvn-HS-sIx" firstAttribute="top" secondItem="TMa-S3-OTk" secondAttribute="bottom" id="dLP-nO-MPE"/>
                             <constraint firstItem="1HY-37-Hrt" firstAttribute="trailing" secondItem="rvn-HS-sIx" secondAttribute="trailing" id="dcS-Dt-7b8"/>
                             <constraint firstItem="1HY-37-Hrt" firstAttribute="trailing" secondItem="irV-Ss-IfD" secondAttribute="trailing" id="eq0-8H-wDc"/>
                             <constraint firstItem="1HY-37-Hrt" firstAttribute="bottom" secondItem="irV-Ss-IfD" secondAttribute="bottom" id="fas-tZ-WuR"/>
+                            <constraint firstItem="pSb-4c-omN" firstAttribute="centerY" secondItem="rvn-HS-sIx" secondAttribute="centerY" id="p1I-ug-3K1"/>
                             <constraint firstItem="rvn-HS-sIx" firstAttribute="leading" secondItem="1HY-37-Hrt" secondAttribute="leading" id="ulM-Nh-7X9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1HY-37-Hrt"/>
@@ -82,7 +92,8 @@
                     <connections>
                         <outlet property="dateLabel" destination="irV-Ss-IfD" id="bgw-1X-2RQ"/>
                         <outlet property="searchTextField" destination="TMa-S3-OTk" id="eQZ-Xs-pef"/>
-                        <outlet property="tableView" destination="rvn-HS-sIx" id="lFk-sM-bzi"/>
+                        <outlet property="spinner" destination="pSb-4c-omN" id="Glx-OA-Ylt"/>
+                        <outlet property="tableView" destination="rvn-HS-sIx" id="TdN-nu-wPA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvD-WM-SIn" userLabel="First Responder" sceneMemberID="firstResponder"/>

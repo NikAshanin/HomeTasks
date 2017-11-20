@@ -2,24 +2,30 @@ import UIKit
 
 class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var searchTextField: UITextField! { didSet { searchTextField.delegate = self } }
     
     private let urlTemplate = "https://swapi.co/api/people/?search="
+    private let formatter = DateFormatter()
     private var allCharacters = [Character]()
     private var characters = [Character]()
+    private var lastUrl: URL?
+    
     private var url: URL? {
+        var newUrl: URL?
         if let validSearchText = searchText?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            return URL(string: urlTemplate + String(validSearchText))
+            newUrl = URL(string: urlTemplate + String(validSearchText))
         }
-        return nil
+        return newUrl
     }
-    private let formatter = DateFormatter()
     
     var searchText: String? {
         didSet {
+            spinner.startAnimating()
             searchTextField.resignFirstResponder()
+            dateLabel.text?.removeAll()
             characters.removeAll()
             tableView.reloadData()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -33,8 +39,8 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func fetchCharacters() {
-        if let url = url {
-            print(url)
+        lastUrl = url
+        if let url = lastUrl {
             let session = URLSession(configuration: .default)
             let group = DispatchGroup()
             group.enter()
@@ -59,6 +65,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
+            self?.spinner.stopAnimating()
         }
     }
     
