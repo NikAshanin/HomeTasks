@@ -10,13 +10,13 @@ final class GestureViewController: UIViewController {
         view.addGestureRecognizer(CircleRecognizer)
     }
     
-    @objc func circleRecognized() {
+    @objc private func circleRecognized() {
         let alert = UIAlertController(title: "Circle recognized", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "Ok", style: .cancel, handler: { [weak self] (_) in
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { [weak self] _ in
             self?.performSegue(withIdentifier: "TapBar", sender: nil)
         }))
         present(alert, animated: true, completion: nil)
-//                performSegue(withIdentifier: "TapBar", sender: nil)
+//        performSegue(withIdentifier: "TapBar", sender: nil)
     }
     
 }
