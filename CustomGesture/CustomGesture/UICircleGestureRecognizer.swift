@@ -2,16 +2,14 @@ import Foundation
 import UIKit.UIGestureRecognizerSubclass
 import UIKit.UIScreen
 
-final class UICircleGestureRecognizer: UIGestureRecognizer  {
+final class UICircleGestureRecognizer: UIGestureRecognizer {
     
-    var allCirclePoints: [CGPoint] = [] {
-        didSet {
-            if allCirclePoints.count > 1000 {
-                state = .failed
-            }
-        }
-    }
+    typealias Seconds = Double
+    
+    var allCirclePoints: [CGPoint] = []
     var firstTap: CGPoint?
+    let allowedTapTime: Seconds = 5
+    private var timeOfFirstTap: Date?
     
     override func reset() {
         super.reset()
@@ -26,15 +24,14 @@ final class UICircleGestureRecognizer: UIGestureRecognizer  {
             return
         }
         
-         firstTap = touches.first?.location(in: view?.superview)
+        firstTap = touches.first?.location(in: view?.superview)
+        timeOfFirstTap = Date()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesEnded(touches, with: event)
         
-        let count = checkPoints(in: allCirclePoints)
-        
-        print("\(count) из \(allCirclePoints.count)")
+        let count = countConformingPoints(in: allCirclePoints)
         
         if Double(count) > Double(allCirclePoints.count) * 0.98 {
             state = .recognized
@@ -51,28 +48,37 @@ final class UICircleGestureRecognizer: UIGestureRecognizer  {
         }
         
         guard let superview = view?.superview,
+            let timeOfFirstTap = timeOfFirstTap,
             let currentPoint = touches.first?.location(in: superview),
             let firstTap = firstTap else {
                 return
         }
         
-        let distance = calculateDistance(from: firstTap, to: currentPoint)
+        let tapDuration = Date().timeIntervalSince(timeOfFirstTap)
+        if tapDuration > allowedTapTime {
+            state = .failed
+        }
         
+        let distance = calculateDistance(from: firstTap, to: currentPoint)
         if distance < 10 {
-            touchesEnded(touches, with: event)  // can i do that? or witch state should i use?
+            touchesEnded(touches, with: event)  // can i do that? or which state should i use to force this method?
         }
         
         allCirclePoints.append(currentPoint)
     }
     
     private func calculateDistance(from p1: CGPoint, to p2: CGPoint) -> CGFloat {
-        return sqrt( (p2.x - p1.x)*(p2.x - p1.x) + (p2.y - p1.y)*(p2.y - p1.y))
+        return sqrt(getSumOfSquares(of: p1, and: p2))
+    }
+    
+    private func getSumOfSquares(of p1: CGPoint, and p2: CGPoint) -> CGFloat {
+        return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)
     }
     
     private func findOrigin() -> CGPoint {
         var x: CGFloat = 0
         var y: CGFloat = 0
-        for point in allCirclePoints {
+        allCirclePoints.forEach { point in
             x += point.x
             y += point.y
         }
@@ -80,22 +86,24 @@ final class UICircleGestureRecognizer: UIGestureRecognizer  {
         return CGPoint(x: x/count, y: y/count)
     }
     
-    private func checkPoints(in array: [CGPoint]) -> UInt {
-        var count: UInt = 0
+    private func countConformingPoints(in array: [CGPoint]) -> Int {
         let origin = findOrigin()
-        let radius = getRad(from: origin)
+        let radius = getRadius(from: origin)
         let outterRadius = radius*radius
         let innerRadius = outterRadius*0.25
-        for point in array {
-            let coords = (point.x-origin.x)*(point.x-origin.x) + (point.y-origin.y)*(point.y-origin.y)
-            if coords < outterRadius, coords > innerRadius {
-                count+=1
+        
+        let filteredArray = array.filter { point in
+            let sum = getSumOfSquares(of: point, and: origin)
+            if sum < outterRadius, sum > innerRadius {
+                return true
             }
+            return false
         }
-        return count
+        
+        return filteredArray.count
     }
     
-    func getRad(from origin: CGPoint) -> CGFloat {
+    private func getRadius(from origin: CGPoint) -> CGFloat {
         var maxDistance: CGFloat = -1
         for point in allCirclePoints {
             let currentaDistance = calculateDistance(from: origin, to: point)
