@@ -30,9 +30,9 @@ final class CalculatorViewController: UIViewController {
             guard let text = resultLabel.text,
                 let doubleFromString = formatter.number(from: text)?.doubleValue else {
                     return nil
-        }
+            }
             return doubleFromString
-    }
+        }
         set {
             guard let value = newValue else {
                 return
@@ -42,7 +42,7 @@ final class CalculatorViewController: UIViewController {
     }
     private let decimalSeparator = formatter.decimalSeparator ?? "."
     private let calculation = Calculation()
-    private var stillTyping = false
+    private var isTyping = false
     private var secondButtons = false
     private var redoArray: [String] = []
     private let secondButtonsDictionary = [
@@ -82,10 +82,10 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func digitPressed(_ sender: UIButton) {
         guard let digit = sender.currentTitle,
-        let currentResult = resultLabel.text else {
-            return
+            let currentResult = resultLabel.text else {
+                return
         }
-        if stillTyping {
+        if isTyping {
             if (!currentResult.contains(decimalSeparator) || digit != decimalSeparator) &&
                 currentResult.count < 9 {
                 resultLabel.text = currentResult + digit
@@ -93,10 +93,10 @@ final class CalculatorViewController: UIViewController {
         } else {
             if digit != decimalSeparator && digit != "0" {
                 resultLabel.text = digit
-                stillTyping = true
+                isTyping = true
             } else if digit == decimalSeparator {
                 resultLabel.text = "0" + digit
-                stillTyping = true
+                isTyping = true
             } else {
                 resultLabel.text = "0"
             }
@@ -121,9 +121,9 @@ final class CalculatorViewController: UIViewController {
             let operand = result else {
                 return
         }
-        if stillTyping {
+        if isTyping {
             calculation.setOperand(operand)
-            stillTyping = false
+            isTyping = false
         }
         calculation.performOperation(mathSign)
         result = calculation.result
@@ -143,21 +143,21 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func clear(_ sender: UIButton) {
         calculation.clearAll()
-        stillTyping = false
+        isTyping = false
         result = 0
         redoArray = []
     }
     @objc private func undo() {
-        if stillTyping {
+        if isTyping {
             guard var text = resultLabel.text,
-            let last = text.last else {
-                return
+                let last = text.last else {
+                    return
             }
             redoArray.append(String(describing: last))
             text.remove(at: text.index(before: text.endIndex))
             resultLabel.text = text
             if text.isEmpty {
-                stillTyping = false
+                isTyping = false
                 resultLabel.text = "0"
             }
         } else {
@@ -171,7 +171,7 @@ final class CalculatorViewController: UIViewController {
         guard let text = resultLabel.text else {
             return
         }
-        if !redoArray.isEmpty && stillTyping {
+        if !redoArray.isEmpty && isTyping {
             resultLabel.text = text + redoArray.removeLast()
             print(redoArray)
         }
