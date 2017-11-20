@@ -1,78 +1,70 @@
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+final class ViewController: UIViewController{
     @IBOutlet weak private var tableView: UITableView!
-    @IBOutlet weak private var serachTextField: UITextField!
+    @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var dateOfFilmLabel: UILabel!
-  @IBOutlet weak var nameStaffLabel: UILabel!
-  var staff = Staff.init(name: "", filmsURL: [], url: "", filmsName: [], filmDate: [])
-    let downloadGroup = DispatchGroup()
+    @IBOutlet weak var nameStaffLabel: UILabel!
+    var staff = Staff(name: "", url: "", filmsURL: [], arrayFilm: [])
+//    let dateformatter = DateFormatter()
     let queue = DispatchQueue.global()
-  
+    let downloadGroup = DispatchGroup()
     override func viewDidLoad() {
       super.viewDidLoad()
-      serachTextField.delegate = self
       dateOfFilmLabel.isHidden = true
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      if staff.filmsURL.isEmpty{ return 1
-      } else { return staff.filmsName.count }
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-      if staff.filmsURL.isEmpty{
-        cell.textLabel?.text = ""
-      } else{
-        cell.textLabel?.text = staff.filmsName[indexPath.row]
-      }
-      return cell
-    }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      dateOfFilmLabel.isHidden = false
-      let dateformatter = DateFormatter()
-      dateformatter.dateFormat = "yyyy-MM-dd"
-      let date = dateformatter.date(from: staff.filmDate[indexPath.row])
-      let calendar = Calendar.current
-      let year = calendar.component(.year, from: date!)
-      self.dateOfFilmLabel.text = "Фильм вышел: \(year)"
-  }
     @IBAction func startSearch(_ sender: Any) {
-      staff.filmsName = []
+      staff.arrayFilm = []
       tableView.reloadData()
-      uploadInfo()
+      downLoad()
     }
 }
-
-
-
-extension ViewController{
+extension ViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    self.serachTextField.resignFirstResponder()
+    searchTextField.resignFirstResponder()
     return true
   }
 }
-
+extension ViewController: UITableViewDelegate, UITableViewDataSource{
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return staff.arrayFilm.isEmpty ? 1 : staff.arrayFilm.count
+  }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    staff.arrayFilm.isEmpty ? (cell.textLabel?.text = "") : (cell.textLabel?.text = staff.arrayFilm[indexPath.row].title)
+    return cell
+  }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard staff.arrayFilm[indexPath.row].date != "Error" else{
+      return
+    }
+    dateOfFilmLabel.isHidden = false
+    let year = ModifyDate().cutYear(date: staff.arrayFilm[indexPath.row].date)
+    self.dateOfFilmLabel.text = "Фильм вышел: \(year)"
+  }
+}
 extension ViewController{
-  func uploadInfo(){
+  func downLoad(){
     let session = URLSession.shared
     var dataTask: URLSessionDataTask?
-    guard let clearSearchText = serachTextField.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+    guard let clearSearchText = searchTextField.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
       return
     }
     let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)")
     dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
-      if let data = data {
+      guard let data = data else{
+        return
+      }
         let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
         if let failUpload = json["count"] {
-          if let count = failUpload as? Int, count == 0{ // Как лучше это записать, чтобы избежать ворнинга?
-            self?.staff.filmsName = ["Ничего не найдено"]
+          if let count = failUpload as? Int, count == 0{
+            let film = Film.init("Error", "Ничего не найдено")
+            self?.staff.arrayFilm.append(film)
             DispatchQueue.main.async {
               self?.tableView.reloadData()
               self?.nameStaffLabel.text = ":(("
             }
-          } else {
-            if let results = json["results"] as? [[String: Any]]{
+          } else if let results = json["results"] as? [[String: Any]]{
               for result in results{
                 self?.staff.name = result["name"] as! String
                 self?.staff.url = result["url"] as! String
@@ -82,9 +74,7 @@ extension ViewController{
                 self?.uploadInfoFilms(i)
               }
             }
-          }
         }
-      }
     })
     dataTask?.resume()
   }
@@ -96,14 +86,15 @@ extension ViewController{
       let url = URL(string: url)
       self.downloadGroup.enter()
       dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
-        if let data = data {
+        guard let data = data else {
+          return
+        }
           let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
           if let title = json["title"], let date = json["release_date"] {
-            self?.staff.filmsName.append(title as! String)
-            self?.staff.filmDate.append(date as! String)
+            let film = Film.init(date as! String, title as! String)
+            self?.staff.arrayFilm.append(film)
           }
-          self?.downloadGroup.leave()
-        }
+        self?.downloadGroup.leave()
       })
       dataTask?.resume()
       self.downloadGroup.wait()

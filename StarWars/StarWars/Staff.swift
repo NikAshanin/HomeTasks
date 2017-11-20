@@ -1,9 +1,10 @@
 import Foundation
 
-struct Staff: Decodable {
+struct Staff {
   var name: String
-  var filmsURL: [String]
   var url: String
-  var filmsName: [String]
-  var filmDate: [String]
+  var filmsURL: [String]
+//  var filmsName: [String]
+//  var filmDate: [String]
+  var arrayFilm: [Film]
 }

@@ -65,6 +65,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" keyboardAppearance="light" returnKeyType="search"/>
                                 <connections>
                                     <action selector="startSearch:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="GNW-aq-LNi"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="feR-Oj-6x9"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -74,7 +75,7 @@
                     <connections>
                         <outlet property="dateOfFilmLabel" destination="a8H-cj-g0o" id="Hk8-sd-gY5"/>
                         <outlet property="nameStaffLabel" destination="W8T-AV-PCa" id="UNZ-2a-5wp"/>
-                        <outlet property="serachTextField" destination="ufG-Wz-89z" id="4Lt-t2-Ebh"/>
+                        <outlet property="searchTextField" destination="ufG-Wz-89z" id="4Lt-t2-Ebh"/>
                         <outlet property="tableView" destination="jW5-XK-1aF" id="m0I-Wn-XNb"/>
                     </connections>
                 </viewController>
