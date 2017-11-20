@@ -11,7 +11,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTextField.delegate = self
         tableView.tableFooterView = UIView(frame: .zero)
     }
 }
@@ -29,8 +28,8 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if movies.isEmpty {
-            EmptyTableViewHelper().emptyViewWith(message: "There is no one.\nPlease search character from Star Wars",
-                                                 tableView: tableView)
+            EmptyTableViewHelper.emptyViewWith(message: "There is no one.\nPlease search character from Star Wars",
+                                               tableView: tableView)
             return 0
         } else {
             tableView.backgroundView = nil
@@ -39,8 +38,7 @@ extension ViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ??
-            UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         cell.textLabel?.text = movies[indexPath.row].title
         return cell
     }
@@ -51,14 +49,13 @@ extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         movies.removeAll()
         tableView.reloadData()
-        resignFirstResponder()
         print("start search")
         guard let text = textField.text,
         !text.isEmpty else {
             print("no text")
             return false
         }
-        networking.getCharacter(text) { [weak self] films, name in
+        networking.parseCharacter(text) { [weak self] films, name in
             if let films = films {
                 self?.movies = films
                 self?.title = name

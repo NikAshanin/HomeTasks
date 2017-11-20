@@ -9,14 +9,13 @@ import Foundation
 
 final class Networking {
     typealias JSONDictionary = [String: Any]
-//    typealias Film = (title: String, year: Date)
 
-    private let session = URLSession(configuration: .default)
+    private let session = URLSession.shared
     private var films: [Film] = []
     private let group = DispatchGroup()
     private var dataTask: URLSessionDataTask?
 
-    func getCharacter(_ searchName: String, complition: @escaping ([Film]?, String) -> Void) {
+    func parseCharacter(_ searchName: String, complition: @escaping ([Film]?, String) -> Void) {
         dataTask?.cancel()
 
         guard let rightSearchName = searchName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -57,10 +56,10 @@ final class Networking {
             return
         }
         for film in films {
-            group.enter()
             guard let url = URL(string: film) else {
                 return
             }
+            group.enter()
             session.dataTask(with: url) { [weak self]  data, _, error in
                 guard let data = data else {
                     return

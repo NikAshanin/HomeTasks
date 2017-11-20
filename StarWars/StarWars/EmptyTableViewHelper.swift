@@ -8,7 +8,7 @@
 import UIKit
 
 final class EmptyTableViewHelper {
-     func emptyViewWith(message: String, tableView: UITableView) {
+    static func emptyViewWith(message: String, tableView: UITableView) {
         let width = tableView.bounds.size.width
         let height = tableView.bounds.size.height
 
