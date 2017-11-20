@@ -61,7 +61,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let countOfCharacters = getValidCharacters()
         if countOfCharacters == 0 {
             fetchCharacters()
-            getValidCharacters()
+            _ = getValidCharacters()
         }
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
@@ -104,9 +104,11 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dateString = characters[indexPath.section].films[indexPath.row].1
         formatter.dateFormat = "yyyy-mm-dd"
-        let data = formatter.date(from: dateString)
+        guard let data = formatter.date(from: dateString) else {
+            return 
+        }
         formatter.dateFormat = "yyyy"
-        let year = formatter.string(from: data!)
+        let year = formatter.string(from: data)
         dateLabel.text = "Этот фильм вышел в \(year) году"
     }
     

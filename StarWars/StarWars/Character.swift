@@ -3,8 +3,7 @@ import Foundation
 class Character {
 
     let name: String
-    let films: [(String, String)]
-    
+    let films: [(String, String)]   
     private let info: [String: Any]
     
     init(info: [String: Any]) {
@@ -19,7 +18,10 @@ class Character {
         var tempArray = [(String, String)]()
         let group = DispatchGroup()
         for filmUrl in filmsUrl {
-            let url = URL(string: filmUrl)!
+            guard let url = URL(string: filmUrl) else {
+                films = []
+                return
+            }
             group.enter()
             let task = session.dataTask(with: url) {(data, _, _) in
                 if let data = data, let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] {
@@ -33,5 +35,5 @@ class Character {
         }
         group.wait()
         films = tempArray
-    }   
+    }
 }
