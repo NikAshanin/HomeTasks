@@ -1,10 +1,3 @@
-//
-//  EmptyTableViewHelper.swift
-//  StarWars
-//
-//  Created by Artem Orlov on 19/11/2017.
-//
-
 import UIKit
 
 final class EmptyTableViewHelper {

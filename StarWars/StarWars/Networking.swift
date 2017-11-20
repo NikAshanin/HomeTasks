@@ -1,24 +1,15 @@
-//
-//  Networking.swift
-//  StarWars
-//
-//  Created by Artem Orlov on 19/11/2017.
-//
-
 import Foundation
 
 final class Networking {
     typealias JSONDictionary = [String: Any]
 
     private let session = URLSession.shared
-    private var films: [Film] = []
-    private let group = DispatchGroup()
     private var dataTask: URLSessionDataTask?
 
-    func parseCharacter(_ searchName: String, complition: @escaping ([Film]?, String) -> Void) {
+    func parseCharacter(_ searchString: String, completion: @escaping ([Film]?, String?) -> Void) {
         dataTask?.cancel()
 
-        guard let rightSearchName = searchName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+        guard let rightSearchName = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: "https://swapi.co/api/people/?search=\(rightSearchName)") else {
                 print("wrong URl")
                 return
@@ -39,28 +30,32 @@ final class Networking {
                 let results = json["results"] as? [JSONDictionary],
                 let firstResult = results.first,
                 let name = firstResult["name"] as? String else {
+                    print("no result")
                     return
             }
-            self?.updateMovies(firstResult)
-            self?.group.notify(queue: DispatchQueue.main) {
-                complition(self?.films, name)
+            self?.updateFilms(firstResult) { films in
+                guard let films = films else {
+                        return
+                }
+                completion(films, name)
             }
         }
         dataTask?.resume()
     }
 
-    private func updateMovies(_ json: JSONDictionary) {
-        films.removeAll()
+    private func updateFilms(_ json: JSONDictionary, completion: @escaping ([Film]?) -> Void) {
+        var films: [Film] = []
+        let group = DispatchGroup()
         var filmsJSON: JSONDictionary?
-        guard let films = json["films"] as? [String] else {
-            return
+        guard let filmsURLs = json["films"] as? [String] else {
+                return
         }
-        for film in films {
+        for film in filmsURLs {
             guard let url = URL(string: film) else {
                 return
             }
             group.enter()
-            session.dataTask(with: url) { [weak self]  data, _, error in
+            session.dataTask(with: url) { data, _, error in
                 guard let data = data else {
                     return
                 }
@@ -77,9 +72,12 @@ final class Networking {
                         return
                 }
 
-                self?.films.append(Film(title: title, releaseDate: releaseDate))
-                self?.group.leave()
+                films.append(Film(title: title, releaseDate: releaseDate))
+                group.leave()
             }.resume()
+        }
+        group.notify(queue: DispatchQueue.main) {
+            completion(films)
         }
     }
 }
