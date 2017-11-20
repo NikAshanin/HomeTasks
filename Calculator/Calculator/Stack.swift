@@ -1,18 +1,18 @@
 import Foundation
 
 class Stack {
-    
+
     init() {
         push(value: 0.0, fun: nil)
     }
-    
+
     enum Operators {
         case number(Double)
         case operation((Double, String))
     }
-    
+
      private var history: [Operators] = []
-    
+
     private var currentSymbol = -1 {
         didSet {
             if currentSymbol <= -1 {
@@ -22,7 +22,7 @@ class Stack {
             }
         }
     }
-    
+
     var isEmpty: Bool {
         return currentSymbol<=0
     }
@@ -30,7 +30,7 @@ class Stack {
     var isFull: Bool {
         return currentSymbol.distance(to: history.count) == 1
     }
-    
+
     func push(value: Double, fun: String?) {
         if let fun = fun {
             history.append(Operators.operation((value, fun)))
@@ -39,7 +39,7 @@ class Stack {
         }
         currentSymbol+=1
     }
-    
+
     func pop() -> (Double, String?)? {
         if isEmpty {
             return nil
@@ -53,7 +53,7 @@ class Stack {
             return (value, fun)
         }
     }
-    
+
         func goForward() -> (Double, String?)? {
             if isFull {
                 return nil
@@ -68,7 +68,7 @@ class Stack {
                 }
             }
         }
-    
+
 //    func reset() {
 //        var deleted = false
 //        while history.count-1>currentSymbol {
@@ -81,7 +81,7 @@ class Stack {
 //            for 
 //        }
 //    }
-    
+
 //
 //
 //    func putResultOnTop() {
