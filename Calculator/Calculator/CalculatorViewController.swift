@@ -9,16 +9,16 @@ final class CalculatorViewController: UIViewController {
         updateUI()
     }
 
-    @IBOutlet weak var display: UILabel! {
+    @IBOutlet private weak var display: UILabel! {
         didSet {
             displayText = display.text ?? ""
         }
     }
-    @IBOutlet weak var radiansStateLabel: UILabel!
+    @IBOutlet private weak var radiansStateLabel: UILabel!
 
     var inTheMiddleOftyping = true
     var buttonsArray: [UIButton] = []
-    lazy var model = Model()
+    lazy var model = Calculator()
 
     var displayText = "0" {
         didSet {
@@ -31,7 +31,7 @@ final class CalculatorViewController: UIViewController {
             return Double(displayText) ?? 0.0
         }
         set {
-            let doubleValue = converDoubleToString(newValue)
+            let doubleValue = newValue.stringValue
             display.text = doubleValue
         }
     }
@@ -132,7 +132,7 @@ final class CalculatorViewController: UIViewController {
             model.resetPendingOperation()
         } else {
             let oldDegreeMode = model.degreesMode
-            model = Model()
+            model = Calculator()
             model.degreesMode = oldDegreeMode
             inTheMiddleOftyping = true
             displayText = "0"
@@ -155,7 +155,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func performOperation (_ sender: UIButton) {
-        let operationTitle = sender.currentTitle!
+        let operationTitle = sender.currentTitle ?? "?"
 
         if inTheMiddleOftyping {
             model.setOperand(symbol)
@@ -176,5 +176,17 @@ final class CalculatorViewController: UIViewController {
         if let pendingFunction = model.pendingFunction {
             selectOperationButton(with: pendingFunction, in: view)
         }
+    }
+}
+
+extension Double {
+    var stringValue: String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 9
+        var stringFromDouble = formatter.string(from: NSNumber(value: self))!
+        if stringFromDouble.first == "."{
+            stringFromDouble = "0"+stringFromDouble
+        }
+        return stringFromDouble
     }
 }

@@ -1,16 +1,6 @@
 import Foundation
 
-func converDoubleToString(_ value: Double) -> String {
-    let formatter = NumberFormatter()
-    formatter.maximumFractionDigits = 9
-    var stringFromDouble = formatter.string(from: NSNumber(value: value))!
-        if stringFromDouble.first == "."{
-            stringFromDouble = "0"+stringFromDouble
-        }
-    return stringFromDouble
-}
-
-class Model {
+class Calculator {
 
     var stack = Stack()
     var degreesMode = true
@@ -91,6 +81,7 @@ class Model {
         let function: (Double, Double) -> Double
         let firstOperand: Double
         let fun: String
+
         func perform (with secondOperand: Double) -> Double {
             return (function(firstOperand, secondOperand))
         }
