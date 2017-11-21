@@ -9,7 +9,6 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
     var allCirclePoints: [CGPoint] = []
     var firstTap: CGPoint?
     private var hasBeenFar = false
-    private let persistance: CGFloat = 10
 
     override func reset() {
         super.reset()
@@ -39,7 +38,7 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
 
-        guard state != .failed && state != .recognized else {
+        guard state != .failed, state != .recognized else {
             return
         }
 
@@ -51,11 +50,11 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
 
         let distance = calculateDistance(from: firstTap, to: currentPoint)
 
-        if !hasBeenFar, distance > persistance {
+        if !hasBeenFar, distance > 10 {
             hasBeenFar = true
         }
 
-        if hasBeenFar, distance < persistance {
+        if hasBeenFar, distance < 10 {
             analizePoints()
             if state != .recognized {
                 state = .failed
