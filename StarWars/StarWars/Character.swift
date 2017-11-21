@@ -9,15 +9,11 @@ class Character {
     private var filmsData: [(String, String)]
     private let info: [String: Any]
 
-    init(info: [String: Any]) {
+    init(from info: [String: Any]) {
         self.info = info
-        guard let name = info["name"] as? String else {
-        self.name = "?"
-        self.filmsData = []
-            return
-        }
-        self.name = name
         filmsData = []
+        let name = info["name"] as? String
+        self.name = name ?? "?"
     }
 
     func fetchFilms() {
@@ -29,8 +25,7 @@ class Character {
         let group = DispatchGroup()
         for filmUrl in filmsUrl {
             guard let url = URL(string: filmUrl) else {
-                filmsData = []
-                return
+                continue
             }
             group.enter()
             let task = session.dataTask(with: url) {(data, _, _) in

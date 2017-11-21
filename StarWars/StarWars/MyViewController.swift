@@ -9,9 +9,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     private let urlTemplate = "https://swapi.co/api/people/?search="
     private let formatter = DateFormatter()
-    private var allCharacters = [Character]()
     private var characters = [Character]()
-    private var lastUrl: URL?
 
     private var url: URL? {
         var newUrl: URL?
@@ -29,7 +27,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             characters.removeAll()
             tableView.reloadData()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.checkFetchedCharacters()
+                self?.fetchCharacters()
             }
         }
     }
@@ -39,48 +37,29 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     private func fetchCharacters() {
-        lastUrl = url
-        if let url = lastUrl {
-            let session = URLSession.shared
+        if let url = url {
             let group = DispatchGroup()
+            let session = URLSession.shared
             group.enter()
             let task  = session.dataTask(with: url) { [weak self] (data, _, _) in
                 if let data = data,
                     let searchResult = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
                     let characters = searchResult["results"] as? [[String: Any]] {
-                    self?.allCharacters += characters.map {
-                        let ch = Character(info: $0)
-                        ch.fetchFilms()
-                        return ch
-                    }
+                    self?.characters = characters.map { Character(from: $0) }
                 }
                 group.leave()
             }
             task.resume()
-            group.wait()
-        }
-    }
-
-    private func checkFetchedCharacters() {
-        let countOfCharacters = getValidCharacters()
-        if countOfCharacters == 0 {
-            fetchCharacters()
-            _ = getValidCharacters()
-        }
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            self?.spinner.stopAnimating()
-        }
-    }
-
-    private func getValidCharacters() -> Int {
-        characters = allCharacters.filter {character in
-            if let searchText = searchText, character.name.lowercased().contains(searchText.lowercased()) {
-                return true
+            group.notify(queue: .global()) { [weak self] in
+                self?.characters.forEach { character in
+                    character.fetchFilms()
+                }
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.spinner.stopAnimating()
+                }
             }
-            return false
         }
-        return characters.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
