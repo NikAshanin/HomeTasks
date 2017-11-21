@@ -30,7 +30,6 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesEnded(touches, with: event)
-
         let count = countConformingPoints(in: allCirclePoints)
 
         if Double(count) > Double(allCirclePoints.count) * 0.98 {
@@ -62,16 +61,17 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         let distance = calculateDistance(from: firstTap, to: currentPoint)
         if distance < 10 {
             touchesEnded(touches, with: event)  // can i do that? or which state should i use to force this method?
+
         }
 
         allCirclePoints.append(currentPoint)
     }
 
     private func calculateDistance(from p1: CGPoint, to p2: CGPoint) -> CGFloat {
-        return sqrt(getSumOfSquares(of: p1, and: p2))
+        return sqrt(sumOfSquares(of: p1, and: p2))
     }
 
-    private func getSumOfSquares(of p1: CGPoint, and p2: CGPoint) -> CGFloat {
+    private func sumOfSquares(of p1: CGPoint, and p2: CGPoint) -> CGFloat {
         return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)
     }
 
@@ -93,7 +93,7 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         let innerRadius = outterRadius*0.25
 
         let filteredArray = array.filter { point in
-            let sum = getSumOfSquares(of: point, and: origin)
+            let sum = sumOfSquares(of: point, and: origin)
             if sum < outterRadius, sum > innerRadius {
                 return true
             }
