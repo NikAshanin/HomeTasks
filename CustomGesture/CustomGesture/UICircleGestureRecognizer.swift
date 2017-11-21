@@ -4,16 +4,17 @@ import UIKit.UIScreen
 
 final class UICircleGestureRecognizer: UIGestureRecognizer {
 
-    typealias Seconds = Double
+    typealias Percents = Double
 
     var allCirclePoints: [CGPoint] = []
     var firstTap: CGPoint?
-    let allowedTapTime: Seconds = 5
-    private var timeOfFirstTap: Date?
+    private var hasBeenFar = false
+    private let persistance: CGFloat = 10
 
     override func reset() {
         super.reset()
         allCirclePoints = []
+        hasBeenFar = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -25,16 +26,12 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         }
 
         firstTap = touches.first?.location(in: view?.superview)
-        timeOfFirstTap = Date()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesEnded(touches, with: event)
-        let count = countConformingPoints(in: allCirclePoints)
 
-        if Double(count) > Double(allCirclePoints.count) * 0.98 {
-            state = .recognized
-        }
+        analizePoints()
 
         reset()
     }
@@ -47,32 +44,33 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         }
 
         guard let superview = view?.superview,
-            let timeOfFirstTap = timeOfFirstTap,
             let currentPoint = touches.first?.location(in: superview),
             let firstTap = firstTap else {
                 return
         }
 
-        let tapDuration = Date().timeIntervalSince(timeOfFirstTap)
-        if tapDuration > allowedTapTime {
-            state = .failed
+        let distance = calculateDistance(from: firstTap, to: currentPoint)
+
+        if !hasBeenFar, distance > persistance {
+            hasBeenFar = true
         }
 
-        let distance = calculateDistance(from: firstTap, to: currentPoint)
-        if distance < 10 {
-            touchesEnded(touches, with: event)  // can i do that? or which state should i use to force this method?
-
+        if hasBeenFar, distance < persistance {
+            analizePoints()
+            if state != .recognized {
+                state = .failed
+            }
         }
 
         allCirclePoints.append(currentPoint)
     }
 
-    private func calculateDistance(from p1: CGPoint, to p2: CGPoint) -> CGFloat {
-        return sqrt(sumOfSquares(of: p1, and: p2))
+    private func calculateDistance(from point1: CGPoint, to point2: CGPoint) -> CGFloat {
+        return sqrt(sumOfSquares(of: point1, and: point2))
     }
 
-    private func sumOfSquares(of p1: CGPoint, and p2: CGPoint) -> CGFloat {
-        return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)
+    private func sumOfSquares(of point1: CGPoint, and point2: CGPoint) -> CGFloat {
+        return (point2.x - point1.x) * (point2.x - point1.x) + (point2.y - point1.y) * (point2.y - point1.y)
     }
 
     private func findOrigin() -> CGPoint {
@@ -90,8 +88,7 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         let origin = findOrigin()
         let radius = getRadius(from: origin)
         let outterRadius = radius*radius
-        let innerRadius = outterRadius*0.25
-
+        let innerRadius = outterRadius * 0.25
         let filteredArray = array.filter { point in
             let sum = sumOfSquares(of: point, and: origin)
             if sum < outterRadius, sum > innerRadius {
@@ -99,7 +96,6 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
             }
             return false
         }
-
         return filteredArray.count
     }
 
@@ -114,4 +110,13 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         return maxDistance
     }
 
+    private func analizePoints() {
+        let count = countConformingPoints(in: allCirclePoints)
+
+        let accuracy: Percents = 98
+
+        if Double(count)/Double(allCirclePoints.count) * 100 > accuracy {
+            state = .recognized
+        }
+    }
 }
