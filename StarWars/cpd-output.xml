@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+   <duplication lines="12" tokens="86">
+      <file line="36"
+            path="/Users/userauto/Desktop/workspace/epam/HomeTasks/StarWars/StarWars/SwapiRequester.swift"/>
+      <file line="78"
+            path="/Users/userauto/Desktop/workspace/epam/HomeTasks/StarWars/StarWars/SwapiRequester.swift"/>
+      <codefragment><![CDATA[        }
+
+        guard let url = URL(string: strURL) else {
+            return
+        }
+        dataTask = defaultSession.dataTask(with: url) { data, _, error in
+            defer { self.dataTask = nil }
+            do {
+                if let error = error {
+                    print(error.localizedDescription)
+                } else if let data = data,
+                    let responseData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],]]></codefragment>
+   </duplication>
+</pmd-cpd>
