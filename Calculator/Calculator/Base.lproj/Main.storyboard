@@ -549,7 +549,7 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JW-pX-K6w">
                                                         <rect key="frame" x="605" y="0.0" width="62" height="26"/>
-                                                        <color key="backgroundColor" red="0.94151782989999999" green="0.60357379909999997" blue="0.2195663303" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <state key="normal" title="-" backgroundImage="orange">
@@ -722,8 +722,8 @@
                                                         <state key="normal" title="+" backgroundImage="orange">
                                                             <color key="titleColor" red="0.9882367849" green="0.98823690409999998" blue="0.9882367849" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
-                                                        <state key="selected" backgroundImage="white">
-                                                            <color key="titleColor" red="0.94151782989999999" green="0.60357379909999997" blue="0.2195663303" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <state key="selected">
+                                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <state key="highlighted" backgroundImage="white">
                                                             <color key="titleColor" red="0.9882367849" green="0.98823690409999998" blue="0.9882367849" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

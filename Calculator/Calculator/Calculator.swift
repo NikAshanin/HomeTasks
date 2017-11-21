@@ -91,6 +91,7 @@ class Calculator {
         guard let operation = operators[symbol] else {
             return
         }
+        
         var pendingOperationWasPerformed = false
         switch (operation, accumulator) {
         case (.constant(let value), _):

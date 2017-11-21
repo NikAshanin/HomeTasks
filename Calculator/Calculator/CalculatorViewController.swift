@@ -9,6 +9,7 @@ final class CalculatorViewController: UIViewController {
         updateUI()
     }
 
+    
     @IBOutlet private weak var display: UILabel! {
         didSet {
             displayText = display.text ?? ""
