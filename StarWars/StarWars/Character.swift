@@ -3,23 +3,33 @@ import Foundation
 class Character {
 
     let name: String
-    let films: [(String, String)]
+    var films: [(String, String)] {
+        return filmsData
+    }
+    private var filmsData: [(String, String)]
     private let info: [String: Any]
 
     init(info: [String: Any]) {
         self.info = info
-        guard let name = info["name"] as? String, let filmsUrl = info["films"] as? [String] else {
+        guard let name = info["name"] as? String else {
         self.name = "?"
-        self.films = []
+        self.filmsData = []
             return
         }
         self.name = name
-        let session = URLSession(configuration: .default)
+        filmsData = []
+    }
+
+    func fetchFilms() {
+        guard let filmsUrl = info["films"] as? [String] else {
+            return
+        }
+        let session = URLSession.shared
         var tempArray = [(String, String)]()
         let group = DispatchGroup()
         for filmUrl in filmsUrl {
             guard let url = URL(string: filmUrl) else {
-                films = []
+                filmsData = []
                 return
             }
             group.enter()
@@ -34,6 +44,6 @@ class Character {
             task.resume()
         }
         group.wait()
-        films = tempArray
+        filmsData = tempArray
     }
 }

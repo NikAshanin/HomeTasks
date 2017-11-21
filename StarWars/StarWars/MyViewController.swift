@@ -41,14 +41,18 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     private func fetchCharacters() {
         lastUrl = url
         if let url = lastUrl {
-            let session = URLSession(configuration: .default)
+            let session = URLSession.shared
             let group = DispatchGroup()
             group.enter()
             let task  = session.dataTask(with: url) { [weak self] (data, _, _) in
                 if let data = data,
                     let searchResult = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
                     let characters = searchResult["results"] as? [[String: Any]] {
-                    self?.allCharacters += characters.map { Character(info: $0) }
+                    self?.allCharacters += characters.map {
+                        let ch = Character(info: $0)
+                        ch.fetchFilms()
+                        return ch
+                    }
                 }
                 group.leave()
             }
