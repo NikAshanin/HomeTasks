@@ -1,20 +1,12 @@
 import UIKit
 
-extension UIView {
-    func runSubviewsRecursive(_ allSubviews: (UIView) -> Void) {
-        subviews.forEach {
-            allSubviews($0)
-            $0.runSubviewsRecursive(allSubviews)
-        }
-    }
-}
 final class CalculatorViewController: UIViewController {
 
     @IBOutlet private weak var resultView: UIView!
     @IBOutlet private weak var resultLabel: UILabel!
     @IBOutlet private weak var decimalButton: UIButton! {
         didSet {
-            decimalButton.setTitle(formatter.decimalSeparator, for: .normal)
+            decimalButton.setTitle(BaseNumberFormatter.decimalSeparator, for: .normal)
         }
     }
     @IBOutlet private weak var radianLabel: UILabel! {
@@ -28,7 +20,7 @@ final class CalculatorViewController: UIViewController {
     private var result: Double? {
         get {
             guard let text = resultLabel.text,
-                let doubleFromString = formatter.number(from: text)?.doubleValue else {
+                let doubleFromString = BaseNumberFormatter.double(from: text) else {
                     return nil
             }
             return doubleFromString
@@ -37,10 +29,10 @@ final class CalculatorViewController: UIViewController {
             guard let value = newValue else {
                 return
             }
-            resultLabel.text = formatter.string(from: NSNumber(value: value))
+            resultLabel.text = BaseNumberFormatter.string(with: value)
         }
     }
-    private let decimalSeparator = formatter.decimalSeparator ?? "."
+    private let decimalSeparator = BaseNumberFormatter.decimalSeparator
     private let calculation = Calculation()
     private var isTyping = false
     private var secondButtons = false
@@ -187,6 +179,15 @@ final class CalculatorViewController: UIViewController {
             if let buttonTitle = secondButtonsDictionary[buttonTitle] {
                 button.setTitle(buttonTitle, for: .normal)
             }
+        }
+    }
+}
+
+private extension UIView {
+    func runSubviewsRecursive(for view: (UIView) -> Void) {
+        subviews.forEach {
+            view($0)
+            $0.runSubviewsRecursive(for: view)
         }
     }
 }

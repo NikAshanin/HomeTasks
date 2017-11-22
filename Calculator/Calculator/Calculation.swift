@@ -1,19 +1,19 @@
 import Foundation
 
 final class Calculation {
-    
+
     private var operand: Double = 0
     private var undoParameters: [CalculationParameter] = []
     var isRadian = false
     var result: Double {
         return operand
     }
-    
+
     private enum CalculationParameter {
         case operand(Double)
         case operation(String)
     }
-    
+
     private enum Operation {
         case rand(() -> Double)
         case number(Double)
@@ -23,7 +23,7 @@ final class Calculation {
         case binary((Double, Double) -> Double)
         case equal
     }
-    
+
     private var operationsDictionary = [
         "Rand": Operation.rand { Double(arc4random()) / Double(UInt32.max) },
         "e": Operation.number(M_E),
@@ -37,7 +37,7 @@ final class Calculation {
         "eˣ": Operation.unary { pow(M_E, $0) },
         "10ˣ": Operation.unary { pow(10, $0) },
         "2ˣ": Operation.unary { pow(2, $0) },
-        "x!": Operation.unary { factorial($0) },
+        "x!": Operation.unary { $0.factorial() },
         "sinh⁻¹": Operation.unary(asinh),
         "cosh⁻¹": Operation.unary(acosh),
         "tanh⁻¹": Operation.unary(atanh),
@@ -65,22 +65,22 @@ final class Calculation {
         "logᵧ": Operation.binary { log($0) / log($1) },
         "=": Operation.equal
     ]
-    
+
     private struct BinaryOperation {
         var function: (Double, Double) -> Double
         var firstOperand: Double
-        
+
         func perform(with secondOperand: Double) -> Double {
             return function(firstOperand, secondOperand)
         }
     }
-    
+
     private var binaryOperation: BinaryOperation?
-    
+
     func performOperation(_ mathSign: String) {
         guard let operation = operationsDictionary[mathSign] else {
             return
-            
+
         }
         calculationParameters.append(CalculationParameter.operation(mathSign))
         switch operation {
@@ -102,7 +102,7 @@ final class Calculation {
             executeBinaryOperation()
         }
     }
-    
+
     private var calculationParameters: [CalculationParameter] = []
     private var calculationSequence: [CalculationParameter] {
         get {
@@ -120,7 +120,7 @@ final class Calculation {
             }
         }
     }
-    
+
     private func executeBinaryOperation() {
         guard let binaryOperation = binaryOperation else {
             return
@@ -128,32 +128,32 @@ final class Calculation {
         operand = binaryOperation.perform(with: operand)
         self.binaryOperation = nil
     }
-    
+
     func clearAll() {
         clear()
         undoParameters.removeAll(keepingCapacity: false)
     }
-    
+
     private func clear() {
         operand = 0
         binaryOperation = nil
         calculationParameters.removeAll(keepingCapacity: false)
     }
-    
+
     func setOperand(_ operand: Double) {
         self.operand = operand
         calculationParameters.append(CalculationParameter.operand(operand))
     }
-    
+
     func undoCalculationParameter() {
         guard !calculationParameters.isEmpty else {
             return
-            
+
         }
         undoParameters.append(calculationParameters.removeLast())
         calculationSequence = calculationParameters
     }
-    
+
     func redoCalculationParameter() {
         if !undoParameters.isEmpty, let last = undoParameters.last {
             calculationParameters.append(last)
@@ -161,14 +161,17 @@ final class Calculation {
             undoParameters = Array(undoParameters.dropLast())
         }
     }
-    // Factorial with gamma function for all complex numbers except the non-positive integers
-    static private func factorial(_ value: Double) -> Double {
+}
+
+private extension Double {
+    /// Factorial with gamma function for all complex numbers except the non-positive integers
+    func factorial() -> Double {
         var factorial: Double = 0
-        
-        if (fmod(value, floor(value)) == 0) {
-            factorial = round(exp(lgamma(value + 1)))
+
+        if (fmod(self, floor(self)) == 0) {
+            factorial = Darwin.round(exp(lgamma(self + 1)))
         } else {
-            factorial = exp(lgamma(value + 1))
+            factorial = exp(lgamma(self + 1))
             print(factorial)
         }
         return factorial
