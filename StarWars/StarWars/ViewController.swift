@@ -8,7 +8,7 @@ final class ViewController: UIViewController {
     var staff = Staff(name: "", url: "", filmsURL: [], arrayFilm: [])
 //    let dateformatter = DateFormatter()
     let queue = DispatchQueue.global()
-    let downloadGroup = DispatchGroup()
+   // let downloadGroup = DispatchGroup()
     override func viewDidLoad() {
       super.viewDidLoad()
       dateOfFilmLabel.isHidden = true
@@ -70,20 +70,33 @@ extension ViewController {
                 self?.staff.url = result["url"] as! String
                 self?.staff.filmsURL = result["films"] as! [String]
               }
+            
+            let downloadGroup = DispatchGroup()
               for i in (self?.staff.filmsURL)! {
-                self?.uploadInfoFilms(i)
+                downloadGroup.enter()
+                self?.uploadInfoFilms(i, callback: {
+                  downloadGroup.wait()
+                  DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.nameStaffLabel.text = self?.staff.name
+                  }
+                  downloadGroup.leave()
+                })
+                downloadGroup.wait()
               }
             }
         }
     })
     dataTask?.resume()
   }
-  func uploadInfoFilms(_ url: String) {
+  func uploadInfoFilms(_ url: String, callback: @escaping () -> Void) {
+    callback()
     queue.async {
+     
       let session = URLSession.shared
       var dataTask: URLSessionDataTask?
       let url = URL(string: url)
-      self.downloadGroup.enter()
+//      downloadGroup.enter()
       dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
         guard let data = data else {
           return
@@ -93,14 +106,14 @@ extension ViewController {
             let film = Film.init(date as! String, title as! String)
             self?.staff.arrayFilm.append(film)
           }
-        self?.downloadGroup.leave()
+//        downloadGroup.leave()
       })
       dataTask?.resume()
-      self.downloadGroup.wait()
-      DispatchQueue.main.sync {
-        self.tableView.reloadData()
-        self.nameStaffLabel.text = self.staff.name
-      }
+      
+//      DispatchQueue.main.async {
+//        self.tableView.reloadData()
+//        self.nameStaffLabel.text = self.staff.name
+//      }
     }
   }
 }
