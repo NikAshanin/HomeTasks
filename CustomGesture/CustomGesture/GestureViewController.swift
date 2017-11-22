@@ -2,8 +2,6 @@ import UIKit
 
 final class GestureViewController: UIViewController {
 
-    let identifier = "TabBarController"
-
     @IBOutlet private weak var circleView: CircleView!
 
     override func viewDidLoad() {
@@ -19,7 +17,7 @@ final class GestureViewController: UIViewController {
     }
 
     @objc private func circle() {
-        guard let tabBar = storyboard?.instantiateViewController(withIdentifier: identifier) as? UITabBarController else {
+        guard let tabBar = storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController else {
             return
         }
         present(tabBar, animated: true)

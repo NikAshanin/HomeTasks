@@ -1,23 +1,13 @@
-//
-//  CircleGestureRecognizer.swift
-//  Circle_Gesture
-//
-//  Created by Artem Orlov on 08/11/2017.
-//
-
 import UIKit.UIGestureRecognizerSubclass
 
-class CircleGestureRecognizer: UIGestureRecognizer {
+final class CircleGestureRecognizer: UIGestureRecognizer {
 
-    var innerRadius: CGFloat?
-    var outerRadius: CGFloat?
-    let midPoint: CGPoint
-
-    // Distance between touch and middle point
-    private var distance: CGFloat? {
-
+    private var innerRadius: CGFloat?
+    private var outerRadius: CGFloat?
+    private let midPoint: CGPoint
+    private var radius: CGFloat? {
         if let newPoint = currentPoint {
-            return distanceBetween(pointA: midPoint, and: newPoint)
+            return midPoint.distanceTo(pointB: newPoint)
         }
         return nil
     }
@@ -37,31 +27,9 @@ class CircleGestureRecognizer: UIGestureRecognizer {
             let previousPoint = previousPoint else {
                 return nil
         }
-        let rotation = angleBetween(pointA: currentPoint, and: previousPoint)
+        let rotation = previousPoint.angleTo(pointB: currentPoint, with: midPoint)
         print("rotation = \(rotation / (.pi * 2) * 100)")
         return rotation
-    }
-
-    private func distanceBetween(pointA: CGPoint, and pointB: CGPoint) -> CGFloat {
-        let x = pointA.x - pointB.x
-        let y = pointA.y - pointB.y
-        return CGFloat(sqrt(x * x + y * y))
-    }
-
-    private func angle(for point: CGPoint) -> CGFloat {
-        let angle = atan2(point.x - midPoint.x, point.y - midPoint.y) + .pi / 2
-        print("angle = \(angle)")
-        return angle
-    }
-
-    private func angleBetween(pointA: CGPoint, and pointB: CGPoint) -> CGFloat {
-        var angle = self.angle(for: pointA) - self.angle(for: pointB)
-        if angle > .pi {
-            angle -= .pi * 2
-        } else if angle < -.pi {
-            angle += .pi * 2
-        }
-        return angle
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -69,7 +37,7 @@ class CircleGestureRecognizer: UIGestureRecognizer {
         print("touches began")
         guard let firstTouch = touches.first,
             let innerRadius = innerRadius,
-            let distance = distance,
+            let distance = radius,
             let outerRadius = outerRadius else {
                 return
         }
@@ -104,7 +72,7 @@ class CircleGestureRecognizer: UIGestureRecognizer {
         }
         if let innerRadius = innerRadius,
             let outerRadius = outerRadius,
-            let distance = distance {
+            let distance = radius {
             print("innerRadius = \(innerRadius) distance = \(distance) outerRadius = \(outerRadius)")
             if distance < innerRadius || distance > outerRadius {
                 state = .failed
@@ -124,4 +92,28 @@ class CircleGestureRecognizer: UIGestureRecognizer {
         reset()
     }
 
+}
+
+private extension CGPoint {
+    func distanceTo(pointB: CGPoint) -> CGFloat {
+        let x = self.x - pointB.x
+        let y = self.y - pointB.y
+        return CGFloat(sqrt(x * x + y * y))
+    }
+
+    private func angle(from midPoint: CGPoint) -> CGFloat {
+        let angle = atan2(self.x - midPoint.x, self.y - midPoint.y) + .pi / 2
+        print("angle = \(angle)")
+        return angle
+    }
+
+    func angleTo(pointB: CGPoint, with midPoint: CGPoint) -> CGFloat {
+        var angle = self.angle(from: midPoint) - pointB.angle(from: midPoint)
+        if angle > .pi {
+            angle -= .pi * 2
+        } else if angle < -.pi {
+            angle += .pi * 2
+        }
+        return angle
+    }
 }
