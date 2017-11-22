@@ -1,5 +1,14 @@
 import Foundation
 
+private struct BinaryOperation {
+    var function: (Double, Double) -> Double
+    var firstOperand: Double
+
+    func perform(with secondOperand: Double) -> Double {
+        return function(firstOperand, secondOperand)
+    }
+}
+
 final class Calculation {
 
     private var operand: Double = 0
@@ -65,15 +74,6 @@ final class Calculation {
         "logᵧ": Operation.binary { log($0) / log($1) },
         "=": Operation.equal
     ]
-
-    private struct BinaryOperation {
-        var function: (Double, Double) -> Double
-        var firstOperand: Double
-
-        func perform(with secondOperand: Double) -> Double {
-            return function(firstOperand, secondOperand)
-        }
-    }
 
     private var binaryOperation: BinaryOperation?
 
