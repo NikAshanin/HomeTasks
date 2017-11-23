@@ -49,8 +49,9 @@ class MyViewController: UIViewController {
                     self?.characters.forEach { character in
                         group.enter()
                         DispatchQueue.global(qos: .userInitiated).async {
-                            character.fetchFilms()
-                            group.leave()
+                            character.fetchFilms {
+                               group.leave()
+                            }
                         }
                     }
                 }

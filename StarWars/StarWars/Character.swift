@@ -16,7 +16,7 @@ class Character {
         self.name = name ?? "?"
     }
 
-    func fetchFilms() {
+    func fetchFilms(callback: @escaping () -> Void) {
         guard let filmsUrl = info["films"] as? [String] else {
             return
         }
@@ -37,6 +37,8 @@ class Character {
             }
             task.resume()
         }
-        group.wait()
+        group.notify(queue: .global()) {
+            callback()
+        }
     }
 }
