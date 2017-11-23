@@ -6,7 +6,10 @@ class OperationStackController {
         case operation((Double, String))
     }
     private var internalProgram: [OpStack] = []
-    private var currentSymbol = -1
+    var isEmpty: Bool {
+        return currentSymbol<0
+    }
+    private var currentSymbol = -1 
     var lastValueInStack: Bool {
         return currentSymbol.distance(to: internalProgram.count) == 1
     }
@@ -14,12 +17,12 @@ class OperationStackController {
         if let operation = operation {
             internalProgram.append(OpStack.operation((operand, operation)))
         } else {
-            internalProgram.append(OpStack.operation((operand, "")))
+            internalProgram.append(OpStack.number(operand))
         }
         currentSymbol+=1
     }
     func undo() -> (Double, String?)? {
-        if internalProgram.isEmpty {
+        if isEmpty {
             return nil
         }
         let oper = internalProgram[currentSymbol]

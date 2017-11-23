@@ -32,8 +32,7 @@ struct Calculator {
         case binaryOperation ((Double, Double) -> Double)
         case equals
     }
-    
-    private var operations : Dictionary <String,Operation> =
+    private var operations: Dictionary <String,Operation> =
         [
             "2^x": Operation.unaryOperation ({pow(2, $0)}),
             "x^2": Operation.unaryOperation ({pow($0, 2)}),
@@ -74,7 +73,6 @@ struct Calculator {
             "-": Operation.binaryOperation ({$0 - $1}),
             "=": Operation.equals
     ]
-    
     mutating func performOperation(_ symbol: String) {
         if let operation = operations[symbol] {
             switch operation {
@@ -94,28 +92,23 @@ struct Calculator {
             }
         }
     }
-    
     private mutating func  performPendingBinaryOperation() {
-        if pendingBinaryOperation != nil {
+        if pendingBinaryOperation != nil {//&& accumulator != nil {
             accumulator =  pendingBinaryOperation!.perform(with: accumulator!)
             pendingBinaryOperation = nil
         }
     }
-    
     private var pendingBinaryOperation: PendingBinaryOperation?
-    
     private struct PendingBinaryOperation {
-        let function: (Double,Double) -> Double
+        let function: (Double, Double) -> Double
         let firstOperand: Double
         func perform (with secondOperand: Double) -> Double {
             return function (firstOperand, secondOperand)
         }
     }
-    
     mutating func setOperand (_ operand: Double) {
         accumulator = operand
     }
-    
     var result: Double? {
         get {
             return accumulator

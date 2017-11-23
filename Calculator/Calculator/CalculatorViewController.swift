@@ -3,7 +3,6 @@ import UIKit
 final class CalculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     var userInTheMiddleOfTyping = false
-    
     @IBAction func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle ?? ""
         if userInTheMiddleOfTyping {
@@ -14,15 +13,12 @@ final class CalculatorViewController: UIViewController {
             userInTheMiddleOfTyping = true
         }
     }
-    
     @IBAction func btnClear(_ sender: UIButton) {
         displayValue = 0
         userInTheMiddleOfTyping = false
         display.text! = "0"
         opStack.clear()
-        clearBorder()
     }
-    
     var displayValue: Double {
         get {
             return Double(display.text!)!
@@ -31,26 +27,25 @@ final class CalculatorViewController: UIViewController {
             display.text = String (newValue)
         }
     }
-    
     var opStack = OperationStackController()
-    private var calc = Calculator ()
+    private var calc = Calculator()
     var count=0
     
     @IBAction func performOPeration(_ sender: UIButton) {
-        clearBorder()
         if userInTheMiddleOfTyping {
             calc.setOperand(displayValue)
             userInTheMiddleOfTyping = false
         }
-        if count > 0 {
-            calc.performOperation("=")
-            let result = calc.result
-            displayValue = result!
-            calc.setOperand(displayValue)
-        }
         if let mathematicalSymbol = sender.currentTitle {
             if mathematicalSymbol == "=" {
                 count = 0
+            }
+            if count > 0 {
+                calc.performOperation("=")
+                opStack.push(operand: displayValue, operation: mathematicalSymbol)
+                let result = calc.result
+                displayValue = result!
+                calc.setOperand(displayValue)
             }
             count+=1
             calc.performOperation(mathematicalSymbol)
@@ -72,9 +67,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var btnSinh: UIButton!
     @IBOutlet weak var btnTanh: UIButton!
     @IBOutlet weak var btnCosh: UIButton!
-    
     @IBAction func getSecondPerformOperation(_ sender: UIButton) {
-        clearBorder()
         if !flagToGoSecondOpiration {
             flagToGoSecondOpiration = true
             sender.layer.borderColor = UIColor.darkGray.cgColor
@@ -126,7 +119,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var btnXFactorial: UIButton!
     @IBOutlet weak var btnPercent: UIButton!
     @IBOutlet weak var btnChangeSign: UIButton!
-    
     @IBAction func btnRadtoDeg(_ sender: UIButton) {
         if flagToGetRad {
             flagToGetRad = false
@@ -142,97 +134,23 @@ final class CalculatorViewController: UIViewController {
             labelRadOrDegInformation.setTitle("Rad", for: UIControlState.normal)
         }
     }
-    
     @IBAction func btnNextResult(_ sender: UIButton) {
-        clearBorder()
         guard let (operand, operation) = opStack.redo() else { return }
         displayValue = operand
         if let mathematicalSymbol = operation {
-            self.searchTitle(mathematicalSymbol: mathematicalSymbol)
             calc.setOperand(displayValue)
             calc.performOperation(mathematicalSymbol)
         }
     }
-    
     @IBAction func btnPreviousResult(_ sender: UIButton) {
-        clearBorder()
         if let (operand, operation) = opStack.undo() {
             displayValue = operand
             if let mathematicalSymbol = operation {
-                self.searchTitle(mathematicalSymbol: mathematicalSymbol)
                 calc.setOperand(displayValue)
                 calc.performOperation(mathematicalSymbol)
             }
         } else {
             displayValue = 0
-        }
-    }
-    
-    func clearBorder() {
-        btnPlus.layer.borderWidth = 0
-        btnMinus.layer.borderWidth = 0
-        btnMultiply.layer.borderWidth = 0
-        btnDivision.layer.borderWidth = 0
-        btnEqual.layer.borderWidth = 0
-        btnEXandYX.layer.borderWidth = 0
-        btn10Xand2x.layer.borderWidth = 0
-        btnLNandLOGy.layer.borderWidth = 0
-        btnLOG10andLOG2.layer.borderWidth = 0
-        btnSin.layer.borderWidth = 0
-        btnCos.layer.borderWidth = 0
-        btnTan.layer.borderWidth = 0
-        btnSinh.layer.borderWidth = 0
-        btnCosh.layer.borderWidth = 0
-        btnTanh.layer.borderWidth = 0
-        btnChangeSign.layer.borderWidth = 0
-        btnPercent.layer.borderWidth = 0
-        btnXFactorial.layer.borderWidth = 0
-        btnSQRTy.layer.borderWidth = 0
-        btnE.layer.borderWidth = 0
-        btnPi.layer.borderWidth = 0
-        btnRand.layer.borderWidth = 0
-        btnLOG2.layer.borderWidth = 0
-        btnSQRT3.layer.borderWidth = 0
-        btnSQRT.layer.borderWidth = 0
-        btn1X.layer.borderWidth = 0
-        btnXY.layer.borderWidth = 0
-        btnX3.layer.borderWidth = 0
-        btnX2.layer.borderWidth = 0
-    }
-    
-    func searchTitle(mathematicalSymbol: String) {
-        switch mathematicalSymbol {
-        case "+":
-            btnPlus.layer.borderWidth = 1
-            btnPlus.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "-":
-            btnMinus.layer.borderWidth = 1
-            btnMinus.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "×":
-            btnMultiply.layer.borderWidth = 1
-            btnMultiply.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "÷":
-            btnDivision.layer.borderWidth = 1
-            btnDivision.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "logy", "ln":
-            btnLNandLOGy.layer.borderWidth = 1
-            btnLNandLOGy.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "x!":
-            btnXFactorial.layer.borderWidth = 1
-            btnXFactorial.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "y√":
-            btnSQRTy.layer.borderWidth = 1
-            btnSQRTy.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "e^x","y^x":
-            btnEXandYX.layer.borderWidth = 1
-            btnEXandYX.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "x^y":
-            btnXY.layer.borderWidth = 1
-            btnXY.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
-        case "":
-            break
-        default:
-            assertionFailure("Error in func searchTitle in ViewController")
         }
     }
 }
