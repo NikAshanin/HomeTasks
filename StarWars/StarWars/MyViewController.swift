@@ -1,6 +1,6 @@
 import UIKit
 
-class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class MyViewController: UIViewController {
 
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var tableView: UITableView!
@@ -8,7 +8,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet private weak var searchTextField: UITextField! { didSet { searchTextField.delegate = self } }
 
     private let urlTemplate = "https://swapi.co/api/people/?search="
-    private let formatter = DateFormatter()
+
     private var characters = [Character]()
 
     private var url: URL? {
@@ -46,22 +46,35 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let searchResult = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
                     let characters = searchResult["results"] as? [[String: Any]] {
                     self?.characters = characters.map { Character(from: $0) }
+                    self?.characters.forEach { character in
+                        group.enter()
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            character.fetchFilms()
+                            group.leave()
+                        }
+                    }
                 }
                 group.leave()
             }
             task.resume()
-            group.notify(queue: .global()) { [weak self] in
-                self?.characters.forEach { character in
-                    character.fetchFilms()
-                }
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.spinner.stopAnimating()
-                }
+            group.notify(queue: .main) { [weak self] in
+                self?.tableView.reloadData()
+                self?.spinner.stopAnimating()
             }
         }
     }
+}
 
+extension MyViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == searchTextField {
+            searchText = textField.text
+        }
+        return true
+    }
+}
+
+extension MyViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return characters.count
     }
@@ -70,7 +83,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return characters[section].films.count
     }
 
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
 
         let films = characters[indexPath.section].films
@@ -78,7 +91,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         cell.textLabel?.text = filmName.0
 
         return cell
-     }
+    }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return characters[section].name
@@ -86,19 +99,20 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dateString = characters[indexPath.section].films[indexPath.row].1
+        let year = dateString.year ?? "неизвестно каком"
+        dateLabel.text = "Этот фильм вышел в \(year) году"
+    }
+}
+
+fileprivate extension String {
+    var year: String? {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-mm-dd"
-        guard let data = formatter.date(from: dateString) else {
-            return
+        guard let data = formatter.date(from: self) else {
+            return nil
         }
         formatter.dateFormat = "yyyy"
         let year = formatter.string(from: data)
-        dateLabel.text = "Этот фильм вышел в \(year) году"
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == searchTextField {
-            searchText = textField.text
-        }
-        return true
+        return year
     }
 }

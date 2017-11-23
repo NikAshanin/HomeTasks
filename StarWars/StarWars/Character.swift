@@ -21,24 +21,22 @@ class Character {
             return
         }
         let session = URLSession.shared
-        var tempArray = [(String, String)]()
         let group = DispatchGroup()
         for filmUrl in filmsUrl {
             guard let url = URL(string: filmUrl) else {
                 continue
             }
             group.enter()
-            let task = session.dataTask(with: url) {(data, _, _) in
+            let task = session.dataTask(with: url) { [weak self] (data, _, _) in
                 if let data = data, let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] {
                     let filmName = json["title"] as? String ?? "no film title"
                     let filmDate = json["release_date"] as? String ?? "no film date"
-                    tempArray.append((filmName, filmDate))
+                    self?.filmsData.append((filmName, filmDate))
                     group.leave()
                 }
             }
             task.resume()
         }
         group.wait()
-        filmsData = tempArray
     }
 }
