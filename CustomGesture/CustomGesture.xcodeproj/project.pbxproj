@@ -39,6 +39,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A5322781FC87E4F003F1F6B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE0E9B1FC084F800A55AD2 /* CGFloat+Helpers.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3A5322791FC87E5B003F1F6B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE0E991FC084CB00A55AD2 /* CircleGestureRecognizer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3A53227A1FC87E67003F1F6B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		7F6C26741FBB3668008A981B = {
 			isa = PBXGroup;
 			children = (
@@ -59,9 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
-				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
-				3ADE0E991FC084CB00A55AD2 /* CircleGestureRecognizer.swift */,
-				3ADE0E9B1FC084F800A55AD2 /* CGFloat+Helpers.swift */,
+				3A53227A1FC87E67003F1F6B /* Controller */,
+				3A5322791FC87E5B003F1F6B /* Model */,
+				3A5322781FC87E4F003F1F6B /* Extension */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
 				7F6C26871FBB3669008A981B /* Assets.xcassets */,
 				7F6C26891FBB3669008A981B /* LaunchScreen.storyboard */,
