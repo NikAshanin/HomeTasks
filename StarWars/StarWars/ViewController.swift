@@ -9,6 +9,8 @@ final class ViewController: UIViewController {
 //    let dateformatter = DateFormatter()
     let queue = DispatchQueue.global()
    // let downloadGroup = DispatchGroup()
+  let network = NetworkService()
+  
     override func viewDidLoad() {
       super.viewDidLoad()
       dateOfFilmLabel.isHidden = true
@@ -16,7 +18,10 @@ final class ViewController: UIViewController {
     @IBAction func startSearch(_ sender: Any) {
       staff.arrayFilm = []
       tableView.reloadData()
-      staff = NetworkService().downLoad(searchTextField.text!)
+      network.downLoad(searchTextField.text!) { staff in
+        self.staff = staff
+      }
+      print(staff.arrayFilm.count)
       DispatchQueue.main.async {
         self.tableView.reloadData()
       }
