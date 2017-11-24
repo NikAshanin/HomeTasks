@@ -6,8 +6,7 @@ final class FilmTableViewCell: UITableViewCell {
         super.awakeFromNib()
         accessoryType = .disclosureIndicator
     }
-    
-    
+
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
@@ -18,7 +17,7 @@ final class FilmTableViewCell: UITableViewCell {
             updateUI()
         }
     }
-    
+
     private func updateUI() {
         posterImageView.image = filmData?.poster
         titleLabel.text = filmData?.title

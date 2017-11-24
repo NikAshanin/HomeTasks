@@ -27,6 +27,14 @@
 		BFAF93AD1FC797AB0021E02A /* E_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93A51FC797AB0021E02A /* E_6.jpg */; };
 		BFAF93AF1FC799470021E02A /* FilmSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAF93AE1FC799470021E02A /* FilmSources.swift */; };
 		BFAF93B51FC7B3880021E02A /* DetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAF93B41FC7B3880021E02A /* DetailViewProtocol.swift */; };
+		BFAF93B81FC7BE060021E02A /* E_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93B71FC7BE060021E02A /* E_1.txt */; };
+		BFAF93C01FC82A9A0021E02A /* E_3.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93B91FC82A9A0021E02A /* E_3.txt */; };
+		BFAF93C11FC82A9A0021E02A /* E_2.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93BA1FC82A9A0021E02A /* E_2.txt */; };
+		BFAF93C21FC82A9A0021E02A /* E_6.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93BB1FC82A9A0021E02A /* E_6.txt */; };
+		BFAF93C31FC82A9A0021E02A /* E_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93BC1FC82A9A0021E02A /* E_4.txt */; };
+		BFAF93C41FC82A9A0021E02A /* E_7.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93BD1FC82A9A0021E02A /* E_7.txt */; };
+		BFAF93C51FC82A9A0021E02A /* E_5.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93BE1FC82A9A0021E02A /* E_5.txt */; };
+		BFAF93C61FC82A9A0021E02A /* E_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93BF1FC82A9A0021E02A /* E_8.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +60,14 @@
 		BFAF93A51FC797AB0021E02A /* E_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = E_6.jpg; sourceTree = "<group>"; };
 		BFAF93AE1FC799470021E02A /* FilmSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSources.swift; sourceTree = "<group>"; };
 		BFAF93B41FC7B3880021E02A /* DetailViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewProtocol.swift; sourceTree = "<group>"; };
+		BFAF93B71FC7BE060021E02A /* E_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = E_1.txt; path = FilmBrowser/Resources/E_1.txt; sourceTree = SOURCE_ROOT; };
+		BFAF93B91FC82A9A0021E02A /* E_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_3.txt; sourceTree = "<group>"; };
+		BFAF93BA1FC82A9A0021E02A /* E_2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_2.txt; sourceTree = "<group>"; };
+		BFAF93BB1FC82A9A0021E02A /* E_6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_6.txt; sourceTree = "<group>"; };
+		BFAF93BC1FC82A9A0021E02A /* E_4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_4.txt; sourceTree = "<group>"; };
+		BFAF93BD1FC82A9A0021E02A /* E_7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_7.txt; sourceTree = "<group>"; };
+		BFAF93BE1FC82A9A0021E02A /* E_5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_5.txt; sourceTree = "<group>"; };
+		BFAF93BF1FC82A9A0021E02A /* E_8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = E_8.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +127,14 @@
 				BFAF93A11FC797AB0021E02A /* E_8.jpg */,
 				BFAF939E1FC797AA0021E02A /* E_4.jpg */,
 				BFAF939F1FC797AB0021E02A /* E_5.jpg */,
+				BFAF93B71FC7BE060021E02A /* E_1.txt */,
+				BFAF93BA1FC82A9A0021E02A /* E_2.txt */,
+				BFAF93B91FC82A9A0021E02A /* E_3.txt */,
+				BFAF93BC1FC82A9A0021E02A /* E_4.txt */,
+				BFAF93BE1FC82A9A0021E02A /* E_5.txt */,
+				BFAF93BB1FC82A9A0021E02A /* E_6.txt */,
+				BFAF93BD1FC82A9A0021E02A /* E_7.txt */,
+				BFAF93BF1FC82A9A0021E02A /* E_8.txt */,
 				7FC8054E1FC6EF8100C526B7 /* Assets.xcassets */,
 				7FC805501FC6EF8100C526B7 /* LaunchScreen.storyboard */,
 			);
@@ -186,18 +210,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFAF93C01FC82A9A0021E02A /* E_3.txt in Resources */,
+				BFAF93C21FC82A9A0021E02A /* E_6.txt in Resources */,
 				BFAF93A61FC797AB0021E02A /* E_4.jpg in Resources */,
 				7FC805521FC6EF8100C526B7 /* LaunchScreen.storyboard in Resources */,
 				BFAF93AC1FC797AB0021E02A /* E_2.jpg in Resources */,
 				BF411C631FC78424006A65BA /* like.png in Resources */,
 				BFAF93A71FC797AB0021E02A /* E_5.jpg in Resources */,
+				BFAF93C41FC82A9A0021E02A /* E_7.txt in Resources */,
 				7FC805621FC6F0DE00C526B7 /* FilmTableViewCell.xib in Resources */,
 				BFAF93A81FC797AB0021E02A /* E_3.jpg in Resources */,
 				BFAF93AA1FC797AB0021E02A /* E_1.jpg in Resources */,
 				7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */,
+				BFAF93C61FC82A9A0021E02A /* E_8.txt in Resources */,
 				7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */,
+				BFAF93C11FC82A9A0021E02A /* E_2.txt in Resources */,
 				BFAF93AB1FC797AB0021E02A /* E_7.jpg in Resources */,
 				BFAF93AD1FC797AB0021E02A /* E_6.jpg in Resources */,
+				BFAF93C31FC82A9A0021E02A /* E_4.txt in Resources */,
+				BFAF93B81FC7BE060021E02A /* E_1.txt in Resources */,
+				BFAF93C51FC82A9A0021E02A /* E_5.txt in Resources */,
 				BFAF93A91FC797AB0021E02A /* E_8.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi";
+			shellScript = "#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/#SwiftLint\"\n#fi";
 		};
 		7FC8055E1FC6F04000C526B7 /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;

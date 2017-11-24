@@ -85,33 +85,41 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eou-Xv-vnW">
-                                        <rect key="frame" x="155.5" y="568" width="64" height="64"/>
+                                        <rect key="frame" x="172.5" y="568" width="30" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="64" id="7gk-G0-9ud"/>
                                             <constraint firstAttribute="height" constant="64" id="QTk-Lo-Jq3"/>
                                         </constraints>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Like" backgroundImage="like.png">
+                                        <state key="normal" title="Like">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <state key="selected" image="E_2.jpg"/>
                                         <connections>
                                             <action selector="likePressed:" destination="4qB-Jp-MSk" eventType="touchUpInside" id="oOf-cL-aJz"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1h-ee-lrf">
+                                        <rect key="frame" x="204" y="568" width="42" height="64"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="d1h-ee-lrf" firstAttribute="height" secondItem="eou-Xv-vnW" secondAttribute="height" id="1zI-fN-WQi"/>
                                     <constraint firstItem="mJo-Id-ukU" firstAttribute="leading" secondItem="o6n-Bp-1N6" secondAttribute="leading" id="GO9-56-jui"/>
                                     <constraint firstAttribute="trailing" secondItem="MTr-sg-Pn2" secondAttribute="trailing" constant="16" id="Ggc-OM-MIY"/>
                                     <constraint firstItem="eou-Xv-vnW" firstAttribute="top" secondItem="b8n-uW-uPs" secondAttribute="bottom" constant="16" id="JgK-Jf-woN"/>
                                     <constraint firstItem="mJo-Id-ukU" firstAttribute="top" secondItem="o6n-Bp-1N6" secondAttribute="top" id="QQg-bZ-bMX"/>
                                     <constraint firstAttribute="trailing" secondItem="b8n-uW-uPs" secondAttribute="trailing" constant="16" id="S8q-rf-GFk"/>
                                     <constraint firstItem="MTr-sg-Pn2" firstAttribute="leading" secondItem="o6n-Bp-1N6" secondAttribute="leading" constant="16" id="WJi-xF-KQf"/>
+                                    <constraint firstItem="d1h-ee-lrf" firstAttribute="centerY" secondItem="eou-Xv-vnW" secondAttribute="centerY" id="Y9h-n7-Z1W"/>
                                     <constraint firstAttribute="trailing" secondItem="mJo-Id-ukU" secondAttribute="trailing" id="d3u-Pl-4fR"/>
                                     <constraint firstItem="MTr-sg-Pn2" firstAttribute="top" secondItem="mJo-Id-ukU" secondAttribute="bottom" constant="30" id="elC-2z-Wj6"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d1h-ee-lrf" secondAttribute="trailing" constant="20" symbolic="YES" id="faz-RT-nTv"/>
                                     <constraint firstAttribute="bottom" secondItem="eou-Xv-vnW" secondAttribute="bottom" constant="21" id="htg-r5-2OP"/>
                                     <constraint firstItem="eou-Xv-vnW" firstAttribute="centerX" secondItem="o6n-Bp-1N6" secondAttribute="centerX" id="q5T-Mf-EO0"/>
                                     <constraint firstItem="mJo-Id-ukU" firstAttribute="width" secondItem="o6n-Bp-1N6" secondAttribute="width" id="qMf-2X-Oga"/>
+                                    <constraint firstItem="d1h-ee-lrf" firstAttribute="leading" secondItem="eou-Xv-vnW" secondAttribute="trailing" constant="1" id="qfl-Lx-waa"/>
                                     <constraint firstItem="b8n-uW-uPs" firstAttribute="top" secondItem="MTr-sg-Pn2" secondAttribute="bottom" constant="30" id="tpP-he-OOz"/>
                                     <constraint firstItem="b8n-uW-uPs" firstAttribute="leading" secondItem="o6n-Bp-1N6" secondAttribute="leading" constant="16" id="ytI-dh-aks"/>
                                 </constraints>
@@ -126,9 +134,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UNI-zt-UPf"/>
                     </view>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="b8n-uW-uPs" id="rMD-D5-vg2"/>
                         <outlet property="likeButton" destination="eou-Xv-vnW" id="gHi-lp-SWQ"/>
+                        <outlet property="likesLabel" destination="d1h-ee-lrf" id="gC7-Fl-OEU"/>
                         <outlet property="posterImageView" destination="mJo-Id-ukU" id="glv-ng-NAI"/>
                         <outlet property="titleLabel" destination="MTr-sg-Pn2" id="xi0-Wn-JXH"/>
                     </connections>
@@ -156,8 +166,4 @@
             <point key="canvasLocation" x="87" y="103"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="E_2.jpg" width="265" height="393"/>
-        <image name="like.png" width="512" height="512"/>
-    </resources>
 </document>
