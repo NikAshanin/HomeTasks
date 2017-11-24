@@ -1,39 +1,28 @@
 import Foundation
 
-class DescriptionHandler {
-
-    // MARK: - Singleton
-
-    static let sharedInstance = DescriptionHandler()
-
-    private init() {}
+final class DescriptionHandler {
 
     // MARK: - Properties
 
-    private struct Consts {
-        static let space = " "
+    private enum Constants: String {
+        case space = " "
     }
 
     private var unaryOperations: Set = ["1/x", "2√x", "∛x", "e^x", "10^x", "2^x"]
     private var description = ""
     private var lastOperation = ""
-    private var resultIsPending: Bool {
-        return CalculatorProcessor.sharedInstance.resultIsPending
-    }
-    private var operations: [String: CalculatorProcessor.Operation] {
-        return CalculatorProcessor.sharedInstance.calculatorOperations
-    }
-    private let formatter = NumberFormatter()
+    private let operations = Operations()
+    private let formatter = NumberFormatterConfigurator()
 
     // MARK: - Public properties
 
-    public var getDescription: String? {
+    var getDescription: String? {
         return description
     }
 
     // MARK: - Public
 
-    public func addToDescription(digit: String? = nil, symbol: String? = nil) {
+    func addToDescription(digit: String? = nil, symbol: String? = nil, resultIsPending: Bool) {
 
         if let digit = digit {
             guard let digit = Double(digit) else {
@@ -41,54 +30,50 @@ class DescriptionHandler {
                 return
             }
 
-            formatter.maximumFractionDigits = 6
-            formatter.minimumFractionDigits = 0
-            formatter.minimumIntegerDigits = 1
-
             guard let formattedDigit = formatter.string(from: NSNumber(value: digit)) else {
                 assertionFailure("Cant format")
                 return
             }
 
-            description += formattedDigit + Consts.space
+            description += formattedDigit + Constants.space.rawValue
         } else if symbol != nil {
             guard let symbol = symbol else {
                 return
             }
 
-            addOperationToDesccription(symbol)
+            addOperationToDesccription(symbol, resultIsPending: resultIsPending)
         }
     }
 
-    public func cleanDescription() {
+    func cleanDescription() {
         description = ""
     }
 
     // MARK: - Private
 
-    private func addOperationToDesccription(_ symbol: String) {
-        guard let operation = operations[symbol] else {
+    private func addOperationToDesccription(_ symbol: String, resultIsPending: Bool) {
+        guard let operation = operations.operations[symbol] else {
             return
         }
 
         switch operation {
         case .constant:
-            description += symbol + Consts.space
+            description += symbol + Constants.space.rawValue
         case .unaryOperation where unaryOperations.contains(symbol):
 
             var mutableSymbol = String(symbol)
             mutableSymbol.removeLast(1)
 
             if resultIsPending {
-                description += mutableSymbol + "\(returnLastNumberFromDescription())" + Consts.space
+                description += mutableSymbol + "\(returnLastNumberFromDescription())" + Constants.space.rawValue
             } else {
-                description = mutableSymbol + "(\(description))" + Consts.space
+                description = mutableSymbol + "(\(description))" + Constants.space.rawValue
             }
         case .unaryOperation:
             if resultIsPending {
-                description += symbol + "(\(returnLastNumberFromDescription()))" + Consts.space
+                description += symbol + "(\(returnLastNumberFromDescription()))" + Constants.space.rawValue
             } else {
-                description = symbol + "(\(description))" + Consts.space
+                description = symbol + "(\(description))" + Constants.space.rawValue
             }
         case .binaryOperation where symbol == "y√x" || symbol == "x^y":
             lastOperation = symbol
@@ -96,12 +81,12 @@ class DescriptionHandler {
             var mutableSymbol = String(symbol)
             mutableSymbol.removeLast(1)
 
-            description = mutableSymbol + "(\(description))" + Consts.space
+            description = mutableSymbol + "(\(description))" + Constants.space.rawValue
         case .binaryOperation:
-            description += symbol + Consts.space
+            description += symbol + Constants.space.rawValue
         case .equals where lastOperation == "y√x" || lastOperation == "x^y":
             description.removeFirst(1)
-            description = returnLastNumberFromDescription() + "\(description)" + Consts.space
+            description = returnLastNumberFromDescription() + "\(description)" + Constants.space.rawValue
             lastOperation = ""
         default: return
         }

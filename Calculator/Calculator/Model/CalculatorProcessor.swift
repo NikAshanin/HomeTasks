@@ -1,31 +1,27 @@
 import Foundation
 
-class CalculatorProcessor {
-
-    // MARK: - Singleton
-
-    static let sharedInstance = CalculatorProcessor()
-
-    private init() {}
+final class CalculatorProcessor {
 
     // MARK: - Private properties
 
     private var accumulator: Double?
     private var variables = [String: Double]()
-    private let formatter = NumberFormatter()
+    private let formatter = NumberFormatterConfigurator()
     private var operandsAndOperations: [String] = []
     private var redoOperandAndOperations: [String] = []
     private var pendingBinaryOperation: PendingBinaryOperation?
-    private var description = DescriptionHandler.sharedInstance
+    private var description = DescriptionHandler()
+    private let operations = Operations()
 
     // MARK: - Public properties
 
-    public var resultIsPending: Bool {
+    var getDescription: String? {
+        return description.getDescription
+    }
+
+    var resultIsPending: Bool {
         get {
-            if pendingBinaryOperation != nil {
-                return true
-            }
-            return false
+            return pendingBinaryOperation != nil
         }
         set {
             if newValue == false {
@@ -34,65 +30,9 @@ class CalculatorProcessor {
         }
     }
 
-    public var result: Double? {
+    var result: Double? {
         return accumulator
     }
-
-    public var calculatorOperations: [String: Operation] {
-        return operations
-    }
-
-    enum Operation {
-        case constant(Double)
-        case unaryOperation((Double) -> (Double))
-        case binaryOperation((Double, Double) -> Double)
-        case equals
-        case clear
-    }
-
-    private var operations: [String: Operation] = [
-        "π": Operation.constant(Double.pi),
-        "e": Operation.constant(M_E),
-
-        "2√x": Operation.unaryOperation(sqrt),
-        "∛x": Operation.unaryOperation(cbrt),
-        "cos": Operation.unaryOperation(cos),
-        "sin": Operation.unaryOperation(sin),
-        "tan": Operation.unaryOperation(tan),
-        "cos-1": Operation.unaryOperation(acos),
-        "sin-1": Operation.unaryOperation(asin),
-        "tan-1": Operation.unaryOperation(atan),
-        "cosh": Operation.unaryOperation(cosh),
-        "sinh": Operation.unaryOperation(sinh),
-        "tanh": Operation.unaryOperation(tanh),
-        "cosh-1": Operation.unaryOperation(acosh),
-        "sinh-1": Operation.unaryOperation(asinh),
-        "tanh-1": Operation.unaryOperation(atanh),
-        "log2": Operation.unaryOperation(log2),
-        "log10": Operation.unaryOperation(log10),
-        "ln": Operation.unaryOperation(log),
-        "x²": Operation.unaryOperation({ pow($0, 2) }),
-        "x³": Operation.unaryOperation({ pow($0, 3) }),
-        "±": Operation.unaryOperation({ -$0 }),
-        "e^x": Operation.unaryOperation({ pow(M_E, $0) }),
-        "10^x": Operation.unaryOperation({ pow(10, $0) }),
-        "2^x": Operation.unaryOperation({ pow(2, $0) }),
-        "1/x": Operation.unaryOperation({ 1 / $0 }),
-        "x!": Operation.unaryOperation({ $0.factorial }),
-        "EE": Operation.unaryOperation({ pow(10, $0) }),
-
-        "%": Operation.binaryOperation({ $0.truncatingRemainder(dividingBy: $1) }),
-        "×": Operation.binaryOperation({ $0 * $1 }),
-        "x^y": Operation.binaryOperation({ pow($1, $0) }),
-        "y√x": Operation.binaryOperation({ pow($0, 1.0 / $1) }),
-        "logy": Operation.binaryOperation({ $0.logY($1) }),
-        "÷": Operation.binaryOperation({ $0 / $1 }),
-        "+": Operation.binaryOperation({ $0 + $1 }),
-        "-": Operation.binaryOperation({ $0 - $1 }),
-
-        "=": Operation.equals,
-        "C": Operation.clear
-    ]
 
     // MARK: - Private
 
@@ -105,20 +45,18 @@ class CalculatorProcessor {
         }
     }
 
-    private struct PendingBinaryOperation {
-        let function: (Double, Double) -> Double
-        let firstOperand: Double
+    func handleClean() {
+        resultIsPending = false
 
-        func perform(with secondOperand: Double) -> Double {
-            return function(firstOperand, secondOperand)
-        }
+        description.cleanDescription()
+        removeAllFrom(.undo)
+        removeAllFrom(.redo)
     }
 
     // MARK: - Public
 
-    public func performOperation(_ symbol: String) {
-        print("Perform operation: current operation is \(symbol)")
-        if let operation = operations[symbol] {
+    func performOperation(_ symbol: String) {
+        if let operation = operations.operations[symbol] {
             switch operation {
             case .constant(let value):
                 accumulator = value
@@ -144,7 +82,7 @@ class CalculatorProcessor {
         }
     }
 
-    public func setOperand(_ operand: Double) {
+    func setOperand(_ operand: Double) {
         accumulator = operand
 
         if !resultIsPending {
@@ -157,17 +95,15 @@ class CalculatorProcessor {
 
         redoOperandAndOperations.removeAll()
 
-        formatter.maximumFractionDigits = 6
-        formatter.minimumFractionDigits = 0
         let formattedNumber = formatter.string(from: operand as NSNumber)
-        description.addToDescription(digit: formattedNumber)
+        description.addToDescription(digit: formattedNumber, resultIsPending: resultIsPending)
     }
 
-    public func setValueTo(variable named: String) {
+    func setValueTo(variable named: String) {
         operandsAndOperations.append(named)
     }
 
-    public func calculateResult() {
+    func calculateResult() {
         pendingBinaryOperation = nil
 
         for oper in operandsAndOperations {
@@ -176,19 +112,16 @@ class CalculatorProcessor {
                 if let digit = Double(oper) {
                     accumulator = digit
 
-                    description.addToDescription(digit: oper)
+                    description.addToDescription(digit: oper, resultIsPending: resultIsPending)
                 }
             default:
                 performOperation(oper)
-                description.addToDescription(symbol: oper)
+                description.addToDescription(symbol: oper, resultIsPending: resultIsPending)
             }
         }
-        print("Calulate result: operand and operation is \(String(describing: operandsAndOperations))")
-        print("Calulate result: current accumulator is \(String(describing: accumulator))")
-        print("Calulate result: is pinding \(String(describing: resultIsPending))")
     }
 
-    public func isListEmpty(_ list: UndoRedo) -> Bool {
+    func isListEmpty(_ list: UndoRedo) -> Bool {
         switch list {
         case .undo:
             return operandsAndOperations.isEmpty
@@ -197,11 +130,22 @@ class CalculatorProcessor {
         }
     }
 
-    public func appendTo(_ list: UndoRedo, symbol: String) {
-        list == .undo ? operandsAndOperations.append(symbol) : redoOperandAndOperations.append(symbol)
+    func appendTo(_ list: UndoRedo, symbol: String) {
+        if list == .undo {
+            operandsAndOperations.append(symbol)
+            removeLastFrom(.redo)
+            description.addToDescription(symbol: symbol, resultIsPending: resultIsPending)
+        } else {
+            redoOperandAndOperations.append(symbol)
+            removeLastFrom(.undo)
+        }
     }
 
-    public func returnLastFrom(_ list: UndoRedo) -> String {
+    func cleanDescription() {
+        description.cleanDescription()
+    }
+
+    func returnLastFrom(_ list: UndoRedo) -> String {
         switch list {
         case .undo:
             return operandsAndOperations.last ?? "0"
@@ -210,16 +154,22 @@ class CalculatorProcessor {
         }
     }
 
-    public func removeLastFrom(_ list: UndoRedo) {
+    func removeLastFrom(_ list: UndoRedo) {
         switch list {
         case .undo:
+            guard !operandsAndOperations.isEmpty else {
+                return
+            }
             operandsAndOperations.removeLast()
         case .redo:
+            guard !redoOperandAndOperations.isEmpty else {
+                return
+            }
             redoOperandAndOperations.removeLast()
         }
     }
 
-    public func removeAllFrom(_ list: UndoRedo) {
+    func removeAllFrom(_ list: UndoRedo) {
         switch list {
         case .undo:
             operandsAndOperations.removeAll()
@@ -229,7 +179,7 @@ class CalculatorProcessor {
     }
 }
 
-enum UndoRedo {
-    case undo
-    case redo
+enum UndoRedo: String {
+    case undo = "Undo"
+    case redo = "Redo"
 }

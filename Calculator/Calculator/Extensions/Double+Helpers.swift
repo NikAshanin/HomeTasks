@@ -1,7 +1,7 @@
 import Foundation
 
 extension Double {
-    public var factorial: Double {
+    var factorial: Double {
         let roundedDouble = rounded()
         return roundedDouble == 1.0 ? roundedDouble : roundedDouble * (roundedDouble - 1).factorial
     }

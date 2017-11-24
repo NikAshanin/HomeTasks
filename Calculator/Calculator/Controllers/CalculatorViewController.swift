@@ -30,10 +30,10 @@ final class CalculatorViewController: UIViewController {
                                        "cosh-1", "tan-1", "tanh-1",
                                        "sinh", "sin", "cos",
                                        "cosh", "tan", "tanh"]
-    private let formatter = NumberFormatter()
-    private let processor = CalculatorProcessor.sharedInstance
-    private let descriptionHandler = DescriptionHandler.sharedInstance
-    private var userIsInTheMiddleOfTyping = false
+
+    private let formatter = NumberFormatterConfigurator()
+    private let processor = CalculatorProcessor()
+    private var userBeganTyping = false
     private var numberOfCharacterGreaterThan16: Bool {
         return (displayLabel.text?.count)! >= 16
     }
@@ -59,15 +59,13 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureFormatter()
-
         sequanceOfOperationsLabel.text = nil
         memoryLabel.text = nil
     }
 
     // MARK: - Actions
 
-    @IBAction func nonOperationButtonTapped(_ sender: UIButton) {
+    @IBAction private func nonOperationButtonTapped(_ sender: UIButton) {
         guard let character = sender.currentTitle else {
             assertionFailure("Failed to get the title")
             return
@@ -81,27 +79,26 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func performOperation(_ sender: UIButton) {
+    @IBAction private func performOperation(_ sender: UIButton) {
         guard let operation = sender.currentTitle else {
             assertionFailure("Failed to get the title")
             return
         }
 
-        if operation == "Redo" {
+        if operation == UndoRedo.redo.rawValue {
             handleUndoRedo(operation: .redo)
-        } else if operation == "Undo" {
-            userIsInTheMiddleOfTyping ? deleteTapped() : handleUndoRedo(operation: .undo)
+        } else if operation == UndoRedo.undo.rawValue {
+            userBeganTyping ? deleteTapped() : handleUndoRedo(operation: .undo)
         } else {
-            if userIsInTheMiddleOfTyping {
+            if userBeganTyping {
                 processor.setOperand(formatToDergeeOrRad(number: displayValue, operation))
 
-                userIsInTheMiddleOfTyping = false
+                userBeganTyping = false
             } else if processor.resultIsPending {
                 processor.performOperation(operation)
             }
 
             processor.appendTo(.undo, symbol: operation)
-            descriptionHandler.addToDescription(symbol: operation)
             processor.performOperation(operation)
             updateSequanceOfOperationLabel()
         }
@@ -112,7 +109,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func randomNumber(_ sender: UIButton) {
-        userIsInTheMiddleOfTyping = true
+        userBeganTyping = true
 
         let result = Double(drand48())
         displayLabel.text = String(result)
@@ -149,22 +146,20 @@ final class CalculatorViewController: UIViewController {
         switch operation {
         case .undo where !processor.isListEmpty(.undo) :
             processor.appendTo(.redo, symbol: processor.returnLastFrom(.undo))
-            processor.removeLastFrom(.undo)
 
         case .redo where !processor.isListEmpty(.redo):
             processor.appendTo(.undo, symbol: processor.returnLastFrom(.redo))
-            processor.removeLastFrom(.redo)
 
         default: return
         }
-        descriptionHandler.cleanDescription()
-        processor.calculateResult()
 
+        processor.cleanDescription()
+        processor.calculateResult()
         updateSequanceOfOperationLabel()
     }
 
     private func updateSequanceOfOperationLabel() {
-        guard let description = descriptionHandler.getDescription else {
+        guard let description = processor.getDescription else {
             assertionFailure("There is no description")
             return
         }
@@ -212,30 +207,23 @@ final class CalculatorViewController: UIViewController {
         tanhMinus1.setTitle("tanh", for: .normal)
     }
 
-    private func configureFormatter() {
-        formatter.maximumFractionDigits = 6
-        formatter.minimumFractionDigits = 0
-        formatter.groupingSeparator = " "
-        formatter.numberStyle = .decimal
-    }
-
     private func decimalPointTapped() {
-        userIsInTheMiddleOfTyping == false ? descriptionHandler.addToDescription(digit: "0") : ()
+        userBeganTyping == false ? processor.setOperand(0) : ()
         if let text = displayLabel.text {
             text.contains(",") ? print("No dots allowed") : displayLabel.text?.append(",")
         }
-        userIsInTheMiddleOfTyping = true
+        userBeganTyping = true
     }
 
     private func deleteTapped() {
-        guard let text = displayLabel.text, userIsInTheMiddleOfTyping else {
+        guard let text = displayLabel.text, userBeganTyping else {
             return
         }
         text.count > 1 ? displayLabel.text?.removeLast(1) : displayLabel.text?.removeAll()
     }
 
     private func performDigitTapping(digit: String) {
-        if userIsInTheMiddleOfTyping {
+        if userBeganTyping {
             guard let displayText = displayLabel.text else {
                 assertionFailure("Text is missing")
                 return
@@ -246,7 +234,7 @@ final class CalculatorViewController: UIViewController {
             }
         } else {
             displayLabel.text = digit
-            userIsInTheMiddleOfTyping = true
+            userBeganTyping = true
 
             cleanButton.setTitle("C", for: .normal)
         }
@@ -254,17 +242,12 @@ final class CalculatorViewController: UIViewController {
 
     private func cleanDisplay() {
         displayLabel.text = "0"
-
-        userIsInTheMiddleOfTyping = false
-        processor.resultIsPending = false
-
-        descriptionHandler.cleanDescription()
-        processor.removeAllFrom(.undo)
-        processor.removeAllFrom(.redo)
-
+        userBeganTyping = false
         sequanceOfOperationsLabel.text = " "
         memoryLabel.text = " "
 
         cleanButton.setTitle("AC", for: .normal)
+
+        processor.handleClean()
     }
 }
