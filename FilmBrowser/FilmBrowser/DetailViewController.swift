@@ -15,6 +15,7 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         updateUI()
     }
 
@@ -22,6 +23,13 @@ final class DetailViewController: UIViewController {
         guard let film = film, let index = index else {
             return
         }
+
+        UIView.transition(with: likeButton,
+                          duration: 0.2,
+                          options: .transitionFlipFromLeft,
+                          animations: nil,
+                          completion: nil)
+
         film.likes += 1
         likesLabel?.text = String(describing: film.likes)
         delegate?.buttonPressed(index)

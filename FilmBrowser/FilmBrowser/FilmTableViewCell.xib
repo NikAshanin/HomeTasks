@@ -39,7 +39,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like.png" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-xL-e04">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-xL-e04">
                         <rect key="frame" x="408.5" y="177" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="XG4-NH-6qA"/>
@@ -83,6 +83,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="like.png" width="512" height="512"/>
+        <image name="likeRed.png" width="200" height="200"/>
     </resources>
 </document>
