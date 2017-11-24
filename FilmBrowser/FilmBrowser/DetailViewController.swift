@@ -7,7 +7,10 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var likeButton: UIButton!
     
+    weak var delegate: DetailViewProtocol?
+    
     var film: Film?
+    var index: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +18,8 @@ final class DetailViewController: UIViewController {
     }
 
     @IBAction func likePressed(_ sender: UIButton) {
-            film?.likes += 1
+        film?.likes += 1
+        delegate?.buttonPressed(index ?? 0)
     }
     
     private func updateUI() {

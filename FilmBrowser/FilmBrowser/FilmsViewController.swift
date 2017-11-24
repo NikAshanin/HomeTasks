@@ -25,6 +25,8 @@ final class FilmsViewController: UIViewController {
         }
         
         destination.film = filmsList[indexPath.row]
+        destination.index = indexPath.row
+        destination.delegate = self
     }
     
 }
@@ -47,6 +49,15 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
         performSegue(withIdentifier: "showInfo", sender: self)
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
+    }
+    
+}
+
+extension FilmsViewController: DetailViewProtocol {
+    
+    func buttonPressed(_ index: Int) {
+        let ip = IndexPath(row: index, section: 0)
+        tableView.reloadRows(at: [ip], with: .automatic)
     }
     
 }
