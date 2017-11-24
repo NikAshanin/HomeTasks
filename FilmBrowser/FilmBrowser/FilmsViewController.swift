@@ -2,6 +2,7 @@ import UIKit
 
 final class FilmsViewController: UIViewController {
     
+    @IBOutlet private weak var tableView: UITableView!
     private let filmsList = [
     Film(poster: #imageLiteral(resourceName: "E_1.jpg"), title: FilmSources.E_1Title, descr: FilmSources.E_1Description, likes: 0),
     Film(poster: #imageLiteral(resourceName: "E_2.jpg"), title: FilmSources.E_2Title, descr: FilmSources.E_2Description, likes: 0),
@@ -16,6 +17,16 @@ final class FilmsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? DetailViewController,
+                let indexPath = tableView.indexPathForSelectedRow else {
+                return
+        }
+        
+        destination.film = filmsList[indexPath.row]
+    }
+    
 }
 
 extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -31,5 +42,11 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
 
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showInfo", sender: self)
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.isSelected = false
+    }
+    
 }
