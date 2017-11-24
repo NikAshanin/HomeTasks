@@ -24,7 +24,7 @@ final class DetailViewController: UIViewController {
             return
         }
 
-        UIView.transition(with: likeButton,
+        UIView.transition(with: sender,
                           duration: 0.2,
                           options: .transitionFlipFromLeft,
                           animations: nil,
