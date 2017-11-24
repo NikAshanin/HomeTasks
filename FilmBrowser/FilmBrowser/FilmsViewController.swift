@@ -1,13 +1,13 @@
 import UIKit
 
 final class FilmsViewController: UIViewController {
-    
+
     @IBOutlet private weak var tableView: UITableView!
     private var filmsList = [Film]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        FilmSources.getDescriptions()
+        FilmSources.fetchDescriptions()
         filmsList = [
             Film(poster: #imageLiteral(resourceName: "E_1.jpg"), title: FilmSources.E1Title, descr: FilmSources.descriptions[0], likes: 0),
             Film(poster: #imageLiteral(resourceName: "E_2.jpg"), title: FilmSources.E2Title, descr: FilmSources.descriptions[1], likes: 0),
