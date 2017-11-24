@@ -35,7 +35,6 @@
 		BFAF93D71FC82DEB0021E02A /* E_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93D51FC82DEB0021E02A /* E_7.jpg */; };
 		BFAF93D81FC82DEB0021E02A /* E_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93D61FC82DEB0021E02A /* E_5.jpg */; };
 		BFAF93DD1FC8310B0021E02A /* likeRed.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93DB1FC8310A0021E02A /* likeRed.png */; };
-		BFAF93DE1FC8310B0021E02A /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAF93DC1FC8310B0021E02A /* like.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +68,6 @@
 		BFAF93D51FC82DEB0021E02A /* E_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = E_7.jpg; sourceTree = "<group>"; };
 		BFAF93D61FC82DEB0021E02A /* E_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = E_5.jpg; sourceTree = "<group>"; };
 		BFAF93DB1FC8310A0021E02A /* likeRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = likeRed.png; path = FilmBrowser/likeRed.png; sourceTree = SOURCE_ROOT; };
-		BFAF93DC1FC8310B0021E02A /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = like.png; path = FilmBrowser/like.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +118,6 @@
 		7FC805631FC6F0E400C526B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BFAF93DC1FC8310B0021E02A /* like.png */,
 				BFAF93DB1FC8310A0021E02A /* likeRed.png */,
 				BFAF93C81FC82D380021E02A /* E_1.jpg */,
 				BFAF93D31FC82DB70021E02A /* E_2.jpg */,
@@ -223,7 +220,6 @@
 				BFAF93CD1FC82D390021E02A /* E_1.jpg in Resources */,
 				BFAF93D81FC82DEB0021E02A /* E_5.jpg in Resources */,
 				7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */,
-				BFAF93DE1FC8310B0021E02A /* like.png in Resources */,
 				BFAF93C61FC82A9A0021E02A /* E_8.txt in Resources */,
 				7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */,
 				BFAF93C11FC82A9A0021E02A /* E_2.txt in Resources */,
