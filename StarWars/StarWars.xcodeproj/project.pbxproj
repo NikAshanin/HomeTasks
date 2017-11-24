@@ -310,7 +310,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
 				INFOPLIST_FILE = StarWars/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.StarWars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -326,7 +325,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
 				INFOPLIST_FILE = StarWars/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.StarWars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
