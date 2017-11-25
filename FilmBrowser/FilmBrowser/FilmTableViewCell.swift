@@ -13,9 +13,9 @@ final class FilmTableViewCell: UITableViewCell {
     @IBOutlet private weak var likesLabel: UILabel!
 
     func updateUI(filmData: Film) {
-        posterImageView.image = filmData.poster
+        posterImageView.image = UIImage(named: filmData.poster)
         titleLabel.text = filmData.title
-        descriptionLabel.text = filmData.descr
+        descriptionLabel.text = filmData.description
         likesLabel.text = String(describing: filmData.likes)
     }
 }

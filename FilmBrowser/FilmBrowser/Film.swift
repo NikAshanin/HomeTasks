@@ -1,16 +1,9 @@
 import Foundation
 import UIKit
 
-class Film {
+class Film: Decodable {
     let title: String
-    let poster: UIImage
+    let poster: String
     var likes: Int
-    let descr: String
-
-    init(poster: UIImage, title: String, descr: String, likes: Int) {
-        self.title = title
-        self.poster = poster
-        self.likes = likes
-        self.descr = descr
-    }
+    let description: String
 }

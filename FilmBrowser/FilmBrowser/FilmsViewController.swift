@@ -3,11 +3,17 @@ import UIKit
 final class FilmsViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private var filmsList = [Film]()
+    private var films = [Film]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        filmsList = FilmSources.fetchDescriptions()
+
+        guard let file = Bundle.main.url(forResource: "source", withExtension: "txt"),
+            let data = try? Data(contentsOf: file),
+            let films = try? JSONDecoder().decode([Film].self, from: data) else {
+                return
+            }
+        self.films = films
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -16,7 +22,7 @@ final class FilmsViewController: UIViewController {
                 return
         }
 
-        destination.film = filmsList[indexPath.row]
+        destination.film = films[indexPath.row]
         destination.index = indexPath.row
         destination.delegate = self
     }
@@ -26,12 +32,12 @@ final class FilmsViewController: UIViewController {
 extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filmsList.count
+        return films.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = (Bundle.main.loadNibNamed("FilmTableViewCell", owner: self, options: nil)?.first) as? FilmTableViewCell {
-            cell.updateUI(filmData: filmsList[indexPath.row])
+            cell.updateUI(filmData: films[indexPath.row])
             return cell
         } else {
             return UITableViewCell()

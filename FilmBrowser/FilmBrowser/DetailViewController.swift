@@ -39,9 +39,9 @@ final class DetailViewController: UIViewController {
         guard let film = film else {
             return
         }
-        posterImageView?.image = film.poster
+        posterImageView?.image = UIImage(named: film.poster)
         titleLabel?.text = film.title
-        descriptionLabel?.text = film.descr
+        descriptionLabel?.text = film.description
         likesLabel?.text = String(describing: film.likes)
         self.title = film.title
     }
