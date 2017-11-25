@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+   <duplication lines="15" tokens="56">
+      <file line="51"
+            path="/Users/anton/Desktop/Swift/HomeTasks/StarWars/StarWars/Controller/ViewController.swift"/>
+      <file line="86"
+            path="/Users/anton/Desktop/Swift/HomeTasks/StarWars/StarWars/Controller/ViewController.swift"/>
+      <codefragment><![CDATA[        dataManager.getCharacterInfo(name: character) { [weak self] response in
+
+            assert(!Thread.isMainThread)
+
+            guard let sSelf = self else {
+                return
+            }
+
+            sSelf.handle(response, onSuccess: { [weak self] models in
+                guard let sSelf = self else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    sSelf.searchModel = models]]></codefragment>
+   </duplication>
+</pmd-cpd>
