@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01A221261FC98A9B00DCDE3A /* JsonDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A221231FC98A9B00DCDE3A /* JsonDownload.swift */; };
+		01A221271FC98A9B00DCDE3A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A221241FC98A9B00DCDE3A /* Film.swift */; };
+		01A221281FC98A9B00DCDE3A /* JsonDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A221251FC98A9B00DCDE3A /* JsonDecode.swift */; };
 		11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C651FBDB6D2008C570F /* AppDelegate.swift */; };
 		11396C681FBDB6D2008C570F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* ViewController.swift */; };
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01A221231FC98A9B00DCDE3A /* JsonDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDownload.swift; sourceTree = "<group>"; };
+		01A221241FC98A9B00DCDE3A /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		01A221251FC98A9B00DCDE3A /* JsonDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecode.swift; sourceTree = "<group>"; };
 		11396C621FBDB6D2008C570F /* StarWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11396C651FBDB6D2008C570F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11396C671FBDB6D2008C570F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +62,9 @@
 			children = (
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
 				11396C671FBDB6D2008C570F /* ViewController.swift */,
+				01A221241FC98A9B00DCDE3A /* Film.swift */,
+				01A221251FC98A9B00DCDE3A /* JsonDecode.swift */,
+				01A221231FC98A9B00DCDE3A /* JsonDownload.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
@@ -170,6 +179,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				01A221281FC98A9B00DCDE3A /* JsonDecode.swift in Sources */,
+				01A221271FC98A9B00DCDE3A /* Film.swift in Sources */,
+				01A221261FC98A9B00DCDE3A /* JsonDownload.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
