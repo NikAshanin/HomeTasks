@@ -8,7 +8,7 @@ final class FilmsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let file = Bundle.main.url(forResource: "source", withExtension: "txt"),
+        guard let file = Bundle.main.url(forResource: "data", withExtension: "json"),
             let data = try? Data(contentsOf: file),
             let films = try? JSONDecoder().decode([Film].self, from: data) else {
                 return
