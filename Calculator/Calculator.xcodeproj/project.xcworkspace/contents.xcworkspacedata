@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Calculator.xcodeproj">
+      location = "group:/Users/Aleksei/code/01.Calculator/Calculator/Calculator/CalculatorCustomUI.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/Aleksei/code/01.Calculator/Calculator/Calculator/Model.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/Aleksei/code/01.Calculator/Calculator/Calculator/Stack.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,18 +13,527 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="qV1-r0-HLK" customClass="CalculatorLabel" customModule="Calculator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hiE-M4-LVR" userLabel="StandartView">
+                                <rect key="frame" x="405" y="60" width="262" height="315"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-Xu-Z1n" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="5" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <state key="normal" title="AC"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JhP-bD-WSO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-nD-rkx" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="66" y="5" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <state key="normal" title="±"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jez-Pu-3Wz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ad8-1F-kP2" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="7"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h6t-jP-tcA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-M4-gJX" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="66" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="8"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="csz-P5-0H1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1U-rG-pD0" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="245" width="124" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="0"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sGq-Om-aSa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5E-h3-sLG" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="132" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="9"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hdC-UG-1YA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNv-Rt-AGN" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="4"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PNx-vz-wHn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVm-oy-5ZC" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="66" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="5"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xla-tY-Fzj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyc-bU-doe" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="132" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="6"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bkd-V9-TOc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bos-us-ciQ" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="1"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N1N-HV-qmy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJk-q0-GXl" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="132" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="3"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u0C-A4-j4m"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWP-mK-iwU" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="66" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="2"/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Iio-tz-8kI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjn-QD-pam" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="132" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="."/>
+                                        <connections>
+                                            <action selector="digitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTv-i4-xVc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7e-3Z-bgw" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="198" y="5" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="÷"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dzN-tw-tLZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tt-g7-XwC" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="198" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="x"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Twx-3P-vnn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kn-mI-60A" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="198" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="-"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zq4-J9-Fcp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t57-6N-jKs" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="198" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NlQ-4J-vtq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idm-Ud-j0G" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="198" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="="/>
+                                        <connections>
+                                            <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R7j-x3-Oeo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dm-aj-xdm" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="132" y="5" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <state key="normal" title="%"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e1s-yE-HfN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Ug-RH-nfN" userLabel="ExtendedView">
+                                <rect key="frame" x="0.0" y="60" width="405" height="315"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wft-4s-95Q" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Rand"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OhT-0q-bvS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Et-1P-BXE" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="272" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="π"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bX8-Pr-2mJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ip-sT-H6C" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="206" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="tanh"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Shx-BG-4il"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skw-c1-gzU" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="cosh"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C3r-4G-Rng"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qu4-5J-dhm" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="74" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="sinh"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Coz-Dh-nA7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sC-Mi-IiA" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="EE"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6EQ-kM-6AD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Wk-Te-uLk" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="272" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="e"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J72-zc-qWg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYA-Hl-5Fe" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="206" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="tan"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IyS-G3-NA7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5G-M8-DC2" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="cos"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LcN-s2-hgU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgS-YB-nhQ" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="74" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="sin"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tHx-xa-J5d"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMb-Lk-gUi" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="log₁₀"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qmv-NQ-VJb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hL3-pS-Ewd" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="272" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="ln"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PAC-oB-oGY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2p-7F-gJ4" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="206" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="ʸ√x"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OAt-NC-xYi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4j3-yR-wf8" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="∛x"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Inc-7b-7aP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGM-Bm-E85" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="74" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="√x"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f77-c7-65b"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ew-G4-Vkw" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="125" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="1/x"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VT2-HE-YFE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRs-ga-1rd" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="10ˣ"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uic-or-pyZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4Q-Mj-ltB" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="206" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="xʸ"/>
+                                        <connections>
+                                            <action selector="binaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DK6-Gz-LoN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdJ-Bw-Vpn" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="x³"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kZ1-pn-jQZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-G3-Fd7" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="74" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="x²"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Ua-oF-krD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZH-ew-m0W" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="2nd"/>
+                                        <connections>
+                                            <action selector="changeButtonsState:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S8t-Zz-IoQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4t-yu-8kL" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="5" width="190" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="undo"/>
+                                        <connections>
+                                            <action selector="undoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2id-uR-cxH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUN-Nk-SEV" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="272" y="65" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="eˣ"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YWU-zs-lpz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-2t-dvh" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="245" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                        <state key="normal" title="Deg">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="angleRateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fTY-QX-9RJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e17-UV-Lxu" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="206" y="5" width="190" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="redo"/>
+                                        <connections>
+                                            <action selector="redoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="89e-bo-q8S"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEQ-aC-BFo" customClass="CalculatorButton" customModule="Calculator" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="185" width="58" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="x!"/>
+                                        <connections>
+                                            <action selector="unaryOperatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sDw-PB-EgW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQD-Of-L0u">
+                                <rect key="frame" x="8" y="6" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxt-IF-6FN">
+                                <rect key="frame" x="8" y="31" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="angleMeasureUnitLabel" destination="Zxt-IF-6FN" id="3Ae-fY-XsQ"/>
+                        <outlet property="angleRateButton" destination="M8Z-2t-dvh" id="SfH-8d-d9q"/>
+                        <outlet property="binaryOperationLabel" destination="QQD-Of-L0u" id="OqC-Eq-zT6"/>
+                        <outlet property="displayLabel" destination="qV1-r0-HLK" id="n59-fa-35v"/>
+                        <outlet property="redoButton" destination="e17-UV-Lxu" id="sut-zT-gbn"/>
+                        <outlet property="undoButton" destination="g4t-yu-8kL" id="LBD-H6-3BG"/>
+                        <outletCollection property="doubleStateButtons" destination="0ip-sT-H6C" collectionClass="NSMutableArray" id="xxc-zq-k2z"/>
+                        <outletCollection property="doubleStateButtons" destination="YYA-Hl-5Fe" collectionClass="NSMutableArray" id="TgJ-Hp-nu4"/>
+                        <outletCollection property="doubleStateButtons" destination="skw-c1-gzU" collectionClass="NSMutableArray" id="Znt-MI-vHl"/>
+                        <outletCollection property="doubleStateButtons" destination="l5G-M8-DC2" collectionClass="NSMutableArray" id="Azu-ID-ib0"/>
+                        <outletCollection property="doubleStateButtons" destination="mgS-YB-nhQ" collectionClass="NSMutableArray" id="imm-oH-cfz"/>
+                        <outletCollection property="doubleStateButtons" destination="Qu4-5J-dhm" collectionClass="NSMutableArray" id="92M-NF-nTW"/>
+                        <outletCollection property="doubleStateButtons" destination="kRs-ga-1rd" collectionClass="NSMutableArray" id="vG3-Hb-SJR"/>
+                        <outletCollection property="doubleStateButtons" destination="jMb-Lk-gUi" collectionClass="NSMutableArray" id="uj4-bq-F0z"/>
+                        <outletCollection property="doubleStateButtons" destination="H4Q-Mj-ltB" collectionClass="NSMutableArray" id="xMf-nA-lfA"/>
+                        <outletCollection property="doubleStateButtons" destination="U2p-7F-gJ4" collectionClass="NSMutableArray" id="7cW-56-grj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="78.710644677661179" y="152.80000000000001"/>
         </scene>
     </scenes>
 </document>
