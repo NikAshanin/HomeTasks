@@ -7,7 +7,6 @@ final class FilmsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         guard let file = Bundle.main.url(forResource: "data", withExtension: "json"),
             let data = try? Data(contentsOf: file),
             let films = try? JSONDecoder().decode([Film].self, from: data) else {
@@ -26,6 +25,15 @@ final class FilmsViewController: UIViewController {
         destination.index = indexPath.row
         destination.delegate = self
     }
+
+//    deinit {
+//        print("deinit called")
+//        guard let file = Bundle.main.url(forResource: "data", withExtension: "json"),
+//            let stream = OutputStream(url: file, append: false) else {
+//                return
+//        }
+//        JSONSerialization.writeJSONObject(films, to: stream, options: [], error: nil)
+//    }
 
 }
 
@@ -49,7 +57,6 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
     }
-
 }
 
 extension FilmsViewController: DetailViewProtocol {

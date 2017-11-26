@@ -45,5 +45,4 @@ final class DetailViewController: UIViewController {
         likesLabel?.text = String(describing: film.likes)
         self.title = film.title
     }
-
 }
