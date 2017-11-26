@@ -71,21 +71,19 @@ class ORecognizer: UIGestureRecognizer {
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
+        guard let innerX = innerX, let innerY = innerY, let outerX = outerX, let outerY = outerY else { return }
         if let x = squareX, let y = squareY {
-            if (x / (innerX! * innerX!) + y / (innerY! * innerY!)) <= 1 {
+            if (x / (innerX * innerX) + y / (innerY * innerY)) <= 1 {
                 state = .failed
             }
-            if (x / (outerX! * outerX!) + y / (outerY! * outerY!)) > 1 {
+            if (x / (outerX * outerX) + y / (outerY * outerY)) > 1 {
                 state = .failed
             }
         }
-        if state == .failed {
-            return
-        }
-        if let firstTouch = touches.first {
-            currentPoint = firstTouch.location(in: view)
-            previousPoint = firstTouch.previousLocation(in: view)
-        }
+        guard state != .failed else { return }
+        guard let firstTouch = touches.first else { return }
+        currentPoint = firstTouch.location(in: view)
+        previousPoint = firstTouch.previousLocation(in: view)
         if strokePart == 0 &&
             (angle?.degrees)! > CGFloat(225) && (angle?.degrees)! <= CGFloat(315) {
             firstAngle = angle?.degrees
