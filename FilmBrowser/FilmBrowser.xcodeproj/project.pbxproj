@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492C323B1FC89C1D0017D563 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C323A1FC89C1D0017D563 /* Film.swift */; };
+		492C323D1FC8A4440017D563 /* FilmsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C323C1FC8A4440017D563 /* FilmsGenerator.swift */; };
+		4934AD8D1FCA188B00625E42 /* LikesCountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934AD8C1FCA188B00625E42 /* LikesCountProtocol.swift */; };
+		4934AD901FCACB7900625E42 /* UILabel+SizeToFitOnlyHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934AD8F1FCACB7900625E42 /* UILabel+SizeToFitOnlyHeight.swift */; };
+		499A7AA01FC8BA4C009EFD27 /* FilmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */; };
 		7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC805471FC6EF8100C526B7 /* AppDelegate.swift */; };
 		7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC8054B1FC6EF8100C526B7 /* Main.storyboard */; };
 		7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FC8054E1FC6EF8100C526B7 /* Assets.xcassets */; };
@@ -14,10 +19,13 @@
 		7FC8055A1FC6EFE000C526B7 /* FilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */; };
 		7FC8055C1FC6EFF600C526B7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */; };
 		7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */; };
-		7FC805621FC6F0DE00C526B7 /* FilmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		492C323A1FC89C1D0017D563 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		492C323C1FC8A4440017D563 /* FilmsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsGenerator.swift; sourceTree = "<group>"; };
+		4934AD8C1FCA188B00625E42 /* LikesCountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesCountProtocol.swift; sourceTree = "<group>"; };
+		4934AD8F1FCACB7900625E42 /* UILabel+SizeToFitOnlyHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+SizeToFitOnlyHeight.swift"; sourceTree = "<group>"; };
 		7FC805441FC6EF8100C526B7 /* FilmBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC805471FC6EF8100C526B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FC8054C1FC6EF8100C526B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +49,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		492C323E1FC8A4AD0017D563 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				492C323A1FC89C1D0017D563 /* Film.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		492C323F1FC8A6040017D563 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */,
+				7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */,
+				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
+				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4934AD8B1FCA187200625E42 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4934AD8C1FCA188B00625E42 /* LikesCountProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4934AD8E1FCACB5C00625E42 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4934AD8F1FCACB7900625E42 /* UILabel+SizeToFitOnlyHeight.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7FC8053B1FC6EF8100C526B7 = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +103,15 @@
 		7FC805461FC6EF8100C526B7 /* FilmBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				7FC805531FC6EF8100C526B7 /* Info.plist */,
+				4934AD8E1FCACB5C00625E42 /* Extensions */,
+				4934AD8B1FCA187200625E42 /* Protocols */,
+				492C323F1FC8A6040017D563 /* Controllers */,
+				492C323E1FC8A4AD0017D563 /* Models */,
 				7FC805631FC6F0E400C526B7 /* Resources */,
 				7FC805471FC6EF8100C526B7 /* AppDelegate.swift */,
-				7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */,
-				7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */,
 				7FC8054B1FC6EF8100C526B7 /* Main.storyboard */,
-				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
-				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
+				492C323C1FC8A4440017D563 /* FilmsGenerator.swift */,
+				7FC805531FC6EF8100C526B7 /* Info.plist */,
 			);
 			path = FilmBrowser;
 			sourceTree = "<group>";
@@ -142,8 +186,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499A7AA01FC8BA4C009EFD27 /* FilmTableViewCell.xib in Resources */,
 				7FC805521FC6EF8100C526B7 /* LaunchScreen.storyboard in Resources */,
-				7FC805621FC6F0DE00C526B7 /* FilmTableViewCell.xib in Resources */,
 				7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */,
 				7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */,
 			);
@@ -188,7 +232,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FC8055A1FC6EFE000C526B7 /* FilmsViewController.swift in Sources */,
+				492C323B1FC89C1D0017D563 /* Film.swift in Sources */,
+				492C323D1FC8A4440017D563 /* FilmsGenerator.swift in Sources */,
+				4934AD901FCACB7900625E42 /* UILabel+SizeToFitOnlyHeight.swift in Sources */,
 				7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */,
+				4934AD8D1FCA188B00625E42 /* LikesCountProtocol.swift in Sources */,
 				7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */,
 				7FC8055C1FC6EFF600C526B7 /* DetailViewController.swift in Sources */,
 			);
