@@ -43,6 +43,7 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
         guard let superview = view?.superview,
             let currentPoint = touches.first?.location(in: superview),
             let firstTap = firstTap else {
+                state = .failed
                 return
         }
 
@@ -84,14 +85,11 @@ final class UICircleGestureRecognizer: UIGestureRecognizer {
     private func countConformingPoints(in array: [CGPoint]) -> Int {
         let origin = findOrigin()
         let radius = getRadius(from: origin)
-        let outterRadius = radius*radius
-        let innerRadius = outterRadius * 0.25
+        let outterRadiusSquare = radius*radius
+        let innerRadiusSquare = outterRadiusSquare * 0.25
         let filteredArray = array.filter { point in
             let sum = sumOfSquares(of: point, and: origin)
-            if sum < outterRadius, sum > innerRadius {
-                return true
-            }
-            return false
+            return sum < outterRadiusSquare && sum > innerRadiusSquare
         }
         return filteredArray.count
     }
