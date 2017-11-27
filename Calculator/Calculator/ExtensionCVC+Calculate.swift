@@ -7,7 +7,6 @@ extension CalculatorViewController {
         stack.remove(from: index)
       }
     }
-    
     if operand != "" {
       switch operand {
       case "%":
@@ -70,7 +69,6 @@ extension CalculatorViewController {
           resultLabel.text = String(cosh(firstNumber))
       case "tanh":
           resultLabel.text = String(tanh(firstNumber))
-        //????????
       case "sinh^-1":
         resultLabel.text = String(asinh(firstNumber))
       case "sin^-1":
@@ -95,7 +93,6 @@ extension CalculatorViewController {
         }
       case "tanh^-1":
          resultLabel.text = String(tanh(firstNumber))
-        //????????
       case "y^x":
         resultLabel.text = String(pow(secondNumber, firstNumber))
       case "2^x":
@@ -108,22 +105,13 @@ extension CalculatorViewController {
         resultLabel.text = "Mistake"
       }
       stack.insert(firstNumber)
-      // Добавляем операнд в стэк
       stack.insert(operand)
-      
       if flagForNumberOeprationFirst != true{
         stack.insert(secondNumber)
       }
       stack.insert(Double(resultLabel.text!)!)
       operand = ""
-      //
-      //if flagForFindOperandBack == true || flagForFindOperandForward == true {
        firstNumber = Double(resultLabel.text!)!
-      //}// else {
-      //  firstNumber = Double(stack.arrayNumber[stack.currentIndex!])!
-     // }
-      
-      //
       secondNumber = 0
       flag = false
     }

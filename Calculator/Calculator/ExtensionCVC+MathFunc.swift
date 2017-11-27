@@ -1,12 +1,6 @@
 
 extension CalculatorViewController {
   func math(_ text: String) {
-    
-//    if let index = stack.currentIndex{
-//      if index != stack.arrayNumber.count{
-//        stack.remove(from: index)
-//      }
-//    }
     decimalFlag = 0
     switch  text {
     case "%":

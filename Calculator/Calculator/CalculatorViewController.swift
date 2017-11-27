@@ -158,14 +158,11 @@ class CalculatorViewController: UIViewController {
     }
   }
   //MARK: forward buttons
-  
   @IBAction func backButton(_ sender: Any) {
     flagForFindOperandBack = true
     if stack.currentIndex != 0 {
       stack.currentIndex = stack.currentIndex! - 1
-      
       for operation in singleOperation {
-        
         if stack.arrayNumber[stack.currentIndex!] == operation {
           operand = operation
           resultLabel.text = stack.arrayNumber[stack.currentIndex!]
@@ -183,7 +180,6 @@ class CalculatorViewController: UIViewController {
           flag = true
         }
       }
-      
       if flagForFindOperandBack == true{
         resultLabel.text = stack.arrayNumber[stack.currentIndex!]
         if operand != "" {
@@ -242,7 +238,6 @@ extension CalculatorViewController {
     flagForNumberOeprationFirst = false
     flagForNumberOperationSecond = false
   }
-  
   fileprivate func decimal() {
     if decimalFlag == 0 {
       decimalFlag = 1

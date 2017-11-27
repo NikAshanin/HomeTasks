@@ -9,17 +9,9 @@ class Stack{
     }
   }
   var currentIndex: Int?
-
-  
   func insert <T>(_ element: T) {
     arrayNumber.append(String(describing: element))
   }
-  
-//  func insert(_ element: String) {
-//    arrayNumber.append(element)
-//  }
-  
-  
   func remove(from index: Int ){
     let downRangeForDelete = index + 1
     let upRangeForDelete = arrayNumber.count - 1
@@ -27,7 +19,6 @@ class Stack{
         arrayNumber.removeSubrange(downRangeForDelete...upRangeForDelete)
     }
   }
-  
 }
 
 
