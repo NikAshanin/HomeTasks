@@ -29,7 +29,7 @@ final class CalculatorViewController: UIViewController {
             guard let value = newValue else {
                 return
             }
-            resultLabel.text = BaseNumberFormatter.string(with: value)
+            resultLabel.text = BaseNumberFormatter.string(from: value)
         }
     }
     private let decimalSeparator = BaseNumberFormatter.decimalSeparator

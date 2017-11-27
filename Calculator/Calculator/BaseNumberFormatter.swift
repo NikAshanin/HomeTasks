@@ -9,13 +9,13 @@ final class BaseNumberFormatter {
         formatter.maximumFractionDigits = 9
         return formatter
     }()
-    public static let decimalSeparator = formatter.decimalSeparator ?? "."
-    /// Serialize double into string
-    public static func string(with double: Double) -> String? {
+    static let decimalSeparator = formatter.decimalSeparator ?? "."
+
+    static func string(from double: Double) -> String? {
         return formatter.string(from: NSNumber(value: double))
     }
 
-    public static func double(from string: String) -> Double? {
+    static func double(from string: String) -> Double? {
         return formatter.number(from: string)?.doubleValue
     }
 }
