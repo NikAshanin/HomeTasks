@@ -1,28 +1,25 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
-    @IBOutlet weak var filmImage: UIImageView!
-    @IBOutlet weak var textView: UILabel!
-    
+    @IBOutlet weak private var filmImage: UIImageView!
+    @IBOutlet weak private var textView: UILabel!
+    @IBOutlet weak private var like: UIButton!
     weak var delegate: TextChangeProtocol?
-    var film: FilmObject?
-    var likeCount: Int = 0
+    var film: Film?
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let film = film else { return }
         filmImage.image = UIImage(named: "\(film.imageName).jpg")
         textView.text = film.description
-        title = film.filmName
-        likeCount = film.likeCount
-        like.setTitle("Like: \(likeCount)", for: .normal)
+        title = film.name
+        like.setTitle("Like: \(film.likeCount)", for: .normal)
     }
-    @IBOutlet weak var like: UIButton!
     @IBAction func submit(_ sender: Any) {
-        likeCount+=1
-        like.setTitle("Like: \(likeCount)", for: .normal)
-        delegate?.textChange(likeCount)
+        film?.likeCount+=1
+        like.setTitle("Like: \(film!.likeCount)", for: .normal)
+        delegate?.textChange()
     }
 }
 protocol TextChangeProtocol: class {
-    func textChange(_ value: Int)
+    func textChange()
 }
