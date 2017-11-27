@@ -2,7 +2,43 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var btnEXandYX: UIButton!
+    @IBOutlet weak var btn10Xand2x: UIButton!
+    @IBOutlet weak var btnLNandLOGy: UIButton!
+    @IBOutlet weak var btnLOG10andLOG2: UIButton!
+    @IBOutlet weak var btnSin: UIButton!
+    @IBOutlet weak var btnCos: UIButton!
+    @IBOutlet weak var btnTan: UIButton!
+    @IBOutlet weak var btnSinh: UIButton!
+    @IBOutlet weak var btnTanh: UIButton!
+    @IBOutlet weak var btnCosh: UIButton!
+    @IBOutlet weak var labelRadOrDegInformation: UIButton!
+    @IBOutlet weak var btnMinus: UIButton!
+    @IBOutlet weak var btnDivision: UIButton!
+    @IBOutlet weak var btnMultiply: UIButton!
+    @IBOutlet weak var btnPlus: UIButton!
+    @IBOutlet weak var btnEqual: UIButton!
+    @IBOutlet weak var btnX2: UIButton!
+    @IBOutlet weak var btnX3: UIButton!
+    @IBOutlet weak var btnXY: UIButton!
+    @IBOutlet weak var btn1X: UIButton!
+    @IBOutlet weak var btnSQRT: UIButton!
+    @IBOutlet weak var btnSQRT3: UIButton!
+    @IBOutlet weak var btnLOG2: UIButton!
+    @IBOutlet weak var btnRand: UIButton!
+    @IBOutlet weak var btnPi: UIButton!
+    @IBOutlet weak var btnE: UIButton!
+    @IBOutlet weak var btnSQRTy: UIButton!
+    @IBOutlet weak var btnXFactorial: UIButton!
+    @IBOutlet weak var btnPercent: UIButton!
+    @IBOutlet weak var btnChangeSign: UIButton!
     var userInTheMiddleOfTyping = false
+    var flagToGoSecondOpiration: Bool = false
+    var flagToGetRad: Bool = false
+    var opStack = OperationStackController()
+    private var calc = Calculator()
+    var count=0
+    
     @IBAction func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle ?? ""
         if userInTheMiddleOfTyping {
@@ -13,12 +49,6 @@ final class CalculatorViewController: UIViewController {
             userInTheMiddleOfTyping = true
         }
     }
-    @IBAction func btnClear(_ sender: UIButton) {
-        displayValue = 0
-        userInTheMiddleOfTyping = false
-        display.text! = "0"
-        opStack.clear()
-    }
     var displayValue: Double {
         get {
             return Double(display.text!)!
@@ -27,14 +57,19 @@ final class CalculatorViewController: UIViewController {
             display.text = String (newValue)
         }
     }
-    var opStack = OperationStackController()
-    private var calc = Calculator()
-    var count=0
     
     @IBAction func performOPeration(_ sender: UIButton) {
         if userInTheMiddleOfTyping {
             calc.setOperand(displayValue)
             userInTheMiddleOfTyping = false
+        }
+        guard sender.currentTitle != "C" else {
+            userInTheMiddleOfTyping = false
+            displayValue = 0
+            display.text! = "0"
+            opStack.clear()
+            count = 0
+            return
         }
         if let mathematicalSymbol = sender.currentTitle {
             if mathematicalSymbol == "=" {
@@ -56,17 +91,7 @@ final class CalculatorViewController: UIViewController {
             calc.setOperand(displayValue)
         }
     }
-    var flagToGoSecondOpiration: Bool = false
-    @IBOutlet weak var btnEXandYX: UIButton!
-    @IBOutlet weak var btn10Xand2x: UIButton!
-    @IBOutlet weak var btnLNandLOGy: UIButton!
-    @IBOutlet weak var btnLOG10andLOG2: UIButton!
-    @IBOutlet weak var btnSin: UIButton!
-    @IBOutlet weak var btnCos: UIButton!
-    @IBOutlet weak var btnTan: UIButton!
-    @IBOutlet weak var btnSinh: UIButton!
-    @IBOutlet weak var btnTanh: UIButton!
-    @IBOutlet weak var btnCosh: UIButton!
+   
     @IBAction func getSecondPerformOperation(_ sender: UIButton) {
         if !flagToGoSecondOpiration {
             flagToGoSecondOpiration = true
@@ -97,28 +122,6 @@ final class CalculatorViewController: UIViewController {
             btnTanh.setTitle("tanh", for: UIControlState.normal)
         }
     }
-    
-    var flagToGetRad: Bool = false
-    @IBOutlet weak var labelRadOrDegInformation: UIButton!
-    @IBOutlet weak var btnMinus: UIButton!
-    @IBOutlet weak var btnDivision: UIButton!
-    @IBOutlet weak var btnMultiply: UIButton!
-    @IBOutlet weak var btnPlus: UIButton!
-    @IBOutlet weak var btnEqual: UIButton!
-    @IBOutlet weak var btnX2: UIButton!
-    @IBOutlet weak var btnX3: UIButton!
-    @IBOutlet weak var btnXY: UIButton!
-    @IBOutlet weak var btn1X: UIButton!
-    @IBOutlet weak var btnSQRT: UIButton!
-    @IBOutlet weak var btnSQRT3: UIButton!
-    @IBOutlet weak var btnLOG2: UIButton!
-    @IBOutlet weak var btnRand: UIButton!
-    @IBOutlet weak var btnPi: UIButton!
-    @IBOutlet weak var btnE: UIButton!
-    @IBOutlet weak var btnSQRTy: UIButton!
-    @IBOutlet weak var btnXFactorial: UIButton!
-    @IBOutlet weak var btnPercent: UIButton!
-    @IBOutlet weak var btnChangeSign: UIButton!
     @IBAction func btnRadtoDeg(_ sender: UIButton) {
         if flagToGetRad {
             flagToGetRad = false

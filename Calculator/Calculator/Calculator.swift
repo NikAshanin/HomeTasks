@@ -1,14 +1,6 @@
 import Foundation
 
-func changeSign (operand: Double) -> Double {
-    return -operand
-}
-
-func multiply (op1: Double, op2: Double) -> Double {
-    return op1 * op2
-}
-
-func factorial(op: Double) -> Double {
+private func factorial(op: Double) -> Double {
     if op >= 0 {
         return op == 0 ? 1 : op * factorial(op: op - 1)
     } else {
@@ -16,16 +8,17 @@ func factorial(op: Double) -> Double {
     }
 }
 
-func logN(op1: Double, op2: Double) -> Double {
+private func logN(op1: Double, op2: Double) -> Double {
    return log(op1)/log(op2)
 }
 
-func random() -> Double {
+private func random() -> Double {
     return drand48()
 }
 
 struct Calculator {
     private var accumulator: Double?
+    private var pendingBinaryOperation: PendingBinaryOperation?
     enum Operation {
         case constant (Double)
         case unaryOperation ((Double) -> Double)
@@ -65,7 +58,7 @@ struct Calculator {
             "tanh^-1": Operation.unaryOperation (atanh),
             "Rand": Operation.unaryOperation({_ in random()}),
             "EE": Operation.binaryOperation ({$0 * pow(10, $1)}),
-            "%": Operation.unaryOperation ({$0/100}),
+            "%": Operation.unaryOperation ({$0 / 100}),
             "±": Operation.unaryOperation ({-$0}),
             "×": Operation.binaryOperation ({$0 * $1}),
             "÷": Operation.binaryOperation ({$0 / $1}),
@@ -79,26 +72,22 @@ struct Calculator {
             case .constant(let value):
                 accumulator = value
             case .unaryOperation (let function):
-                if accumulator != nil {
-                    accumulator = function (accumulator!)
-                }
+                guard accumulator != nil else { return }
+                accumulator = function (accumulator!)
             case .binaryOperation (let function):
-                if accumulator != nil {
-                    pendingBinaryOperation = PendingBinaryOperation (function: function, firstOperand: accumulator!)
-                    accumulator = nil
-                }
+                guard accumulator != nil else { return }
+                pendingBinaryOperation = PendingBinaryOperation (function: function, firstOperand: accumulator!)
+                accumulator = nil
             case .equals:
                 performPendingBinaryOperation()
             }
         }
     }
     private mutating func  performPendingBinaryOperation() {
-        if pendingBinaryOperation != nil {//&& accumulator != nil {
-            accumulator =  pendingBinaryOperation!.perform(with: accumulator!)
-            pendingBinaryOperation = nil
-        }
+        guard pendingBinaryOperation != nil else { return }
+        accumulator = pendingBinaryOperation?.perform(with: accumulator!)
+        pendingBinaryOperation = nil
     }
-    private var pendingBinaryOperation: PendingBinaryOperation?
     private struct PendingBinaryOperation {
         let function: (Double, Double) -> Double
         let firstOperand: Double
