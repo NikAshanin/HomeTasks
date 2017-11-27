@@ -1,13 +1,11 @@
 import Foundation
 
 public class Film {
-    let filmName: String!
-    let releaseDate: Date!
-    let year: Int?
+    let filmName: String
+    let year: Int
 
-    init(name: String, releaseDate: Date, year: Int ) {
+    init(name: String, year: Int ) {
         self.filmName = name
-        self.releaseDate = releaseDate
         self.year = year
     }
 
@@ -24,7 +22,6 @@ public class Film {
         }
         let year = Calendar.current.component(.year, from: releaseDate)
         self.filmName = title
-        self.releaseDate = releaseDate
         self.year = year
     }
 }

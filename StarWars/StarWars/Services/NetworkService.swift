@@ -15,16 +15,16 @@ final class NetworkService {
         }
         let request = URLRequest(url: requestUrl)
         let task = session.dataTask(with: request) { (data, _, error) in
-            if error == nil, let usableData = data {
+            guard let error = error,
+                let usableData = data else {
+                    return completionHandler(nil) }
+
                 let json = try? JSONSerialization.jsonObject(with: usableData, options: [])
                 if let dict = json as? [String: Any] {
                     completionHandler(dict)
                 } else {
                     completionHandler(nil)
                 }
-            } else {
-                completionHandler(nil)
-            }
         }
         task.resume()
     }

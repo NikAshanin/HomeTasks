@@ -1,7 +1,7 @@
 import Foundation
 class Character {
-    let name: String!
-    let linksToFilmsWithCharacter: [String]!
+    let name: String
+    let linksToFilmsWithCharacter: [String]
 
     init?(json: [String: Any]) {
         guard let characterName = json["name"] as? String,

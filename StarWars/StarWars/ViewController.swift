@@ -45,13 +45,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let film = films[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let year = film.year else {
-            let alert = UIAlertController(title: "Error", message: "No release year",
-                                          preferredStyle: UIAlertControllerStyle.alert)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        releaseDateLabel.text = "This film was released in \(year)"
+        let alert = UIAlertController(title: "Error", message: "No release year",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        present(alert, animated: true, completion: nil)
+        return
+            releaseDateLabel.text = "This film was released in \(film.year)"
     }
 }
 
