@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My View Controller-->
+        <!--Star Wars View Controller-->
         <scene sceneID="a1T-dE-YEo">
             <objects>
-                <viewController id="eOA-rj-mnE" customClass="MyViewController" customModule="StarWars" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eOA-rj-mnE" customClass="StarWarsViewController" customModule="StarWars" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VPZ-7H-4X7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,8 +50,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="eOA-rj-mnE" id="Uhz-py-Pnw"/>
-                                    <outlet property="delegate" destination="eOA-rj-mnE" id="OM7-aw-6To"/>
+                                    <outlet property="dataSource" destination="eOA-rj-mnE" id="5sG-OM-IFK"/>
+                                    <outlet property="delegate" destination="eOA-rj-mnE" id="VTH-h6-t9t"/>
                                 </connections>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Example: Darth Vader" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMa-S3-OTk">
@@ -62,6 +62,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="eOA-rj-mnE" id="F73-Di-LjD"/>
+                                </connections>
                             </textField>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pSb-4c-omN">
                                 <rect key="frame" x="162" y="327" width="50" height="50"/>
