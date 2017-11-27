@@ -1,8 +1,7 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class ORecognizer: UIGestureRecognizer {
-    // MARK: magic numbers
+final class ORecognizer: UIGestureRecognizer {
     // strokePart - этап выполнения
     private var strokePart: UInt = 0
     private var firstTap: CGPoint?
@@ -24,13 +23,14 @@ class ORecognizer: UIGestureRecognizer {
             abs(firstTap.x - ParamsForCalculating.centerPoint.x) <= ParamsForCalculating.strokePrecision
                 && abs(firstTap.y - ParamsForCalculating.centerPoint.y
                     + ParamsForCalculating.xRadius) <= ParamsForCalculating.strokePrecision else {
-                    return
+                        state = .failed
+                        return
         }
         guard abs(firstTap.x - ParamsForCalculating.centerPoint.x) <= ParamsForCalculating.strokePrecision
             && abs(firstTap.y - ParamsForCalculating.centerPoint.y
                 + ParamsForCalculating.xRadius) <= ParamsForCalculating.strokePrecision else {
-                state = .failed
-                return
+                    state = .failed
+                    return
         }
         print("Touches Began")
     }
@@ -51,7 +51,7 @@ class ORecognizer: UIGestureRecognizer {
             let firstTap = firstTap else {
                 return
         }
-        guard isPointOnRadius(currentPoint) else {
+        guard CGPoint.isPointOnRadius(currentPoint) else {
             print("failed with x = \(currentPoint.x) and y = \(currentPoint.y)")
             state = .failed
             return
@@ -59,35 +59,28 @@ class ORecognizer: UIGestureRecognizer {
         if strokePart == 0
             && abs(ParamsForCalculating.centerPoint.x + ParamsForCalculating.xRadius
                 - currentPoint.x) <= ParamsForCalculating.strokePrecision
-            && isPointOnRadius(currentPoint) {
+            && CGPoint.isPointOnRadius(currentPoint) {
             print("part 1 complete")
             strokePart = 1
         } else if strokePart == 1
             && abs(ParamsForCalculating.centerPoint.y + ParamsForCalculating.yRadius
                 - currentPoint.y) <= ParamsForCalculating.strokePrecision
-            && isPointOnRadius(currentPoint) {
+            && CGPoint.isPointOnRadius(currentPoint) {
             strokePart = 2
             print("part 2 complete")
         } else if strokePart == 2
             && abs(ParamsForCalculating.centerPoint.x - ParamsForCalculating.xRadius
                 - currentPoint.x) <= ParamsForCalculating.strokePrecision
-            && isPointOnRadius(currentPoint) {
+            && CGPoint.isPointOnRadius(currentPoint) {
             strokePart = 3
             print("part 3 complete")
         } else if strokePart == 3
             && abs(currentPoint.y - firstTap.y) <= ParamsForCalculating.strokePrecision
             && abs(currentPoint.x - firstTap.x) <= ParamsForCalculating.strokePrecision
-            && isPointOnRadius(currentPoint) {
+            && CGPoint.isPointOnRadius(currentPoint) {
             strokePart = 4
             state = .recognized
             print("zero recognized")
         }
-    }
-
-    // MARK: formula
-    // x^2/a^2 + y^2/b^2 = 1
-    func isPointOnRadius(_ currentPoint: CGPoint) -> Bool {
-        return abs(pow(currentPoint.x, 2) / pow(ParamsForCalculating.xRadius, 2) +
-            pow(currentPoint.y, 2) / pow(ParamsForCalculating.yRadius, 2) - 1) <= ParamsForCalculating.mathPrecision
     }
 }

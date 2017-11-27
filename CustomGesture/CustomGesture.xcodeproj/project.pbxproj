@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4912070C1FCCBA5F0069EA5D /* CGPoint+isPointOnRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912070B1FCCBA5F0069EA5D /* CGPoint+isPointOnRadius.swift */; };
 		497F3DC81FC049ED000B83D4 /* ORecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F3DC71FC049ED000B83D4 /* ORecognizer.swift */; };
 		4982DE281FC4935D002E05FA /* ParamsForCalculating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4982DE271FC4935D002E05FA /* ParamsForCalculating.swift */; };
 		7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26801FBB3669008A981B /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4912070B1FCCBA5F0069EA5D /* CGPoint+isPointOnRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+isPointOnRadius.swift"; sourceTree = "<group>"; };
 		497F3DC71FC049ED000B83D4 /* ORecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORecognizer.swift; sourceTree = "<group>"; };
 		4982DE271FC4935D002E05FA /* ParamsForCalculating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsForCalculating.swift; sourceTree = "<group>"; };
 		7F6C267D1FBB3669008A981B /* CustomGesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomGesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4912070A1FCCBA420069EA5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4912070B1FCCBA5F0069EA5D /* CGPoint+isPointOnRadius.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7F6C26741FBB3668008A981B = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +68,7 @@
 		7F6C267F1FBB3669008A981B /* CustomGesture */ = {
 			isa = PBXGroup;
 			children = (
+				4912070A1FCCBA420069EA5D /* Extensions */,
 				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
@@ -178,6 +189,7 @@
 			files = (
 				7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */,
 				7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */,
+				4912070C1FCCBA5F0069EA5D /* CGPoint+isPointOnRadius.swift in Sources */,
 				497F3DC81FC049ED000B83D4 /* ORecognizer.swift in Sources */,
 				4982DE281FC4935D002E05FA /* ParamsForCalculating.swift in Sources */,
 			);
