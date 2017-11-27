@@ -1,8 +1,6 @@
 import Foundation
 
-
-
-final class NetworkService{
+final class NetworkService {
   var staff = Staff()
   let queue = DispatchQueue.global()
   let session = URLSession.shared
@@ -12,7 +10,6 @@ final class NetworkService{
     guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
       let film = Film("Error", "Не правильный запрос")
       staff.arrayFilm.append(film)
-      //return callback
         return
     }
     let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)")
@@ -21,35 +18,27 @@ final class NetworkService{
         return
       }
       let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-      if let failUpload = json["count"] {
-        if let count = failUpload as? Int, count == 0 {
+      if let failUpload = json["count"], let count = failUpload as? Int, count == 0 {
           let film = Film("Error", "Ничего не найдено")
+        self?.staff.name = ":("
           self?.staff.arrayFilm.append(film)
-          
-        } else if let results = json["results"] as? [[String: Any]] {
-          for result in results {
-            self?.staff.name = result["name"] as! String
-            self?.staff.url = result["url"] as! String
-            self?.staff.filmsURL = result["films"] as! [String]
-          }
-          let downloadGroup = DispatchGroup()
-          for i in (self?.staff.filmsURL)! {
-            downloadGroup.enter()
-            self?.uploadInfoFilms(i, callback: {
-              downloadGroup.leave()
-            })
-          }
+        callback((self?.staff)!)
+      } else { self?.parseJSON(json: json["results"] as! [[String: Any]])
+            let downloadGroup = DispatchGroup()
+            for i in (self?.staff.filmsURL)! {
+                downloadGroup.enter()
+                self?.uploadInfoFilms(i, callback: {
+                    downloadGroup.leave()
+                })
+            }
             downloadGroup.notify(queue: .main, execute: {
                 callback((self?.staff)!)
             })
         }
-      }
     })
     dataTask?.resume()
-    //return staff
   }
-  func uploadInfoFilms(_ url: String, callback: @escaping () -> Void) {
-
+  private func uploadInfoFilms(_ url: String, callback: @escaping () -> Void) {
       let url = URL(string: url)
       self.dataTask = self.session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
         guard let data = data else {
@@ -62,7 +51,14 @@ final class NetworkService{
         }
         callback()
       })
-    
       self.dataTask?.resume()
   }
+    public func parseJSON(json: [[String: Any]]) {
+        let results = json
+        for result in results {
+            staff.name = result["name"] as! String
+            staff.url = result["url"] as! String
+            staff.filmsURL = result["films"] as! [String]
+        }
+    }
 }

@@ -6,10 +6,8 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var dateOfFilmLabel: UILabel!
     @IBOutlet weak private var nameStaffLabel: UILabel!
     var staff = Staff()
-//    let dateformatter = DateFormatter()
     let queue = DispatchQueue.global()
-   // let downloadGroup = DispatchGroup()
-  let network = NetworkService()
+    let network = NetworkService()
   
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -17,13 +15,12 @@ final class ViewController: UIViewController {
     }
     @IBAction func startSearch(_ sender: Any) {
       staff.arrayFilm = []
-      tableView.reloadData()
       network.downLoad(searchTextField.text!) { staff in
         self.staff = staff
-      }
-      print(staff.arrayFilm.count)
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+          self.nameStaffLabel.text = self.staff.name
+        }
       }
     }
 }
@@ -51,78 +48,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     self.dateOfFilmLabel.text = "Фильм вышел: \(year)"
   }
 }
-//extension ViewController {
-//  func downLoad() {
-//    let session = URLSession.shared
-//    var dataTask: URLSessionDataTask?
-//    guard let clearSearchText = searchTextField.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-//      return
-//    }
-//    let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)")
-//    dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
-//      guard let data = data else {
-//        return
-//      }
-//        let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-//        if let failUpload = json["count"] {
-//          if let count = failUpload as? Int, count == 0 {
-//            let film = Film("Error", "Ничего не найдено")
-//            self?.staff.arrayFilm.append(film)
-//            DispatchQueue.main.async {
-//              self?.tableView.reloadData()
-//              self?.nameStaffLabel.text = ":(("
-//            }
-//          } else if let results = json["results"] as? [[String: Any]] {
-//              for result in results {
-//                self?.staff.name = result["name"] as! String
-//                self?.staff.url = result["url"] as! String
-//                self?.staff.filmsURL = result["films"] as! [String]
-//              }
-//
-//            let downloadGroup = DispatchGroup()
-//              for i in (self?.staff.filmsURL)! {
-//                downloadGroup.enter()
-//                self?.uploadInfoFilms(i, callback: {
-//                  downloadGroup.wait()
-//                  DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                    self?.nameStaffLabel.text = self?.staff.name
-//                  }
-//                  downloadGroup.leave()
-//                })
-//                downloadGroup.wait()
-//              }
-//            }
-//        }
-//    })
-//    dataTask?.resume()
-//  }
-//  func uploadInfoFilms(_ url: String, callback: @escaping () -> Void) {
-//    callback()
-//    queue.async {
-//
-//      let session = URLSession.shared
-//      var dataTask: URLSessionDataTask?
-//      let url = URL(string: url)
-////      downloadGroup.enter()
-//      dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
-//        guard let data = data else {
-//          return
-//        }
-//          let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-//          if let title = json["title"], let date = json["release_date"] {
-//            let film = Film.init(date as! String, title as! String)
-//            self?.staff.arrayFilm.append(film)
-//          }
-////        downloadGroup.leave()
-//      })
-//      dataTask?.resume()
-//
-////      DispatchQueue.main.async {
-////        self.tableView.reloadData()
-////        self.nameStaffLabel.text = self.staff.name
-////      }
-//    }
-//  }
-//}
-
