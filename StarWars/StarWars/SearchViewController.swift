@@ -1,22 +1,43 @@
 import UIKit
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+final class SearchViewController: UIViewController {
     @IBOutlet private weak var releaseDateLabel: UILabel!
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var filmsTableView: UITableView!
-    private let errorColor = #colorLiteral(red: 1, green: 0.5833955407, blue: 0.5876240134, alpha: 1), okColor = #colorLiteral(red: 0.722771585, green: 0.8874585032, blue: 0.5934467316, alpha: 1)
     fileprivate let networkService = NetworkService()
     fileprivate var films = [Film]()
 
+}
+
+fileprivate extension SearchViewController {
+    func updateFilmsList(characterName: String) {
+        networkService.getFilms(characterName: characterName) { [weak self] films in
+//             ИМХО через if тут было бы лучше сделать проверку
+            guard !films.isEmpty else {
+                DispatchQueue.main.sync {
+                    self?.releaseDateLabel.isUserInteractionEnabled = true
+                }
+                return
+            }
+            self?.films = films
+
+            DispatchQueue.main.sync {
+                self?.filmsTableView.reloadData()
+                self?.releaseDateLabel.isUserInteractionEnabled = true
+            }
+        }
+    }
+}
+extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchTextField {
             guard let text = searchTextField.text,
                 !text.isEmpty else {
-                    searchTextField.textColor = errorColor
+                    searchTextField.textColor = UIColor.errorColor()
                     return false
             }
             searchTextField.isUserInteractionEnabled = false
             releaseDateLabel.text = ""
-            searchTextField.textColor = okColor
+            searchTextField.textColor = UIColor.okColor()
             films.removeAll()
             filmsTableView.reloadData()
             searchTextField.resignFirstResponder()
@@ -25,11 +46,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return true
     }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
+}
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
     }
@@ -45,27 +63,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let film = films[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        let alert = UIAlertController(title: "Error", message: "No release year",
-                                      preferredStyle: UIAlertControllerStyle.alert)
-        present(alert, animated: true, completion: nil)
-        return
-            releaseDateLabel.text = "This film was released in \(film.year)"
-    }
-}
-
-fileprivate extension ViewController {
-
-    func updateFilmsList(characterName: String) {
-        networkService.getFilms(characterName: characterName) { [weak self] films in
-            guard !films.isEmpty else {
-                return }
-            self?.films = films
-
-            DispatchQueue.main.sync {
-                self?.filmsTableView.reloadData()
-                self?.releaseDateLabel.isUserInteractionEnabled = true
-            }
+        guard film.year > 0 else {
+            let alert = UIAlertController(title: "Error", message: "No release year",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            present(alert, animated: true, completion: nil)
+            return
         }
+        releaseDateLabel.text = "This film was released in \(film.year)"
     }
-
 }

@@ -15,16 +15,16 @@ final class NetworkService {
         }
         let request = URLRequest(url: requestUrl)
         let task = session.dataTask(with: request) { (data, _, error) in
-            guard let error = error,
+            guard error == nil,
                 let usableData = data else {
                     return completionHandler(nil) }
 
-                let json = try? JSONSerialization.jsonObject(with: usableData, options: [])
-                if let dict = json as? [String: Any] {
-                    completionHandler(dict)
-                } else {
-                    completionHandler(nil)
-                }
+            let json = try? JSONSerialization.jsonObject(with: usableData, options: [])
+            if let dict = json as? [String: Any] {
+                completionHandler(dict)
+            } else {
+                completionHandler(nil)
+            }
         }
         task.resume()
     }
@@ -79,7 +79,7 @@ extension NetworkService {
             let firstCharacter = results.first,
             let characterName = firstCharacter["name"] as? String,
             let films = firstCharacter["films"] as? [String] else {
-            return nil
+                return nil
         }
         return Character(name: characterName, links: films)
     }

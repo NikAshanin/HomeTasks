@@ -1,6 +1,6 @@
 import Foundation
 
-public class Film {
+final class Film {
     let filmName: String
     let year: Int
 
@@ -9,18 +9,14 @@ public class Film {
         self.year = year
     }
 
-    let dateFormatter = DateFormatter()
-
     init?(json: [String: Any]?) {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let json = json,
             let title = json["title"] as? String,
-            let releaseDateString = json["release_date"] as? String,
-            let releaseDate = dateFormatter.date(from: releaseDateString)
+            let releaseDateString = json["release_date"] as? String
             else {
                 return nil
         }
-        let year = Calendar.current.component(.year, from: releaseDate)
+        let year = BaseDateFormatter.getOnlyYear(stringDate: releaseDateString)
         self.filmName = title
         self.year = year
     }
