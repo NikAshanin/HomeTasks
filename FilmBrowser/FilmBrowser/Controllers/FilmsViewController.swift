@@ -54,11 +54,8 @@ extension FilmsViewController {
     }
 
     func getFilms() {
-        let fg = FilmsGenerator()
-        films = fg.generateFilms()
-        DispatchQueue.main.async(execute: {
-            self.filmsCollectionView.reloadData()
-        })
+        films = FilmsGenerator.generateFilms()
+        self.filmsCollectionView.reloadData()
     }
 }
 

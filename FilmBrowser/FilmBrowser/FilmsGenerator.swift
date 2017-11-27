@@ -1,8 +1,8 @@
 import Foundation
 class FilmsGenerator {
-    private var films = [Film]()
+    private static var films = [Film]()
 
-    func generateFilms() -> [Film] {
+    static func generateFilms() -> [Film] {
         films.append(Film(name: "Minions",
                           image: #imageLiteral(resourceName: "minions"), description: "LAPOTA!", likesCount: 2, liked: false))
         films.append(Film(name: "How to get away with a murder",

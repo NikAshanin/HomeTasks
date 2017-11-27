@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-class Film {
+final class Film {
     let image: UIImage
     let name: String
     let description: String

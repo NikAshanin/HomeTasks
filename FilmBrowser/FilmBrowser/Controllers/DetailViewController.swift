@@ -44,10 +44,7 @@ final class DetailViewController: UIViewController {
         guard let film = film else {
             return
         }
-        if film.liked {
-            liked.setBackgroundImage(#imageLiteral(resourceName: "liked"), for: .normal)
-        } else {
-            liked.setBackgroundImage(#imageLiteral(resourceName: "like"), for: .normal)
-        }
+        let resourceName = film.liked ? "liked" : "like"
+        liked.setBackgroundImage(#imageLiteral(resourceName: resourceName), for: .normal)
     }
 }

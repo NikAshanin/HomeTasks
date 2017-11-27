@@ -21,5 +21,7 @@ final class FilmTableViewCell: UICollectionViewCell {
         } else {
             likeImage.image = #imageLiteral(resourceName: "like")
         }
+        let resourceName = film.liked ? "liked" : "like"
+        likeImage.image = (#imageLiteral(resourceName: resourceName))
     }
 }
