@@ -1,7 +1,6 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-  
   @IBOutlet private weak var imageFilm: UIImageView!
   @IBOutlet private weak var button: UIButton!
   @IBOutlet private weak var descriptionLabel: UILabel!
@@ -10,6 +9,7 @@ class DetailViewController: UIViewController {
   weak var delegate: LikeChangeProtocol?
   var film = Film()
   var currentIndex = Int()
+  
   @IBAction func submit(_ sender: Any) {
     film.countLikes += 1
     delegate?.likeChange(currentIndex)

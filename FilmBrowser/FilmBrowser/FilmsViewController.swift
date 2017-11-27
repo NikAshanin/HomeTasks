@@ -31,7 +31,8 @@ extension InfoViewController: UITableViewDelegate, UITableViewDataSource {
     return cell ?? UITableViewCell()
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+    guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+      else { return }
     detailViewController.delegate = self
     detailViewController.film = films.get(index: indexPath.row)
     detailViewController.currentIndex = indexPath.row

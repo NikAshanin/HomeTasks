@@ -6,7 +6,7 @@ struct Film {
   var countLikes: Int = 0
   var urlImage: String = ""
 }
-class ArrayFilms {
+final class ArrayFilms {
   private var films: [Film] = []
   func pushFilm(name: String, description: String, urlImage: String) {
     var film = Film()
