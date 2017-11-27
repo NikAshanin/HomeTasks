@@ -1,8 +1,6 @@
-import Foundation
-
-class Film {
-  var date: String = ""
-  var title: String = ""
+final class Film {
+  var date = ""
+  var title = ""
 
   init(_ date: String, _ title: String) {
     self.date = date

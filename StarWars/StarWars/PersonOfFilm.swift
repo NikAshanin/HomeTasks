@@ -1,6 +1,6 @@
 import Foundation
 
-class Staff {
+final class PersonOfFilm {
   var name: String = ""
   var url: String = ""
   var filmsURL: [String] = []

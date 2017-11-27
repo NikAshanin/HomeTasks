@@ -1,12 +1,12 @@
 import Foundation
 
 final class NetworkService {
-  var staff = Staff()
+  var staff = PersonOfFilm()
   let queue = DispatchQueue.global()
   let session = URLSession.shared
   var dataTask: URLSessionDataTask?
-  
-  func downLoad(_ textForSearching: String, callback: @escaping (Staff) -> Void)  {
+    
+    func downLoad(_ textForSearching: String, callback: @escaping (PersonOfFilm) -> Void) {
     guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
       let film = Film("Error", "Не правильный запрос")
       staff.arrayFilm.append(film)
@@ -44,21 +44,21 @@ final class NetworkService {
         guard let data = data else {
           return
         }
-        let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+        let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? ["": 0]
         if let title = json["title"], let date = json["release_date"] {
-          let film = Film.init(date as! String, title as! String)
+          let film = Film(date as? String ?? "", title as? String ?? "")
           self?.staff.arrayFilm.append(film)
         }
         callback()
       })
       self.dataTask?.resume()
   }
-    public func parseJSON(json: [[String: Any]]) {
+    private func parseJSON(json: [[String: Any]]) {
         let results = json
         for result in results {
-            staff.name = result["name"] as! String
-            staff.url = result["url"] as! String
-            staff.filmsURL = result["films"] as! [String]
+            staff.name = result["name"] as? String ?? ""
+            staff.url = result["url"] as? String ?? ""
+            staff.filmsURL = result["films"] as? [String] ?? []
         }
     }
 }

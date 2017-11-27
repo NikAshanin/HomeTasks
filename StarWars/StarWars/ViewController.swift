@@ -5,21 +5,19 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var dateOfFilmLabel: UILabel!
     @IBOutlet weak private var nameStaffLabel: UILabel!
-    var staff = Staff()
-    let queue = DispatchQueue.global()
+    var staff = PersonOfFilm()
     let network = NetworkService()
-  
     override func viewDidLoad() {
       super.viewDidLoad()
       dateOfFilmLabel.isHidden = true
     }
     @IBAction func startSearch(_ sender: Any) {
       staff.arrayFilm = []
-      network.downLoad(searchTextField.text!) { staff in
-        self.staff = staff
+      network.downLoad(searchTextField.text!) {[weak self] staff in
+        self?.staff = staff
         DispatchQueue.main.async {
-          self.tableView.reloadData()
-          self.nameStaffLabel.text = self.staff.name
+          self?.tableView.reloadData()
+          self?.nameStaffLabel.text = self?.staff.name
         }
       }
     }

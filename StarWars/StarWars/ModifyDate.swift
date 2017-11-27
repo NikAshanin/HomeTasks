@@ -1,6 +1,6 @@
 import Foundation
 
-class ModifyDate {
+final class ModifyDate {
   let dateformatter = DateFormatter()
   
   func cutYear(date: String) -> Int {
