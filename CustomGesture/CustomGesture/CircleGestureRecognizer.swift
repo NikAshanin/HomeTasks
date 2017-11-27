@@ -7,7 +7,7 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
     private let midPoint: CGPoint
     private var radius: CGFloat? {
         if let newPoint = currentPoint {
-            return midPoint.distanceTo(pointB: newPoint)
+            return midPoint.distance(to: newPoint)
         }
         return nil
     }
@@ -27,7 +27,7 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
             let previousPoint = previousPoint else {
                 return nil
         }
-        let rotation = previousPoint.angleTo(pointB: currentPoint, with: midPoint)
+        let rotation = previousPoint.angle(to: currentPoint, with: midPoint)
         print("rotation = \(rotation / (.pi * 2) * 100)")
         return rotation
     }
@@ -95,7 +95,7 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
 }
 
 private extension CGPoint {
-    func distanceTo(pointB: CGPoint) -> CGFloat {
+    func distance(to pointB: CGPoint) -> CGFloat {
         let x = self.x - pointB.x
         let y = self.y - pointB.y
         return CGFloat(sqrt(x * x + y * y))
@@ -107,7 +107,7 @@ private extension CGPoint {
         return angle
     }
 
-    func angleTo(pointB: CGPoint, with midPoint: CGPoint) -> CGFloat {
+    func angle(to pointB: CGPoint, with midPoint: CGPoint) -> CGFloat {
         var angle = self.angle(from: midPoint) - pointB.angle(from: midPoint)
         if angle > .pi {
             angle -= .pi * 2

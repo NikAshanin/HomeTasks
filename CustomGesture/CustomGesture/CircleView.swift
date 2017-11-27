@@ -2,9 +2,7 @@ import UIKit
 
 final class CircleView: UIView {
 
-    var lineWidth: CGFloat {
-        return 50
-    }
+    let lineWidth: CGFloat = 50
 
     override func draw(_ rect: CGRect) {
         let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
