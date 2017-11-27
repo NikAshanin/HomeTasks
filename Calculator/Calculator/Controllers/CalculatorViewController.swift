@@ -11,6 +11,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private var actionsButtons: [UIButton]!
 
     // MARK: - ViewController Properties
+    private let maxNumberLength = 17
     private var hasPoint: Bool {
         return mainLabelString.contains(".")
     }
@@ -29,7 +30,7 @@ final class CalculatorViewController: UIViewController {
         }
         set {
             if newValue == Double.infinity || newValue == -Double.infinity {
-                AlertService.showAlert(title: "Result value is too huge!", message: "Stop it!")
+                AlertHelper.showAlert(title: "Result value is too huge!", message: "Stop it!")
             } else {
                 if floor(newValue) == newValue, newValue < Double(Int.max), newValue > Double(Int.min) {
                     mainLabel.text = String(Int(newValue))
@@ -60,16 +61,16 @@ final class CalculatorViewController: UIViewController {
     // MARK: - ViewController life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Initialization
+
         mainLabel.text = "0"
     }
 
     // MARK: - Button actions methods
-    @IBAction func digitButtonPressed(_ sender: UIButton) {
+    @IBAction private func digitButtonPressed(_ sender: UIButton) {
         backNormalColorForButton()
         let symbol = sender.titleLabel?.text ?? ""
         if isTyping {
-            if mainLabelString.count <= 17 {
+            if mainLabelString.count <= maxNumberLength {
                 if symbol == "," {
                     if !hasPoint {
                         mainLabelString += "."
@@ -82,7 +83,7 @@ final class CalculatorViewController: UIViewController {
                     }
                 }
             } else {
-                AlertService.showAlert(title: "Too many symbols on the label!", message: "")
+                AlertHelper.showAlert(title: "Too many symbols on the label!", message: "")
             }
         } else {
             if symbol != "," {
@@ -92,7 +93,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func changeLabelsButtonPressed(_ sender: UIButton) {
+    @IBAction private func changeLabelsButtonPressed(_ sender: UIButton) {
         let newButtonDictionaryKey = changeLabelsButtonIsOn ? "Off" : "On"
         let previousButtonDictionaryKey = changeLabelsButtonIsOn ? "On" : "Off"
         for button in actionsButtons {
@@ -104,13 +105,13 @@ final class CalculatorViewController: UIViewController {
         changeLabelsButtonIsOn = !changeLabelsButtonIsOn
     }
 
-    @IBAction func angleButtonPressed(_ sender: UIButton) {
+    @IBAction private func angleButtonPressed(_ sender: UIButton) {
         angleLabelString = angleLabelString == "" ? "Rad" : ""
         let buttonTitle = angleLabelString == "" ? "Deg" : "Rad"
         angleMeasureButton.setTitle(buttonTitle, for: .normal)
     }
 
-    @IBAction func operationButtonPressed(_ sender: UIButton) {
+    @IBAction private func operationButtonPressed(_ sender: UIButton) {
         backNormalColorForButton()
         let operationString = sender.titleLabel?.text ?? ""
         switch operationString {
@@ -121,7 +122,7 @@ final class CalculatorViewController: UIViewController {
             mainLabelString = "0"
             isTyping = true
         case "Undo", "Redo":
-            let value = operationString == "Undo" ? StackService.undo() : StackService.redo()
+            let value = operationString == "Undo" ? StackHelper.undo() : StackHelper.redo()
             if BinaryOperation.allRawValues.contains(value) || UnaryOperation.allRawValues.contains(value) {
                 for button in actionsButtons where button.titleLabel?.text == value {
                     changeColorFor(button: button)
@@ -135,7 +136,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    func executeOperation(operationString: String) {
+    private func executeOperation(operationString: String) {
         switch operationString {
         case _ where BinaryOperation.allRawValues.contains(operationString):
             guard let operation = BinaryOperation(rawValue: operationString) else {
@@ -170,14 +171,14 @@ final class CalculatorViewController: UIViewController {
     }
 
     // MARK: - Buttons' color change methods
-    func changeColorFor(button: UIButton) {
+    private func changeColorFor(button: UIButton) {
         coloredButton = coloredButton == nil ? button : nil
         let tmpColor = button.currentTitleColor
         button.setTitleColor(button.backgroundColor, for: .normal)
         button.backgroundColor = tmpColor
     }
 
-    func backNormalColorForButton() {
+    private func backNormalColorForButton() {
         guard let unwrappedColorButton = coloredButton else {
             return
         }

@@ -80,11 +80,11 @@ final class CalculatorService {
             // Also if you use operations like this the result will be in stack twice,
             // because this number is used for 2 different operations
             self.firstOperand = resultOperation(second: firstOperand)
-            StackService.previousActionsStack.push(value: firstOperand)
-            StackService.previousActionsStack.push(value: operation.rawValue)
+            StackHelper.previousActionsStack.push(value: firstOperand)
+            StackHelper.previousActionsStack.push(value: operation.rawValue)
         } else {
-            StackService.previousActionsStack.push(value: firstOperand)
-            StackService.previousActionsStack.push(value: operation.rawValue)
+            StackHelper.previousActionsStack.push(value: firstOperand)
+            StackHelper.previousActionsStack.push(value: operation.rawValue)
             self.firstOperand = firstOperand
         }
         binaryOperation = operation
@@ -92,8 +92,8 @@ final class CalculatorService {
     }
 
     static func unaryOperation(value: Double, operation: UnaryOperation, withRadians: Bool) -> Double? {
-        StackService.previousActionsStack.push(value: value)
-        StackService.previousActionsStack.push(value: operation.rawValue)
+        StackHelper.previousActionsStack.push(value: value)
+        StackHelper.previousActionsStack.push(value: operation.rawValue)
         isRadianValue = withRadians
         guard let result = unaryOperationsDictionary[operation] else {
             return nil
@@ -102,7 +102,7 @@ final class CalculatorService {
     }
 
     static func nullaryOperation(operation: NullaryOperation) -> Double? {
-        StackService.previousActionsStack.push(value: operation.rawValue)
+        StackHelper.previousActionsStack.push(value: operation.rawValue)
         guard let result = nullaryOperationsDictionary[operation] else {
             return nil
         }
@@ -130,12 +130,12 @@ final class CalculatorService {
         }
         firstOperand = nil
         binaryOperation = nil
-        StackService.previousActionsStack.push(value: second)
+        StackHelper.previousActionsStack.push(value: second)
         guard let resultOperation = binaryOperationsDictionary[operation] else {
             return nil
         }
         let result = resultOperation(first, second)
-        StackService.resultsStack.push(value: result)
+        StackHelper.resultsStack.push(value: result)
         return result
     }
 

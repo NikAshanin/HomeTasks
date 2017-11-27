@@ -13,9 +13,9 @@
 		0A889D791FC49406009B51BA /* Calculator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A889D781FC49406009B51BA /* Calculator.storyboard */; };
 		0A889D7B1FC4947F009B51BA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D7A1FC4947F009B51BA /* UIColor+Extension.swift */; };
 		0A889D7D1FC494A5009B51BA /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D7C1FC494A5009B51BA /* CalculatorViewController.swift */; };
-		0A889D7F1FC494C9009B51BA /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D7E1FC494C9009B51BA /* AlertService.swift */; };
+		0A889D7F1FC494C9009B51BA /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D7E1FC494C9009B51BA /* AlertHelper.swift */; };
 		0A889D811FC494D6009B51BA /* CalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D801FC494D6009B51BA /* CalculatorService.swift */; };
-		0A889D831FC494E4009B51BA /* StackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D821FC494E4009B51BA /* StackService.swift */; };
+		0A889D831FC494E4009B51BA /* StackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D821FC494E4009B51BA /* StackHelper.swift */; };
 		0A889D881FC49558009B51BA /* BinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D871FC49558009B51BA /* BinaryOperation.swift */; };
 		0A889D8A1FC49563009B51BA /* UnaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D891FC49563009B51BA /* UnaryOperation.swift */; };
 		0A889D8C1FC4956E009B51BA /* NullaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A889D8B1FC4956E009B51BA /* NullaryOperation.swift */; };
@@ -34,9 +34,9 @@
 		0A889D781FC49406009B51BA /* Calculator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calculator.storyboard; sourceTree = "<group>"; };
 		0A889D7A1FC4947F009B51BA /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0A889D7C1FC494A5009B51BA /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
-		0A889D7E1FC494C9009B51BA /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		0A889D7E1FC494C9009B51BA /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		0A889D801FC494D6009B51BA /* CalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorService.swift; sourceTree = "<group>"; };
-		0A889D821FC494E4009B51BA /* StackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackService.swift; sourceTree = "<group>"; };
+		0A889D821FC494E4009B51BA /* StackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackHelper.swift; sourceTree = "<group>"; };
 		0A889D871FC49558009B51BA /* BinaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryOperation.swift; sourceTree = "<group>"; };
 		0A889D891FC49563009B51BA /* UnaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnaryOperation.swift; sourceTree = "<group>"; };
 		0A889D8B1FC4956E009B51BA /* NullaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullaryOperation.swift; sourceTree = "<group>"; };
@@ -116,9 +116,9 @@
 		0A889D761FC49397009B51BA /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0A889D7E1FC494C9009B51BA /* AlertService.swift */,
+				0A889D7E1FC494C9009B51BA /* AlertHelper.swift */,
 				0A889D801FC494D6009B51BA /* CalculatorService.swift */,
-				0A889D821FC494E4009B51BA /* StackService.swift */,
+				0A889D821FC494E4009B51BA /* StackHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -270,13 +270,13 @@
 				0A889D941FC495DF009B51BA /* Stack.swift in Sources */,
 				0A889D7D1FC494A5009B51BA /* CalculatorViewController.swift in Sources */,
 				0A889D8C1FC4956E009B51BA /* NullaryOperation.swift in Sources */,
-				0A889D7F1FC494C9009B51BA /* AlertService.swift in Sources */,
+				0A889D7F1FC494C9009B51BA /* AlertHelper.swift in Sources */,
 				0A889D901FC495C6009B51BA /* EnumCollection.swift in Sources */,
 				0A889D921FC495D8009B51BA /* StackElement.swift in Sources */,
 				0A889D8E1FC49581009B51BA /* MemoryOperation.swift in Sources */,
 				0A889D7B1FC4947F009B51BA /* UIColor+Extension.swift in Sources */,
 				0A889D881FC49558009B51BA /* BinaryOperation.swift in Sources */,
-				0A889D831FC494E4009B51BA /* StackService.swift in Sources */,
+				0A889D831FC494E4009B51BA /* StackHelper.swift in Sources */,
 				0A889D811FC494D6009B51BA /* CalculatorService.swift in Sources */,
 				0A889D8A1FC49563009B51BA /* UnaryOperation.swift in Sources */,
 			);

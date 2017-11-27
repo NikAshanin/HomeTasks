@@ -1,6 +1,6 @@
 import UIKit.UIAlert
 
-class AlertService {
+class AlertHelper {
     static func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)

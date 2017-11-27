@@ -1,6 +1,6 @@
 import Foundation
 
-final class StackService {
+final class StackHelper {
     static let previousActionsStack = Stack()
     static let nextActionsStack = Stack()
     static let resultsStack = Stack()
