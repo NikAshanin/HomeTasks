@@ -5,6 +5,7 @@ final class FilmsViewController: UIViewController, UICollectionViewDataSource,
 
     @IBOutlet private weak var filmsCollectionView: UICollectionView!
     private var films = [Film]()
+    private var indexOfChoosenCell = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +40,8 @@ final class FilmsViewController: UIViewController, UICollectionViewDataSource,
                 let indexPaths = sender as? IndexPath else {
                     return
             }
-            destination.film = films[indexPaths.item]
-            destination.index = indexPaths.item
+            indexOfChoosenCell = indexPaths.item
+            destination.film = films[indexOfChoosenCell]
             destination.delegate = self
         }
     }
@@ -50,24 +51,23 @@ extension FilmsViewController {
     fileprivate func collectionViewPreparation () {
         filmsCollectionView.register(UINib(nibName: "FilmTableViewCell",
                                            bundle: Bundle.main), forCellWithReuseIdentifier: "cell")
-        guard let layout = filmsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return }
-        layout.estimatedItemSize = CGSize(width: 340.0, height: 170.0)
     }
 
     func getFilms() {
         let fg = FilmsGenerator()
         films = fg.generateFilms()
         DispatchQueue.main.async(execute: {
-            self.filmsCollectionView.collectionViewLayout.invalidateLayout()
             self.filmsCollectionView.reloadData()
         })
     }
 }
 
 extension FilmsViewController: LikeCountChanged {
-    func likeButtonPressed(_ index: Int) {
-        let indexPath = IndexPath(item: index, section: 0)
+    func likeButtonPressed(_ film: Film) {
+        guard indexOfChoosenCell >= 0 else {
+            return
+        }
+        let indexPath = IndexPath(item: indexOfChoosenCell, section: 0)
         filmsCollectionView.reloadItems(at: [indexPath])
     }
 }

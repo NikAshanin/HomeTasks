@@ -191,6 +191,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UNI-zt-UPf"/>
                     </view>
+                    <navigationItem key="navigationItem" id="god-mJ-olS"/>
                     <connections>
                         <outlet property="filmDescription" destination="ZKf-dU-MFr" id="oId-n6-qEo"/>
                         <outlet property="filmImage" destination="9Nu-5r-k0d" id="BrR-Uh-mEK"/>

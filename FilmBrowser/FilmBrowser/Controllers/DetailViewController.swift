@@ -8,7 +8,6 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var filmDescription: UILabel!
     @IBOutlet private weak var likesCount: UILabel!
     var film: Film?
-    var index: Int?
     weak var delegate: LikeCountChanged?
 
     override func viewDidLoad() {
@@ -17,8 +16,7 @@ final class DetailViewController: UIViewController {
     }
 
     @IBAction func likeButtonClicked(_ sender: Any) {
-        guard let film  = film,
-        let index = index else {
+        guard let film  = film else {
             return }
         if film.liked {
             film.removeLike()
@@ -27,7 +25,7 @@ final class DetailViewController: UIViewController {
         }
         updateLikeStatus()
         likesCount.text = String(film.likesCount)
-        delegate?.likeButtonPressed(index)
+        delegate?.likeButtonPressed(film)
     }
 
     func showFilmDetailInfo() {
