@@ -7,18 +7,20 @@ final class NetworkService {
   var dataTask: URLSessionDataTask?
 
     func downLoad(_ textForSearching: String, callback: @escaping (PersonOfFilm) -> Void) {
-    guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+    guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+        let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)") else {
       let film = Film("Error", "Не правильный запрос")
       staff.arrayFilm.append(film)
         return
     }
-    let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)")
-    dataTask = session.dataTask(with: url!, completionHandler: {[weak self] data, _, _ in
-      guard let data = data else {
+     
+    dataTask = session.dataTask(with: url, completionHandler: { [weak self] data, _, _ in
+      guard let data = data,
+        let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
         return
       }
-      let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-      if let failUpload = json["count"], let count = failUpload as? Int, count == 0 {
+      
+      if let failUpload = json["count"], let count123 = failUpload as? Int, count123 == 0 {
           let film = Film("Error", "Ничего не найдено")
         self?.staff.name = ":("
           self?.staff.arrayFilm.append(film)
@@ -32,7 +34,7 @@ final class NetworkService {
                 })
             }
             downloadGroup.notify(queue: .main, execute: {
-                callback((self?.staff)!)
+                callback((self?.staff) ?? PersonOfFilm())
             })
         }
     })
@@ -54,7 +56,7 @@ final class NetworkService {
       self.dataTask?.resume()
   }
     private func parseJSON(json: [[String: Any]]) {
-        let results = json
+        let results = json.last
         for result in results {
             staff.name = result["name"] as? String ?? ""
             staff.url = result["url"] as? String ?? ""
