@@ -1,19 +1,16 @@
 import UIKit
 
-class ViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textField: UITextField!
-    private var films: [NameFilmWithDate] = []
-    private let information = GetInformationNet()
-    @IBOutlet weak var name: UILabel!
+final class ViewController: UIViewController {
+    @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak private var textField: UITextField!
+    private var films: [Film] = []
+    private let information = NetworkService()
+    @IBOutlet weak private var name: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
         tableView.tableFooterView = UIView(frame: .zero)
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let w = 1 - scrollView.contentOffset.y / scrollView.contentSize.height
-        view.backgroundColor = UIColor(white: w, alpha: 1)
     }
 }
 
@@ -24,12 +21,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
                                                  for: indexPath) as? CreateTableViewCell
-        cell?.nameLabel.text = films[indexPath.row].nameFilm
-        return cell!
+        cell?.configure(name: "films[indexPath.row].nameFilm")
+        return cell ?? UITableViewCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(films[indexPath.row])
-        let alert = UIAlertController(title: "", message: films[indexPath.row].dateFilm, preferredStyle: UIAlertControllerStyle.alert)
+        let year = Calendar.current.component(.year, from: films[indexPath.row].dateFilm)
+        let message = "Этот фильм вышел в \(year) году."
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -56,3 +55,8 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
+let formatting: DateFormatter = {
+    let format = DateFormatter()
+    format.dateFormat = "yyyy-MM-dd"
+    return format
+}()
