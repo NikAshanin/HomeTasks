@@ -5,6 +5,7 @@ final class Film {
     var imageName: String
     var description: String
     var likeCount: Int
+
     init(name: String, imageName: String, description: String, likeCount: Int) {
         self.name = name
         self.imageName = imageName

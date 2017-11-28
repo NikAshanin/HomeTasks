@@ -6,9 +6,12 @@ final class DetailViewController: UIViewController {
     @IBOutlet weak private var like: UIButton!
     weak var delegate: TextChangeProtocol?
     var film: Film?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let film = film else { return }
+        guard let film = film else {
+            return
+        }
         filmImage.image = UIImage(named: "\(film.imageName).jpg")
         textView.text = film.description
         title = film.name
@@ -16,7 +19,10 @@ final class DetailViewController: UIViewController {
     }
     @IBAction func submit(_ sender: Any) {
         film?.likeCount+=1
-        like.setTitle("Like: \(film!.likeCount)", for: .normal)
+        guard  let count = film?.likeCount else {
+            return
+        }
+        like.setTitle("Like: \(count)", for: .normal)
         delegate?.textChange()
     }
 }
