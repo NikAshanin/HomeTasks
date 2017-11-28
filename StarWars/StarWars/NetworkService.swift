@@ -5,7 +5,7 @@ final class NetworkService {
   let queue = DispatchQueue.global()
   let session = URLSession.shared
   var dataTask: URLSessionDataTask?
-    
+
     func downLoad(_ textForSearching: String, callback: @escaping (PersonOfFilm) -> Void) {
     guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
       let film = Film("Error", "Не правильный запрос")
