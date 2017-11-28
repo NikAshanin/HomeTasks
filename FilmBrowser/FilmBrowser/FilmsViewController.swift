@@ -7,11 +7,15 @@ final class FilmsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let cellNib = UINib(nibName: "FilmTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "customCell")
+
         guard let file = Bundle.main.url(forResource: "data", withExtension: "json"),
             let data = try? Data(contentsOf: file),
             let films = try? JSONDecoder().decode([Film].self, from: data) else {
                 return
             }
+
         self.films = films
     }
 
@@ -22,19 +26,8 @@ final class FilmsViewController: UIViewController {
         }
 
         destination.film = films[indexPath.row]
-        destination.index = indexPath.row
         destination.delegate = self
     }
-
-//    deinit {
-//        print("deinit called")
-//        guard let file = Bundle.main.url(forResource: "data", withExtension: "json"),
-//            let stream = OutputStream(url: file, append: false) else {
-//                return
-//        }
-//        JSONSerialization.writeJSONObject(films, to: stream, options: [], error: nil)
-//    }
-
 }
 
 extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -44,26 +37,36 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = (Bundle.main.loadNibNamed("FilmTableViewCell", owner: self, options: nil)?.first) as? FilmTableViewCell {
-            cell.updateUI(filmData: films[indexPath.row])
-            return cell
-        } else {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? FilmTableViewCell
+
+        guard let myCell = cell else {
             return UITableViewCell()
         }
+
+        myCell.film = films[indexPath.row]
+        return myCell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showInfo", sender: self)
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.isSelected = false
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController"),
+                let detail = viewController as? DetailViewController else {
+            return
+        }
+        detail.film = films[indexPath.row]
+        detail.delegate = self
+        navigationController?.pushViewController(detail, animated: true)
     }
 }
 
 extension FilmsViewController: DetailViewProtocol {
 
-    func buttonPressed(_ index: Int) {
-        let ip = IndexPath(row: index, section: 0)
-        tableView.reloadRows(at: [ip], with: .automatic)
+    func buttonPressed(_ film: Film) {
+        guard let index = films.index(of: film) else {
+            return
+        }
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 
 }

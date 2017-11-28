@@ -11,28 +11,26 @@ final class DetailViewController: UIViewController {
     weak var delegate: DetailViewProtocol?
 
     var film: Film?
-    var index: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         updateUI()
     }
 
     @IBAction func likePressed(_ sender: UIButton) {
-        guard let film = film, let index = index else {
+        guard let film = film else {
             return
         }
 
+        film.likes += 1
         UIView.transition(with: sender,
                           duration: 0.2,
                           options: .transitionFlipFromLeft,
                           animations: nil,
-                          completion: nil)
+                          completion: { [weak self] _ in
+                            self?.likesLabel?.text = String(describing: film.likes) })
 
-        film.likes += 1
-        likesLabel?.text = String(describing: film.likes)
-        delegate?.buttonPressed(index)
+        delegate?.buttonPressed(film)
     }
 
     private func updateUI() {
@@ -43,6 +41,6 @@ final class DetailViewController: UIViewController {
         titleLabel?.text = film.title
         descriptionLabel?.text = film.description
         likesLabel?.text = String(describing: film.likes)
-        self.title = film.title
+        title = film.title
     }
 }

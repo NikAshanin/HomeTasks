@@ -22,19 +22,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Auu-Lw-vbQ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="6yl-HT-Ks2" customClass="FilmTableViewCell" customModule="FilmBrowser" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6yl-HT-Ks2" id="AWE-rO-tkm" customClass="FilmTableViewCell" customModule="FilmBrowser" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="4qB-Jp-MSk" kind="show" identifier="showInfo" trigger="accessoryAction" id="HQv-be-Krq"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="d7X-rs-Dd7" id="eIl-1Z-muZ"/>
                                     <outlet property="delegate" destination="d7X-rs-Dd7" id="KzK-th-9Fu"/>
@@ -68,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6n-Bp-1N6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mJo-Id-ukU">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
@@ -98,8 +85,6 @@
                                         <state key="normal" backgroundImage="likeRed.png">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <state key="selected" backgroundImage="like.png"/>
-                                        <state key="highlighted" backgroundImage="like.png"/>
                                         <connections>
                                             <action selector="likePressed:" destination="4qB-Jp-MSk" eventType="touchUpInside" id="oOf-cL-aJz"/>
                                         </connections>
@@ -177,7 +162,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="like.png" width="200" height="200"/>
         <image name="likeRed.png" width="200" height="200"/>
     </resources>
 </document>
