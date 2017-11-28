@@ -1,7 +1,8 @@
 import UIKit
 
 final class GestureViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak private var imageView: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = #imageLiteral(resourceName: "circle.jpg")

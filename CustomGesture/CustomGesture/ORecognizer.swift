@@ -1,56 +1,62 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-let numberpi = CGFloat(Double.pi)
-extension CGFloat {
+private extension CGFloat {
     var degrees: CGFloat {
-        return self * 180 / numberpi
+        return self * 180 / CGFloat(Double.pi)
     }
 }
 
-class ORecognizer: UIGestureRecognizer {
-    var midPoint: CGPoint!
-    var innerX: CGFloat!
-    var innerY: CGFloat!
-    var firstAngle: CGFloat!
-    var outerX: CGFloat!
-    var outerY: CGFloat!
-    var strokePart: UInt = 0
-    var currentPoint: CGPoint!
-    var previousPoint: CGPoint!
-    var angle: CGFloat! {
+final class ORecognizer: UIGestureRecognizer {
+    private var midPoint: CGPoint
+    private var innerX: CGFloat
+    private var innerY: CGFloat
+    private var firstAngle: CGFloat?
+    private var outerX: CGFloat
+    private var outerY: CGFloat
+    private var strokePart: UInt = 0
+    private var currentPoint: CGPoint?
+    private var previousPoint: CGPoint?
+    private var angle: CGFloat? {
         if let nowPoint = currentPoint {
             return angleForPoint(point: nowPoint)
         }
         return nil
     }
-    var squareX: CGFloat! {
+    private var squareX: CGFloat? {
         if let nowPoint = currentPoint {
             return distantionSquareForX(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
-    var squareY: CGFloat! {
+    private var squareY: CGFloat? {
         if let nowPoint = currentPoint {
             return distantionSquareForY(pointA: midPoint, andPointB: nowPoint)
         }
         return nil
     }
-    init(midPoint: CGPoint, innerX: CGFloat, innerY: CGFloat, outerX: CGFloat, outerY: CGFloat, target: AnyObject, action: Selector) {
-        super.init(target: target, action: action)
+
+    init(midPoint: CGPoint,
+         innerX: CGFloat,
+         innerY: CGFloat,
+         outerX: CGFloat,
+         outerY: CGFloat,
+         target: AnyObject?,
+         action: Selector) {
         self.midPoint = midPoint
         self.innerX = innerX
         self.innerY = innerY
         self.outerX = outerX
         self.outerY = outerY
+        super.init(target: target, action: action)
     }
     convenience init(midPoint: CGPoint, target: AnyObject?, action: Selector) {
-        self.init(midPoint: midPoint, innerX: 80, innerY: 135, outerX: 150, outerY: 200, target: target!, action: action)
+        self.init(midPoint: midPoint, innerX: 80, innerY: 135, outerX: 150, outerY: 200, target: target, action: action)
     }
     func angleForPoint(point: CGPoint) -> CGFloat {
-        var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + numberpi/2
+        var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + CGFloat(Double.pi)/2
         if angle < 0 {
-            angle += numberpi*2
+            angle += CGFloat(Double.pi)*2
         }
         return angle
     }
@@ -71,7 +77,6 @@ class ORecognizer: UIGestureRecognizer {
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
-        guard let innerX = innerX, let innerY = innerY, let outerX = outerX, let outerY = outerY else { return }
         if let x = squareX, let y = squareY {
             if (x / (innerX * innerX) + y / (innerY * innerY)) <= 1 {
                 state = .failed
@@ -80,30 +85,34 @@ class ORecognizer: UIGestureRecognizer {
                 state = .failed
             }
         }
-        guard state != .failed else { return }
-        guard let firstTouch = touches.first else { return }
+        guard state != .failed, let firstTouch = touches.first else {
+            return
+        }
         currentPoint = firstTouch.location(in: view)
         previousPoint = firstTouch.previousLocation(in: view)
+        guard let deg = angle?.degrees, let first = firstAngle else {
+            return
+        }
         if strokePart == 0 &&
-            (angle?.degrees)! > CGFloat(225) && (angle?.degrees)! <= CGFloat(315) {
-            firstAngle = angle?.degrees
+            deg > CGFloat(225) && deg <= CGFloat(315) {
+            firstAngle = deg
             print("continue 1")
             strokePart = 1
         } else if strokePart == 1 &&
-            ((angle?.degrees)! > CGFloat(315) && (angle?.degrees)! <= CGFloat(360) ||
-                (angle?.degrees)! >= CGFloat(0) && (angle?.degrees)! <= CGFloat(45)) {
+            deg > CGFloat(315) && deg <= CGFloat(360) ||
+                deg >= CGFloat(0) && deg <= CGFloat(45) {
             strokePart = 2
             print("continue 2")
         } else if strokePart == 2 &&
-            (angle?.degrees)! > CGFloat(45) && (angle?.degrees)! <= CGFloat(135) {
+            deg > CGFloat(45) && deg <= CGFloat(135) {
             strokePart = 3
             print("continue 3")
         } else if strokePart == 3 &&
-            (angle?.degrees)! > CGFloat(135) && (angle?.degrees)! <= CGFloat(225) {
+            deg > CGFloat(135) && deg <= CGFloat(225) {
             strokePart = 4
             print("continue 4")
         } else if strokePart == 4 &&
-            (angle?.degrees)! > CGFloat(225) && (angle?.degrees)! <= CGFloat(firstAngle!) {
+            deg > CGFloat(225) && deg <= CGFloat(first) {
             strokePart = 5
             state = .recognized
             print("'O' recognized")
