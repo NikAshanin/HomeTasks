@@ -21,7 +21,8 @@ final class FilmsViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? DetailViewController,
-                let indexPath = tableView.indexPathForSelectedRow else {
+                let cell = sender as? UITableViewCell,
+                let indexPath = tableView.indexPath(for: cell) else {
                 return
         }
 
