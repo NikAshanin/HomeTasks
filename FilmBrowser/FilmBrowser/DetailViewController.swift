@@ -9,7 +9,7 @@ class DetailViewController: UIViewController {
   weak var delegate: LikeChangeProtocol?
   var film = Film()
   var currentIndex = Int()
-  
+
   @IBAction func submit(_ sender: Any) {
     film.countLikes += 1
     delegate?.likeChange(currentIndex)

@@ -2,8 +2,9 @@ import UIKit
 
 class InfoViewController: UIViewController {
   let films = FilmBuilder.naviGenerate()
-  @IBOutlet weak var infoLabel: UILabel!
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet private weak var infoLabel: UILabel!
+  @IBOutlet private weak var tableView: UITableView!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.rowHeight = UITableViewAutomaticDimension
