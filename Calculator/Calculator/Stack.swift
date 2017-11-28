@@ -1,18 +1,20 @@
 import Foundation
 
-class OperationStackController {
+final class Stack {
     enum OpStack {
         case number(Double)
         case operation((Double, String))
     }
+
     private var internalProgram: [OpStack] = []
+    private var currentSymbol = -1
     var isEmpty: Bool {
         return currentSymbol<0
     }
-    private var currentSymbol = -1 
     var lastValueInStack: Bool {
         return currentSymbol.distance(to: internalProgram.count) == 1
     }
+
     func push(operand: Double, operation: String?) {
         if let operation = operation {
             internalProgram.append(OpStack.operation((operand, operation)))
