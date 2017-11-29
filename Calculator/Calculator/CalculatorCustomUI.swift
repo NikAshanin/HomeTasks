@@ -1,13 +1,13 @@
 import UIKit
 
-class CalculatorButton: UIButton {
+final class CalculatorButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layer.cornerRadius = 20
     }
 }
 
-class CalculatorLabel: UILabel {
+final class CalculatorLabel: UILabel {
     let edgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
 
     override func drawText(in rect: CGRect) {

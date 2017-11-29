@@ -47,31 +47,19 @@ final class CalculatorViewController: UIViewController {
 
     private func setDisplayTextTo(_ value: String) {
         displayString = value
-        DispatchQueue.main.async {
-            self.displayLabel.text = value
+        DispatchQueue.main.async { [weak self] in
+            self?.displayLabel.text = value
         }
     }
 
     private func setBinaryOperationTo(_ value: String) {
         binaryOperation = value
-        DispatchQueue.main.async {
-            self.binaryOperationLabel.text = value
+        DispatchQueue.main.async { [weak self] in
+            self?.binaryOperationLabel.text = value
         }
     }
 
     // MARK: undo, redo
-    private struct UndoStep {
-        public let digitString: String
-        public let binaryOperation: String
-        public let newLine: Bool
-
-        init(_ digitString: String, _ binaryOperation: String, _ newLine: Bool) {
-            self.digitString = digitString
-            self.binaryOperation = binaryOperation
-            self.newLine = newLine
-        }
-    }
-
     @IBOutlet private var undoButton: CalculatorButton!
     @IBOutlet private var redoButton: CalculatorButton!
     private var undoStack: Stack<UndoStep> = Stack<UndoStep>() {
@@ -116,11 +104,11 @@ final class CalculatorViewController: UIViewController {
             if isDegrees {
                 angleRateButton.setTitle("Rad", for: .normal)
                 angleMeasureUnitLabel.text = "Deg"
-                model.setAngleRateTo(.degrees)
+                model.angleRate = .degrees
             } else {
                 angleRateButton.setTitle("Deg", for: .normal)
                 angleMeasureUnitLabel.text = "Rad"
-                model.setAngleRateTo(.radians)
+                model.angleRate = .radians
             }
         }
     }
@@ -131,16 +119,7 @@ final class CalculatorViewController: UIViewController {
 
     // MARK: - Button settings
     @IBOutlet private var doubleStateButtons: [CalculatorButton]!
-    private var isExtendedMode = false {
-        didSet {
-            for button in doubleStateButtons {
-                let titles = buttonTitles[button.tag]
-                if let title = isExtendedMode ? titles?.1 : titles?.0 {
-                    button.setTitle(title, for: .normal)
-                }
-            }
-        }
-    }
+    private var isExtendedMode = false
     private let buttonTitles: [Int: (String, String)] = [
         1: ("xʸ", "yˣ"),
         2: ("10ˣ", "2ˣ"),
@@ -156,11 +135,19 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func changeButtonsState(_ sender: Any) {
         isExtendedMode = !isExtendedMode
+        for button in doubleStateButtons {
+            let titles = buttonTitles[button.tag]
+            if let title = isExtendedMode ? titles?.1 : titles?.0 {
+                DispatchQueue.main.async {
+                    button.setTitle(title, for: .normal)
+                }
+            }
+        }
     }
 }
 
 fileprivate extension Double {
     func toNoZeroTerminatingString() -> (String) {
-        return floor(self) == self ? String(format: "%g", self) : "\(self)"
+        return floor(self) == self ? String(format: "%.0f", self) : "\(self)"
     }
 }

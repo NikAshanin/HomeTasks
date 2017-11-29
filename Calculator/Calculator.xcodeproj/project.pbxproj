@@ -10,6 +10,7 @@
 		5FCAAA551FCABCED00AD9DB7 /* CalculatorCustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCAAA521FCABCEC00AD9DB7 /* CalculatorCustomUI.swift */; };
 		5FCAAA561FCABCED00AD9DB7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCAAA531FCABCEC00AD9DB7 /* Model.swift */; };
 		5FCAAA571FCABCED00AD9DB7 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCAAA541FCABCED00AD9DB7 /* Stack.swift */; };
+		5FCAAA601FCF51AA00AD9DB7 /* UndoStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCAAA5F1FCF51AA00AD9DB7 /* UndoStep.swift */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
 		7FF582571FBDA7E90009B9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582551FBDA7E90009B9BD /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 		5FCAAA521FCABCEC00AD9DB7 /* CalculatorCustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculatorCustomUI.swift; path = /Users/Aleksei/code/01.Calculator/Calculator/Calculator/CalculatorCustomUI.swift; sourceTree = "<absolute>"; };
 		5FCAAA531FCABCEC00AD9DB7 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = /Users/Aleksei/code/01.Calculator/Calculator/Calculator/Model.swift; sourceTree = "<absolute>"; };
 		5FCAAA541FCABCED00AD9DB7 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = /Users/Aleksei/code/01.Calculator/Calculator/Calculator/Stack.swift; sourceTree = "<absolute>"; };
+		5FCAAA5F1FCF51AA00AD9DB7 /* UndoStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoStep.swift; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				5FCAAA541FCABCED00AD9DB7 /* Stack.swift */,
 				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
 				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
+				5FCAAA5F1FCF51AA00AD9DB7 /* UndoStep.swift */,
 				7FF582551FBDA7E90009B9BD /* Main.storyboard */,
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
 				7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */,
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FCAAA551FCABCED00AD9DB7 /* CalculatorCustomUI.swift in Sources */,
+				5FCAAA601FCF51AA00AD9DB7 /* UndoStep.swift in Sources */,
 				5FCAAA571FCABCED00AD9DB7 /* Stack.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,

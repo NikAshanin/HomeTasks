@@ -1,6 +1,6 @@
 import UIKit
 
-public class Model {
+final class Model {
     private enum Operation {
         case constant(Double)
         case unary((Double) -> Double)
@@ -9,9 +9,9 @@ public class Model {
         case reset
     }
 
-    public var firstOperand: Double?
-    public var secondOperand: Double?
-    private var angleRate = 1.0
+    var firstOperand: Double?
+    var secondOperand: Double?
+    var angleRate: AngleMeasureUnit = .radians
     private let operations: [String: Operation] = [
         "x": Operation.binary({ $0 * $1 }),
         "÷": Operation.binary({ $0 / $1 }),
@@ -21,7 +21,7 @@ public class Model {
         "ʸ√x": Operation.binary({ pow($0, 1/$1) }),
         "EE": Operation.binary({ $0 * pow(10, $1) }),
         "yˣ": Operation.binary({ pow($1, $0) }),
-        "logy": Operation.binary({ logarithm($1, toTheBase: $0) }),
+        "logy": Operation.binary({ $1.logarithm(toTheBase: $0) }),
         "sin": Operation.trigonometric({ sin($0 * $1) }),
         "cos": Operation.trigonometric({ cos($0 * $1) }),
         "tan": Operation.trigonometric({ tan($0 * $1) }),
@@ -44,7 +44,7 @@ public class Model {
         "∛x": Operation.unary({ pow($0, 1/3) }),
         "ln": Operation.unary(log),
         "log₁₀": Operation.unary(log10),
-        "x!": Operation.unary(factorial),
+        "x!": Operation.unary({ $0.factorial() }),
         "sinh": Operation.unary(sinh),
         "cosh": Operation.unary(cosh),
         "tanh": Operation.unary(tanh),
@@ -54,7 +54,7 @@ public class Model {
         "AC": Operation.reset
     ]
 
-    public func performOperation(_ operationName: String) -> Double {
+     func performOperation(_ operationName: String) -> Double {
         guard let operation = operations[operationName] else {
             return secondOperand ?? 0.0
         }
@@ -66,7 +66,7 @@ public class Model {
         case (.binary(let f), let first?, let second?, _):
             return f(first, second)
         case (.trigonometric(let f), let first?, _, let angle):
-            return f(first, angle)
+            return angle == .degrees ? f(first, Double.pi / 180.0) : f(first, 1.0)
         default:
             firstOperand = nil
             secondOperand = nil
@@ -75,17 +75,16 @@ public class Model {
     }
 }
 
-// MARK: - Custom math
-extension Model {
-    private static func logarithm(_ firstOperand: Double, toTheBase secondOperand: Double) -> (Double) {
-        return log(secondOperand) / log(firstOperand)
+extension Double {
+    func logarithm(toTheBase secondOperand: Double) -> (Double) {
+        return log(secondOperand) / log(self)
     }
 
-    private static func factorial(_ operand: Double) -> Double {
-        guard operand < Double(UInt64.max) else {
+    func factorial() -> Double {
+        guard self < Double(UInt64.max) else {
             return Double.infinity
         }
-        guard let integerOperand = UInt64(exactly: operand) else {
+        guard let integerOperand = UInt64(exactly: self) else {
             return Double.nan
         }
         guard integerOperand != 0 else {
@@ -103,18 +102,7 @@ extension Model {
 }
 
 // MARK: - Angle rate
-public extension Model {
-    enum AngleMeasureUnit {
-        case degrees
-        case radians
-    }
-
-    func setAngleRateTo(_ measureUnit: AngleMeasureUnit) {
-        switch measureUnit {
-        case .degrees:
-            angleRate = Double.pi / 180.0
-        case .radians:
-            angleRate = 1.0
-        }
-    }
+enum AngleMeasureUnit {
+    case degrees
+    case radians
 }
