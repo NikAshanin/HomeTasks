@@ -1,5 +1,3 @@
-import UIKit
-
 class Stack<Element> {
     var isEmpty: Bool {
         return array.isEmpty

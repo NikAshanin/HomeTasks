@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 final class Model {
     private enum Operation {
@@ -54,7 +54,7 @@ final class Model {
         "AC": Operation.reset
     ]
 
-     func performOperation(_ operationName: String) -> Double {
+    func performOperation(_ operationName: String) -> Double {
         guard let operation = operations[operationName] else {
             return secondOperand ?? 0.0
         }
@@ -75,7 +75,7 @@ final class Model {
     }
 }
 
-extension Double {
+fileprivate extension Double {
     func logarithm(toTheBase secondOperand: Double) -> (Double) {
         return log(secondOperand) / log(self)
     }
