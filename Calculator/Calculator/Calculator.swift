@@ -1,9 +1,9 @@
 import Foundation
 
 private extension Double {
-    func factorial(op1: Double) -> Double {
-        if op1 >= 0 {
-            return op1 == 0 ? 1 : op1 * factorial(op1: op1 - 1)
+    func factorial() -> Double {
+        if self >= 0 {
+            return self == 0 ? 1 : self * self-1.factorial()
         } else {
             return 0
         }
@@ -43,7 +43,7 @@ final class Calculator {
             "y√": Operation.binaryOperation ({ pow($0, 1/$1) }),
             "ln": Operation.unaryOperation (log),
             "log10": Operation.unaryOperation (log10),
-            "x!": Operation.unaryOperation ({ $0.factorial(op1: $0) }),
+            "x!": Operation.unaryOperation ({ $0.factorial() }),
             "sin": Operation.unaryOperation (sin),
             "cos": Operation.unaryOperation (cos),
             "tan": Operation.unaryOperation (tan),
@@ -95,7 +95,7 @@ final class Calculator {
         accumulator = operand
     }
 
-    var result: Double? {
+    var result: Double {
         return accumulator
     }
 }

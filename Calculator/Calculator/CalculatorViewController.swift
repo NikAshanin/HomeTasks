@@ -35,7 +35,7 @@ final class CalculatorViewController: UIViewController {
     var isTyping = false
     var flagToGoSecondOperation = false
     var flagToGetRad = false
-    var opStack = Stack()
+    private var opStack = Stack()
     private var calc = Calculator()
     var count=0
 
@@ -81,20 +81,15 @@ final class CalculatorViewController: UIViewController {
             if count >= 1 {
                 calc.performOperation("=")
                 opStack.push(operand: displayValue, operation: mathematicalSymbol)
-                guard let result = calc.result else {
-                    return
-                }
-                displayValue = result
+                displayValue = calc.result
                 calc.setOperand(displayValue)
             }
             count+=1
             calc.performOperation(mathematicalSymbol)
             opStack.push(operand: displayValue, operation: mathematicalSymbol)
         }
-        if let result = calc.result {
-            displayValue = result
-            calc.setOperand(displayValue)
-        }
+        displayValue = calc.result
+        calc.setOperand(displayValue)
     }
     @IBAction private func getSecondPerformOperation(_ sender: UIButton) {
         if !flagToGoSecondOperation {

@@ -5,11 +5,12 @@ final class Stack {
         case number(Double)
         case operation((Double, String))
     }
+    typealias CallBack = (Double, String?)?
 
     private var internalProgram: [OpStack] = []
     private var currentSymbol = -1
     var isEmpty: Bool {
-        return currentSymbol<0
+        return currentSymbol < 0
     }
     var lastValueInStack: Bool {
         return currentSymbol.distance(to: internalProgram.count) == 1
@@ -23,7 +24,7 @@ final class Stack {
         }
         currentSymbol+=1
     }
-    func undo() -> (Double, String?)? {
+    func undo() -> CallBack {
         if isEmpty {
             return nil
         }
@@ -36,7 +37,7 @@ final class Stack {
             return (value, fun)
         }
     }
-    func redo() -> (Double, String?)? {
+    func redo() -> CallBack {
         if lastValueInStack {
             return nil
         } else {
