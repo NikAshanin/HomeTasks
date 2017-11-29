@@ -8,10 +8,15 @@ class ViewController: UIViewController {
     private var films: [Film] = []
     private let networking = Networking()
     private let reuseIdentifier = "Cell"
+    private let message = "There is no one.\nPlease search character from Star Wars"
+    private var emptyView: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: .zero)
+        emptyView = EmptyTableViewHelper.installEmptyView(in: tableView,
+                                                          with: message)
+        tableView.backgroundView = emptyView
     }
 }
 
@@ -28,11 +33,8 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if films.isEmpty {
-            EmptyTableViewHelper.emptyViewWith(message: "There is no one.\nPlease search character from Star Wars",
-                                               tableView: tableView)
             return 0
         } else {
-            tableView.backgroundView = nil
             return films.count
         }
     }
@@ -56,10 +58,18 @@ extension ViewController: UITextFieldDelegate {
             return false
         }
         networking.parseCharacter(searchString) { [weak self] films, name in
-            if let films = films {
+            if let films = films, !films.isEmpty {
                 self?.films = films
                 self?.title = name
+                print(films)
+                self?.tableView.backgroundView = nil
                 self?.tableView.reloadData()
+            } else {
+                print("no films")
+                DispatchQueue.main.async {
+                    self?.tableView.backgroundView = self?.emptyView
+                    self?.tableView.reloadData()
+                }
             }
         }
         view.endEditing(true)

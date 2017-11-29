@@ -1,7 +1,7 @@
 import UIKit
 
 final class EmptyTableViewHelper {
-    static func emptyViewWith(message: String, tableView: UITableView) {
+    static func installEmptyView(in tableView: UITableView, with message: String) -> UIView {
         let width = tableView.bounds.size.width
         let height = tableView.bounds.size.height
 
@@ -18,7 +18,7 @@ final class EmptyTableViewHelper {
         messageLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
         messageLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
 
-        tableView.backgroundView = emptyView
+        return emptyView
     }
 
 }

@@ -4,25 +4,28 @@ final class Networking {
     typealias JSONDictionary = [String: Any]
 
     private let session = URLSession.shared
-    private var dataTask: URLSessionDataTask?
+    private var searchCharacterDataTask: URLSessionDataTask?
 
-    func parseCharacter(_ searchString: String, completion: @escaping ([Film]?, String?) -> Void) {
-        dataTask?.cancel()
+    func searchCharacter(_ searchString: String, completion: @escaping ([Film]?, String?) -> Void) {
+        searchCharacterDataTask?.cancel()
 
         guard let rightSearchName = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: "https://swapi.co/api/people/?search=\(rightSearchName)") else {
+                completion(nil, nil)
                 print("wrong URl")
                 return
         }
         var json: JSONDictionary?
-        dataTask = session.dataTask(with: url) { [weak self] (data, _, error) in
+        searchCharacterDataTask = session.dataTask(with: url) { [weak self] (data, _, error) in
             guard let data = data else {
+                completion(nil, nil)
                 return
             }
             do {
                 json = try JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary
             } catch let error as NSError {
                 print(error.localizedDescription)
+                completion(nil, nil)
                 return
             }
 
@@ -30,6 +33,7 @@ final class Networking {
                 let results = json["results"] as? [JSONDictionary],
                 let firstResult = results.first,
                 let name = firstResult["name"] as? String else {
+                    completion(nil, nil)
                     print("no result")
                     return
             }
@@ -40,7 +44,7 @@ final class Networking {
                 completion(films, name)
             }
         }
-        dataTask?.resume()
+        searchCharacterDataTask?.resume()
     }
 
     private func updateFilms(_ json: JSONDictionary, completion: @escaping ([Film]?) -> Void) {
@@ -57,17 +61,20 @@ final class Networking {
             group.enter()
             session.dataTask(with: url) { data, _, error in
                 guard let data = data else {
+                    group.leave()
                     return
                 }
                 do {
                     filmsJSON = try (JSONSerialization.jsonObject(with: data, options: []) as? Networking.JSONDictionary)
                 } catch let error as NSError {
+                    group.leave()
                     print(error.localizedDescription)
                 }
                 guard let filmsJSON = filmsJSON,
                     let title = filmsJSON["title"] as? String,
                     let date = filmsJSON["release_date"] as? String,
                     let releaseDate = formatter.date(from: date) else {
+                        group.leave()
                         print("no title")
                         return
                 }
