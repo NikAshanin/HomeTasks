@@ -23,8 +23,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(films[indexPath.row])
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: films[indexPath.row].releaseDate)
+        let year = BaseDateFormatter.getYear(from: films[indexPath.row].releaseDate)
         yearLabel.text = "Этот фильм вышел в \(year) году"
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -57,7 +56,7 @@ extension ViewController: UITextFieldDelegate {
             print("no searchString")
             return false
         }
-        networking.parseCharacter(searchString) { [weak self] films, name in
+        networking.searchCharacter(searchString) { [weak self] films, name in
             if let films = films, !films.isEmpty {
                 self?.films = films
                 self?.title = name
@@ -76,9 +75,3 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
-
-let formatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter
-}()

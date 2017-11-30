@@ -73,7 +73,7 @@ final class Networking {
                 guard let filmsJSON = filmsJSON,
                     let title = filmsJSON["title"] as? String,
                     let date = filmsJSON["release_date"] as? String,
-                    let releaseDate = formatter.date(from: date) else {
+                    let releaseDate = BaseDateFormatter.backendDate(from: date) else {
                         group.leave()
                         print("no title")
                         return
