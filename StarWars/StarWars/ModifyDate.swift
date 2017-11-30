@@ -7,7 +7,10 @@ final class ModifyDate {
     dateformatter.dateFormat = "yyyy-MM-dd"
     let modifyDate = dateformatter.date(from: date)
     let calendar = Calendar.current
-    let year = calendar.component(.year, from: modifyDate!)
+    guard let modifyDateCheck = modifyDate else {
+      return 0
+    }
+    let year = calendar.component(.year, from: modifyDateCheck)
     return year
   }
 }
