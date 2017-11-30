@@ -1,7 +1,7 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    //MARK:- properties
+    // MARK: properties
     private var engine = CalculatorEngine()
     private var returnedStack: (operand: Double?, operation: String?)
     private var buttonPressed = false
@@ -28,36 +28,36 @@ final class CalculatorViewController: UIViewController {
             case (let result, nil):
                 doubleDisplayValue = result
             case (_, let error):
-                display.text = error!
+                display.text = error
             }
         }
     }
-    
-    //MARK: - buttons
-    @IBOutlet weak var display: UILabel!
-    @IBOutlet weak var radDisplay: UILabel!
-    @IBOutlet weak var clearButton: RoundButton!
-    @IBOutlet weak var dot: RoundButton! {
+
+    // MARK: buttons
+    @IBOutlet weak private var display: UILabel!
+    @IBOutlet weak private var radDisplay: UILabel!
+    @IBOutlet weak private var clearButton: RoundButton!
+    @IBOutlet weak private var dot: RoundButton! {
         didSet {
             dot.setTitle(decimalSeparator, for: UIControlState())
         }
     }
-    @IBOutlet weak var radButton: RoundButton!
+    @IBOutlet weak private var radButton: RoundButton!
     //Binary buttons
-    @IBOutlet var binaryBottons: [RoundButton]!
+    @IBOutlet private var binaryBottons: [RoundButton]!
     //Buttoms for change
-    @IBOutlet weak var sinButton: RoundButton!
-    @IBOutlet weak var sinhButton: RoundButton!
-    @IBOutlet weak var cosButton: RoundButton!
-    @IBOutlet weak var coshButton: RoundButton!
-    @IBOutlet weak var tanButton: RoundButton!
-    @IBOutlet weak var tanhButton: RoundButton!
-    @IBOutlet weak var exponentInThePowerXButton: RoundButton!
-    @IBOutlet weak var lnButton: RoundButton!
-    @IBOutlet weak var tenInThePowerXButton: RoundButton!
-    @IBOutlet weak var logTenButton: RoundButton!
-    
-    //MARK: - change buttoms signs
+    @IBOutlet weak private var sinButton: RoundButton!
+    @IBOutlet weak private var sinhButton: RoundButton!
+    @IBOutlet weak private var cosButton: RoundButton!
+    @IBOutlet weak private var coshButton: RoundButton!
+    @IBOutlet weak private var tanButton: RoundButton!
+    @IBOutlet weak private var tanhButton: RoundButton!
+    @IBOutlet weak private var exponentInThePowerXButton: RoundButton!
+    @IBOutlet weak private var lnButton: RoundButton!
+    @IBOutlet weak private var tenInThePowerXButton: RoundButton!
+    @IBOutlet weak private var logTenButton: RoundButton!
+
+    // MARK: change buttoms signs
     @IBAction func pressSecondButtons(_ sender: RoundButton) {
         if sinButton.currentTitle == "sin" {
             sender.setTitleColor(UIColor.black, for: UIControlState())
@@ -87,26 +87,26 @@ final class CalculatorViewController: UIViewController {
             logTenButton.setTitle("log₁₀", for: UIControlState())
         }
     }
-    
-    //MARK: - touch Rad button
+
+    // MARK: touch Rad button
     @IBAction func touchRadButton(_ sender: RoundButton) {
         if radDisplay.text == "" {
             radDisplay.text = " Rad"
             engine.changeMeasure(false)
             radButton.setTitle("Deg", for: UIControlState())
-        }
-        else {
+        } else {
             radDisplay.text = ""
             engine.changeMeasure(true)
             radButton.setTitle("Rad", for: UIControlState())
         }
     }
-    
-    //MARK: - touch digit button
+
+    // MARK: touch digit button
     @IBAction func touchDigit(_ sender: RoundButton) {
-        guard let digit = sender.currentTitle else { return }
+        guard let digit = sender.currentTitle, let textCurrentlyInDisplay = display.text else {
+            return
+        }
         if userIsInTheMiddleOfTyping {
-            let textCurrentlyInDisplay = display.text!
             if (digit != decimalSeparator) || !(textCurrentlyInDisplay.contains(decimalSeparator)) {
                 display.text = textCurrentlyInDisplay + digit
             }
@@ -121,8 +121,8 @@ final class CalculatorViewController: UIViewController {
             }
         }
     }
-    
-    //MARK: - touch arithmetic button
+
+    // MARK: touch arithmetic button
     @IBAction func touchMathAction(_ sender: RoundButton) {
         if let value = doubleDisplayValue {
             engine.setOperand(value)
@@ -143,8 +143,8 @@ final class CalculatorViewController: UIViewController {
             displayResult = engine.result
         }
     }
-    
-    //MARK: - touch undo button
+
+    // MARK: touch undo button
     @IBAction func touchUndo(_ sender: RoundButton) {
         if buttonPressed {
             if let operation = returnedStack.operation {
@@ -161,8 +161,8 @@ final class CalculatorViewController: UIViewController {
         doubleDisplayValue = returnedStack.operand
         userIsInTheMiddleOfTyping = false
     }
-    
-    //MARK: - touch redo button
+
+    // MARK: touch redo button
     @IBAction func touchRedo(_ sender: RoundButton) {
         if buttonPressed {
             if let operation = returnedStack.operation {
@@ -174,13 +174,15 @@ final class CalculatorViewController: UIViewController {
             if let operation = returnedStack.operation {
                 changeButtonColor(operation, true)
             }
-            doubleDisplayValue = returnedStack.operand
-            engine.setOperand(returnedStack.operand!)
+            if let operand = returnedStack.operand {
+                doubleDisplayValue = operand
+                engine.setOperand(operand)
+            }
             userIsInTheMiddleOfTyping = false
         }
     }
-    
-    //MARK: - touch AC button
+
+    // MARK: touch AC button
     @IBAction func allClear(_ sender: RoundButton) {
         if clearButton.currentTitle == "C" {
             clearSymbol()
@@ -198,19 +200,23 @@ final class CalculatorViewController: UIViewController {
             userIsInTheMiddleOfTyping = false
         }
     }
-    
+
     //Clear current display value
     private func clearSymbol() {
-        guard !display.text!.isEmpty else { return }
+        guard display.text != nil else {
+            return
+        }
         userIsInTheMiddleOfTyping = false
         displayResult = (nil, nil)
     }
-    
+
     //Set or reset background color on binary operation button
     private func changeButtonColor(_ operation: String, _ set: Bool) {
-        for i in 0...binaryBottons.count - 1 {
-            if binaryBottons[i].currentTitle == operation {
-                if binaryBottons[i].currentTitle == "xʸ" || binaryBottons[i].currentTitle == "ʸ√x" || binaryBottons[i].currentTitle == "yˣ" || binaryBottons[i].currentTitle == "logᵧ" {
+        for i in 0...binaryBottons.count - 1 where binaryBottons[i].currentTitle == operation {
+                if binaryBottons[i].currentTitle == "xʸ" ||
+                    binaryBottons[i].currentTitle == "ʸ√x" ||
+                    binaryBottons[i].currentTitle == "yˣ" ||
+                    binaryBottons[i].currentTitle == "logᵧ" {
                     if set {
                         binaryBottons[i].setTitleColor(UIColor.black, for: UIControlState())
                         binaryBottons[i].layer.backgroundColor = #colorLiteral(red: 0.4083676934, green: 0.4083676934, blue: 0.4083676934, alpha: 1).cgColor
@@ -233,7 +239,7 @@ final class CalculatorViewController: UIViewController {
                         buttonPressed = false
                     }
                 }
-            }
+
         }
     }
 }
