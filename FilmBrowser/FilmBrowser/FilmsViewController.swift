@@ -17,6 +17,10 @@ final class FilmsViewController: UIViewController {
             }
 
         self.films = films
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
+
+        print(tableView.rowHeight)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

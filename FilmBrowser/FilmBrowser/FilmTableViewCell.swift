@@ -4,7 +4,6 @@ final class FilmTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        accessoryType = .disclosureIndicator
     }
 
     @IBOutlet private weak var posterImageView: UIImageView!
@@ -18,13 +17,13 @@ final class FilmTableViewCell: UITableViewCell {
         }
     }
 
-    func updateUI(filmData: Film?) {
+    private func updateUI(filmData: Film?) {
         guard let filmData = filmData else {
             return
         }
-        posterImageView.image = UIImage(named: filmData.poster)
-        titleLabel.text = filmData.title
-        descriptionLabel.text = filmData.description
-        likesLabel.text = String(describing: filmData.likes)
+        posterImageView?.image = UIImage(named: filmData.poster)
+        titleLabel?.text = filmData.title
+        descriptionLabel?.text = filmData.description
+        likesLabel?.text = String(describing: filmData.likes)
     }
 }
