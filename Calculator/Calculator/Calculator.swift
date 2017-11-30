@@ -1,6 +1,6 @@
 import Foundation
 
-class Calculator {
+final class Calculator {
 
     var stack = Stack()
     var degreesMode = true

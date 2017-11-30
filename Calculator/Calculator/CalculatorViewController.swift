@@ -16,17 +16,17 @@ final class CalculatorViewController: UIViewController {
     }
     @IBOutlet private weak var radiansStateLabel: UILabel!
 
-    var inTheMiddleOftyping = true
-    var buttonsArray: [UIButton] = []
-    lazy var model = Calculator()
+    private var inTheMiddleOftyping = true
+    private var buttonsArray: [UIButton] = []
+    private lazy var model = Calculator()
 
-    var displayText = "0" {
+    private var displayText = "0" {
         didSet {
             display.text = displayText
         }
     }
 
-    var symbol: Double {
+    private var symbol: Double {
         get {
             return Double(displayText) ?? 0.0
         }
@@ -36,7 +36,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    let titlesForButtonsWithTwoStates: [(firstState: String, secondState: String)] = [
+    private let titlesForButtonsWithTwoStates: [(firstState: String, secondState: String)] = [
         ("log₁₀", "log₂"),
         ("ln", "logᵧ"),
         ("10ˣ", "2ˣ"),
@@ -49,7 +49,7 @@ final class CalculatorViewController: UIViewController {
         ("tanh", "tanh⁻¹")
     ]
 
-    func addButtonsToArray (for view: UIView) {
+    private func addButtonsToArray (for view: UIView) {
         for subview in view.subviews {
             if let stack = subview as? UIStackView {
                 addButtonsToArray(for: stack)
@@ -59,7 +59,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    func resetSelectionForAllButtons() {
+    private func resetSelectionForAllButtons() {
         let filteredArray = buttonsArray.filter({
             if $0.currentTitle != "2ⁿᵈ", $0.currentTitle != radiansStateLabel.text {
                 return true
@@ -72,7 +72,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    func roundUpTheButtons() {
+    private func roundUpTheButtons() {
         let multiplayer: CGFloat = traitCollection.horizontalSizeClass == .compact ? 0.7 : 0.9
         for button in buttonsArray {
             button.layer.cornerRadius = min(button.bounds.size.height, button.bounds.size.width) * multiplayer
@@ -92,24 +92,24 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    func selectOperationButton(with title: String, in view: UIView) {
+    private func selectOperationButton(with title: String, in view: UIView) {
         for button in buttonsArray where button.currentTitle == title {
             button.isSelected = true
         }
     }
 
-    @IBAction func changeTitlesTo2ndState(_ sender: UIButton) {
+    @IBAction  private func changeTitlesTo2ndState(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         changeTitlesForButtonsWithTwoStates(for: view)
     }
 
-    @IBAction func switchRadianMode(_ sender: UIButton) {
+    @IBAction private func switchRadianMode(_ sender: UIButton) {
         model.degreesMode = !model.degreesMode
         sender.setTitle(model.degreesMode ? "Rad" : "Deg", for: .normal)
         radiansStateLabel.text = model.degreesMode ? "" : "Rad"
     }
 
-    func performClickAnimation(for title: String) {
+    private func performClickAnimation(for title: String) {
         if let button = buttonsArray.first(where: { $0.currentTitle==title }) {
             UIView.transition(with: button,
                               duration: 0.2,
@@ -119,17 +119,17 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func undo(_ sender: UIButton) {
+    @IBAction private func undo(_ sender: UIButton) {
         model.undo()
         updateUI()
     }
 
-    @IBAction func redo(_ sender: UIButton) {
+    @IBAction private func redo(_ sender: UIButton) {
         model.redo()
         updateUI()
     }
 
-    @IBAction func clear (_ sender: UIButton) {
+    @IBAction private func clear (_ sender: UIButton) {
         resetSelectionForAllButtons()
         if model.pendingFunction != nil {
             model.resetPendingOperation()
@@ -142,7 +142,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func pressDigit(_ sender: UIButton) {
+    @IBAction private func pressDigit(_ sender: UIButton) {
         if let digit = sender.currentTitle {
             if inTheMiddleOftyping {
                 displayText += digit
@@ -157,7 +157,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func performOperation (_ sender: UIButton) {
+    @IBAction private func performOperation (_ sender: UIButton) {
         guard let operationTitle = sender.currentTitle else {
             return
         }
@@ -172,7 +172,7 @@ final class CalculatorViewController: UIViewController {
         updateUI()
     }
 
-    func updateUI() {
+    private func updateUI() {
         if let res = model.result {
             symbol = res
         }
