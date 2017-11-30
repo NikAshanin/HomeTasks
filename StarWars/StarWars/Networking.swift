@@ -39,7 +39,7 @@ final class Networking {
             }
             self?.updateFilms(firstResult) { films in
                 guard let films = films else {
-                        return
+                    return
                 }
                 completion(films, name)
             }
@@ -52,7 +52,8 @@ final class Networking {
         let group = DispatchGroup()
         var filmsJSON: JSONDictionary?
         guard let filmsURLs = json["films"] as? [String] else {
-                return
+            completion(nil)
+            return
         }
         for film in filmsURLs {
             guard let url = URL(string: film) else {

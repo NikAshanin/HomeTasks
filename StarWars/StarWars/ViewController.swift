@@ -7,7 +7,6 @@ class ViewController: UIViewController {
     @IBOutlet private weak var yearLabel: UILabel!
     private var films: [Film] = []
     private let networking = Networking()
-    private let reuseIdentifier = "Cell"
     private let message = "There is no one.\nPlease search character from Star Wars"
     private var emptyView: UIView?
 
@@ -39,7 +38,7 @@ extension ViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = films[indexPath.row].title
         return cell
     }
