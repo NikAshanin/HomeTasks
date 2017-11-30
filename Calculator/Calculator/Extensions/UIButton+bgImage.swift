@@ -22,7 +22,7 @@ public extension UIButton {
             setBackgroundImage(colorName: newValue, for: .highlighted)
         }
     }
-    
+
     private func setBackgroundImage(colorName: String, for state: UIControlState) {
         if colorName == "white" {
             setBackgroundImage(UIImage(color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), for: state)

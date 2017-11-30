@@ -105,11 +105,7 @@ final class Calculator {
         case (.unaryOperation(let function), let acc?):
             accumulator = (function(acc))
         case (.binaryOperation(let function), let acc?):
-            performPendingOperation()
-            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: acc, fun: symbol)
-            if !reestablishingModel {
-                stack.push(value: acc, fun: symbol)
-            }
+            binaryOperationLogic(acc: acc, function: function, symbol: symbol)
         case (.equals, let acc?):
             if let pbo = pendingBinaryOperation {
                 accumulator = pbo.perform(with: acc)
@@ -147,6 +143,14 @@ final class Calculator {
     func redo() {
         if let (value, function) = stack.goForward() {
             reestablishModel(value, function)
+        }
+    }
+
+    private func binaryOperationLogic(acc: Double, function: @escaping (Double, Double) -> Double, symbol: String) {
+        performPendingOperation()
+        pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: acc, fun: symbol)
+        if !reestablishingModel {
+            stack.push(value: acc, fun: symbol)
         }
     }
 
