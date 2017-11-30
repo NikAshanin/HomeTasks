@@ -3,7 +3,6 @@ import UIKit
 final class GestureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let oRecognizer = OLetterRecognizer(target: self, action: #selector(oRecognized))
         view.addGestureRecognizer(oRecognizer)
     }
