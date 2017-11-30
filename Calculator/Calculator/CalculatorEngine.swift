@@ -9,9 +9,8 @@ func radiansToDegrees(_ number: Double) -> Double {
 }
 
 struct CalculatorEngine {
-    //MARK: - properties
+    // MARK: properties
     private var accumulator: Double?
-    private var subAccumulator: Double?
     private var isPending: Bool = false
     private var error: String?
     private var inDegrees = true
@@ -26,7 +25,7 @@ struct CalculatorEngine {
     var resultIsPending: Bool {
         return pendingBinaryOperation != nil
     }
-    
+
     //Enum of operations
     private enum Operation {
         case constant(Double)
@@ -36,8 +35,8 @@ struct CalculatorEngine {
         case binaryOperation((Double, Double) -> Double, ((Double, Double) -> String?)?)
         case equals
     }
-    
-    private var operations: Dictionary<String, Operation> =
+
+    private var operations: [String: Operation] =
         [
             "π": Operation.constant(Double.pi),
             "e": Operation.constant(M_E),
@@ -79,37 +78,46 @@ struct CalculatorEngine {
             "−": Operation.binaryOperation({ $0 - $1 }, nil),
             "=": Operation.equals
     ]
-    
+
+    //PendingBinaryOperation структура отложенной операции
     struct PendingBinaryOperation {
         let function: (Double, Double) -> Double
         let firstOperand: Double
         let validator: ((Double, Double) -> String?)?
-        
+
+        //Функция perform выполениния бинарной операции
         func perform(with secondOperand: Double) -> Double {
             return function(firstOperand, secondOperand)
         }
-        
+
+        //Функция validate проверяет корректность вычислений
         func validate(with secondOperand: Double) -> String? {
-            guard let validator = validator else {return nil}
+            guard let validator = validator else {
+                return nil
+            }
             return validator(firstOperand, secondOperand)
         }
     }
-    
+
     mutating func setOperand(_ operand: Double) {
         accumulator = operand
         memory.append((operand: accumulator, operation: nil))
+        print("Set operand: \(memory)")
     }
-    
+
     mutating func performPendingBinaryOperation() {
-        if pendingBinaryOperation != nil && accumulator != nil {
-            error = pendingBinaryOperation!.validate(with: accumulator!)
-            accumulator =  pendingBinaryOperation!.perform(with: accumulator!)
+        guard let number = accumulator else {
+            return
+        }
+        if pendingBinaryOperation != nil {
+            error = pendingBinaryOperation?.validate(with: number)
+            accumulator = pendingBinaryOperation?.perform(with: number)
             pendingBinaryOperation = nil
         }
     }
-    
+
     mutating func performOperation(_ symbol: String) {
-        if let operation = operations[symbol] {
+        if let operation = operations[symbol], var number = accumulator {
             switch operation {
             case .constant(let value):
                 accumulator = value
@@ -118,26 +126,24 @@ struct CalculatorEngine {
                 accumulator = function()
                 memory.append((operand: accumulator, operation: nil))
             case .unaryOperation(let function, let validator):
-                if accumulator != nil {
-                    error = validator?(accumulator!)
-                    accumulator = function(accumulator!)
-                    memory[memory.count - 1].operation = symbol
-                    memory.append((operand: accumulator, nil))
-                }
+                error = validator?(number)
+                accumulator = function(number)
+                memory[memory.count - 1].operation = symbol
+                memory.append((operand: accumulator, nil))
             case .geometricOperation(let function, let validator):
-                if accumulator != nil {
-                    error = validator?(accumulator!)
-                    if inDegrees {
-                        accumulator = radiansToDegrees(accumulator!)
-                    }
-                    accumulator = function(accumulator!)
-                    memory[memory.count - 1].operation = symbol
-                    memory.append((operand: accumulator, nil))
+                error = validator?(number)
+                if inDegrees {
+                    number = radiansToDegrees(number)
                 }
+                accumulator = function(number)
+                memory[memory.count - 1].operation = symbol
+                memory.append((operand: accumulator, nil))
             case .binaryOperation(let function, let validator):
                 performPendingBinaryOperation()
-                if accumulator != nil && !operationIsSelected {
-                    pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!, validator: validator)
+                if !operationIsSelected && accumulator != nil {
+                    pendingBinaryOperation = PendingBinaryOperation(function: function,
+                                                                    firstOperand: number,
+                                                                    validator: validator)
                     memory[memory.count - 1].operation = symbol
                     if undoIndex != nil { memory.removeAll() }
                 }
@@ -148,54 +154,61 @@ struct CalculatorEngine {
             }
         }
     }
-    
+
     mutating func changeMeasure(_ buttomIsRad: Bool) {
         inDegrees = buttomIsRad
     }
-    
+
     mutating func clear() {
-        accumulator = nil
-        subAccumulator = nil
+        accumulator = 0
         pendingBinaryOperation = nil
         memory.removeAll()
         undoIndex = nil
         haveNotElementsForUndo = false
         operationIsSelected = false
     }
-    
+
     mutating func undo() -> (Double?, String?) {
         if !memory.isEmpty && !haveNotElementsForUndo {
             if undoIndex == nil {
                 undoIndex = 0
                 return memory[memory.count - 1]
             } else {
-                if memory.count - undoIndex! - 1 < 0 {
+                guard var index = undoIndex else {
                     return (nil, nil)
-                } else if memory.count - undoIndex! - 1 == 0 {
+                }
+                if memory.count - index - 1 < 0 {
+                    return (nil, nil)
+                } else if memory.count - index - 1 == 0 {
                     haveNotElementsForUndo = true
                     return memory[0]
                 } else {
-                    undoIndex! += 1
-                    return memory[memory.count - undoIndex! - 1]
+                    index += 1
+                    undoIndex = index
+                    return memory[memory.count - index - 1]
                 }
             }
         } else {
             return (nil, nil)
         }
     }
-    
+
     mutating func redo() -> (Double?, String?) {
         if !memory.isEmpty {
             if undoIndex == nil {
                 return (nil, nil)
             } else {
+                guard var index = undoIndex else {
+                    return (nil, nil)
+                }
                 if undoIndex == 0 {
                     undoIndex = nil
                     haveNotElementsForUndo = false
                     return (nil, nil)
                 } else {
-                    undoIndex! -= 1
-                    return memory[memory.count - undoIndex! - 1]
+                    index -= 1
+                    undoIndex = index
+                    return memory[memory.count - index - 1]
                 }
             }
         }
