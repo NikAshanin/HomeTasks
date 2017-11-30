@@ -7,7 +7,10 @@ class Calculator {
     var reestablishingModel = false
     private var pendingBinaryOperation: PendingBinaryOperation? {
         didSet {
-            pendingFunction = resultIsPending ? pendingBinaryOperation!.fun : nil
+            pendingFunction = nil
+            if resultIsPending, let fun = pendingBinaryOperation?.fun {
+                pendingFunction = fun
+            }
         }
     }
     private var accumulator: Double?
@@ -91,26 +94,25 @@ class Calculator {
         guard let operation = operators[symbol] else {
             return
         }
-        
+
         var pendingOperationWasPerformed = false
         switch (operation, accumulator) {
         case (.constant(let value), _):
             accumulator = value
-        case (.trigonometryOperation(let function), .some):
-            accumulator = degreesMode ? radiansToDegree(accumulator!) : accumulator!
-            accumulator = function(accumulator!)
-        case (.unaryOperation(let function), .some):
-            accumulator = (function(accumulator!))
-        case (.binaryOperation(let function), .some):
+        case (.trigonometryOperation(let function), let acc?):
+            accumulator = degreesMode ? radiansToDegree(acc) : acc
+            accumulator = function(acc)
+        case (.unaryOperation(let function), let acc?):
+            accumulator = (function(acc))
+        case (.binaryOperation(let function), let acc?):
             performPendingOperation()
-            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!, fun: symbol)
+            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: acc, fun: symbol)
             if !reestablishingModel {
-                stack.push(value: accumulator!, fun: symbol)
+                stack.push(value: acc, fun: symbol)
             }
-            accumulator = nil
-        case (.equals, .some):
-            if pendingBinaryOperation != nil {
-                accumulator = pendingBinaryOperation!.perform(with: accumulator!)
+        case (.equals, let acc?):
+            if let pbo = pendingBinaryOperation {
+                accumulator = pbo.perform(with: acc)
                 pendingBinaryOperation=nil
                 pendingOperationWasPerformed = true
             }
@@ -161,8 +163,8 @@ class Calculator {
     }
 
     private func performPendingOperation() {
-        if let pendingBinaryOperation = pendingBinaryOperation {
-            accumulator = pendingBinaryOperation.perform(with: accumulator!)
+        if let pendingBinaryOperation = pendingBinaryOperation, let acc = accumulator {
+            accumulator = pendingBinaryOperation.perform(with: acc)
         }
     }
 

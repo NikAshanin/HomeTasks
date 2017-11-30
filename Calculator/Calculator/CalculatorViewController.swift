@@ -9,7 +9,6 @@ final class CalculatorViewController: UIViewController {
         updateUI()
     }
 
-    
     @IBOutlet private weak var display: UILabel! {
         didSet {
             displayText = display.text ?? ""
@@ -61,10 +60,15 @@ final class CalculatorViewController: UIViewController {
     }
 
     func resetSelectionForAllButtons() {
-        for button in buttonsArray {
-            if button.currentTitle != "2ⁿᵈ", button.currentTitle != radiansStateLabel.text {
-                button.isSelected = false
+        let filteredArray = buttonsArray.filter({
+            if $0.currentTitle != "2ⁿᵈ", $0.currentTitle != radiansStateLabel.text {
+                return true
             }
+            return false
+        })
+
+        for button in filteredArray {
+            button.isSelected = false
         }
     }
 
@@ -89,10 +93,8 @@ final class CalculatorViewController: UIViewController {
     }
 
     func selectOperationButton(with title: String, in view: UIView) {
-        for button in buttonsArray {
-            if button.currentTitle == title {
-                button.isSelected = true
-            }
+        for button in buttonsArray where button.currentTitle == title {
+            button.isSelected = true
         }
     }
 
@@ -156,7 +158,9 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func performOperation (_ sender: UIButton) {
-        let operationTitle = sender.currentTitle ?? "?"
+        guard let operationTitle = sender.currentTitle else {
+            return
+        }
 
         if inTheMiddleOftyping {
             model.setOperand(symbol)
@@ -177,17 +181,5 @@ final class CalculatorViewController: UIViewController {
         if let pendingFunction = model.pendingFunction {
             selectOperationButton(with: pendingFunction, in: view)
         }
-    }
-}
-
-extension Double {
-    var stringValue: String {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 9
-        var stringFromDouble = formatter.string(from: NSNumber(value: self))!
-        if stringFromDouble.first == "."{
-            stringFromDouble = "0"+stringFromDouble
-        }
-        return stringFromDouble
     }
 }
