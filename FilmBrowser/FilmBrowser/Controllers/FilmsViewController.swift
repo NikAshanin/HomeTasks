@@ -27,23 +27,18 @@ final class FilmsViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "detailInfoControll", sender: indexPath)
+        guard let newViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController"),
+        let detailViewController = newViewController as? DetailViewController else {
+            return
+        }
+        indexOfChoosenCell = indexPath.item
+        detailViewController.film = films[indexPath.item]
+        detailViewController.delegate = self
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
     func collectionView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailInfoControll" {
-            guard let destination = segue.destination as? DetailViewController,
-                let indexPaths = sender as? IndexPath else {
-                    return
-            }
-            indexOfChoosenCell = indexPaths.item
-            destination.film = films[indexOfChoosenCell]
-            destination.delegate = self
-        }
     }
 }
 
