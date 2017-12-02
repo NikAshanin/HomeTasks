@@ -13,13 +13,14 @@ final class Calculator {
             }
         }
     }
-    private var accumulator: Double?
+
+    private var accumulator: Double = 0
 
     private var resultIsPending: Bool {
         return pendingBinaryOperation != nil
     }
 
-    var result: Double? {
+    var result: Double {
         return accumulator
     }
 
@@ -96,37 +97,39 @@ final class Calculator {
         }
 
         var pendingOperationWasPerformed = false
-        switch (operation, accumulator) {
-        case (.constant(let value), _):
+        switch operation {
+        case .constant(let value):
             accumulator = value
-        case (.trigonometryOperation(let function), let acc?):
-            accumulator = degreesMode ? radiansToDegree(acc) : acc
-            accumulator = function(acc)
-        case (.unaryOperation(let function), let acc?):
-            accumulator = (function(acc))
-        case (.binaryOperation(let function), let acc?):
-            binaryOperationLogic(acc: acc, function: function, symbol: symbol)
-        case (.equals, let acc?):
+        case .trigonometryOperation(let function):
+            accumulator = degreesMode ? radiansToDegree(accumulator) : accumulator
+            accumulator = function(accumulator)
+        case .unaryOperation(let function):
+            accumulator = (function(accumulator))
+        case .binaryOperation(let function):
+            performPendingOperation()
+            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator, fun: symbol)
+            if !reestablishingModel {
+                stack.push(value: accumulator, fun: symbol)
+            }
+        case .equals:
             if let pbo = pendingBinaryOperation {
-                accumulator = pbo.perform(with: acc)
+                accumulator = pbo.perform(with: accumulator)
                 pendingBinaryOperation=nil
                 pendingOperationWasPerformed = true
             }
-        case (.random(let function), _):
+        case .random(let function):
             accumulator = function()
-        default:
-            break
         }
 
-        if let acc = accumulator, symbol != "=" || pendingOperationWasPerformed, !reestablishingModel {
-            stack.push(value: acc, fun: symbol)
+        if symbol != "=" || pendingOperationWasPerformed, !reestablishingModel {
+            stack.push(value: accumulator, fun: symbol)
         }
     }
 
     func setOperand (_ operand: Double) {
         accumulator = operand
-        if let acc = accumulator, !reestablishingModel {
-            stack.push(value: acc, fun: nil)
+        if !reestablishingModel {
+            stack.push(value: accumulator, fun: nil)
         }
     }
 
@@ -146,14 +149,6 @@ final class Calculator {
         }
     }
 
-    private func binaryOperationLogic(acc: Double, function: @escaping (Double, Double) -> Double, symbol: String) {
-        performPendingOperation()
-        pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: acc, fun: symbol)
-        if !reestablishingModel {
-            stack.push(value: acc, fun: symbol)
-        }
-    }
-
     private func reestablishModel(_ value: Double, _ function: String?) {
         reestablishingModel = true
         setOperand(value)
@@ -167,8 +162,8 @@ final class Calculator {
     }
 
     private func performPendingOperation() {
-        if let pendingBinaryOperation = pendingBinaryOperation, let acc = accumulator {
-            accumulator = pendingBinaryOperation.perform(with: acc)
+        if let pendingBinaryOperation = pendingBinaryOperation {
+            accumulator = pendingBinaryOperation.perform(with: accumulator)
         }
     }
 

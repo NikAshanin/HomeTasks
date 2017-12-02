@@ -2,12 +2,9 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addButtonsToArray(for: view)
-        roundUpTheButtons()
-        updateUI()
-    }
+    private var isTyping = true
+    private var buttonsArray: [UIButton] = []
+    private var model = Calculator()
 
     @IBOutlet private weak var display: UILabel! {
         didSet {
@@ -15,10 +12,6 @@ final class CalculatorViewController: UIViewController {
         }
     }
     @IBOutlet private weak var radiansStateLabel: UILabel!
-
-    private var inTheMiddleOftyping = true
-    private var buttonsArray: [UIButton] = []
-    private lazy var model = Calculator()
 
     private var displayText = "0" {
         didSet {
@@ -49,6 +42,13 @@ final class CalculatorViewController: UIViewController {
         ("tanh", "tanh⁻¹")
     ]
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addButtonsToArray(for: view)
+        roundUpTheButtons()
+        updateUI()
+    }
+
     private func addButtonsToArray (for view: UIView) {
         for subview in view.subviews {
             if let stack = subview as? UIStackView {
@@ -73,9 +73,9 @@ final class CalculatorViewController: UIViewController {
     }
 
     private func roundUpTheButtons() {
-        let multiplayer: CGFloat = traitCollection.horizontalSizeClass == .compact ? 0.7 : 0.9
+        let multiplier: CGFloat = traitCollection.horizontalSizeClass == .compact ? 0.3 : 0.5
         for button in buttonsArray {
-            button.layer.cornerRadius = min(button.bounds.size.height, button.bounds.size.width) * multiplayer
+            button.layer.cornerRadius = min(button.bounds.size.height, button.bounds.size.width) * multiplier
             button.layer.masksToBounds = true
         }
     }
@@ -92,7 +92,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    private func selectOperationButton(with title: String, in view: UIView) {
+    private func selectOperationButton(with title: String) {
         for button in buttonsArray where button.currentTitle == title {
             button.isSelected = true
         }
@@ -106,17 +106,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func switchRadianMode(_ sender: UIButton) {
         model.degreesMode = !model.degreesMode
         sender.setTitle(model.degreesMode ? "Rad" : "Deg", for: .normal)
-        radiansStateLabel.text = model.degreesMode ? "" : "Rad"
-    }
-
-    private func performClickAnimation(for title: String) {
-        if let button = buttonsArray.first(where: { $0.currentTitle==title }) {
-            UIView.transition(with: button,
-                              duration: 0.2,
-                              options: .transitionCrossDissolve,
-                              animations: { button.isHighlighted = true },
-                              completion: { if $0 { button.isHighlighted = false } })
-        }
+        radiansStateLabel.isHidden = model.degreesMode ? true : false
     }
 
     @IBAction private func undo(_ sender: UIButton) {
@@ -131,20 +121,16 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func clear (_ sender: UIButton) {
         resetSelectionForAllButtons()
-        if model.pendingFunction != nil {
-            model.resetPendingOperation()
-        } else {
-            let oldDegreeMode = model.degreesMode
-            model = Calculator()
-            model.degreesMode = oldDegreeMode
-            inTheMiddleOftyping = true
-            displayText = "0"
-        }
+        let oldDegreeMode = model.degreesMode
+        model = Calculator()
+        model.degreesMode = oldDegreeMode
+        isTyping = true
+        displayText = "0"
     }
 
     @IBAction private func pressDigit(_ sender: UIButton) {
         if let digit = sender.currentTitle {
-            if inTheMiddleOftyping {
+            if isTyping {
                 displayText += digit
                 if displayText[displayText.startIndex] == "0" &&
                     displayText[displayText.index(after: displayText.startIndex)] != "." {
@@ -153,7 +139,7 @@ final class CalculatorViewController: UIViewController {
             } else {
                 displayText = digit == "." ? "0." : digit
             }
-            inTheMiddleOftyping = true
+            isTyping = true
         }
     }
 
@@ -162,9 +148,9 @@ final class CalculatorViewController: UIViewController {
             return
         }
 
-        if inTheMiddleOftyping {
+        if isTyping {
             model.setOperand(symbol)
-            inTheMiddleOftyping = false
+            isTyping = false
         }
 
         model.doOperation(operationTitle)
@@ -173,13 +159,11 @@ final class CalculatorViewController: UIViewController {
     }
 
     private func updateUI() {
-        if let res = model.result {
-            symbol = res
-        }
+        symbol = model.result
 
         resetSelectionForAllButtons()
         if let pendingFunction = model.pendingFunction {
-            selectOperationButton(with: pendingFunction, in: view)
+            selectOperationButton(with: pendingFunction)
         }
     }
 }
