@@ -13,6 +13,7 @@
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
 		BF1970A91FC25EDF003F9DED /* StarWarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1970A81FC25EDF003F9DED /* StarWarsViewController.swift */; };
 		BF199BDF1FC278F9004A63FA /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF199BDE1FC278F9004A63FA /* Hero.swift */; };
+		BF8520941FD2D9990096C41F /* Date+year.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8520931FD2D9990096C41F /* Date+year.swift */; };
 		BFFF477D1FCCC15200C1AB0E /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFF477C1FCCC15200C1AB0E /* Film.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF1970A81FC25EDF003F9DED /* StarWarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsViewController.swift; sourceTree = "<group>"; };
 		BF199BDE1FC278F9004A63FA /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		BF8520931FD2D9990096C41F /* Date+year.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+year.swift"; sourceTree = "<group>"; };
 		BFFF477C1FCCC15200C1AB0E /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,16 +60,25 @@
 		11396C641FBDB6D2008C570F /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
+				BF8520921FD2D96E0096C41F /* Extensions */,
+				BF1970A81FC25EDF003F9DED /* StarWarsViewController.swift */,
+				BF199BDE1FC278F9004A63FA /* Hero.swift */,
+				BFFF477C1FCCC15200C1AB0E /* Film.swift */,
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
-				BF1970A81FC25EDF003F9DED /* StarWarsViewController.swift */,
-				BF199BDE1FC278F9004A63FA /* Hero.swift */,
-				BFFF477C1FCCC15200C1AB0E /* Film.swift */,
 			);
 			path = StarWars;
+			sourceTree = "<group>";
+		};
+		BF8520921FD2D96E0096C41F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BF8520931FD2D9990096C41F /* Date+year.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +190,7 @@
 				BFFF477D1FCCC15200C1AB0E /* Film.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
 				BF1970A91FC25EDF003F9DED /* StarWarsViewController.swift in Sources */,
+				BF8520941FD2D9990096C41F /* Date+year.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

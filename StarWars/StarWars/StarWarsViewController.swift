@@ -136,12 +136,3 @@ extension StarWarsViewController: UITableViewDelegate, UITableViewDataSource {
         dateLabel.text = "Этот фильм вышел в \(date.year) году"
     }
 }
-
-extension Date {
-    var year: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
-        let year = formatter.string(from: self)
-        return year
-    }
-}
