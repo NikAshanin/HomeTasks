@@ -17,10 +17,6 @@ final class FilmsViewController: UIViewController {
             }
 
         self.films = films
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
-
-        print(tableView.rowHeight)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,14 +38,13 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? FilmTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath)
 
-        guard let myCell = cell else {
-            return UITableViewCell()
+        if let myCell = cell as? FilmTableViewCell {
+            myCell.film = films[indexPath.row]
         }
-
-        myCell.film = films[indexPath.row]
-        return myCell
+        
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -58,15 +53,13 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
                 let detail = viewController as? DetailViewController else {
             return
         }
-        detail.film = films[indexPath.row]
-        detail.delegate = self
         navigationController?.pushViewController(detail, animated: true)
     }
 }
 
 extension FilmsViewController: DetailViewProtocol {
 
-    func buttonPressed(_ film: Film) {
+    func buttonPressed(with film: Film) {
         guard let index = films.index(of: film) else {
             return
         }

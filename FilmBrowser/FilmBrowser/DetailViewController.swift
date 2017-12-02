@@ -28,19 +28,19 @@ final class DetailViewController: UIViewController {
                           options: .transitionFlipFromLeft,
                           animations: nil,
                           completion: { [weak self] _ in
-                            self?.likesLabel?.text = String(describing: film.likes) })
+                            self?.likesLabel.text = String(describing: film.likes) })
 
-        delegate?.buttonPressed(film)
+        delegate?.buttonPressed(with: film)
     }
 
     private func updateUI() {
         guard let film = film else {
             return
         }
-        posterImageView?.image = UIImage(named: film.poster)
-        titleLabel?.text = film.title
-        descriptionLabel?.text = film.description
-        likesLabel?.text = String(describing: film.likes)
+        posterImageView.image = UIImage(named: film.poster)
+        titleLabel.text = film.title
+        descriptionLabel.text = film.description
+        likesLabel.text = String(describing: film.likes)
         title = film.title
     }
 }
