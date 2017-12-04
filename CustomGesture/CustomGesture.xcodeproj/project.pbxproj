@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		526ADFB31FC423750062B996 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526ADFB21FC423750062B996 /* TabBarController.swift */; };
 		526ADFB51FC4237D0062B996 /* CircleGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526ADFB41FC4237D0062B996 /* CircleGesture.swift */; };
 		7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26801FBB3669008A981B /* AppDelegate.swift */; };
 		7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26821FBB3669008A981B /* GestureViewController.swift */; };
@@ -17,7 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		526ADFB21FC423750062B996 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		526ADFB41FC4237D0062B996 /* CircleGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleGesture.swift; sourceTree = "<group>"; };
 		7F6C267D1FBB3669008A981B /* CustomGesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomGesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6C26801FBB3669008A981B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				526ADFB41FC4237D0062B996 /* CircleGesture.swift */,
-				526ADFB21FC423750062B996 /* TabBarController.swift */,
 				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
@@ -152,7 +149,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
 		};
 		7FF582441FBDA4B80009B9BD /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -175,7 +172,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				526ADFB31FC423750062B996 /* TabBarController.swift in Sources */,
 				7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */,
 				7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */,
 				526ADFB51FC4237D0062B996 /* CircleGesture.swift in Sources */,

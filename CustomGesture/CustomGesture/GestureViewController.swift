@@ -1,17 +1,17 @@
 import UIKit
 
-final class ViewController: UIViewController {
+final class GestureViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let circleRecognizer = CircleRecognizer(target: self, action: #selector(self.circleTapPressed))
-        circleRecognizer.setCircle(center: self.view.center, radius: 120)
-        self.view.addGestureRecognizer(circleRecognizer)
+        let circleRecognizer = CircleRecognizer(target: self, action: #selector(circleTapPressed))
+        circleRecognizer.setCircle(center: view.center, radius: 120)
+        view.addGestureRecognizer(circleRecognizer)
     }
     @objc func circleTapPressed() {
-        if let tabBar = storyboard?.instantiateViewController( withIdentifier: "testController" ) as? UITabBarController {
-            self.present(tabBar, animated: true, completion: nil)
+        if let tabBar = storyboard?.instantiateViewController(withIdentifier: "testController") as? UITabBarController {
+            present(tabBar, animated: true, completion: nil)
         }
     }
 }
