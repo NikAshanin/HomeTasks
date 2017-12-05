@@ -26,9 +26,7 @@ extension InfoViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? TableViewCell
     let film = films.get(index: indexPath.row)
-    cell?.titleFilmLabel.text = film.name
-    cell?.countLikesLabel.text = String(film.countLikes)
-    cell?.imageFilm.image = UIImage(named: film.urlImage)
+    cell?.pushDataToCell(film)
     return cell ?? UITableViewCell()
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

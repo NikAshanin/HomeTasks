@@ -13,7 +13,7 @@ final class ArrayFilms {
     var film = Film()
       film.name = name
       film.description = description
-      film.countLikes = Int(arc4random() % 1000)
+      film.countLikes = Int(arc4random() % 1_000)
       film.urlImage = urlImage
       films.append(film)
   }

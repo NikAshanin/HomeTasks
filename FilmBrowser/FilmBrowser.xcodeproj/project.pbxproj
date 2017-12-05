@@ -174,7 +174,7 @@
 		};
 		7FC8055E1FC6F04000C526B7 /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
