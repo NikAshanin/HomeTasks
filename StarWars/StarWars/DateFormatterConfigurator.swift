@@ -1,6 +1,6 @@
 import Foundation
 
-class DataFormatterConfigurator {
+final class DataFormatterConfigurator {
 
     private static let yearMonthDayFormate = "yyyy-mm-dd"
     private static let calendar: Calendar = {
