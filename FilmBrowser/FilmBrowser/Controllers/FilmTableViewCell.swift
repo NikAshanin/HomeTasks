@@ -12,10 +12,10 @@ final class FilmTableViewCell: UICollectionViewCell {
         filmName.sizeToFitOnlyHeight(maxWidth: filmName.frame.width)
         likesCount.text = String(film.likesCount)
         filmImage.image = film.image
-        likeStateImage(film)
+        selectImageForLikeState(film)
     }
 
-    public func likeStateImage(_ film: Film) {
+    public func selectImageForLikeState(_ film: Film) {
         if film.liked {
             likeImage.image = #imageLiteral(resourceName: "liked")
         } else {

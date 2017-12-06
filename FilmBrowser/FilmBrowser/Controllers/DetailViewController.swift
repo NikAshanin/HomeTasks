@@ -2,7 +2,7 @@ import UIKit
 
 final class DetailViewController: UIViewController {
 
-    @IBOutlet private weak var filmImage: UIImageView!
+    @IBOutlet private weak var filmImageView: UIImageView!
     @IBOutlet private weak var filmName: UILabel!
     @IBOutlet private weak var liked: UIButton!
     @IBOutlet private weak var filmDescription: UILabel!
@@ -32,7 +32,7 @@ final class DetailViewController: UIViewController {
         guard let film = film else {
             return
         }
-        filmImage.image = film.image
+        filmImageView.image = film.image
         filmName.text = film.name
         filmDescription.text = film.description
         filmDescription.sizeToFitOnlyHeight(maxWidth: filmDescription.frame.width)
