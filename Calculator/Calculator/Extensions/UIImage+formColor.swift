@@ -1,8 +1,8 @@
 import UIKit
 
 public extension UIImage {
-    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
-        let rect = CGRect(origin: .zero, size: size)
+    convenience init?(color: UIColor) {
+        let rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         color.setFill()
         UIRectFill(rect)

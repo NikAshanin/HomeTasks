@@ -73,7 +73,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     private func roundUpTheButtons() {
-        let multiplier: CGFloat = traitCollection.horizontalSizeClass == .compact ? 0.3 : 0.5
+        let multiplier: CGFloat = traitCollection.horizontalSizeClass == .compact ? 0.4 : 0.5
         for button in buttonsArray {
             button.layer.cornerRadius = min(button.bounds.size.height, button.bounds.size.width) * multiplier
             button.layer.masksToBounds = true
