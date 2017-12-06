@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A6FCC601FCAEE7700C3431A /* Image Files in Resources */ = {isa = PBXBuildFile; fileRef = 2A6FCC5C1FCAEE7500C3431A /* Image Files */; };
-		2A6FCC611FCAEE7700C3431A /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6FCC5D1FCAEE7600C3431A /* InfoViewModel.swift */; };
+		2A6FCC611FCAEE7700C3431A /* FilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6FCC5D1FCAEE7600C3431A /* FilmsModel.swift */; };
 		2A6FCC621FCAEE7700C3431A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6FCC5E1FCAEE7700C3431A /* Film.swift */; };
 		7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC805471FC6EF8100C526B7 /* AppDelegate.swift */; };
 		7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC8054B1FC6EF8100C526B7 /* Main.storyboard */; };
@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		2A6FCC5C1FCAEE7500C3431A /* Image Files */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Image Files"; path = "../../../../Desktop/Ira/TestDelegate/TestDelegate/Image Files"; sourceTree = "<group>"; };
-		2A6FCC5D1FCAEE7600C3431A /* InfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
+		2A6FCC5D1FCAEE7600C3431A /* FilmsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmsModel.swift; sourceTree = "<group>"; };
 		2A6FCC5E1FCAEE7700C3431A /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		7FC805441FC6EF8100C526B7 /* FilmBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC805471FC6EF8100C526B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 			children = (
 				2A6FCC5E1FCAEE7700C3431A /* Film.swift */,
 				2A6FCC5C1FCAEE7500C3431A /* Image Files */,
-				2A6FCC5D1FCAEE7600C3431A /* InfoViewModel.swift */,
+				2A6FCC5D1FCAEE7600C3431A /* FilmsModel.swift */,
 				7FC805531FC6EF8100C526B7 /* Info.plist */,
 				7FC805631FC6F0E400C526B7 /* Resources */,
 				7FC805471FC6EF8100C526B7 /* AppDelegate.swift */,
@@ -198,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A6FCC621FCAEE7700C3431A /* Film.swift in Sources */,
-				2A6FCC611FCAEE7700C3431A /* InfoViewModel.swift in Sources */,
+				2A6FCC611FCAEE7700C3431A /* FilmsModel.swift in Sources */,
 				7FC8055A1FC6EFE000C526B7 /* FilmsViewController.swift in Sources */,
 				7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */,
 				7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */,
