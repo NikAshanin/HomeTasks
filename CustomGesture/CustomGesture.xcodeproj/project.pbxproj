@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F9E525E1FD892B50094E6F5 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9E525D1FD892B50094E6F5 /* TabBarViewController.swift */; };
+		6F9E52601FD892BD0094E6F5 /* ellipse.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9E525F1FD892BD0094E6F5 /* ellipse.jpg */; };
+		6F9E52621FD892C50094E6F5 /* OGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9E52611FD892C40094E6F5 /* OGestureRecognizer.swift */; };
 		7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26801FBB3669008A981B /* AppDelegate.swift */; };
 		7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26821FBB3669008A981B /* GestureViewController.swift */; };
 		7F6C26861FBB3669008A981B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6C26841FBB3669008A981B /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F9E525D1FD892B50094E6F5 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		6F9E525F1FD892BD0094E6F5 /* ellipse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ellipse.jpg; sourceTree = "<group>"; };
+		6F9E52611FD892C40094E6F5 /* OGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OGestureRecognizer.swift; sourceTree = "<group>"; };
 		7F6C267D1FBB3669008A981B /* CustomGesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomGesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6C26801FBB3669008A981B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F6C26821FBB3669008A981B /* GestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
@@ -56,10 +62,13 @@
 			children = (
 				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
+				6F9E525D1FD892B50094E6F5 /* TabBarViewController.swift */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
 				7F6C26871FBB3669008A981B /* Assets.xcassets */,
+				6F9E525F1FD892BD0094E6F5 /* ellipse.jpg */,
 				7F6C26891FBB3669008A981B /* LaunchScreen.storyboard */,
 				7F6C268C1FBB3669008A981B /* Info.plist */,
+				6F9E52611FD892C40094E6F5 /* OGestureRecognizer.swift */,
 			);
 			path = CustomGesture;
 			sourceTree = "<group>";
@@ -125,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F9E52601FD892BD0094E6F5 /* ellipse.jpg in Resources */,
 				7F6C268B1FBB3669008A981B /* LaunchScreen.storyboard in Resources */,
 				7F6C26881FBB3669008A981B /* Assets.xcassets in Resources */,
 				7F6C26861FBB3669008A981B /* Main.storyboard in Resources */,
@@ -160,7 +170,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,6 +179,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F9E525E1FD892B50094E6F5 /* TabBarViewController.swift in Sources */,
+				6F9E52621FD892C50094E6F5 /* OGestureRecognizer.swift in Sources */,
 				7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */,
 				7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */,
 			);
