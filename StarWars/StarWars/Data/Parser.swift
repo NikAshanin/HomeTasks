@@ -12,8 +12,8 @@ struct Parser {
 extension Parser: Parsable {
 
     func parseArray<T: JSONInitializable>(_ data: Data) throws -> T {
-
-        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any], let model = T(json: json) else {
+        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+            let model = T(json: json) else {
             throw dataTypeError
         }
 

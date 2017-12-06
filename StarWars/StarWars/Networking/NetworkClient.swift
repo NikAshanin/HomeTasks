@@ -7,8 +7,6 @@ final class NetworkClient {
     private let networkQueue = DispatchQueue(label: "NetworkClient.queue")
     private let session: URLSession
 
-    // MARK: - Life cycle
-
     init() {
         self.session = URLSession(configuration: .default)
     }

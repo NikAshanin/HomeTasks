@@ -1,13 +1,23 @@
 import Foundation
 
-class DataFormatterConfigurator: DateFormatter {
+class DataFormatterConfigurator {
 
-    override init() {
-        super.init()
-        self.dateFormat = "yyyy-mm-dd"
-    }
+    private static let yearMonthDayFormate = "yyyy-mm-dd"
+    private static let calendar: Calendar = {
+        Calendar.current
+    }()
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private static let yearMonthDayFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = yearMonthDayFormate
+        return dateFormatter
+    }()
+
+    static func getYear(from date: String) -> String {
+        guard let date = yearMonthDayFormatter.date(from: date) else {
+            return "0"
+        }
+        let year = calendar.component(.year, from: date)
+        return String(year)
     }
 }

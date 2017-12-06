@@ -14,7 +14,7 @@ enum Response<ResponseType> {
     case failure(Error)
 }
 
-struct SearchResultModel: JSONInitializable {
+final class SearchResultModel: JSONInitializable {
 
     private struct Keys {
         static let count = "count"
@@ -47,7 +47,7 @@ struct SearchResultModel: JSONInitializable {
     }
 }
 
-struct FilmsModel: JSONInitializable {
+final class FilmsModel: JSONInitializable {
 
     private struct Keys {
         static let title = "title"
