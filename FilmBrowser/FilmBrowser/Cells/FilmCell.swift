@@ -8,10 +8,10 @@ final class FilmCell: UITableViewCell {
     @IBOutlet weak private var filmImage: UIImageView!
     @IBOutlet weak private var likeLabel: UILabel!
 
-    func configure(_ film: Film, likes: Int) {
+    func configure(_ film: Film) {
         let imageName = film.image
         filmImage.image = UIImage(named: imageName)
         filmTitle.text = film.title
-        likeLabel.text = "\(likes) likes"
+        likeLabel.text = "\(film.likesCount) likes"
     }
 }

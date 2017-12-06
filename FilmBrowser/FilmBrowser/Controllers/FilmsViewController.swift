@@ -3,7 +3,7 @@ import UIKit
 final class FilmsViewController: UIViewController {
 
     fileprivate let filmModel = FilmModel()
-    var filmLikes: [String: Int] = [:]
+    //var filmLikes: [String: Int] = [:]
 
     @IBOutlet weak private var tableView: UITableView!
 
@@ -13,31 +13,9 @@ final class FilmsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-
-        tableView.reloadData()
-    }
-
     private func registerCells() {
         let nib = UINib(nibName: "FilmCell", bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: FilmCell.reuseId)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "filmSegue" {
-            let vc = segue.destination as? DetailViewController
-
-            guard let cell = sender as? FilmCell, let row = tableView.indexPath(for: cell)?.row else {
-                return
-            }
-
-            let film = filmModel.films[row]
-
-            vc?.delegate = self
-            vc?.film = film
-            vc?.likes = filmLikes[film.title] ?? 0
-        }
     }
 }
 
@@ -55,16 +33,22 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         let film = filmModel.films[indexPath.row]
-        let likess = filmLikes[film.title] ?? 0
 
-        cell.configure(film, likes: likess)
+        cell.configure(film)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        performSegue(withIdentifier: "filmSegue", sender: tableView.cellForRow(at: indexPath))
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "detail") as?
+            DetailViewController else {
+            return
+        }
+        detailViewController.delegate = self
+        detailViewController.film = filmModel.films[indexPath.row]
+        detailViewController.filmIndex = indexPath.row
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
@@ -72,16 +56,15 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension FilmsViewController: LikeDelegate {
 
-    func plusOneLike(to film: String) {
-        guard let likess = filmLikes[film] else {
-            filmLikes[film] = 1
-            return
-        }
+    func plusOneLike(toFilmAt index: Int) {
+        filmModel.films[index].likesCount += 1
 
-        filmLikes[film] = likess + 1
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
 protocol LikeDelegate: class {
-    func plusOneLike(to film: String)
+    func plusOneLike(toFilmAt index: Int)
 }

@@ -1,8 +1,8 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
-    var film = Film(title: "", image: "", likesCount: 0, descrip: "")
-    var likes = 0
+    var filmIndex = 0
+    var film = Film(title: "", image: "", likesCount: 0, description: "")
 
     @IBOutlet weak private var filmLabel: UILabel!
     @IBOutlet weak private var filmImage: UIImageView!
@@ -18,15 +18,14 @@ final class DetailViewController: UIViewController {
 
         filmLabel.text = film.title
         filmImage.image = image
-        filmDescrip.text = film.descrip
-        likeButton.setTitle("\(likes) likes", for: .normal)
+        filmDescrip.text = film.description
+        likeButton.setTitle("\(film.likesCount) likes", for: .normal)
     }
 
     weak var delegate: LikeDelegate?
 
     @IBAction func likeButtonTapped(_ sender: Any) {
-        likes += 1
-        delegate?.plusOneLike(to: film.title)
-        likeButton.setTitle("\(likes) likes", for: .normal)
+        delegate?.plusOneLike(toFilmAt: filmIndex)
+        likeButton.setTitle("\(film.likesCount) likes", for: .normal)
     }
 }

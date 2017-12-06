@@ -46,7 +46,7 @@
         <!--Detail View Controller-->
         <scene sceneID="5nv-kY-L4g">
             <objects>
-                <viewController id="p0a-aF-HfI" customClass="DetailViewController" customModule="FilmBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detail" id="p0a-aF-HfI" customClass="DetailViewController" customModule="FilmBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="geH-z2-8xv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
