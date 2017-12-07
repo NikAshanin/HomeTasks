@@ -3,7 +3,6 @@ import UIKit
 final class FilmsViewController: UIViewController {
 
     fileprivate let filmModel = FilmModel()
-    //var filmLikes: [String: Int] = [:]
 
     @IBOutlet weak private var tableView: UITableView!
 
@@ -28,15 +27,15 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FilmCell.reuseId, for: indexPath) as? FilmCell else {
-            return UITableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: FilmCell.reuseId, for: indexPath) as? FilmCell {
+
+            let film = filmModel.films[indexPath.row]
+
+            cell.configure(film)
+
+            return cell
         }
-
-        let film = filmModel.films[indexPath.row]
-
-        cell.configure(film)
-
-        return cell
+        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -47,7 +46,6 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         detailViewController.delegate = self
         detailViewController.film = filmModel.films[indexPath.row]
-        detailViewController.filmIndex = indexPath.row
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
@@ -56,8 +54,8 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension FilmsViewController: LikeDelegate {
 
-    func plusOneLike(toFilmAt index: Int) {
-        filmModel.films[index].likesCount += 1
+    func plusOneLike(toFilm film: Film) {
+        film.likesCount += 1
 
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -66,5 +64,5 @@ extension FilmsViewController: LikeDelegate {
 }
 
 protocol LikeDelegate: class {
-    func plusOneLike(toFilmAt index: Int)
+    func plusOneLike(toFilm film: Film)
 }

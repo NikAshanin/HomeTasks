@@ -1,8 +1,7 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
-    var filmIndex = 0
-    var film = Film(title: "", image: "", likesCount: 0, description: "")
+    var film: Film!
 
     @IBOutlet weak private var filmLabel: UILabel!
     @IBOutlet weak private var filmImage: UIImageView!
@@ -12,7 +11,7 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let image = UIImage(named: film.image) else {
+        guard let film = film, let image = UIImage(named: film.image) else {
             return
         }
 
@@ -25,7 +24,7 @@ final class DetailViewController: UIViewController {
     weak var delegate: LikeDelegate?
 
     @IBAction func likeButtonTapped(_ sender: Any) {
-        delegate?.plusOneLike(toFilmAt: filmIndex)
+        delegate?.plusOneLike(toFilm: film)
         likeButton.setTitle("\(film.likesCount) likes", for: .normal)
     }
 }

@@ -4,14 +4,14 @@ final class FilmCell: UITableViewCell {
 
     static let reuseId = "FilmCell"
 
-    @IBOutlet weak private var filmTitle: UILabel!
-    @IBOutlet weak private var filmImage: UIImageView!
+    @IBOutlet weak private var filmTitleLabel: UILabel!
+    @IBOutlet weak private var filmImageView: UIImageView!
     @IBOutlet weak private var likeLabel: UILabel!
 
     func configure(_ film: Film) {
         let imageName = film.image
-        filmImage.image = UIImage(named: imageName)
-        filmTitle.text = film.title
+        filmImageView.image = UIImage(named: imageName)
+        filmTitleLabel.text = film.title
         likeLabel.text = "\(film.likesCount) likes"
     }
 }

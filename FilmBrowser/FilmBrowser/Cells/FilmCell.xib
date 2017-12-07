@@ -58,8 +58,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="filmImage" destination="v1W-fu-0ko" id="Nfl-FC-9aW"/>
-                <outlet property="filmTitle" destination="Nal-jC-1oG" id="S92-JI-eE2"/>
+                <outlet property="filmImageView" destination="v1W-fu-0ko" id="Yuh-qd-7rB"/>
+                <outlet property="filmTitleLabel" destination="Nal-jC-1oG" id="4xG-Sx-S0K"/>
                 <outlet property="likeLabel" destination="oLf-nq-fYm" id="eqe-a0-CIK"/>
             </connections>
             <point key="canvasLocation" x="-200.5" y="-12.5"/>
