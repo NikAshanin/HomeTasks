@@ -127,8 +127,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="LD7-qy-yel"/>
                     <connections>
-                        <outlet property="filmDescrip" destination="5LY-zC-Q57" id="nEi-LO-FjX"/>
-                        <outlet property="filmImage" destination="5Sq-8g-btt" id="mF0-Fu-RWb"/>
+                        <outlet property="filmDescriptionLabel" destination="5LY-zC-Q57" id="P1h-JD-7pc"/>
+                        <outlet property="filmImageView" destination="5Sq-8g-btt" id="axs-aS-foC"/>
                         <outlet property="filmLabel" destination="DUD-5Q-sjZ" id="zQL-kr-RQP"/>
                         <outlet property="likeButton" destination="hcQ-x7-g21" id="R6j-XE-SXs"/>
                     </connections>

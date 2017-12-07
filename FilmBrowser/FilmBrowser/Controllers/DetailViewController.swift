@@ -4,8 +4,8 @@ final class DetailViewController: UIViewController {
     var film: Film!
 
     @IBOutlet weak private var filmLabel: UILabel!
-    @IBOutlet weak private var filmImage: UIImageView!
-    @IBOutlet weak private var filmDescrip: UILabel!
+    @IBOutlet weak private var filmImageView: UIImageView!
+    @IBOutlet weak private var filmDescriptionLabel: UILabel!
     @IBOutlet weak private var likeButton: UIButton!
 
     override func viewDidLoad() {
@@ -16,8 +16,8 @@ final class DetailViewController: UIViewController {
         }
 
         filmLabel.text = film.title
-        filmImage.image = image
-        filmDescrip.text = film.description
+        filmImageView.image = image
+        filmDescriptionLabel.text = film.description
         likeButton.setTitle("\(film.likesCount) likes", for: .normal)
     }
 
