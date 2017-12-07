@@ -3,7 +3,7 @@ import Foundation
 class Film {
     let name: String
     let dateFilm: Date
-    
+
     init(nameFilm: String, dateFilm: Date) {
         self.name = nameFilm
         self.dateFilm = dateFilm
@@ -12,21 +12,19 @@ class Film {
 
 final class NetworkService {
     private let session = URLSession.shared
-    
+
     typealias CallBack = (_ result: [Film], _ name: String?) -> Void
-    
-    
+
     func getJsonFromUrl(searchNameCharacter: String, completion: @escaping CallBack) {
-        dataTask?.cancel()
         guard let searchName = searchNameCharacter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: "https://swapi.co/api/people/?search=\(searchName)")
             else {
-                completion([],nil)
+                completion([], nil)
                 return
         }
         let dataTask = session.dataTask(with: url, completionHandler: { [weak self] (data, _, error) in
             guard let data = data else {
-                completion([],nil)
+                completion([], nil)
                 return
             }
             let jsonObj: [String: Any]?
@@ -38,21 +36,20 @@ final class NetworkService {
             }
             guard let jsonObject = jsonObj, let searchResult = (jsonObject["results"] as? [[String: Any]])?.first,
                 let nameCharacter = searchResult["name"] as? String else {
-                    completion([],nil)
+                    completion([], nil)
                     return
             }
             self?.updateInformation(jsonObj: searchResult, name: nameCharacter, completion: completion)
         })
-        dataTask?.resume()
+        dataTask.resume()
     }
-    
+
     private func updateInformation(jsonObj: [String: Any], name: String, completion: @escaping CallBack) {
-        var nameFilms: [Film]
-        nameFilms.removeAll()
+        var nameFilms = [Film]()
         let group = DispatchGroup()
-        
+
         guard let filmsCharacter = jsonObj["films"] as? [String] else {
-            completion([],nil)
+            completion([], nil)
             return
         }
         for filmName in filmsCharacter {
@@ -91,4 +88,3 @@ let formatting: DateFormatter = {
     format.dateFormat = "yyyy-MM-dd"
     return format
 }()
-
