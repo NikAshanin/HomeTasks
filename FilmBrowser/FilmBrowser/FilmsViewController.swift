@@ -18,17 +18,6 @@ final class FilmsViewController: UIViewController {
 
         self.films = films
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? DetailViewController,
-                let cell = sender as? UITableViewCell,
-                let indexPath = tableView.indexPath(for: cell) else {
-                return
-        }
-
-        destination.film = films[indexPath.row]
-        destination.delegate = self
-    }
 }
 
 extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -53,6 +42,8 @@ extension FilmsViewController: UITableViewDataSource, UITableViewDelegate {
                 let detail = viewController as? DetailViewController else {
             return
         }
+        detail.film = films[indexPath.row]
+        detail.delegate = self
         navigationController?.pushViewController(detail, animated: true)
     }
 }
