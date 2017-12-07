@@ -4,7 +4,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var textField: UITextField!
     private var films: [Film] = []
-    private let information = NetworkService()
+    private let network = NetworkService()
     @IBOutlet weak private var name: UILabel!
 
     override func viewDidLoad() {
@@ -18,12 +18,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
-                                                 for: indexPath) as? CreateTableViewCell
-        cell?.configure(name: "films[indexPath.row].nameFilm")
-        return cell ?? UITableViewCell()
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                      for: indexPath) as? CreateTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configure(name: films[indexPath.row].name)
+        return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(films[indexPath.row])
         let year = Calendar.current.component(.year, from: films[indexPath.row].dateFilm)
@@ -44,7 +48,7 @@ extension ViewController: UITextFieldDelegate {
             !text.isEmpty else {
                 return false
         }
-        information.getJsonFromUrl(searchNameCharacter: text) { [weak self] films, name in
+        network.getJsonFromUrl(searchNameCharacter: text) { [weak self] films, name in
             self?.films = films
             self?.name.text = name
             self?.tableView.reloadData()
@@ -54,9 +58,3 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
-
-let formatting: DateFormatter = {
-    let format = DateFormatter()
-    format.dateFormat = "yyyy-MM-dd"
-    return format
-}()
