@@ -9,7 +9,6 @@ final class FilmTableViewCell: UICollectionViewCell {
 
     public func setFilmInfo(_ film: Film) {
         filmName.text = film.name
-        filmName.sizeToFitOnlyHeight(maxWidth: filmName.frame.width)
         likesCount.text = String(film.likesCount)
         filmImage.image = film.image
         selectImageForLikeState(film)

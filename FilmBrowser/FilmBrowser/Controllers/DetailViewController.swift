@@ -35,7 +35,6 @@ final class DetailViewController: UIViewController {
         filmImageView.image = film.image
         filmNameLabel.text = film.name
         filmDescriptionLabel.text = film.description
-        filmDescriptionLabel.sizeToFitOnlyHeight(maxWidth: filmDescriptionLabel.frame.width)
         likesCountLabel.text = String(film.likesCount)
         updateLikeStatus()
     }
