@@ -74,7 +74,7 @@ extension NetworkService {
     }
 
     private func getCharacterFromJSON(json: [String: Any]?) -> Character? {
-        guard let json = json, isCharacterExist(json: json),
+        guard let json = json,
             let results = json["results"] as? [[String: Any]],
             let firstCharacter = results.first,
             let characterName = firstCharacter["name"] as? String,
@@ -83,12 +83,4 @@ extension NetworkService {
         }
         return Character(name: characterName, links: films)
     }
-
-    private func isCharacterExist(json: [String: Any]) -> Bool {
-        guard let charactersCount = json["count"] as? Int, charactersCount > 0 else {
-            return false
-        }
-        return true
-    }
-
 }

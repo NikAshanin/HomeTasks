@@ -1,11 +1,11 @@
 import Foundation
 
 final class Film {
-    let filmName: String
+    let name: String
     let year: Int
 
     init(name: String, year: Int ) {
-        self.filmName = name
+        self.name = name
         self.year = year
     }
 
@@ -17,7 +17,7 @@ final class Film {
                 return nil
         }
         let year = BaseDateFormatter.getOnlyYear(stringDate: releaseDateString)
-        self.filmName = title
+        self.name = title
         self.year = year
     }
 }

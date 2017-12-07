@@ -32,12 +32,12 @@ extension SearchViewController: UITextFieldDelegate {
         if textField == searchTextField {
             guard let text = searchTextField.text,
                 !text.isEmpty else {
-                    searchTextField.textColor = UIColor.errorColor()
+                    searchTextField.textColor = UIColor.error
                     return false
             }
             searchTextField.isUserInteractionEnabled = false
             releaseDateLabel.text = ""
-            searchTextField.textColor = UIColor.okColor()
+            searchTextField.textColor = UIColor.ok
             films.removeAll()
             filmsTableView.reloadData()
             searchTextField.resignFirstResponder()
@@ -56,7 +56,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let film = films[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
                                                  for: indexPath)
-        cell.textLabel?.text = film.filmName
+        cell.textLabel?.text = film.name
         return cell
     }
 

@@ -1,4 +1,5 @@
 import Foundation
+
 final class Character {
     let name: String
     let linksToFilmsWithCharacter: [String]
