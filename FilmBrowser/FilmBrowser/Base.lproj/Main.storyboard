@@ -44,7 +44,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" preservesSuperviewLayoutMargins="YES" reuseIdentifier="cell" id="5Ok-hC-GRu" customClass="FilmTableViewCell" customModule="FilmBrowser" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="0.0" width="404" height="160"/>
+                                        <rect key="frame" x="98" y="0.0" width="404" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="404" height="160"/>
@@ -189,11 +189,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="god-mJ-olS"/>
                     <connections>
-                        <outlet property="filmDescription" destination="ZKf-dU-MFr" id="oId-n6-qEo"/>
+                        <outlet property="filmDescriptionLabel" destination="ZKf-dU-MFr" id="oId-n6-qEo"/>
                         <outlet property="filmImageView" destination="9Nu-5r-k0d" id="BrR-Uh-mEK"/>
-                        <outlet property="filmName" destination="AeY-Wy-fJS" id="7J0-Yn-dzJ"/>
-                        <outlet property="liked" destination="78g-Ow-qqQ" id="2KI-mN-Xt8"/>
-                        <outlet property="likesCount" destination="wKS-kR-HDk" id="mwJ-7n-xf2"/>
+                        <outlet property="filmNameLabel" destination="AeY-Wy-fJS" id="7J0-Yn-dzJ"/>
+                        <outlet property="likedButton" destination="78g-Ow-qqQ" id="2KI-mN-Xt8"/>
+                        <outlet property="likesCountLabel" destination="wKS-kR-HDk" id="mwJ-7n-xf2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3EE-H3-mCB" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -3,10 +3,10 @@ import UIKit
 final class DetailViewController: UIViewController {
 
     @IBOutlet private weak var filmImageView: UIImageView!
-    @IBOutlet private weak var filmName: UILabel!
-    @IBOutlet private weak var liked: UIButton!
-    @IBOutlet private weak var filmDescription: UILabel!
-    @IBOutlet private weak var likesCount: UILabel!
+    @IBOutlet private weak var filmNameLabel: UILabel!
+    @IBOutlet private weak var likedButton: UIButton!
+    @IBOutlet private weak var filmDescriptionLabel: UILabel!
+    @IBOutlet private weak var likesCountLabel: UILabel!
     var film: Film?
     weak var delegate: LikeCountChanged?
 
@@ -24,7 +24,7 @@ final class DetailViewController: UIViewController {
             film.addLike()
         }
         updateLikeStatus()
-        likesCount.text = String(film.likesCount)
+        likesCountLabel.text = String(film.likesCount)
         delegate?.likeButtonPressed(film)
     }
 
@@ -33,10 +33,10 @@ final class DetailViewController: UIViewController {
             return
         }
         filmImageView.image = film.image
-        filmName.text = film.name
-        filmDescription.text = film.description
-        filmDescription.sizeToFitOnlyHeight(maxWidth: filmDescription.frame.width)
-        likesCount.text = String(film.likesCount)
+        filmNameLabel.text = film.name
+        filmDescriptionLabel.text = film.description
+        filmDescriptionLabel.sizeToFitOnlyHeight(maxWidth: filmDescriptionLabel.frame.width)
+        likesCountLabel.text = String(film.likesCount)
         updateLikeStatus()
     }
 
@@ -45,6 +45,6 @@ final class DetailViewController: UIViewController {
             return
         }
         let resourceName = film.liked ? "liked" : "like"
-        liked.setBackgroundImage(#imageLiteral(resourceName: resourceName), for: .normal)
+        likedButton.setBackgroundImage(#imageLiteral(resourceName: resourceName), for: .normal)
     }
 }
