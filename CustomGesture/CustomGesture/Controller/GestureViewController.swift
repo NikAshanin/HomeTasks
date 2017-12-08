@@ -27,8 +27,7 @@ final class GestureViewController: UIViewController {
         view.addGestureRecognizer(circleRecognizer)
     }
 
-    @objc func circleGesture() {
-
+    @objc private func circleGesture() {
             performSegue(withIdentifier: "Show Tab Bar", sender: self)
     }
 }

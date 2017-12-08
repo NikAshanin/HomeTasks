@@ -5,9 +5,9 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
 
     // MARK: - Private properties
 
-    private var midPoint: CGPoint
-    private var innerRadius: CGFloat
-    private var outerRadius: CGFloat
+    private var midPoint: CGPoint!
+    private var innerRadius: CGFloat!
+    private var outerRadius: CGFloat!
     private var currentPoint: CGPoint?
     private var previousPoint: CGPoint?
 
@@ -32,7 +32,7 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
         guard let nowPoint = currentPoint else {
             return nil
         }
-        return self.distanceBetween(pointA: self.midPoint, andPointB: nowPoint)
+        return distanceBetween(pointA: midPoint, andPointB: nowPoint)
     }
 
     var rotationValue: CGFloat = 0
@@ -40,10 +40,10 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
     // MARK: - Initialization
 
     init(midPoint: CGPoint, innerRadius: CGFloat, outerRadius: CGFloat, target: AnyObject?, action: Selector) {
+        super.init(target: target, action: action)
         self.midPoint = midPoint
         self.innerRadius = innerRadius
         self.outerRadius = outerRadius
-        super.init(target: target, action: action)
     }
 
     // MARK: - Public methods
@@ -77,11 +77,11 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
         currentPoint = firstTouch.location(in: view)
 
         if let distance = radius, distance < innerRadius {
-            return
+            self.state = .failed
         }
 
         if let distance = radius, distance > outerRadius {
-            return
+            self.state = .failed
         }
 
     }
