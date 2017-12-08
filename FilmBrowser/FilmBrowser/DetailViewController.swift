@@ -33,7 +33,4 @@ final class DetailViewController: UIViewController {
         title = film.title
         likesLabel.text = "\(film.likes)"
     }
-    deinit {
-        print("deinited")
-    }
 }

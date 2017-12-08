@@ -7,11 +7,11 @@ final class FilmsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadCell()
+        registerCell()
         title = "Films"
     }
 
-    private func loadCell() {
+    private func registerCell() {
         let cellNib = UINib(nibName: FilmTableViewCell.reuseId, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: FilmTableViewCell.reuseId)
     }
@@ -25,7 +25,7 @@ extension FilmsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.reuseId, for: indexPath)
             as? FilmTableViewCell
         guard let filmCell = cell else {
-            return UITableViewCell()
+            return FilmTableViewCell()
         }
         filmCell.configure(films[indexPath.row])
         return filmCell
