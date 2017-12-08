@@ -57,21 +57,18 @@ final class Networking {
         }
         for film in filmsURLs {
             guard let url = URL(string: film) else {
-                completion(nil)
                 return
             }
             group.enter()
             session.dataTask(with: url) { data, _, error in
                 guard let data = data else {
                     group.leave()
-                    completion(nil)
                     return
                 }
                 do {
                     filmsJSON = try (JSONSerialization.jsonObject(with: data, options: []) as? Networking.JSONDictionary)
                 } catch let error as NSError {
                     group.leave()
-                    completion(nil)
                     print(error.localizedDescription)
                 }
                 guard let filmsJSON = filmsJSON,
@@ -79,7 +76,6 @@ final class Networking {
                     let date = filmsJSON["release_date"] as? String,
                     let releaseDate = BaseDateFormatter.backendDate(from: date) else {
                         group.leave()
-                        completion(nil)
                         print("no title")
                         return
                 }

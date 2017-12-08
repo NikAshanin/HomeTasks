@@ -1,7 +1,7 @@
 import UIKit
 
 final class EmptyTableViewHelper {
-    static func installEmptyView(in tableView: UITableView, with message: String) -> UIView {
+    static func createEmptyView(in tableView: UITableView, with message: String) -> UIView {
         let width = tableView.bounds.size.width
         let height = tableView.bounds.size.height
 

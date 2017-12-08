@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: .zero)
-        emptyView = EmptyTableViewHelper.installEmptyView(in: tableView,
+        emptyView = EmptyTableViewHelper.createEmptyView(in: tableView,
                                                           with: message)
         tableView.backgroundView = emptyView
     }
