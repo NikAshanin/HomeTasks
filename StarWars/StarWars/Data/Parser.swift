@@ -9,7 +9,7 @@ struct Parser {
     }
 }
 
-extension Parser: Parsable {
+extension Parser: ParserProtocol {
 
     func parseArray<T: JSONInitializable>(_ data: Data) throws -> T {
         guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],

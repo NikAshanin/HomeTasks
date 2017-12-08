@@ -5,12 +5,11 @@ final class ViewController: UIViewController {
     // MARK: - Properties
 
     private let dataManager = DataManager()
-    private var films = [FilmsModel]()
 
     // MARK: - Outlets
 
     @IBOutlet weak private var filmsTableView: UITableView!
-    @IBOutlet weak private var filmYear: UILabel!
+    @IBOutlet weak private var filmYearLabel: UILabel!
     @IBOutlet weak private var searchTextField: UITextField!
 
     override func viewDidLoad() {
@@ -30,8 +29,8 @@ final class ViewController: UIViewController {
     }
 
     private func clearTableView() {
-        filmYear.text = nil
-        films.removeAll()
+        filmYearLabel.text = nil
+        dataManager.films.removeAll()
 
         updateUI()
     }
@@ -48,8 +47,8 @@ extension ViewController: UITextFieldDelegate {
 
         clearTableView()
 
-        dataManager.loadData(with: text) { films in
-            self.films = films
+        dataManager.loadFilmData(with: text) { films in
+            self.dataManager.films = films
             self.updateUI()
         }
 
@@ -62,18 +61,19 @@ extension ViewController: UITextFieldDelegate {
 extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return films.count
+        return dataManager.films.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let film = films[indexPath.row]
-        guard let cell = filmsTableView.dequeueReusableCell(withIdentifier: FilmTitleCell.reuseId) as? FilmTitleCell else {
-            return UITableViewCell()
+        let film = dataManager.films[indexPath.row]
+        if let cell = filmsTableView.dequeueReusableCell(withIdentifier: FilmTitleCell.reuseId) as? FilmTitleCell {
+
+            cell.configure(film)
+
+            return cell
         }
 
-        cell.configure(film)
-
-        return cell
+        return UITableViewCell()
     }
 }
 
@@ -82,6 +82,6 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        filmYear.text = DataFormatterConfigurator.getYear(from: films[indexPath.row].releaseDate)
+        filmYearLabel.text = DataFormatterConfigurator.getYear(from: dataManager.films[indexPath.row].releaseDate)
     }
 }

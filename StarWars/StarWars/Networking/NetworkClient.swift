@@ -15,11 +15,11 @@ final class NetworkClient {
 
     fileprivate func execute(request: URLRequest, completion: @escaping FetchCompletion) {
         networkQueue.async {
-            let task = self.session.dataTask(with: request, completionHandler: { (data, _, error) in
-                if let _error = error {
-                    completion(.failure(_error))
+            let task = self.session.dataTask(with: request, completionHandler: { (data, _, _) in
+                if let data = data {
+                    completion(data)
                 } else {
-                    completion(.success(data))
+                    assertionFailure()
                 }
             })
             task.resume()

@@ -4,7 +4,7 @@ protocol JSONInitializable {
     init?(json: [String: Any])
 }
 
-protocol Parsable {
+protocol ParserProtocol {
 
     func parseArray<T: JSONInitializable>(_ data: Data) throws -> T
 }
