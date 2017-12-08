@@ -23,7 +23,7 @@ final class DetailViewController: UIViewController {
 
     weak var delegate: LikeDelegate?
 
-    @IBAction func likeButtonTapped(_ sender: Any) {
+    @IBAction private func likeButtonTapped(_ sender: Any) {
         delegate?.plusOneLike(toFilm: film)
         likeButton.setTitle("\(film.likesCount) likes", for: .normal)
     }
