@@ -80,3 +80,4 @@ extension CalculatorViewController {
     power = 1
   }
 }
+
