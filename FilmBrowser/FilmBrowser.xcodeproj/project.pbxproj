@@ -15,6 +15,13 @@
 		7FC8055C1FC6EFF600C526B7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */; };
 		7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */; };
 		7FC805621FC6F0DE00C526B7 /* FilmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */; };
+		84ABCA011FDDCBC300E27D06 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABCA001FDDCBC300E27D06 /* Film.swift */; };
+		84ABCA031FDDEFEF00E27D06 /* FilmSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABCA021FDDEFEF00E27D06 /* FilmSource.swift */; };
+		84ABCA051FDE013400E27D06 /* poster_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84ABCA041FDE013400E27D06 /* poster_01.jpg */; };
+		84ABCA071FDE013B00E27D06 /* poster_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84ABCA061FDE013B00E27D06 /* poster_02.jpg */; };
+		84ABCA091FDE014200E27D06 /* poster_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84ABCA081FDE014200E27D06 /* poster_03.jpg */; };
+		84ABCA0B1FDE014A00E27D06 /* poster_04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84ABCA0A1FDE014A00E27D06 /* poster_04.jpg */; };
+		84ABCA0D1FDE015000E27D06 /* poster_05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84ABCA0C1FDE015000E27D06 /* poster_05.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +35,13 @@
 		7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmTableViewCell.swift; sourceTree = "<group>"; };
 		7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilmTableViewCell.xib; sourceTree = "<group>"; };
+		84ABCA001FDDCBC300E27D06 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		84ABCA021FDDEFEF00E27D06 /* FilmSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSource.swift; sourceTree = "<group>"; };
+		84ABCA041FDE013400E27D06 /* poster_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster_01.jpg; sourceTree = "<group>"; };
+		84ABCA061FDE013B00E27D06 /* poster_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster_02.jpg; sourceTree = "<group>"; };
+		84ABCA081FDE014200E27D06 /* poster_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster_03.jpg; sourceTree = "<group>"; };
+		84ABCA0A1FDE014A00E27D06 /* poster_04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster_04.jpg; sourceTree = "<group>"; };
+		84ABCA0C1FDE015000E27D06 /* poster_05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster_05.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +74,14 @@
 		7FC805461FC6EF8100C526B7 /* FilmBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				84ABC9FD1FDDA57200E27D06 /* Models */,
+				84ABC9FB1FDDA54400E27D06 /* Controllers */,
+				84ABCA101FDE3DAD00E27D06 /* Cells */,
+				84ABC9FA1FDDA53600E27D06 /* Images */,
 				7FC805531FC6EF8100C526B7 /* Info.plist */,
 				7FC805631FC6F0E400C526B7 /* Resources */,
 				7FC805471FC6EF8100C526B7 /* AppDelegate.swift */,
-				7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */,
-				7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */,
 				7FC8054B1FC6EF8100C526B7 /* Main.storyboard */,
-				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
-				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
 			);
 			path = FilmBrowser;
 			sourceTree = "<group>";
@@ -79,6 +93,45 @@
 				7FC805501FC6EF8100C526B7 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		84ABC9FA1FDDA53600E27D06 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				84ABCA041FDE013400E27D06 /* poster_01.jpg */,
+				84ABCA061FDE013B00E27D06 /* poster_02.jpg */,
+				84ABCA081FDE014200E27D06 /* poster_03.jpg */,
+				84ABCA0A1FDE014A00E27D06 /* poster_04.jpg */,
+				84ABCA0C1FDE015000E27D06 /* poster_05.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		84ABC9FB1FDDA54400E27D06 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */,
+				7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		84ABC9FD1FDDA57200E27D06 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84ABCA001FDDCBC300E27D06 /* Film.swift */,
+				84ABCA021FDDEFEF00E27D06 /* FilmSource.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		84ABCA101FDE3DAD00E27D06 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
+				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +195,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84ABCA0D1FDE015000E27D06 /* poster_05.jpg in Resources */,
+				84ABCA071FDE013B00E27D06 /* poster_02.jpg in Resources */,
+				84ABCA051FDE013400E27D06 /* poster_01.jpg in Resources */,
 				7FC805521FC6EF8100C526B7 /* LaunchScreen.storyboard in Resources */,
+				84ABCA091FDE014200E27D06 /* poster_03.jpg in Resources */,
+				84ABCA0B1FDE014A00E27D06 /* poster_04.jpg in Resources */,
 				7FC805621FC6F0DE00C526B7 /* FilmTableViewCell.xib in Resources */,
 				7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */,
 				7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */,
@@ -188,6 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FC8055A1FC6EFE000C526B7 /* FilmsViewController.swift in Sources */,
+				84ABCA031FDDEFEF00E27D06 /* FilmSource.swift in Sources */,
+				84ABCA011FDDCBC300E27D06 /* Film.swift in Sources */,
 				7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */,
 				7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */,
 				7FC8055C1FC6EFF600C526B7 /* DetailViewController.swift in Sources */,
