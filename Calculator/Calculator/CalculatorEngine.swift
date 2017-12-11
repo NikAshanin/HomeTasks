@@ -1,17 +1,29 @@
 import Foundation
 
-func factorial(_ number: Double) -> Double {
-    return number == 0 ? 1 : number * factorial(number-1)
+//PendingBinaryOperation структура отложенной операции
+struct PendingBinaryOperation {
+    let function: (Double, Double) -> Double
+    let firstOperand: Double
+    let validator: ((Double, Double) -> String?)?
+
+    //Функция perform выполениния бинарной операции
+    func perform(with secondOperand: Double) -> Double {
+        return function(firstOperand, secondOperand)
+    }
+
+    //Функция validate проверяет корректность вычислений
+    func validate(with secondOperand: Double) -> String? {
+        guard let validator = validator else {
+            return nil
+        }
+        return validator(firstOperand, secondOperand)
+    }
 }
 
-func radiansToDegrees(_ number: Double) -> Double {
-    return number * .pi / 180
-}
-
-struct CalculatorEngine {
+final class CalculatorEngine {
     // MARK: properties
     private var accumulator: Double?
-    private var isPending: Bool = false
+    private var isPending = false
     private var error: String?
     private var inDegrees = true
     private var memory: [(operand: Double?, operation: String?)] = []
@@ -57,7 +69,7 @@ struct CalculatorEngine {
             "tanh⁻¹": Operation.geometricOperation(atanh, nil),
             "±": Operation.unaryOperation({ -$0 }, nil),
             "%": Operation.unaryOperation({ $0 / 100 }, nil),
-            "x!": Operation.unaryOperation(factorial, { $0 < 0 ? "Ошибка" : nil }),
+            "x!": Operation.unaryOperation(Double.factorial, { $0 < 0 ? "Ошибка" : nil }),
             "х²": Operation.unaryOperation({ pow($0, 2) }, nil),
             "x³": Operation.unaryOperation({ pow($0, 3) }, nil),
             "2ˣ": Operation.unaryOperation({ pow(2, $0) }, nil),
@@ -79,33 +91,12 @@ struct CalculatorEngine {
             "=": Operation.equals
     ]
 
-    //PendingBinaryOperation структура отложенной операции
-    struct PendingBinaryOperation {
-        let function: (Double, Double) -> Double
-        let firstOperand: Double
-        let validator: ((Double, Double) -> String?)?
-
-        //Функция perform выполениния бинарной операции
-        func perform(with secondOperand: Double) -> Double {
-            return function(firstOperand, secondOperand)
-        }
-
-        //Функция validate проверяет корректность вычислений
-        func validate(with secondOperand: Double) -> String? {
-            guard let validator = validator else {
-                return nil
-            }
-            return validator(firstOperand, secondOperand)
-        }
-    }
-
-    mutating func setOperand(_ operand: Double) {
+    func setOperand(_ operand: Double) {
         accumulator = operand
         memory.append((operand: accumulator, operation: nil))
-        print("Set operand: \(memory)")
     }
 
-    mutating func performPendingBinaryOperation() {
+    func performPendingBinaryOperation() {
         guard let number = accumulator else {
             return
         }
@@ -116,7 +107,7 @@ struct CalculatorEngine {
         }
     }
 
-    mutating func performOperation(_ symbol: String) {
+    func performOperation(_ symbol: String) {
         if let operation = operations[symbol], var number = accumulator {
             switch operation {
             case .constant(let value):
@@ -133,7 +124,7 @@ struct CalculatorEngine {
             case .geometricOperation(let function, let validator):
                 error = validator?(number)
                 if inDegrees {
-                    number = radiansToDegrees(number)
+                    number = Double.radiansToDegrees(number)
                 }
                 accumulator = function(number)
                 memory[memory.count - 1].operation = symbol
@@ -155,11 +146,11 @@ struct CalculatorEngine {
         }
     }
 
-    mutating func changeMeasure(_ buttomIsRad: Bool) {
+    func changeMeasure(_ buttomIsRad: Bool) {
         inDegrees = buttomIsRad
     }
 
-    mutating func clear() {
+    func clear() {
         accumulator = 0
         pendingBinaryOperation = nil
         memory.removeAll()
@@ -168,7 +159,7 @@ struct CalculatorEngine {
         operationIsSelected = false
     }
 
-    mutating func undo() -> (Double?, String?) {
+    func undo() -> (Double?, String?) {
         if !memory.isEmpty && !haveNotElementsForUndo {
             if undoIndex == nil {
                 undoIndex = 0
@@ -193,7 +184,7 @@ struct CalculatorEngine {
         }
     }
 
-    mutating func redo() -> (Double?, String?) {
+    func redo() -> (Double?, String?) {
         if !memory.isEmpty {
             if undoIndex == nil {
                 return (nil, nil)
@@ -216,12 +207,12 @@ struct CalculatorEngine {
     }
 }
 
-let formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.maximumFractionDigits = 15
-    formatter.notANumberSymbol = "Ошибка"
-    formatter.groupingSeparator = " "
-    formatter.locale = Locale.current
-    return formatter
-} ()
+extension Double {
+    static func factorial(_ number: Double) -> Double {
+        return number == 0 ? 1 : number * factorial(number-1)
+    }
+
+    static func radiansToDegrees(_ number: Double) -> Double {
+        return number * .pi / 180
+    }
+}

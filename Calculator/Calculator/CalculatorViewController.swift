@@ -6,7 +6,7 @@ final class CalculatorViewController: UIViewController {
     private var returnedStack: (operand: Double?, operation: String?)
     private var buttonPressed = false
     let decimalSeparator = formatter.decimalSeparator ?? "."
-    var userIsInTheMiddleOfTyping = false
+    var isTyping = false
     var doubleDisplayValue: Double? {
         get {
             if let text = display.text, let value = formatter.number(from: text) as? Double {
@@ -58,7 +58,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak private var logTenButton: RoundButton!
 
     // MARK: change buttoms signs
-    @IBAction func pressSecondButtons(_ sender: RoundButton) {
+    @IBAction private func pressSecondButtons(_ sender: RoundButton) {
         if sinButton.currentTitle == "sin" {
             sender.setTitleColor(UIColor.black, for: UIControlState())
             sender.layer.backgroundColor = #colorLiteral(red: 0.4083676934, green: 0.4083676934, blue: 0.4083676934, alpha: 1).cgColor
@@ -89,7 +89,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     // MARK: touch Rad button
-    @IBAction func touchRadButton(_ sender: RoundButton) {
+    @IBAction private func touchRadButton(_ sender: RoundButton) {
         if radDisplay.text == "" {
             radDisplay.text = " Rad"
             engine.changeMeasure(false)
@@ -102,11 +102,11 @@ final class CalculatorViewController: UIViewController {
     }
 
     // MARK: touch digit button
-    @IBAction func touchDigit(_ sender: RoundButton) {
+    @IBAction private func touchDigit(_ sender: RoundButton) {
         guard let digit = sender.currentTitle, let textCurrentlyInDisplay = display.text else {
             return
         }
-        if userIsInTheMiddleOfTyping {
+        if isTyping {
             if (digit != decimalSeparator) || !(textCurrentlyInDisplay.contains(decimalSeparator)) {
                 display.text = textCurrentlyInDisplay + digit
             }
@@ -117,17 +117,17 @@ final class CalculatorViewController: UIViewController {
                 if digit == "." {
                     display.text = "0."
                 }
-                userIsInTheMiddleOfTyping = true
+                isTyping = true
             }
         }
     }
 
     // MARK: touch arithmetic button
-    @IBAction func touchMathAction(_ sender: RoundButton) {
+    @IBAction private func touchMathAction(_ sender: RoundButton) {
         if let value = doubleDisplayValue {
             engine.setOperand(value)
-            if userIsInTheMiddleOfTyping {
-                userIsInTheMiddleOfTyping = false
+            if isTyping {
+                isTyping = false
             }
         }
         if let mathExpression = sender.currentTitle {
@@ -145,7 +145,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     // MARK: touch undo button
-    @IBAction func touchUndo(_ sender: RoundButton) {
+    @IBAction private func touchUndo(_ sender: RoundButton) {
         if buttonPressed {
             if let operation = returnedStack.operation {
                 changeButtonColor(operation, false)
@@ -159,11 +159,11 @@ final class CalculatorViewController: UIViewController {
             changeButtonColor(operation, true)
         }
         doubleDisplayValue = returnedStack.operand
-        userIsInTheMiddleOfTyping = false
+        isTyping = false
     }
 
     // MARK: touch redo button
-    @IBAction func touchRedo(_ sender: RoundButton) {
+    @IBAction private func touchRedo(_ sender: RoundButton) {
         if buttonPressed {
             if let operation = returnedStack.operation {
                 changeButtonColor(operation, false)
@@ -178,12 +178,12 @@ final class CalculatorViewController: UIViewController {
                 doubleDisplayValue = operand
                 engine.setOperand(operand)
             }
-            userIsInTheMiddleOfTyping = false
+            isTyping = false
         }
     }
 
     // MARK: touch AC button
-    @IBAction func allClear(_ sender: RoundButton) {
+    @IBAction private func allClear(_ sender: RoundButton) {
         if clearButton.currentTitle == "C" {
             clearSymbol()
             clearButton.setTitle("AC", for: UIControlState())
@@ -197,7 +197,7 @@ final class CalculatorViewController: UIViewController {
             engine.clear()
             displayResult = (nil, nil)
             returnedStack = (nil, nil)
-            userIsInTheMiddleOfTyping = false
+            isTyping = false
         }
     }
 
@@ -206,7 +206,7 @@ final class CalculatorViewController: UIViewController {
         guard display.text != nil else {
             return
         }
-        userIsInTheMiddleOfTyping = false
+        isTyping = false
         displayResult = (nil, nil)
     }
 
