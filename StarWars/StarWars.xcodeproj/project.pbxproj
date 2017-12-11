@@ -12,6 +12,11 @@
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		7813C9F91FDEFFFD009C3CEE /* StarwarsInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813C9F41FDEFFFC009C3CEE /* StarwarsInput.swift */; };
+		7813C9FA1FDEFFFD009C3CEE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813C9F51FDEFFFC009C3CEE /* NetworkService.swift */; };
+		7813C9FB1FDEFFFD009C3CEE /* StarwarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813C9F61FDEFFFC009C3CEE /* StarwarsPresenter.swift */; };
+		7813C9FC1FDEFFFD009C3CEE /* StarwarsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813C9F71FDEFFFD009C3CEE /* StarwarsDelegate.swift */; };
+		7813C9FD1FDEFFFD009C3CEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813C9F81FDEFFFD009C3CEE /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7813C9F41FDEFFFC009C3CEE /* StarwarsInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarwarsInput.swift; sourceTree = "<group>"; };
+		7813C9F51FDEFFFC009C3CEE /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		7813C9F61FDEFFFC009C3CEE /* StarwarsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarwarsPresenter.swift; sourceTree = "<group>"; };
+		7813C9F71FDEFFFD009C3CEE /* StarwarsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarwarsDelegate.swift; sourceTree = "<group>"; };
+		7813C9F81FDEFFFD009C3CEE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +64,59 @@
 		11396C641FBDB6D2008C570F /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
+				7813C9F81FDEFFFD009C3CEE /* Constants.swift */,
+				7813C9F51FDEFFFC009C3CEE /* NetworkService.swift */,
+				7813C9FE1FDF003C009C3CEE /* Module */,
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
-				11396C671FBDB6D2008C570F /* ViewController.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
 			);
 			path = StarWars;
+			sourceTree = "<group>";
+		};
+		7813C9FE1FDF003C009C3CEE /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				7813C9FF1FDF0045009C3CEE /* Starwars */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		7813C9FF1FDF0045009C3CEE /* Starwars */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA021FDF0069009C3CEE /* Contract */,
+				7813CA031FDF0074009C3CEE /* Presenter */,
+				7813CA001FDF0054009C3CEE /* View */,
+			);
+			path = Starwars;
+			sourceTree = "<group>";
+		};
+		7813CA001FDF0054009C3CEE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11396C671FBDB6D2008C570F /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7813CA021FDF0069009C3CEE /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				7813C9F41FDEFFFC009C3CEE /* StarwarsInput.swift */,
+				7813C9F71FDEFFFD009C3CEE /* StarwarsDelegate.swift */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		7813CA031FDF0074009C3CEE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7813C9F61FDEFFFC009C3CEE /* StarwarsPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +205,7 @@
 		};
 		11396C781FBDB916008C570F /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -170,6 +225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				7813C9FB1FDEFFFD009C3CEE /* StarwarsPresenter.swift in Sources */,
+				7813C9F91FDEFFFD009C3CEE /* StarwarsInput.swift in Sources */,
+				7813C9FC1FDEFFFD009C3CEE /* StarwarsDelegate.swift in Sources */,
+				7813C9FD1FDEFFFD009C3CEE /* Constants.swift in Sources */,
+				7813C9FA1FDEFFFD009C3CEE /* NetworkService.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
