@@ -27,20 +27,20 @@
                             <constraint firstAttribute="width" constant="120" id="mf5-E2-lhL"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Star Wars Episode II" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvc-Vx-1ng">
-                        <rect key="frame" x="152" y="16" width="271" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvc-Vx-1ng">
+                        <rect key="frame" x="152" y="16" width="271" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This movie is about star wars and another epic advantures of alot of heroes with alot of episodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nub-E3-Ttk">
-                        <rect key="frame" x="152" y="96.5" width="271" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nub-E3-Ttk">
+                        <rect key="frame" x="152" y="107" width="271" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMc-Aw-8lR">
-                        <rect key="frame" x="394.5" y="176.5" width="28.5" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMc-Aw-8lR">
+                        <rect key="frame" x="423" y="176.5" width="0.0" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="dzb-Pz-Wng"/>
                         </constraints>
@@ -48,8 +48,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-xL-e04">
-                        <rect key="frame" x="370" y="177" width="21" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-xL-e04">
+                        <rect key="frame" x="398.5" y="177" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="XG4-NH-6qA"/>
                         </constraints>
@@ -75,6 +75,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="descriptionLabel" destination="nub-E3-Ttk" id="835-Wb-Mgl"/>
+                <outlet property="likeImage" destination="XFL-xL-e04" id="wWp-gu-dVD"/>
                 <outlet property="likesLabel" destination="yMc-Aw-8lR" id="gR2-PT-2tz"/>
                 <outlet property="posterImageView" destination="yFX-VQ-lYD" id="ykT-U4-2tr"/>
                 <outlet property="titleLabel" destination="dvc-Vx-1ng" id="dPd-U9-9Ac"/>
@@ -82,7 +83,4 @@
             <point key="canvasLocation" x="-122" y="-128"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="likeRed.png" width="200" height="200"/>
-    </resources>
 </document>

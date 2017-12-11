@@ -2,14 +2,11 @@ import UIKit
 
 final class FilmTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var likesLabel: UILabel!
+    @IBOutlet private weak var likeImage: UIImageView!
 
     var film: Film? {
         didSet {
@@ -25,5 +22,6 @@ final class FilmTableViewCell: UITableViewCell {
         titleLabel?.text = filmData.title
         descriptionLabel?.text = filmData.description
         likesLabel?.text = String(describing: filmData.likes)
+        likeImage.image = #imageLiteral(resourceName: "likeRed.png")
     }
 }
