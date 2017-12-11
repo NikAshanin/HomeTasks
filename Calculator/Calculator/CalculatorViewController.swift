@@ -1,7 +1,7 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    private var userInTheMiddleOfTyping = false
+    private var isTyping = false
     private var dotAlreadySet = false
     private var secondTurnOn = false
     private var brain = CalculatorBrain()
@@ -32,20 +32,21 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private var clearAC: RoundButton!
     @IBOutlet private var display: UILabel!
     @IBOutlet private var radDisplay: UILabel!
-    @IBAction func dotSet(_ sender: UIButton) {
+    @IBAction private func dotSet(_ sender: UIButton) {
         let dot = "."
         let textCurrentlyInDisplay = display.text ?? "0"
-        if !dotAlreadySet &&  floor(Double(display.text ?? "0") ?? 0) == Double(display.text ?? "0") && display.text != nil {
+        if !dotAlreadySet &&  floor(Double(display.text ?? "0") ?? 0) == Double(display.text ?? "0")
+            && display.text != nil {
             display.text = textCurrentlyInDisplay + dot
             dotAlreadySet = true
         }
     }
-    @IBAction func touchDigit(_ sender: UIButton) {
+    @IBAction private func touchDigit(_ sender: UIButton) {
         guard let digit = sender.currentTitle else {
             return
         }
         brain.buttonPressed = false
-        if userInTheMiddleOfTyping {
+        if isTyping {
             guard let textCurrentlyInDisplay = display.text else {
                 return
             }
@@ -57,10 +58,10 @@ final class CalculatorViewController: UIViewController {
             if display.text != "0" {
                 clearAC.setTitle("C", for: UIControlState.normal)
             }
-            userInTheMiddleOfTyping = true
+            isTyping = true
         }
     }
-    @IBAction func makeFuncChange(_ sender: Any) {
+    @IBAction private func makeFuncChange(_ sender: Any) {
         if !secondTurnOn {
             sinButton.setTitle("sin⁻¹", for: UIControlState.normal)
             cosButton.setTitle("cosh⁻¹", for: UIControlState.normal)
@@ -87,13 +88,13 @@ final class CalculatorViewController: UIViewController {
             secondTurnOn = false
         }
     }
-    @IBAction func undoButton(_ sender: UIButton) {
+    @IBAction private func undoButton(_ sender: UIButton) {
         brain.doUndoFunction()
         if let result = brain.result {
             displayValue = result
             dotAlreadySet = false
         }
-        userInTheMiddleOfTyping = false
+        isTyping = false
         if brain.buttonPressed {
             for i in 0...changeColorToGray.count-1 where changeColorToGray[i].titleLabel?.text ==
                 brain.memoryArray[brain.memoryArrayLength].1 {
@@ -108,13 +109,13 @@ final class CalculatorViewController: UIViewController {
             changeButtonColorToDefault()
         }
     }
-    @IBAction func redoButton(_ sender: UIButton) {
+    @IBAction private func redoButton(_ sender: UIButton) {
         brain.doRedoFunction()
         if let result = brain.result {
             displayValue = result
             dotAlreadySet = false
         }
-        userInTheMiddleOfTyping = false
+        isTyping = false
         if brain.buttonPressed {
             for i in 0...changeColorToGray.count-1 where changeColorToGray[i].titleLabel?.text ==
                 brain.memoryArray[brain.memoryArrayLength].1 {
@@ -129,7 +130,7 @@ final class CalculatorViewController: UIViewController {
             changeButtonColorToDefault()
         }
     }
-    @IBAction func touchRadButton(_ sender: RoundButton) {
+    @IBAction private func touchRadButton(_ sender: RoundButton) {
         if sender.currentTitle == "Rad" {
             brain.inDeg = false
             sender.setTitle("Deg", for: UIControlState())
@@ -140,7 +141,7 @@ final class CalculatorViewController: UIViewController {
             radDisplay.text = "Deg"
         }
     }
-    @IBAction func performOPeration(_ sender: UIButton) {
+    @IBAction private func performOPeration(_ sender: UIButton) {
         for i in 0...changeColorToWhite.count-1 where changeColorToWhite[i].titleLabel?.text == sender.currentTitle {
                 sender.setTitleColor(#colorLiteral(red: 1, green: 0.5825584531, blue: 0, alpha: 1), for: UIControlState.normal); sender.backgroundColor =  UIColor.white
                 brain.buttonPressed = true
@@ -149,10 +150,10 @@ final class CalculatorViewController: UIViewController {
                 sender.backgroundColor =   #colorLiteral(red: 0.6391444206, green: 0.6392566562, blue: 0.6391373277, alpha: 1)
                 brain.buttonPressed = true
             }
-        if userInTheMiddleOfTyping {
+        if isTyping {
             brain.buttonPressed = false
             brain.setOperand(displayValue)
-            userInTheMiddleOfTyping = false
+            isTyping = false
         }
         if  let mathematicalSymbol = sender.currentTitle {
             brain.performOperation(mathematicalSymbol)

@@ -1,23 +1,26 @@
 import Foundation
 
-func factorialFunc(_ someValue: Int) -> Int {
-    var facto = 1
-    if someValue < 2 {
+extension Int {
+    func factorialFunc() -> Int {
+        var facto = 1
+        if self < 2 {
+            return self
+        }
+        if self < 20 {
+            for i in 2...self {
+                facto *= i
+            }
+        }
         return facto
     }
-    if someValue < 20 {
-    for i in 2...someValue {
-        facto *= i
-        }
+}
+extension Double {
+    func degreesToRadians() -> Double {
+        return self * .pi / 180
     }
-    return facto
 }
 
-func degreesToRadians(_ number: Double) -> Double {
-    return number * .pi / 180
-}
-
-struct CalculatorBrain {
+final class CalculatorBrain {
     private var pendingBinaryOperation: PendingBinaryOperation?
     private var accumulator: Double? = 0.0
     private var resultSum: Double?
@@ -26,7 +29,7 @@ struct CalculatorBrain {
     var memoryArrayLength = 0
     var buttonPressed = false
     var result: Double? {
-            return accumulator
+        return accumulator
     }
     private var operations =
         [
@@ -49,7 +52,7 @@ struct CalculatorBrain {
             "tanh⁻¹": Operation.geomOperation(atanh),
             "±": Operation.changeOperation ({ -$0 }),
             "Rand": Operation.constant (Double(arc4random())),
-            "x!": Operation.factorial(factorialFunc),
+            "x!": Operation.factorial({ $0.factorialFunc() }),
             "×": Operation.binaryOperation ({ $0 * $1 }),
             "÷": Operation.binaryOperation ({ $0 / $1 }),
             "+": Operation.binaryOperation ({ $0 + $1 }),
@@ -80,7 +83,7 @@ struct CalculatorBrain {
         case factorial ((Int) -> Int)
         case clearAc
     }
-    mutating func performOperation(_ symbol: String) {
+     func performOperation(_ symbol: String) {
         if let operation = operations[symbol] {
             switch operation {
             case .constant(let value):
@@ -94,7 +97,7 @@ struct CalculatorBrain {
             case .geomOperation(let function):
                 if buttonPressed == false {
                     if inDeg {
-                        accumulator = degreesToRadians(accumulator ?? 0)
+                        accumulator = accumulator?.degreesToRadians()
                     }
                         accumulator = function (accumulator ?? 0)
                         performPendingBinaryOperation()
@@ -137,7 +140,7 @@ struct CalculatorBrain {
             return function (firstOperand, secondOperand)
         }
     }
-    private mutating func  performPendingBinaryOperation() {
+    private  func  performPendingBinaryOperation() {
         if pendingBinaryOperation != nil {
             if let number = accumulator {
                 accumulator = pendingBinaryOperation?.perform(with: number)
@@ -146,7 +149,7 @@ struct CalculatorBrain {
             buttonPressed = false
         }
     }
-    mutating func doUndoFunction() {
+    func doUndoFunction() {
         print(memoryArray)
         print(buttonPressed)
         if memoryArrayLength >= 1 {
@@ -174,8 +177,7 @@ struct CalculatorBrain {
             buttonPressed = true
             }
         }
-
-     mutating func doRedoFunction() {
+    func doRedoFunction() {
         if memoryArrayLength < memoryArray.count - 1 {
             resultSum = nil
             if buttonPressed {
@@ -192,22 +194,22 @@ struct CalculatorBrain {
             }
         }
     }
-    mutating func clear() {
+    func clear() {
         accumulator = 0
         resultSum = nil
         memoryArray = [(0, "")]
         buttonPressed = false
         memoryArrayLength = 0
     }
-    mutating func setOperand (_ operand: Double) {
+    func setOperand (_ operand: Double) {
         accumulator = operand
     }
-    mutating func memoryMagic (symbol: String) {
+    func memoryMagic (symbol: String) {
         memoryArray.append((accumulator ?? 0, symbol))
         memoryArrayLength = memoryArray.count - 1
     }
 
-    mutating func checkPressedButton() {
+    func checkPressedButton() {
         buttonPressed = false
     }
 }
