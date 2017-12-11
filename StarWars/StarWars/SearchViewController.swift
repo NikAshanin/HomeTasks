@@ -11,18 +11,12 @@ final class SearchViewController: UIViewController {
 fileprivate extension SearchViewController {
     func updateFilmsList(characterName: String) {
         networkService.getFilms(characterName: characterName) { [weak self] films in
-//             ИМХО через if тут было бы лучше сделать проверку
-            guard !films.isEmpty else {
-                DispatchQueue.main.sync {
-                    self?.releaseDateLabel.isUserInteractionEnabled = true
-                }
-                return
+            if !films.isEmpty {
+                self?.films = films
             }
-            self?.films = films
-
             DispatchQueue.main.sync {
                 self?.filmsTableView.reloadData()
-                self?.releaseDateLabel.isUserInteractionEnabled = true
+                self?.searchTextField.isUserInteractionEnabled = true
             }
         }
     }
@@ -36,7 +30,6 @@ extension SearchViewController: UITextFieldDelegate {
                     return false
             }
             searchTextField.isUserInteractionEnabled = false
-            releaseDateLabel.text = ""
             searchTextField.textColor = UIColor.ok
             films.removeAll()
             filmsTableView.reloadData()
