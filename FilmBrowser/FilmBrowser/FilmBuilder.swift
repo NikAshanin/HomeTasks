@@ -1,7 +1,7 @@
 import Foundation
 
 final class FilmBuilder {
-  static func naviGenerate() -> ArrayFilms {
+  static func generateFilms() -> ArrayFilms {
     let array = ArrayFilms()
     array.pushFilm(name: "Лига справедливости", description: "Брюс Уэйн, вдохновленный" +
       "самопожертвованием Супермена," +
