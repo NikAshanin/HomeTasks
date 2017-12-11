@@ -1,6 +1,6 @@
 final class Film {
-  var date = ""
-  var title = ""
+  var date: String
+  var title: String
 
   init(_ date: String, _ title: String) {
     self.date = date
