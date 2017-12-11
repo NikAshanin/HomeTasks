@@ -1,7 +1,6 @@
 import UIKit
 
-final class FilmsViewController: UIViewController, UICollectionViewDataSource,
-UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+final class FilmsViewController: UIViewController {
 
     @IBOutlet private weak var filmsCollectionView: UICollectionView!
     private var films = [Film]()
@@ -11,7 +10,32 @@ UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
         prepareCollectionView()
         getFilms()
     }
+}
 
+extension FilmsViewController {
+    fileprivate func prepareCollectionView () {
+        filmsCollectionView.register(UINib(nibName: "FilmTableViewCell",
+                                           bundle: Bundle.main), forCellWithReuseIdentifier: "cell")
+    }
+
+    func getFilms() {
+        films = FilmsGenerator.generateFilms()
+        filmsCollectionView.reloadData()
+    }
+}
+
+extension FilmsViewController: LikeCountChanged {
+    func likeButtonPressed(_ film: Film) {
+        guard let indexOfFilm = films.index(where: { $0 === film }) else {
+            return
+        }
+        let indexPath = IndexPath(item: indexOfFilm, section: 0)
+        filmsCollectionView.reloadItems(at: [indexPath])
+    }
+}
+
+extension FilmsViewController: UICollectionViewDataSource,
+UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return films.count
     }
@@ -32,28 +56,6 @@ UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
         }
         detailViewController.film = films[indexPath.item]
         detailViewController.delegate = self
-        self.navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
-extension FilmsViewController {
-    fileprivate func prepareCollectionView () {
-        filmsCollectionView.register(UINib(nibName: "FilmTableViewCell",
-                                           bundle: Bundle.main), forCellWithReuseIdentifier: "cell")
-    }
-
-    func getFilms() {
-        films = FilmsGenerator.generateFilms()
-        self.filmsCollectionView.reloadData()
-    }
-}
-
-extension FilmsViewController: LikeCountChanged {
-    func likeButtonPressed(_ film: Film) {
-        guard let indexOfFilm = films.index(where: { $0 === film }) else {
-            return
-        }
-        let indexPath = IndexPath(item: indexOfFilm, section: 0)
-        filmsCollectionView.reloadItems(at: [indexPath])
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -7,7 +7,7 @@ final class Film {
     var likesCount: Int
     var liked: Bool
 
-    required init(name: String, image: UIImage, description: String, likesCount: Int, liked: Bool) {
+    init(name: String, image: UIImage, description: String, likesCount: Int, liked: Bool) {
         self.name = name
         self.image = image
         self.description = description
@@ -15,14 +15,14 @@ final class Film {
         self.liked = liked
     }
 
-    public func addLike() {
+    func addLike() {
         if !liked {
             likesCount+=1
             liked = true
         }
     }
 
-    public func removeLike() {
+    func removeLike() {
         if liked {
             likesCount-=1
             liked = false
