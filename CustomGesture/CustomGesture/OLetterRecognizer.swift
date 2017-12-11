@@ -3,10 +3,10 @@ import UIKit.UIGestureRecognizerSubclass
 
 final class OLetterRecognizer: UIGestureRecognizer {
     // MARK: properties
-    let strokePrecision: CGFloat = 5
-    var strokePart: UInt = 0
-    var firstTap: CGPoint?
-    //Радиус и цент определены руками
+    private let strokePrecision: CGFloat = 5
+    private var strokePart: UInt = 0
+    private var firstTap: CGPoint?
+    //Радиус и центр определены руками
     private let circleRadius: CGFloat = 150
     private let circleCenter: CGPoint = CGPoint(x: 187.5, y: 323.5)
 
@@ -62,8 +62,10 @@ final class OLetterRecognizer: UIGestureRecognizer {
             print("O recognized!")
         }
     }
+}
 
-    private func isPointOnCircle(_ currentPoint: CGPoint) -> Bool {
+extension OLetterRecognizer {
+    func isPointOnCircle(_ currentPoint: CGPoint) -> Bool {
         return pow(currentPoint.x - circleCenter.x, 2) + pow(currentPoint.y - currentPoint.y, 2) == pow(circleRadius, 2)
     }
 }

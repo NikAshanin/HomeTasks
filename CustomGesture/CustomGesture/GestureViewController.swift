@@ -9,7 +9,7 @@ final class GestureViewController: UIViewController {
 
     @objc func oRecognized() {
         if let tabBarController = storyboard?.instantiateViewController(withIdentifier: "TabBarController") {
-            self.navigationController?.pushViewController(tabBarController, animated: true)
+            navigationController?.pushViewController(tabBarController, animated: true)
         }
     }
 }
