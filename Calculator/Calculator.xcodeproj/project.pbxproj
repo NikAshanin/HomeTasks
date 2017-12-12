@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		673631F41FDF1A4800F1E7E4 /* CalculateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673631F31FDF1A4800F1E7E4 /* CalculateService.swift */; };
 		673975CA1FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975C91FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift */; };
 		673975CC1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975CB1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift */; };
 		673975CE1FC6E70A00872C80 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975CD1FC6E70A00872C80 /* Stack.swift */; };
@@ -18,13 +19,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		673631F31FDF1A4800F1E7E4 /* CalculateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = CalculateService.swift; path = calculator/CalculateService.swift; sourceTree = SOURCE_ROOT; tabWidth = 4; };
 		673975C91FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtensionCVC+Calculate.swift"; sourceTree = "<group>"; };
 		673975CB1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtensionCVC+MathFunc.swift"; sourceTree = "<group>"; };
 		673975CD1FC6E70A00872C80 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		673975CF1FC6E71700872C80 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		7FF582581FBDA7E90009B9BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FF5825B1FBDA7E90009B9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FF5825D1FBDA7E90009B9BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				673975CD1FC6E70A00872C80 /* Stack.swift */,
 				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
 				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
+				673631F31FDF1A4800F1E7E4 /* CalculateService.swift */,
 				673975C91FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift */,
 				673975CB1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift */,
 				673975CF1FC6E71700872C80 /* Main.storyboard */,
@@ -179,6 +182,7 @@
 			files = (
 				673975CC1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift in Sources */,
 				673975CE1FC6E70A00872C80 /* Stack.swift in Sources */,
+				673631F41FDF1A4800F1E7E4 /* CalculateService.swift in Sources */,
 				673975CA1FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
