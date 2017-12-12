@@ -1,13 +1,13 @@
 import Foundation
 
 struct Film {
-  var name: String = ""
-  var description: String = ""
-  var countLikes: Int = 0
-  var urlImage: String = ""
+  var name = ""
+  var description = ""
+  var countLikes = 0
+  var urlImage = ""
 }
 
-final class ArrayFilms {
+final class Films {
   private var films: [Film] = []
 
   func pushFilm( name: String, description: String, urlImage: String) {

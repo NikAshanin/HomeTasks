@@ -4,7 +4,7 @@ protocol LikeChangeProtocol: class {
     func likeChange(_ index: Int)
 }
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
 
   @IBOutlet private weak var imageFilm: UIImageView!
   @IBOutlet private weak var button: UIButton!
@@ -12,13 +12,13 @@ class DetailViewController: UIViewController {
   @IBOutlet private weak var countLikesLabel: UILabel!
   @IBOutlet private weak var nameOfFilmLabel: UILabel!
 
-  weak var delegate: LikeChangeProtocol?
+  weak var likeChangeDelegate: LikeChangeProtocol?
   var film = Film()
   var currentIndex = Int()
 
-  @IBAction func submit(_ sender: Any) {
+  @IBAction private func submit(_ sender: Any) {
     film.countLikes += 1
-    delegate?.likeChange(currentIndex)
+    likeChangeDelegate?.likeChange(currentIndex)
     countLikesLabel.text = "Likes :\(String(film.countLikes))"
   }
 

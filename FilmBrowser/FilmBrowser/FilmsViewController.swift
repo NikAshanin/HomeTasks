@@ -1,6 +1,6 @@
 import UIKit
 
-class InfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LikeChangeProtocol {
+final class InfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LikeChangeProtocol {
 
   private let films = FilmBuilder.naiveGenerate()
 
@@ -9,8 +9,8 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.tableView.estimatedRowHeight = 100
-    self.tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 100
+    tableView.rowHeight = UITableViewAutomaticDimension
   }
 
   func likeChange(_ index: Int) {
@@ -25,7 +25,7 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? TableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? FilmViewCell
     let film = films.get(index: indexPath.row)
     cell?.setImage(image: UIImage(named: film.urlImage))
     cell?.setFilmTitle(title: film.name)
@@ -40,7 +40,7 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
       else {
         return
     }
-    detailViewController.delegate = self
+    detailViewController.likeChangeDelegate = self
     detailViewController.currentIndex = indexPath.row
     detailViewController.film = films.get(index: indexPath.row)
 

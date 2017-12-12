@@ -1,17 +1,9 @@
 import UIKit
 
-class TableViewCell: UITableViewCell {
+final class FilmViewCell: UITableViewCell {
   @IBOutlet private weak var imageFilm: UIImageView!
   @IBOutlet private weak var countLikesLabel: UILabel!
   @IBOutlet private weak var titleFilmLabel: UILabel!
-
-  override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 
     public func setImage(image: UIImage?) {
         guard image != nil else {

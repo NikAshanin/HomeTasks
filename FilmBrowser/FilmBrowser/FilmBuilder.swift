@@ -1,8 +1,8 @@
 import Foundation
 
 final class FilmBuilder {
-  static func naiveGenerate() -> ArrayFilms {
-    let array = ArrayFilms()
+  static func naiveGenerate() -> Films {
+    let array = Films()
     array.pushFilm(name: "Солярис", description: "Три человека на планете Солярис оказываются в"
         + "предельной, нечеловеческой ситуации. Окруженные своими «гостями», они должны решать,"
         + "что делать. Для доктора Сарториуса главное — долг перед наукой, истиной, которая выше жалости и"
