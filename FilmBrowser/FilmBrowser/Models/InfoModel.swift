@@ -1,5 +1,5 @@
 import UIKit
-final class InfoViewModel {
+final class InfoModel {
 
     static func filmsFromBundle() -> [Film] {
         guard let file = Bundle.main.url(forResource: "films", withExtension: "json")  else {

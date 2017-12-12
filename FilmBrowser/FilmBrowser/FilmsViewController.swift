@@ -3,7 +3,7 @@ import UIKit
 final class FilmsViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    fileprivate let films = InfoViewModel.filmsFromBundle()
+    fileprivate let films = InfoModel.filmsFromBundle()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +21,15 @@ extension FilmsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.reuseId, for: indexPath)
-            as? FilmTableViewCell
-        guard let filmCell = cell else {
-            return FilmTableViewCell()
-        }
-        filmCell.configure(films[indexPath.row])
-        return filmCell
-    }
 
+        if let filmCell = cell as? FilmTableViewCell {
+            filmCell.configure(films[indexPath.row])
+        }
+        return cell
+    }
 }
 
 extension FilmsViewController: UITableViewDelegate {

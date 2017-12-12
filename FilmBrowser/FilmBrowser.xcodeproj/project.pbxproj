@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00B8D8C21FC8357800D5A961 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B8D8C11FC8357800D5A961 /* Film.swift */; };
-		00B8D8C41FC83EF000D5A961 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B8D8C31FC83EF000D5A961 /* InfoViewModel.swift */; };
+		00B8D8C41FC83EF000D5A961 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B8D8C31FC83EF000D5A961 /* InfoModel.swift */; };
 		00B8D8CD1FC88B0100D5A961 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B8D8CC1FC88B0100D5A961 /* UIButton + Extension.swift */; };
 		00B8D8D11FC88EA400D5A961 /* films.json in Resources */ = {isa = PBXBuildFile; fileRef = 00B8D8D01FC88EA400D5A961 /* films.json */; };
 		7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC805471FC6EF8100C526B7 /* AppDelegate.swift */; };
@@ -23,7 +23,7 @@
 
 /* Begin PBXFileReference section */
 		00B8D8C11FC8357800D5A961 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
-		00B8D8C31FC83EF000D5A961 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
+		00B8D8C31FC83EF000D5A961 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		00B8D8CC1FC88B0100D5A961 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
 		00B8D8D01FC88EA400D5A961 /* films.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = films.json; sourceTree = "<group>"; };
 		7FC805441FC6EF8100C526B7 /* FilmBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				00B8D8C11FC8357800D5A961 /* Film.swift */,
-				00B8D8C31FC83EF000D5A961 /* InfoViewModel.swift */,
+				00B8D8C31FC83EF000D5A961 /* InfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 			files = (
 				7FC8055A1FC6EFE000C526B7 /* FilmsViewController.swift in Sources */,
 				7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */,
-				00B8D8C41FC83EF000D5A961 /* InfoViewModel.swift in Sources */,
+				00B8D8C41FC83EF000D5A961 /* InfoModel.swift in Sources */,
 				00B8D8CD1FC88B0100D5A961 /* UIButton + Extension.swift in Sources */,
 				00B8D8C21FC8357800D5A961 /* Film.swift in Sources */,
 				7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */,
