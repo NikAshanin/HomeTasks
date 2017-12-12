@@ -36,7 +36,7 @@ private extension ViewController {
 
   func bindModelSelected() {
     tableView.rx.modelSelected(Film.self)
-      .map { "Year = " + $0.year }
+      .map { "Year = \($0.year)" }
       .bind(to: choosenInfo.rx.text)
       .disposed(by: disposeBag)
   }
