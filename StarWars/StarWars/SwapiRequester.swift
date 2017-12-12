@@ -2,16 +2,13 @@ import Foundation
 
 final class SwapiRequester {
     var swData = SwapiData()
+
     private let queue = DispatchQueue(label: "network thread to work with swapi.co web resource")
     private let defaultSession = URLSession(configuration: .default)
     private var dataTask: URLSessionDataTask?
     private var swURL = "https://swapi.co/api/"
-    private weak var controller: ViewController?
+    weak var dataReceieverDelegate: SwapiDataRecieverDelegate?
     private var films: [String] = []
-
-    func setController(_ controller: ViewController) {
-        self.controller = controller
-    }
 
     func loadData() {
         queue.async {
@@ -20,19 +17,20 @@ final class SwapiRequester {
     }
 
     private func updateController(isFilms: Bool = false) {
-        controller?.updateData(isFilms: isFilms)
+        dataReceieverDelegate?.dataIsReady(isFilms: isFilms)
     }
 
     private func request(strURL: String) -> Any? {
         let group = DispatchGroup()
-        group.enter()
 
         guard let url = URL(string: strURL) else {
             return nil
         }
+
+        group.enter()
         var returnValue: Any?
-        dataTask = defaultSession.dataTask(with: url) { data, _, error in
-            defer { self.dataTask = nil }
+        dataTask = defaultSession.dataTask(with: url) { [weak self] data, _, error in
+            defer { self?.dataTask = nil }
             do {
                 if let error = error {
                     print(error.localizedDescription)
@@ -45,20 +43,15 @@ final class SwapiRequester {
                 group.leave()
             }
         }
+
         dataTask?.resume()
         group.wait()
         return returnValue
     }
 
     private func loadCharacters(_ newURL: String = "") {
-        var strURL = ""
-        if newURL != "" {
-            strURL = newURL
-        } else {
-            strURL = swURL + "people/"
-        }
 
-        guard let response = request(strURL: strURL) as? [String: Any] else {
+        guard let response = request(strURL: newURL != "" ? newURL : swURL + "people/") as? [String: Any] else {
             return
         }
 
@@ -66,15 +59,15 @@ final class SwapiRequester {
             for result in results {
                 if let name = result["name"] as? String,
                     let url = result["url"] as? String {
-                    self.swData.push_back(charName: name, url: url)
+                    swData.push_back(charName: name, url: url)
                 }
             }
             if let nextPageURL = response["next"] as? String {
                 if nextPageURL == "null" {
                     return
                 }
-                self.updateController()
-                self.loadCharacters(nextPageURL)
+                dataReceieverDelegate?.dataIsReady(isFilms: false)
+                loadCharacters(nextPageURL)
             }
         }
     }
@@ -85,12 +78,12 @@ final class SwapiRequester {
         }
         if let title = response["title"] as? String,
             let date = response["release_date"] as? String {
-            self.swData.push_back(filmName: title, filmDate: date)
+            swData.push_back(filmName: title, filmDate: date)
         }
     }
 
     func getFilms(characterURL: String) {
-        self.swData.clearFilms()
+        swData.clearFilms()
 
         if let response = request(strURL: characterURL) as? [String: Any] ,
            let filmsResponse = response["films"] as? [String] {
@@ -98,9 +91,9 @@ final class SwapiRequester {
         }
 
         for film in films {
-            self.loadFilm(film)
+            loadFilm(film)
         }
 
-        self.updateController(isFilms: true)
+        dataReceieverDelegate?.dataIsReady(isFilms: true)
     }
 }

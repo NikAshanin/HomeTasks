@@ -1,6 +1,6 @@
 import UIKit
 
-final class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+final class ViewController: UIViewController, UITextFieldDelegate {
     var swData = SwapiData()
 
      @IBOutlet private weak var tableView: UITableView!
@@ -14,7 +14,7 @@ final class ViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        swRequester.setController(self)
+        swRequester.dataReceieverDelegate = self
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.sync {
             swRequester.loadData()
@@ -43,17 +43,25 @@ final class ViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             animated: true, scrollPosition: .middle)
     }
 
-    func updateData(isFilms: Bool = false) {
-        DispatchQueue.main.async {
-            self.isFilms = isFilms
-            self.swData = self.swRequester.swData
+    private func displayFilms(index: Int) {
+        if isFilms {
+            isFilms = !isFilms
             self.tableView.reloadData()
+        } else {
+            let character = swData.getCharacter(index: index)
+            let queue = DispatchQueue.global(qos: .userInitiated)
+            queue.async {
+                self.swRequester.getFilms(characterURL: character.url)
+            }
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let w = 1 - scrollView.contentOffset.y / scrollView.contentSize.height
@@ -122,17 +130,13 @@ final class ViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         return true
     }
-
-    private func displayFilms(index: Int) {
-        if isFilms {
-            isFilms = !isFilms
+}
+extension ViewController: SwapiDataRecieverDelegate {
+    func dataIsReady(isFilms: Bool) {
+        DispatchQueue.main.async {
+            self.isFilms = isFilms
+            self.swData = self.swRequester.swData
             self.tableView.reloadData()
-        } else {
-            let character = swData.getCharacter(index: index)
-            let queue = DispatchQueue.global(qos: .userInitiated)
-            queue.async {
-                self.swRequester.getFilms(characterURL: character.url)
-            }
         }
     }
 }

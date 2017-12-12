@@ -1,14 +1,14 @@
 import Foundation
 
 final class SwapiCharacter {
-    var name: String = ""
-    var url: String = ""
+    var name = ""
+    var url = ""
     var filmIndexes: Set<Int> = []
 }
 
 final class SwapiFilm {
-    var name: String = ""
-    var date: String = ""
+    var name = ""
+    var date = ""
 }
 
 final class SwapiData {
