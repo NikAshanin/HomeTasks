@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     @IBOutlet private weak var filmImage: UIImageView!
     @IBOutlet private weak var likeButton: UIButton!
     @IBOutlet private weak var filmLabel: UILabel!
