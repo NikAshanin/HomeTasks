@@ -9,8 +9,6 @@ final class NetworkService {
     func downLoad(_ textForSearching: String, callback: @escaping (PersonOfFilm) -> Void) {
         guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)") else {
-          let film = Film("Error", "Не правильный запрос")
-          staff.arrayFilm.append(film)
             return
         }
         dataTask = session.dataTask(with: url, completionHandler: { [weak self] data, _, _ in
