@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F42C0AD1FE08943009E0BF3 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F42C0AC1FE08943009E0BF3 /* Film.swift */; };
+		5F42C0AF1FE089D5009E0BF3 /* FilmsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F42C0AE1FE089D5009E0BF3 /* FilmsViewModel.swift */; };
+		5F42C0B81FE094FA009E0BF3 /* lotr.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B01FE094F9009E0BF3 /* lotr.txt */; };
+		5F42C0B91FE094FA009E0BF3 /* hooligans.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B11FE094FA009E0BF3 /* hooligans.jpg */; };
+		5F42C0BA1FE094FA009E0BF3 /* hooligans.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B21FE094FA009E0BF3 /* hooligans.txt */; };
+		5F42C0BB1FE094FA009E0BF3 /* godfather.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B31FE094FA009E0BF3 /* godfather.txt */; };
+		5F42C0BC1FE094FA009E0BF3 /* scarface.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B41FE094FA009E0BF3 /* scarface.jpg */; };
+		5F42C0BD1FE094FA009E0BF3 /* lotr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B51FE094FA009E0BF3 /* lotr.jpg */; };
+		5F42C0BE1FE094FA009E0BF3 /* scarface.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B61FE094FA009E0BF3 /* scarface.txt */; };
+		5F42C0BF1FE094FA009E0BF3 /* godfather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F42C0B71FE094FA009E0BF3 /* godfather.jpg */; };
 		7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC805471FC6EF8100C526B7 /* AppDelegate.swift */; };
 		7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC8054B1FC6EF8100C526B7 /* Main.storyboard */; };
 		7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FC8054E1FC6EF8100C526B7 /* Assets.xcassets */; };
@@ -18,6 +28,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F42C0AC1FE08943009E0BF3 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		5F42C0AE1FE089D5009E0BF3 /* FilmsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsViewModel.swift; sourceTree = "<group>"; };
+		5F42C0B01FE094F9009E0BF3 /* lotr.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lotr.txt; sourceTree = "<group>"; };
+		5F42C0B11FE094FA009E0BF3 /* hooligans.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hooligans.jpg; sourceTree = "<group>"; };
+		5F42C0B21FE094FA009E0BF3 /* hooligans.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hooligans.txt; sourceTree = "<group>"; };
+		5F42C0B31FE094FA009E0BF3 /* godfather.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = godfather.txt; sourceTree = "<group>"; };
+		5F42C0B41FE094FA009E0BF3 /* scarface.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scarface.jpg; sourceTree = "<group>"; };
+		5F42C0B51FE094FA009E0BF3 /* lotr.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lotr.jpg; sourceTree = "<group>"; };
+		5F42C0B61FE094FA009E0BF3 /* scarface.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scarface.txt; sourceTree = "<group>"; };
+		5F42C0B71FE094FA009E0BF3 /* godfather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = godfather.jpg; sourceTree = "<group>"; };
 		7FC805441FC6EF8100C526B7 /* FilmBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC805471FC6EF8100C526B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FC8054C1FC6EF8100C526B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F42C0C01FE18385009E0BF3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
+				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		7FC8053B1FC6EF8100C526B7 = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +89,15 @@
 		7FC805461FC6EF8100C526B7 /* FilmBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				7FC805531FC6EF8100C526B7 /* Info.plist */,
+				7FC8054B1FC6EF8100C526B7 /* Main.storyboard */,
 				7FC805631FC6F0E400C526B7 /* Resources */,
+				5F42C0C01FE18385009E0BF3 /* Cells */,
+				7FC805531FC6EF8100C526B7 /* Info.plist */,
 				7FC805471FC6EF8100C526B7 /* AppDelegate.swift */,
 				7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */,
 				7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */,
-				7FC8054B1FC6EF8100C526B7 /* Main.storyboard */,
-				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
-				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
+				5F42C0AE1FE089D5009E0BF3 /* FilmsViewModel.swift */,
+				5F42C0AC1FE08943009E0BF3 /* Film.swift */,
 			);
 			path = FilmBrowser;
 			sourceTree = "<group>";
@@ -75,6 +105,14 @@
 		7FC805631FC6F0E400C526B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5F42C0B71FE094FA009E0BF3 /* godfather.jpg */,
+				5F42C0B31FE094FA009E0BF3 /* godfather.txt */,
+				5F42C0B11FE094FA009E0BF3 /* hooligans.jpg */,
+				5F42C0B21FE094FA009E0BF3 /* hooligans.txt */,
+				5F42C0B51FE094FA009E0BF3 /* lotr.jpg */,
+				5F42C0B01FE094F9009E0BF3 /* lotr.txt */,
+				5F42C0B41FE094FA009E0BF3 /* scarface.jpg */,
+				5F42C0B61FE094FA009E0BF3 /* scarface.txt */,
 				7FC8054E1FC6EF8100C526B7 /* Assets.xcassets */,
 				7FC805501FC6EF8100C526B7 /* LaunchScreen.storyboard */,
 			);
@@ -143,9 +181,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FC805521FC6EF8100C526B7 /* LaunchScreen.storyboard in Resources */,
+				5F42C0BA1FE094FA009E0BF3 /* hooligans.txt in Resources */,
 				7FC805621FC6F0DE00C526B7 /* FilmTableViewCell.xib in Resources */,
 				7FC8054F1FC6EF8100C526B7 /* Assets.xcassets in Resources */,
+				5F42C0BF1FE094FA009E0BF3 /* godfather.jpg in Resources */,
+				5F42C0BC1FE094FA009E0BF3 /* scarface.jpg in Resources */,
+				5F42C0BE1FE094FA009E0BF3 /* scarface.txt in Resources */,
 				7FC8054D1FC6EF8100C526B7 /* Main.storyboard in Resources */,
+				5F42C0BD1FE094FA009E0BF3 /* lotr.jpg in Resources */,
+				5F42C0B91FE094FA009E0BF3 /* hooligans.jpg in Resources */,
+				5F42C0B81FE094FA009E0BF3 /* lotr.txt in Resources */,
+				5F42C0BB1FE094FA009E0BF3 /* godfather.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F42C0AF1FE089D5009E0BF3 /* FilmsViewModel.swift in Sources */,
+				5F42C0AD1FE08943009E0BF3 /* Film.swift in Sources */,
 				7FC8055A1FC6EFE000C526B7 /* FilmsViewController.swift in Sources */,
 				7FC805611FC6F0DE00C526B7 /* FilmTableViewCell.swift in Sources */,
 				7FC805481FC6EF8100C526B7 /* AppDelegate.swift in Sources */,
