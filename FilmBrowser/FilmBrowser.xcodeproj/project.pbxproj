@@ -61,15 +61,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5F42C0C01FE18385009E0BF3 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
-				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		7FC8053B1FC6EF8100C526B7 = {
 			isa = PBXGroup;
 			children = (
@@ -91,8 +82,9 @@
 			children = (
 				7FC8054B1FC6EF8100C526B7 /* Main.storyboard */,
 				7FC805631FC6F0E400C526B7 /* Resources */,
-				5F42C0C01FE18385009E0BF3 /* Cells */,
 				7FC805531FC6EF8100C526B7 /* Info.plist */,
+				7FC8055F1FC6F0DE00C526B7 /* FilmTableViewCell.swift */,
+				7FC805601FC6F0DE00C526B7 /* FilmTableViewCell.xib */,
 				7FC805471FC6EF8100C526B7 /* AppDelegate.swift */,
 				7FC805591FC6EFE000C526B7 /* FilmsViewController.swift */,
 				7FC8055B1FC6EFF600C526B7 /* DetailViewController.swift */,
