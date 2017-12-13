@@ -1,9 +1,9 @@
 import Foundation
 
-class Film {
+final class Film {
     let name: String
     let year: Int
-    private let dateFormatter = DateFormatter()
+    private static let dateFormatter = DateFormatter()
 
     init(filmName name: String, filmedIn year: String) {
         self.name = name

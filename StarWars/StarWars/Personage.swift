@@ -1,6 +1,6 @@
 import Foundation
 
-class Personage {
+final class Personage {
     let name: String
     let films: [Film]
 

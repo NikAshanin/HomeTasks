@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C651FBDB6D2008C570F /* AppDelegate.swift */; };
-		11396C681FBDB6D2008C570F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* TableViewController.swift */; };
+		11396C681FBDB6D2008C570F /* StarWarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* StarWarsViewController.swift */; };
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		84BB58B61FDF617400055EA7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BB58B51FDF617400055EA7 /* NetworkService.swift */; };
 		84E2CCF71FD8B6630055D103 /* Personage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2CCF61FD8B6630055D103 /* Personage.swift */; };
 		84E2CCF91FD8B6840055D103 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2CCF81FD8B6840055D103 /* Film.swift */; };
 /* End PBXBuildFile section */
@@ -19,11 +20,12 @@
 /* Begin PBXFileReference section */
 		11396C621FBDB6D2008C570F /* StarWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11396C651FBDB6D2008C570F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11396C671FBDB6D2008C570F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		11396C671FBDB6D2008C570F /* StarWarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsViewController.swift; sourceTree = "<group>"; };
 		11396C6A1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84BB58B51FDF617400055EA7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		84E2CCF61FD8B6630055D103 /* Personage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personage.swift; sourceTree = "<group>"; };
 		84E2CCF81FD8B6840055D103 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,9 +61,10 @@
 			isa = PBXGroup;
 			children = (
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
-				11396C671FBDB6D2008C570F /* TableViewController.swift */,
+				11396C671FBDB6D2008C570F /* StarWarsViewController.swift */,
 				84E2CCF61FD8B6630055D103 /* Personage.swift */,
 				84E2CCF81FD8B6840055D103 /* Film.swift */,
+				84BB58B51FDF617400055EA7 /* NetworkService.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
@@ -175,9 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84BB58B61FDF617400055EA7 /* NetworkService.swift in Sources */,
 				84E2CCF71FD8B6630055D103 /* Personage.swift in Sources */,
 				84E2CCF91FD8B6840055D103 /* Film.swift in Sources */,
-				11396C681FBDB6D2008C570F /* TableViewController.swift in Sources */,
+				11396C681FBDB6D2008C570F /* StarWarsViewController.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
