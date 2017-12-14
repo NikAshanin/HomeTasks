@@ -18,11 +18,10 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFilmDetail()
+        setupFilmDetail()
     }
 
-    private func setFilmDetail() {
-
+    private func setupFilmDetail() {
         guard let logo = filmDetail?.logo,
             let likesCount = filmDetail?.like else { return }
 
@@ -31,17 +30,15 @@ final class DetailViewController: UIViewController {
         filmDescriptionLabel.text = filmDetail?.description
         filmNameLabel.text = filmDetail?.name
         likesCountLabel.text = String(count)
-
     }
 
-    private func chagesOnLike() {
-
+    private func changesOnLike() {
         count += 1
         likesCountLabel.text = String(count)
         delegate?.likeCountChange(count)
     }
 
     @IBAction private func likeButtonPressed(_ sender: UIButton) {
-        chagesOnLike()
+        changesOnLike()
     }
 }

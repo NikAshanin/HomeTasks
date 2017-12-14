@@ -5,7 +5,6 @@ final class FilmCellViewModel {
     var likesCount: Int?
 
     init(_ film: FilmModel) {
-
         guard let logo = film.logo,
             let name = film.name,
             let likes = film.like
