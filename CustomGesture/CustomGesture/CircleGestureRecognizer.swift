@@ -1,125 +1,94 @@
-import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-extension CGFloat {
-  var degrees:CGFloat {
-    return self * 180 / .pi;
-  }
-  var radians:CGFloat {
-    return self * .pi / 180;
-  }
-  var rad2deg:CGFloat {
-    return self.degrees
-  }
-  var deg2rad:CGFloat {
-    return self.radians
-  }
-  
+final class CircleGestureRecognizer: UIGestureRecognizer {
+    private let strokePrecision: CGFloat = 80
+    private var firstTap: CGPoint?
+    private var centerCircle = CGPoint()
+    private var previousPoint: CGPoint?
+    private var radius: CGFloat = 0
+    private var currentAngle: CGFloat = 0
+    private var startAngle: CGFloat = 0
+    private var halfCircle = false
+
+    init(target: Any?, action: Selector?, center: CGPoint, radius: CGFloat) {
+        super.init(target: target, action: action)
+        self.radius = radius
+        self.centerCircle = center
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        print("Touches Began")
+        super.touchesBegan(touches, with: event)
+        guard touches.count == 1 else {
+            state = .failed
+            return
+        }
+        firstTap = touches.first?.location(in: view?.superview)
+        guard let startPoint = firstTap else {
+            state = .failed
+            return
+        }
+        startAngle = startAngle.angleForPoint(startPoint, centerCircle)
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesEnded(touches, with: event)
+        reset()
+        print("Touches Ended")
+    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
+        guard let superview = view?.superview,
+            let currentPoint = touches.first?.location(in: superview) else {
+                state = .failed
+                return
+        }
+        let xPos = currentPoint.x - centerCircle.x
+        let yPos = currentPoint.y - centerCircle.y
+        let currentPosition = xPos * xPos + yPos * yPos
+        if currentPosition < (radius * radius) + (strokePrecision * strokePrecision)
+            && currentPosition > (radius * radius) - (strokePrecision * strokePrecision) {
+            if previousPoint == nil {
+                previousPoint = currentPoint
+                return
+            }
+            guard let startPoint = firstTap else {
+                state = .failed
+                return
+            }
+            currentAngle = currentAngle.angleBetween(pointA: startPoint, pointB: currentPoint, centerCircle: centerCircle)
+            print(currentAngle)
+            if (currentAngle > .pi && currentAngle < 3.5)
+                || (currentAngle < -(.pi) && currentAngle > -3.5)
+                && !halfCircle {
+                halfCircle = true
+            }
+            if  halfCircle &&
+                (currentAngle > -0.1 && currentAngle < 0.1) {
+                state = .recognized
+            }
+        } else {
+            print("Gesture failed")
+            state = .failed
+        }
+    }
+    override func reset() {
+        currentAngle = 0
+        startAngle = 0
+        halfCircle = false
+        previousPoint = nil
+        firstTap = nil
+        super.reset()
+    }
 }
 
-class CircleGestureRecognizer: UIGestureRecognizer {
-
-  var currentPoint:CGPoint?
-  var previousPoint:CGPoint?
-  var midPoint = CGPoint.zero
-  var innerRadius:CGFloat?
-  var outerRadius:CGFloat?
-  
-  var rotation:CGFloat? {
-    if let currentPoint = self.currentPoint {
-      if let previousPoint = self.previousPoint {
-        var rotation = angleBetween(pointA: currentPoint, andPointB: previousPoint)
-        if rotation > .pi {
-          rotation -= .pi*2
-        } else if (rotation < -.pi) {
-          rotation += .pi*2
+extension CGFloat {
+    func angleForPoint(_ point: CGPoint, _ centerCircle: CGPoint) -> CGFloat {
+        var angle = CGFloat(-atan2f(Float(point.x - centerCircle.x), Float(point.y - centerCircle.y))) + .pi/2
+        if angle < 0 {
+            angle += .pi*2
         }
-        return rotation
-      }
+        return angle
     }
-    return nil
-  }
-  
-  var angle:CGFloat? {
-    if let nowPoint = self.currentPoint {
-      return self.angleForPoint(point: nowPoint)
+    func angleBetween(pointA: CGPoint, pointB: CGPoint, centerCircle: CGPoint) -> CGFloat {
+        return angleForPoint(pointA, centerCircle) - angleForPoint(pointB, centerCircle)
     }
-    return nil
-  }
-  
-  var distance:CGFloat? {
-    if let nowPoint = self.currentPoint {
-      return self.distanceBetween(pointA: self.midPoint, andPointB: nowPoint)
-    }
-
-    return nil
-  }
-  
-  init(midPoint:CGPoint, innerRadius:CGFloat?, outerRadius:CGFloat?, target:AnyObject?, action:Selector) {
-    super.init(target: target, action: action)
-    self.midPoint = midPoint
-    self.innerRadius = innerRadius
-    self.outerRadius = outerRadius
-  }
-  
-  convenience init(midPoint:CGPoint, target:AnyObject?, action:Selector) {
-    self.init(midPoint:midPoint, innerRadius:nil, outerRadius:nil, target:target, action:action)
-  }
-
-  func distanceBetween(pointA:CGPoint, andPointB pointB:CGPoint) -> CGFloat {
-    let dx = Float(pointA.x - pointB.x)
-    let dy = Float(pointA.y - pointB.y)
-    return CGFloat(sqrtf(dx*dx + dy*dy))
-  }
-  
-  func angleForPoint(point:CGPoint) -> CGFloat {
-    var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + .pi/2
-    if angle < 0 {
-      angle += .pi*2;
-    }
-    return angle
-  }
-  
-  func angleBetween(pointA:CGPoint, andPointB pointB:CGPoint) -> CGFloat {
-    return angleForPoint(point: pointA) - angleForPoint(point: pointB)
-  }
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-    super.touchesBegan(touches, with: event)
-    if let firstTouch = touches.first {
-      currentPoint = firstTouch.location(in: self.view)
-      var newState:UIGestureRecognizerState = .began
-      if let innerRadius = self.innerRadius, let distance = self.distance {
-        if distance < innerRadius {
-          newState = .failed
-        }
-      }
-      if let outerRadius = self.outerRadius, let distance = self.distance {
-        if distance > outerRadius {
-          newState = .failed
-        }
-      }
-      state = newState
-    }
-  }
-  
-  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-    super.touchesMoved(touches, with: event)
-    if state == .failed {
-      return
-    }
-    if let firstTouch = touches.first {
-      currentPoint = firstTouch.location(in: self.view)
-      previousPoint = firstTouch.previousLocation(in: self.view)
-      state = .changed
-    }
-  }
-  
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-    super.touchesEnded(touches, with: event)
-    state = .ended
-    currentPoint = nil
-    previousPoint = nil
-  }
-  
 }
