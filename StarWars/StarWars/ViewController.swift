@@ -20,21 +20,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
-                                                      for: indexPath) as? CreateTableViewCell else {
-            return UITableViewCell()
+       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        if let cell = cell as? CreateTableViewCell {
+            cell.configure(name: films[indexPath.row].name)
         }
-        cell.configure(name: films[indexPath.row].name)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(films[indexPath.row])
-        let year = Calendar.current.component(.year, from: films[indexPath.row].dateFilm)
+        let year = Calendar.current.component(.year, from: films[indexPath.row].date)
         let message = "Этот фильм вышел в \(year) году."
         let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -52,6 +51,9 @@ extension ViewController: UITextFieldDelegate {
             self?.films = films
             self?.name.text = name
             self?.tableView.reloadData()
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
         textField.text = ""
         view.endEditing(true)
