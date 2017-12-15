@@ -9,33 +9,37 @@ final class FilmsViewController: UIViewController {
         let nib = UINib(nibName: "FilmTableViewCell", bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: FilmTableViewCell.cellIdentifier)
     }
+}
+
+extension FilmsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filmsModel.films.count
     }
-}
-extension FilmsViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = FilmTableViewCell.cellIdentifier
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? FilmTableViewCell else {
-            return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.cellIdentifier, for: indexPath)
+        if let cell = cell as? FilmTableViewCell {
+            cell.configure(film: filmsModel.films[indexPath.row])
         }
-        cell.configure(film: filmsModel.films[indexPath.row])
         return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let id = "DetailViewController"
-        guard let detailViewControl = storyboard?.instantiateViewController(withIdentifier: id) as? DetailViewController else {
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController")
+            as? DetailViewController else {
             return
         }
-        detailViewControl.film = filmsModel.films[indexPath.row]
-        detailViewControl.delegate = self
-        navigationController?.pushViewController(detailViewControl, animated: true)
+        detailViewController.film = filmsModel.films[indexPath.row]
+        detailViewController.delegate = self
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 }
+
 extension FilmsViewController: LikeChangeProtocol {
     func likeChange(film: Film) {
         film.likeCount += 1

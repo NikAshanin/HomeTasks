@@ -15,13 +15,18 @@ final class DetailViewController: UIViewController {
         filmImageView.image = UIImage(named: "\(film.imageName).jpg")
         textInfoLabel.text = film.descriptionFilm
         title = film.name
-        likeBtn.setTitle("Like: \(film.likeCount)", for: .normal)
+        likeBtnUpdate(film: film)
     }
+
     @IBAction func submit(_ sender: Any) {
         guard let film = film else {
             return
         }
         delegate?.likeChange(film: film)
+        likeBtnUpdate(film: film)
+    }
+
+    private func likeBtnUpdate(film: Film) {
         likeBtn.setTitle("Like: \(film.likeCount)", for: .normal)
     }
 }
