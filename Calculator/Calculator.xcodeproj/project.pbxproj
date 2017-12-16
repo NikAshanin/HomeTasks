@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		673631F41FDF1A4800F1E7E4 /* CalculateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673631F31FDF1A4800F1E7E4 /* CalculateService.swift */; };
-		673975CA1FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975C91FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift */; };
-		673975CC1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975CB1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift */; };
+		6736A1681FE50D6B001143A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6736A1661FE50D6B001143A9 /* Main.storyboard */; };
 		673975CE1FC6E70A00872C80 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975CD1FC6E70A00872C80 /* Stack.swift */; };
-		673975D01FC6E71700872C80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673975CF1FC6E71700872C80 /* Main.storyboard */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
 		7FF582591FBDA7E90009B9BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582581FBDA7E90009B9BD /* Assets.xcassets */; };
@@ -20,10 +18,8 @@
 
 /* Begin PBXFileReference section */
 		673631F31FDF1A4800F1E7E4 /* CalculateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = CalculateService.swift; path = calculator/CalculateService.swift; sourceTree = SOURCE_ROOT; tabWidth = 4; };
-		673975C91FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtensionCVC+Calculate.swift"; sourceTree = "<group>"; };
-		673975CB1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtensionCVC+MathFunc.swift"; sourceTree = "<group>"; };
+		6736A1671FE50D6B001143A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../../EPAM-hw/calculator 2/calculator/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		673975CD1FC6E70A00872C80 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
-		673975CF1FC6E71700872C80 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -66,9 +62,7 @@
 				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
 				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
 				673631F31FDF1A4800F1E7E4 /* CalculateService.swift */,
-				673975C91FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift */,
-				673975CB1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift */,
-				673975CF1FC6E71700872C80 /* Main.storyboard */,
+				6736A1661FE50D6B001143A9 /* Main.storyboard */,
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
 				7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */,
 				7FF5825D1FBDA7E90009B9BD /* Info.plist */,
@@ -105,7 +99,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = epam;
 				TargetAttributes = {
 					7FF5824D1FBDA7E90009B9BD = {
@@ -136,9 +130,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6736A1681FE50D6B001143A9 /* Main.storyboard in Resources */,
 				7FF5825C1FBDA7E90009B9BD /* LaunchScreen.storyboard in Resources */,
 				7FF582591FBDA7E90009B9BD /* Assets.xcassets in Resources */,
-				673975D01FC6E71700872C80 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +141,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		7FF582631FBDA8070009B9BD /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -155,13 +149,13 @@
 			name = Swiftlint;
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		7FF582641FBDA80D0009B9BD /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -169,7 +163,7 @@
 			name = CPD;
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
@@ -180,10 +174,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				673975CC1FC6E70400872C80 /* ExtensionCVC+MathFunc.swift in Sources */,
 				673975CE1FC6E70A00872C80 /* Stack.swift in Sources */,
 				673631F41FDF1A4800F1E7E4 /* CalculateService.swift in Sources */,
-				673975CA1FC6E6FE00872C80 /* ExtensionCVC+Calculate.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
 			);
@@ -192,6 +184,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6736A1661FE50D6B001143A9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6736A1671FE50D6B001143A9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -223,6 +223,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -278,6 +280,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
