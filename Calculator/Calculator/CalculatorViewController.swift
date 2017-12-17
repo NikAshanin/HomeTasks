@@ -3,6 +3,7 @@ import UIKit
 final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var resultLabel: UILabel!
     public var stack = Stack()
+    public var symbol = ""
     public var delete = false
     public var blockAppendingToStack = false
     public var beginWork = false
@@ -45,14 +46,17 @@ final class CalculatorViewController: UIViewController {
     }
     @IBAction private func operationWithDigit(_ sender: UIButton) {
         if beginWork {
-            if delete {
-                stack.remove(from: stack.currentIndex)
-            }
             calculatorService.setOperand(displayValue)
+            if symbol != "" {
+                calculatorService.performOperation(symbol)
+            }
             beginWork = false
             if blockAppendingToStack == false {
                 stack.insert(displayValue)
             }
+        }
+        if delete {
+            stack.remove(from: stack.currentIndex)
         }
         if let mathSymbol = sender.currentTitle {
             calculatorService.performOperation(mathSymbol)
@@ -70,15 +74,16 @@ final class CalculatorViewController: UIViewController {
         blockAppendingToStack = true
         if stack.currentIndex != 0 {
             stack.currentIndex -= 1
+            calculatorService.reset()
+            calculatorService.setOperand(stack.returnDigitFromArray())
             displayValue = stack.returnDigitFromArray()
             let operand = displayValue
             if operand == 0 {
-                let symbol = stack.currentElement()
-                calculatorService.setOperand(stack.returnPreviousElement())
-                calculatorService.performOperation(symbol)
+                symbol = stack.currentElement()
                 delete = true
             }
         }
+        symbol = ""
         blockAppendingToStack = false
     }
     @IBAction private func forwardButton(_ sender: Any) {
@@ -86,16 +91,17 @@ final class CalculatorViewController: UIViewController {
         blockAppendingToStack = true
         if stack.currentIndex < stack.arrayNumber.count - 1 {
             stack.currentIndex += 1
+            calculatorService.reset()
+            calculatorService.setOperand(stack.returnDigitFromArray())
             displayValue = stack.returnDigitFromArray()
             let operand = displayValue
             if operand == 0 {
-                let symbol = stack.currentElement()
-                calculatorService.setOperand(stack.returnPreviousElement())
-                calculatorService.performOperation(symbol)
+                symbol = stack.currentElement()
                 delete = true
             }
         }
         blockAppendingToStack = false
+        symbol = ""
     }
     @IBAction private func showStack(_ sender: Any) {
         print(stack.arrayNumber)
