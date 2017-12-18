@@ -39,13 +39,12 @@ extension FilmsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.reuseId,
-                                                 for: indexPath) as? FilmTableViewCell
-        guard let filmCell = cell else {
-            return UITableViewCell()
+                                                 for: indexPath)
+        if let cell = cell as? FilmTableViewCell {
+            let film = viewModel.films[indexPath.row]
+            cell.configure(film)
         }
-        let film = viewModel.films[indexPath.row]
-        filmCell.configure(film)
-        return filmCell
+        return cell
     }
 }
 

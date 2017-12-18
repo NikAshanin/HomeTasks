@@ -18,7 +18,7 @@ final class DetailViewController: UIViewController {
         nameLabel.text = film.name
         directorLabel.text = "Режиссер: " + film.director
         plotLabel.text = film.plot
-        likeButton.setTitle("♥ \(film.likes)", for: .normal)
+        likeButton.setTitle(film.likeString, for: .normal)
     }
 
     @IBAction private func likeButtonPressed(_ sender: Any) {
@@ -26,6 +26,6 @@ final class DetailViewController: UIViewController {
             return
         }
         delegate?.like(film)
-        likeButton.setTitle("♥ \(film.likes)", for: .normal)
+        likeButton.setTitle(film.likeString, for: .normal)
     }
 }

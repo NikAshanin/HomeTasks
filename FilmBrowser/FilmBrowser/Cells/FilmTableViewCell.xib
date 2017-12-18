@@ -65,7 +65,7 @@
                 <outlet property="directorLabel" destination="njw-Pd-LLE" id="Ivw-yk-AN8"/>
                 <outlet property="likeLabel" destination="k9C-Ux-sHo" id="Ucn-Hi-xej"/>
                 <outlet property="nameLabel" destination="sLq-8D-MT7" id="KP6-w6-Q6t"/>
-                <outlet property="posterImage" destination="BW7-0q-fNX" id="FhF-HO-kfk"/>
+                <outlet property="posterImageView" destination="BW7-0q-fNX" id="FhF-HO-kfk"/>
             </connections>
             <point key="canvasLocation" x="54" y="95"/>
         </tableViewCell>
