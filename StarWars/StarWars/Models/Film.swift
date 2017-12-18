@@ -2,7 +2,7 @@ import Foundation
 
 final class Film {
     let name: String
-    let year: Int
+    let year: Int?
 
     init(name: String, year: Int ) {
         self.name = name

@@ -8,9 +8,9 @@ final class BaseDateFormatter {
         return dateFormatter
     }()
 
-    public static func getOnlyYear(stringDate: String) -> Int {
+     static func getOnlyYear(stringDate: String) -> Int? {
         guard let date = apiOnlyYearFormatter.date(from: stringDate) else {
-            return -1
+            return nil
         }
         return Calendar.current.component(.year, from: date)
     }

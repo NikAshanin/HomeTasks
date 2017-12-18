@@ -56,12 +56,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let film = films[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        guard film.year > 0 else {
+        guard let year = film.year,
+            year > 0 else {
             let alert = UIAlertController(title: "Error", message: "No release year",
                                           preferredStyle: UIAlertControllerStyle.alert)
             present(alert, animated: true, completion: nil)
             return
         }
-        releaseDateLabel.text = "This film was released in \(film.year)"
+        releaseDateLabel.text = "This film was released in \(String(describing: film.year))"
     }
 }
