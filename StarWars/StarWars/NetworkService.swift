@@ -16,25 +16,25 @@ final class NetworkService {
             let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
             return
           }
-          if let failUpload = json["count"], let countFromServer = failUpload as? Int, countFromServer == 0 {
-              let film = Film("Error", "Ничего не найдено")
+        if let failUpload = json["count"], let countFromServer = failUpload as? Int, countFromServer == 0 {
+            let film = Film("Error", "Ничего не найдено")
             self?.staff.name = ":("
-              self?.staff.arrayFilm.append(film)
+            self?.staff.arrayFilm.append(film)
             callback((self?.staff) ?? PersonOfFilm())
-          } else {
+            } else {
             guard let jsonCheck = json["results"] as? [[String: Any]] else {
                 return
             }
-                self?.parseJSON(json: jsonCheck)
-                let downloadGroup = DispatchGroup()
-                for i in (self?.staff.filmsURL) ?? [] {
-                    downloadGroup.enter()
-                    self?.uploadInfoFilms(i, callback: {
-                        downloadGroup.leave()
+            self?.parseJSON(json: jsonCheck)
+            let downloadGroup = DispatchGroup()
+            for i in (self?.staff.filmsURL) ?? [] {
+                downloadGroup.enter()
+                self?.uploadInfoFilms(i, callback: {
+                    downloadGroup.leave()
                     })
                 }
-                downloadGroup.notify(queue: .main, execute: {
-                    callback((self?.staff) ?? PersonOfFilm())
+            downloadGroup.notify(queue: .main, execute: {
+                callback((self?.staff) ?? PersonOfFilm())
                 })
             }
         })
@@ -44,15 +44,15 @@ final class NetworkService {
         guard let url = URL(string: url) else {
             return
         }
-          dataTask = session.dataTask(with: url, completionHandler: {[weak self] data, _, _ in
+        dataTask = session.dataTask(with: url, completionHandler: {[weak self] data, _, _ in
             guard let data = data else {
               return
             }
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? ["": 0]
                 if let title = json["title"], let date = json["release_date"] {
-                  let film = Film(date as? String ?? "", title as? String ?? "")
-                  self?.staff.arrayFilm.append(film)
+                    let film = Film(date as? String ?? "", title as? String ?? "")
+                    self?.staff.arrayFilm.append(film)
                 }
                 callback()
             } catch {
