@@ -130,8 +130,8 @@
                         <viewLayoutGuide key="safeArea" id="tCy-fi-DWN"/>
                     </view>
                     <connections>
-                        <outlet property="filmDescription" destination="zbu-Jl-aUH" id="Hzq-m4-iyU"/>
-                        <outlet property="filmImage" destination="vrE-Oo-Pui" id="qJc-Nv-ATR"/>
+                        <outlet property="filmDescriptionLabel" destination="zbu-Jl-aUH" id="Q2D-ho-0LD"/>
+                        <outlet property="filmImageView" destination="vrE-Oo-Pui" id="3sV-FK-coX"/>
                         <outlet property="filmLabel" destination="lQC-70-eOS" id="eQ3-Hg-Fun"/>
                         <outlet property="likeButton" destination="vch-pP-1NK" id="LKn-qy-BeK"/>
                     </connections>

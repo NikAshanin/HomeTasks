@@ -5,12 +5,13 @@ final class FilmTableViewCell: UITableViewCell {
     @IBOutlet private weak var filmImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var likeLabel: UILabel!
+    
     func configure(_ film: Film) {
-        let imageName = "0\(film.photo)_film.jpg"
-        filmImageView.image =  UIImage(named: imageName)
+        filmImageView.image =  UIImage(named: film.photo)
         nameLabel.text = film.name
         likeLabel.text = "\(film.likesCount)"
     }
+    
     func update(_ value: String) {
         likeLabel.text = "\(value)"
         print(value)
