@@ -15,7 +15,7 @@ final class DetailViewController: UIViewController {
         showFilmDetailInfo()
     }
 
-    @IBAction func likeButtonClicked(_ sender: Any) {
+    @IBAction private func likeButtonClicked(_ sender: Any) {
         guard let film  = film else {
             return }
         if film.liked {
@@ -28,7 +28,7 @@ final class DetailViewController: UIViewController {
         delegate?.likeButtonPressed(film)
     }
 
-    func showFilmDetailInfo() {
+    private func showFilmDetailInfo() {
         guard let film = film else {
             return
         }
@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController {
         updateLikeStatus()
     }
 
-    func updateLikeStatus() {
+    private func updateLikeStatus() {
         guard let film = film else {
             return
         }

@@ -14,12 +14,7 @@ final class FilmTableViewCell: UICollectionViewCell {
         selectImageForLikeState(film)
     }
 
-     func selectImageForLikeState(_ film: Film) {
-        if film.liked {
-            likeImage.image = #imageLiteral(resourceName: "liked")
-        } else {
-            likeImage.image = #imageLiteral(resourceName: "like")
-        }
+     private func selectImageForLikeState(_ film: Film) {
         let resourceName = film.liked ? "liked" : "like"
         likeImage.image = (#imageLiteral(resourceName: resourceName))
     }

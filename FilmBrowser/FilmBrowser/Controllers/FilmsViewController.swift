@@ -18,7 +18,7 @@ extension FilmsViewController {
                                            bundle: Bundle.main), forCellWithReuseIdentifier: "cell")
     }
 
-    func getFilms() {
+    fileprivate func getFilms() {
         films = FilmsGenerator.generateFilms()
         filmsCollectionView.reloadData()
     }
@@ -35,7 +35,7 @@ extension FilmsViewController: LikeCountChanged {
 }
 
 extension FilmsViewController: UICollectionViewDataSource,
-UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return films.count
     }

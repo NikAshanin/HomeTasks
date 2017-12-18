@@ -36,6 +36,6 @@ class FilmsGenerator {
                           image: #imageLiteral(resourceName: "greys"), description: "Grey's Anatomy is an American medical drama television"
             + "series that premiered on American Broadcasting Company" +
                             "(ABC) as a mid-season replacement", likesCount: 2, liked: false))
-        return self.films
+        return films
     }
 }
