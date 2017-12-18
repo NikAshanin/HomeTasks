@@ -19,7 +19,7 @@ extension ViewController: UITextFieldDelegate {
         tableView.reloadData()
         service.searchCharacters(searchText: text) { [weak self] foundCharacters in
             self?.characters = foundCharacters
-            self?.service.fetchFilms(personages: foundCharacters) { [weak self] in
+            self?.service.fetchFilms(characters: foundCharacters) { [weak self] in
                 self?.tableView.reloadData()
             }
         }
