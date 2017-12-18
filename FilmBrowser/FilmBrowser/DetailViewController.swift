@@ -5,7 +5,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var plotLabel: UILabel!
     @IBOutlet private weak var directorLabel: UILabel!
     @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var posterImage: UIImageView!
+    @IBOutlet private weak var posterImageView: UIImageView!
     var film: Film?
     weak var delegate: LikeProtocol?
 
@@ -14,7 +14,7 @@ final class DetailViewController: UIViewController {
         guard let film = film else {
             return
         }
-        posterImage.image = film.posterImage
+        posterImageView.image = film.posterImage
         nameLabel.text = film.name
         directorLabel.text = "Режиссер: " + film.director
         plotLabel.text = film.plot
