@@ -25,7 +25,7 @@ final class CalculatorViewController: UIViewController {
         let digit = sender.currentTitle ?? ""
         if beginWork {
             let textOnDisplay = resultLabel.text ?? ""
-            resultLabel.text = textOnDisplay + String(describing: digit)
+            resultLabel.text = textOnDisplay + digit
         } else {
             resultLabel.text = digit
             beginWork = true

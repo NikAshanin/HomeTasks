@@ -8,7 +8,7 @@ final class CalculatorService {
     }
     private var accumulator: Double?
     private var pendingBinaryOperation: PendingBinaryOperation?
-    private var operations: Dictionary<String, Operation> =
+    private var operations: [String: Operation] =
         [
             "Rand": .rand { Double(arc4random()) / Double(UInt32.max) },
             "e": .constant(M_E),
