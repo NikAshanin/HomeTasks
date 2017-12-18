@@ -1,17 +1,19 @@
 import Foundation
 
 final class NetworkService {
-    private var dataTask: URLSessionDataTask?
+    typealias Callback = (_ result: [SwapiData], _ name: String) -> Void
+    
     private let session = URLSession.shared
-    typealias DelayFunc = (_ result: [SwapiData], _ name: String) -> Void
-    func getJson(searchName: String, callback: @escaping DelayFunc) {
-        dataTask?.cancel()
-        guard let url = URL(string: "https://swapi.co/api/people/?search=\(searchName)")
+
+    func getJson(searchName: String, callback: @escaping Callback) {
+        guard let searchNameResult = searchName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let url = URL(string: "https://swapi.co/api/people/?search=\(searchNameResult)")
             else {
                 return
-            }
-        dataTask = session.dataTask(with: url, completionHandler: { [weak self] (data, _, error) in
+        }
+       let dataTask = session.dataTask(with: url, completionHandler: { [weak self] (data, _, error) in
             guard let data = data else {
+                callback([], "")
                 return
             }
             let json: [String: Any]?
@@ -22,27 +24,28 @@ final class NetworkService {
                 return
             }
             guard let resultJson = json, let searchResult = (resultJson["results"] as? [[String: Any]])?.first,
-                let CharacterName = searchResult["name"] as? String else {
-                return
+                let characterName = searchResult["name"] as? String else {
+                    return
             }
-            self?.downloadFilms(json: searchResult, name: CharacterName, callback: callback)
+            self?.downloadFilms(json: searchResult, name: characterName, callback: callback)
         })
-        dataTask?.resume()
-        }
-    private func downloadFilms(json: [String: Any], name: String, callback: @escaping DelayFunc) {
+        dataTask.resume()
+    }
+
+    private func downloadFilms(json: [String: Any], name: String, callback: @escaping Callback) {
         var swapiDataResults: [SwapiData] = []
-        swapiDataResults.removeAll()
         let group = DispatchGroup()
         guard let filmsList = json["films"] as? [String] else {
             return
         }
-        for filmName in filmsList {
-            guard let url = URL(string: filmName) else {
+        for filmUrl in filmsList {
+            guard let url = URL(string: filmUrl) else {
                 continue
             }
             group.enter()
             let dataTask = self.session.dataTask(with: url, completionHandler: { (data, _, error) in
                 guard let data = data else {
+                    callback([], "")
                     return
                 }
                 var filmJson: [String: Any]?
@@ -53,9 +56,9 @@ final class NetworkService {
                 }
                 guard let json = filmJson, let filmName = json["title"] as? String,
                     let filmDate = json["release_date"] as? String else {
-                    return
+                        return
                 }
-                swapiDataResults.append(SwapiData(name: filmName, date: filmDate))
+                swapiDataResults.append(SwapiData(filmName: filmName, filmDate: filmDate))
                 group.leave()
             })
             dataTask.resume()
