@@ -50,8 +50,8 @@ final class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             let character = swData.getCharacter(index: index)
             let queue = DispatchQueue.global(qos: .userInitiated)
-            queue.async {
-                self.swRequester.getFilms(characterURL: character.url)
+            queue.async { [weak self] in
+                self?.swRequester.getFilms(characterURL: character.url)
             }
         }
     }
