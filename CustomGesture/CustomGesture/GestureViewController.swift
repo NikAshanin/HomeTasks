@@ -11,17 +11,16 @@ final class GestureViewController: UIViewController {
         circleCenter.x += circleWidth
         circleCenter.y += circleHeigh
         let oRecognizer = OGestureRecognizer(width: circleWidth,
-                                             heigh: circleHeigh,
+                                             height: circleHeigh,
                                              center: circleCenter,
                                              target: self,
                                              action: #selector(oRecognized))
         view.addGestureRecognizer(oRecognizer)
     }
-    @objc func oRecognized() {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let sec = storyBoard.instantiateViewController(withIdentifier: "tabBar") as? TabBarViewController else {
-            return
+
+    @objc private func oRecognized() {
+        if let tabBar = storyboard?.instantiateViewController(withIdentifier: "tabBar") {
+                navigationController?.pushViewController(tabBar, animated: true)
         }
-        self.present(sec, animated: true, completion: nil)
     }
 }

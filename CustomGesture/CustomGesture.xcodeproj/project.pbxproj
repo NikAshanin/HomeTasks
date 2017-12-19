@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F9E525E1FD892B50094E6F5 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9E525D1FD892B50094E6F5 /* TabBarViewController.swift */; };
 		6F9E52601FD892BD0094E6F5 /* ellipse.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9E525F1FD892BD0094E6F5 /* ellipse.jpg */; };
 		6F9E52621FD892C50094E6F5 /* OGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9E52611FD892C40094E6F5 /* OGestureRecognizer.swift */; };
 		7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26801FBB3669008A981B /* AppDelegate.swift */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6F9E525D1FD892B50094E6F5 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		6F9E525F1FD892BD0094E6F5 /* ellipse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ellipse.jpg; sourceTree = "<group>"; };
 		6F9E52611FD892C40094E6F5 /* OGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OGestureRecognizer.swift; sourceTree = "<group>"; };
 		7F6C267D1FBB3669008A981B /* CustomGesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomGesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +60,6 @@
 			children = (
 				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
-				6F9E525D1FD892B50094E6F5 /* TabBarViewController.swift */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
 				7F6C26871FBB3669008A981B /* Assets.xcassets */,
 				6F9E525F1FD892BD0094E6F5 /* ellipse.jpg */,
@@ -179,7 +176,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9E525E1FD892B50094E6F5 /* TabBarViewController.swift in Sources */,
 				6F9E52621FD892C50094E6F5 /* OGestureRecognizer.swift in Sources */,
 				7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */,
 				7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */,

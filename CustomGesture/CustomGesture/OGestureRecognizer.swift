@@ -1,22 +1,30 @@
 import Foundation
 import UIKit.UIGestureRecognizerSubclass
 
-class OGestureRecognizer: UIGestureRecognizer {
+final class OGestureRecognizer: UIGestureRecognizer {
     private var width: CGFloat = 0
-    private var heigh: CGFloat = 0
-    private var center: CGPoint = CGPoint()
-    var trackedTouch: UITouch?
-    var firstTap: CGPoint?
-    var previousState: CGPoint = CGPoint()
-    var stateOfCircle: Int = 0
+    private let height: CGFloat
+    private let center: CGPoint
+    private var firstTap: CGPoint?
+    private var previousState = CGPoint()
+
+    private enum StatesOfCircle {
+        case firstCircleQuarter
+        case secondCircleQuarter
+        case thirdCircleQuarter
+        case forthCircleQuarter
+    }
+
+    private var circleState: StatesOfCircle
     var currentAngle: CGFloat = 0
     var around: CGFloat = 20
 
-    init(width: CGFloat, heigh: CGFloat, center: CGPoint, target: Any?, action: Selector) {
-        super.init(target: target, action: action)
+    init(width: CGFloat, height: CGFloat, center: CGPoint, target: Any?, action: Selector) {
         self.width = width
-        self.heigh = heigh
+        self.height = height
         self.center = center
+        circleState = StatesOfCircle.firstCircleQuarter
+        super.init(target: target, action: action)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -29,7 +37,7 @@ class OGestureRecognizer: UIGestureRecognizer {
 
     override func reset() {
         super.reset()
-        stateOfCircle = 0
+        circleState = StatesOfCircle.firstCircleQuarter
         currentAngle = 0
     }
 
@@ -50,7 +58,7 @@ class OGestureRecognizer: UIGestureRecognizer {
                 return
         }
 
-        if stateOfCircle == 0 {
+        if circleState == StatesOfCircle.firstCircleQuarter {
             previousState = firstTap
         }
 
@@ -64,40 +72,35 @@ class OGestureRecognizer: UIGestureRecognizer {
             return
         }
 
-        guard calculate(point: currentPoint) else {
+        guard isCurrentPointOnEllipse(point: currentPoint) else {
             state = .failed
             return
         }
 
-        if stateOfCircle == 0 && currentAngle >= 90 {
-            stateOfCircle = 1
+        if circleState == StatesOfCircle.firstCircleQuarter && currentAngle >= 90 {
+            circleState = StatesOfCircle.secondCircleQuarter
             previousState = currentPoint
             currentAngle = 0
-        } else if stateOfCircle == 1 && currentAngle >= 90 {
-            stateOfCircle = 2
+        } else if circleState == StatesOfCircle.secondCircleQuarter && currentAngle >= 90 {
+            circleState = StatesOfCircle.thirdCircleQuarter
             previousState = currentPoint
             currentAngle = 0
-        } else if stateOfCircle == 2 && currentAngle >= 90 {
-            stateOfCircle = 3
+        } else if circleState == StatesOfCircle.thirdCircleQuarter && currentAngle >= 90 {
+            circleState = StatesOfCircle.forthCircleQuarter
             previousState = currentPoint
             currentAngle = 0
-        } else if stateOfCircle == 3 && currentAngle >= 90 &&
+        } else if circleState == StatesOfCircle.forthCircleQuarter && currentAngle >= 90 &&
                   distance(currentPoint, firstTap) <= around {
-            stateOfCircle = 4
             state = .recognized
         }
     }
 
-    public func calculate(point: CGPoint) -> Bool {
+    public func isCurrentPointOnEllipse(point: CGPoint) -> Bool {
         var newPoint = CGPoint()
         newPoint.x = point.x - center.x
         newPoint.y = point.y - center.y
-        let ellipse = (newPoint.x*newPoint.x)/(width*width) + (newPoint.y*newPoint.y)/(heigh*heigh)
-        if ellipse <= 1.3 && ellipse >= 0.7 {
-            return true
-        } else {
-            return false
-        }
+        let ellipse = (newPoint.x*newPoint.x)/(width*width) + (newPoint.y*newPoint.y)/(height*height)
+        return ellipse <= 1.3 && ellipse >= 0.7
     }
 
     public func angle(aSide: CGFloat, bSide: CGFloat, cSide: CGFloat) -> CGFloat {
