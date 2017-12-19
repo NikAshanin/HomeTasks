@@ -1,6 +1,5 @@
 import UIKit
 
-<<<<<<< HEAD
 protocol LikeChangeProtocol: class {
     func likeChange(_ index: Int)
 }
@@ -30,12 +29,4 @@ final class DetailViewController: UIViewController {
     nameOfFilmLabel.text = film.name
     imageFilm.image = UIImage(named: film.urlImage)
   }
-=======
-final class DetailViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
->>>>>>> upstream/master
 }

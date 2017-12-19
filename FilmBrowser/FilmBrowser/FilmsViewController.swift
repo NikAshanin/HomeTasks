@@ -1,6 +1,5 @@
 import UIKit
 
-<<<<<<< HEAD
 final class InfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LikeChangeProtocol {
 
   private let films = FilmBuilder.naiveGenerate()
@@ -47,12 +46,4 @@ final class InfoViewController: UIViewController, UITableViewDelegate, UITableVi
 
     navigationController?.pushViewController(detailViewController, animated: true)
   }
-=======
-final class FilmsViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
->>>>>>> upstream/master
 }
