@@ -66,6 +66,6 @@ final class OLetterRecognizer: UIGestureRecognizer {
 
 extension OLetterRecognizer {
     func isPointOnCircle(_ currentPoint: CGPoint) -> Bool {
-        return pow(currentPoint.x - circleCenter.x, 2) + pow(currentPoint.y - currentPoint.y, 2) == pow(circleRadius, 2)
+        return pow(currentPoint.x - circleCenter.x, 2) + pow(currentPoint.y - circleCenter.y, 2) <= pow(circleRadius, 2) * 0.2
     }
 }
