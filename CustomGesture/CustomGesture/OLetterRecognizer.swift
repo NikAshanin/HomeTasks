@@ -42,28 +42,31 @@ final class OLetterRecognizer: UIGestureRecognizer {
             let firstTap = firstTap else {
                 return
         }
-        circleCenter = CGPoint(x: gestureView.center.x, y: gestureView.center.y)
-        if strokePart == 0 && !isPointOnCircle(currentPoint) &&
+        circleCenter = gestureView.center
+        if strokePart == 0 && !currentPoint.isPointOnCircle(circleCenter, circleRadius) &&
             circleCenter.x + circleRadius - currentPoint.x <= strokePrecision {
             strokePart = 1
-        } else if strokePart == 1 && !isPointOnCircle(currentPoint) &&
+        } else if strokePart == 1 && !currentPoint.isPointOnCircle(circleCenter, circleRadius) &&
             circleCenter.y + circleRadius - currentPoint.y <= strokePrecision {
             strokePart = 2
-        } else if strokePart == 2 && !isPointOnCircle(currentPoint) &&
+        } else if strokePart == 2 && !currentPoint.isPointOnCircle(circleCenter, circleRadius) &&
             circleCenter.x - circleRadius - currentPoint.x <= strokePrecision {
             strokePart = 3
-        } else if strokePart == 3 && !isPointOnCircle(currentPoint) &&
+        } else if strokePart == 3 && !currentPoint.isPointOnCircle(circleCenter, circleRadius) &&
             currentPoint.x - firstTap.x <= strokePrecision && currentPoint.y - firstTap.y <= strokePrecision {
             strokePart = 4
             state = .recognized
             print("recognized!")
+        } else if currentPoint.isPointOnCircle(circleCenter, circleRadius) {
+            state = .failed
+            print("fail!")
         }
     }
 }
 
-extension OLetterRecognizer {
-    func isPointOnCircle(_ currentPoint: CGPoint) -> Bool {
-        return pow(currentPoint.x - circleCenter.x, 2) +
-            pow(currentPoint.y - circleCenter.y, 2) <= pow(circleRadius, 2) - pow(circleRadius, 2) * 0.2
+extension CGPoint {
+    func isPointOnCircle(_ center: CGPoint, _ radius: CGFloat) -> Bool {
+        return pow(self.x - center.x, 2) +
+            pow(self.y - center.y, 2) <= pow(radius, 2) - pow(radius, 2) * 0.2
     }
 }
