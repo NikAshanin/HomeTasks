@@ -39,7 +39,7 @@ final class CalculatorService {
             "sin^-1": .inverseTrigonometry(asin),
             "cos^-1¹": .inverseTrigonometry(acos),
             "tan^-1": .inverseTrigonometry(atan),
-            "+": .binary { $0 + $1 },
+            .plus: .binary { $0 + $1 },
             "-": .binary { $0 - $1 },
             "X": .binary { $0 * $1 },
             "/": .binary { $0 / $1 },
