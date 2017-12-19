@@ -15,6 +15,7 @@
 		0A5A411A1FD076C200191A6B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A41191FD076C200191A6B /* CircleView.swift */; };
 		0AAA8D141FD0C21A002621D0 /* CircleGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA8D131FD0C21A002621D0 /* CircleGestureRecognizer.swift */; };
 		0AAA8D161FD0CE35002621D0 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA8D151FD0CE35002621D0 /* MathHelper.swift */; };
+		0AFABD5A1FE92F1E00B6BDCE /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFABD591FE92F1E00B6BDCE /* CGPoint+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0A5A41191FD076C200191A6B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		0AAA8D131FD0C21A002621D0 /* CircleGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizer.swift; sourceTree = "<group>"; };
 		0AAA8D151FD0CE35002621D0 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
+		0AFABD591FE92F1E00B6BDCE /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		0A5A40FF1FD06B0200191A6B /* CustomGesture */ = {
 			isa = PBXGroup;
 			children = (
+				0AFABD581FE92EEA00B6BDCE /* Extensions */,
 				0AAA8D121FD0C1D7002621D0 /* CustomGestures */,
 				0A5A41181FD0766600191A6B /* Views */,
 				0A5A41171FD0754800191A6B /* Services */,
@@ -119,6 +122,14 @@
 				0AAA8D131FD0C21A002621D0 /* CircleGestureRecognizer.swift */,
 			);
 			path = CustomGestures;
+			sourceTree = "<group>";
+		};
+		0AFABD581FE92EEA00B6BDCE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0AFABD591FE92F1E00B6BDCE /* CGPoint+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 			files = (
 				0AAA8D161FD0CE35002621D0 /* MathHelper.swift in Sources */,
 				0A5A411A1FD076C200191A6B /* CircleView.swift in Sources */,
+				0AFABD5A1FE92F1E00B6BDCE /* CGPoint+Extension.swift in Sources */,
 				0AAA8D141FD0C21A002621D0 /* CircleGestureRecognizer.swift in Sources */,
 				0A5A41011FD06B0200191A6B /* AppDelegate.swift in Sources */,
 				0A5A41161FD0704500191A6B /* GestureViewController.swift in Sources */,

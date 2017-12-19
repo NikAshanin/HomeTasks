@@ -2,15 +2,25 @@ import UIKit.UIGestureRecognizerSubclass
 
 final class CircleGestureRecognizer: UIGestureRecognizer {
 
-    private var circleView: CircleView
+    //private var circleView: CircleView
+    private let center: CGPoint
+    private let innerRadius: CGFloat
+    private let outerRadius: CGFloat
 
     private var startAngle: CGFloat?
     private var isClockwiseRotation: Bool?
     private var halfPathCheck = false
     private let halfPathDistance: CGFloat = 0.5 // in radians
 
-    init(circleView: CircleView, target: AnyObject?, action: Selector?) {
-        self.circleView = circleView
+    init(center: CGPoint,
+         innerRadius: CGFloat,
+         outerRadius: CGFloat,
+         target: AnyObject?,
+         action: Selector?) {
+
+        self.center = center
+        self.innerRadius = innerRadius
+        self.outerRadius = outerRadius
         super.init(target: target, action: action)
     }
 
@@ -21,10 +31,10 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
         guard let firstTouch = touches.first else {
             return
         }
-        let touchPoint = firstTouch.location(in: circleView)
+        let touchPoint = firstTouch.location(in: view)
 
         checkDistanceFromCenter(touchPoint: touchPoint)
-        startAngle = MathHelper.getAngle(of: touchPoint, to: circleView.center)
+        startAngle = touchPoint.getAngle(with: center)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -32,10 +42,10 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
         guard let firstTouch = touches.first, state != .failed else {
             return
         }
-        let currentPoint = firstTouch.location(in: circleView)
-        let previousPoint = firstTouch.previousLocation(in: circleView)
-        let currentAngle = MathHelper.getAngle(of: currentPoint, to: circleView.center)
-        let previousAngle = MathHelper.getAngle(of: previousPoint, to: circleView.center)
+        let currentPoint = firstTouch.location(in: view)
+        let previousPoint = firstTouch.previousLocation(in: view)
+        let currentAngle = currentPoint.getAngle(with: center)
+        let previousAngle = previousPoint.getAngle(with: center)
 
         checkDistanceFromCenter(touchPoint: currentPoint)
 
@@ -78,8 +88,8 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
     }
 
     func checkDistanceFromCenter(touchPoint: CGPoint) {
-        let distance = MathHelper.getDistance(from: touchPoint, to: circleView.center)
-        if distance < circleView.innerRadius || distance > circleView.outerRadius {
+        let distance = touchPoint.getDistance(to: center)
+        if distance < innerRadius || distance > outerRadius {
             print("failed")
             state = .failed
         }

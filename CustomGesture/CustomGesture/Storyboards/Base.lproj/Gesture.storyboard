@@ -19,16 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBg-Wt-7Ye" customClass="CircleView" customModule="CustomGesture" customModuleProvider="target">
-                                <rect key="frame" x="5" y="25" width="310" height="518"/>
+                                <rect key="frame" x="5" y="20" width="310" height="528"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="UBg-Wt-7Ye" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3cY-A4-CeC"/>
-                            <constraint firstItem="UBg-Wt-7Ye" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="5Zb-pp-rnj"/>
                             <constraint firstItem="UBg-Wt-7Ye" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="68y-B8-Xtk"/>
-                            <constraint firstItem="UBg-Wt-7Ye" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="BcG-gd-zeZ"/>
+                            <constraint firstItem="UBg-Wt-7Ye" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="MtJ-pX-u91"/>
+                            <constraint firstItem="UBg-Wt-7Ye" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="5" id="XHY-MD-dNg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

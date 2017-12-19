@@ -7,12 +7,11 @@ final class GestureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let circleGestureRecognizer = CircleGestureRecognizer(circleView: circleView,
+        let circleGestureRecognizer = CircleGestureRecognizer(center: view.center,
+                                                              innerRadius: circleView.innerRadius,
+                                                              outerRadius: circleView.outerRadius,
                                                               target: self,
                                                               action: #selector(presentTabBarController))
-        print(circleView.center)
-        print()
-        print(view.center)
         circleView.addGestureRecognizer(circleGestureRecognizer)
     }
 
