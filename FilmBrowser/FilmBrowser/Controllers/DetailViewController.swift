@@ -2,7 +2,6 @@ import UIKit
 
 final class DetailViewController: UIViewController {
     @IBOutlet weak private var poster: UIImageView!
-    @IBOutlet weak private var scrollView: UIScrollView!
     @IBOutlet weak private var descriptionLabel: UILabel!
     @IBOutlet weak private var likesButton: UIButton!
 
@@ -11,7 +10,6 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //scrollView.addSubview(descriptionLabel)
         guard let film = film else {
             return
         }
