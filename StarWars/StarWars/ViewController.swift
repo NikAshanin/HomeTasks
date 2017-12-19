@@ -9,25 +9,25 @@ final class ViewController: UIViewController {
     private let network = NetworkService()
 
     override func viewDidLoad() {
-      super.viewDidLoad()
-      dateOfFilmLabel.isHidden = true
+        super.viewDidLoad()
+        dateOfFilmLabel.isHidden = true
     }
     @IBAction private func startSearch(_ sender: Any) {
-      staff.arrayFilm = []
-      network.downLoad(searchTextField.text ?? "") {[weak self] staff in
-        self?.staff = staff
-        DispatchQueue.main.async {
-          self?.tableView.reloadData()
-          self?.nameStaffLabel.text = self?.staff.name
+        staff.arrayFilm = []
+        network.downLoad(searchTextField.text ?? "") {[weak self] staff in
+            self?.staff = staff
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.nameStaffLabel.text = self?.staff.name
+            }
         }
-      }
     }
 }
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.resignFirstResponder()
         return true
-  }
+    }
 }
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,13 +37,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         staff.arrayFilm.isEmpty ? (cell.textLabel?.text = "") : (cell.textLabel?.text = staff.arrayFilm[indexPath.row].title)
         return cell
-      }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard staff.arrayFilm[indexPath.row].date != "Error" else {
-          return
+            return
         }
         dateOfFilmLabel.isHidden = false
-        let year = String(describing: ModifyDate().cutYear(date: staff.arrayFilm[indexPath.row].date))
+        let year = String(describing: ModifyDate.cutYear(date: staff.arrayFilm[indexPath.row].date))
         dateOfFilmLabel.text = "Фильм вышел: \(year)"
-      }
+    }
 }

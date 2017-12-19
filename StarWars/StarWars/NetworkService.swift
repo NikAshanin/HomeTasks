@@ -5,7 +5,7 @@ final class NetworkService {
     private let queue = DispatchQueue.global()
     private let session = URLSession.shared
     private var dataTask: URLSessionDataTask?
-    
+
     func downLoad(_ textForSearching: String, callback: @escaping (PersonOfFilm) -> Void) {
         guard let clearSearchText = textForSearching.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: "https://swapi.co/api/people/?search=\(clearSearchText)") else {
