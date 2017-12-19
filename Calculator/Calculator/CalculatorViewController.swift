@@ -16,14 +16,11 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction private func buttonPressed(_ sender: UIButton) {
-        let digit = sender.currentTitle ?? ""
-        if beginWork {
-            let textOnDisplay = resultLabel.text ?? ""
-            resultLabel.text = textOnDisplay + String(describing: digit)
-        } else {
-            resultLabel.text = digit
+        if !beginWork {
+            resultLabel.text = ""
             beginWork = true
         }
+        resultLabel.text = (resultLabel.text ?? "") + (sender.currentTitle ?? "")
     }
 
     @IBAction private func clearDisplay(_ sender: UIButton) {
@@ -68,8 +65,6 @@ final class CalculatorViewController: UIViewController {
         }
         if futureValue.isNumber() {
             displayValue = Double(futureValue) ?? 0
-        } else {
-            calculationModule.setOperand(Double(futureValue) ?? 0)
         }
     }
 
@@ -82,11 +77,12 @@ final class CalculatorViewController: UIViewController {
         if previousValue.isNumber() {
             displayValue = Double(previousValue) ?? 0
         } else {
-            calculationModule.setOperand(Double(previousValue) ?? 0)
+            resultLabel.text = previousValue
         }
     }
     @IBAction private func clearStack(_ sender: Any) {
         print( "clearStack")
+        stack.clear()
     }
 
     @IBOutlet private weak var radianStatusLabel: UILabel!

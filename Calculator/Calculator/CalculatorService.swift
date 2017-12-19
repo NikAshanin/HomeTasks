@@ -30,7 +30,7 @@ final class CalculationModule {
     }
 
     private var accumulator: Double?
-    private var operations: Dictionary<String, Operation> = [
+    private var operations:  [String: Operation] = [
             "Rand": .rand { Double(arc4random()) / Double(UInt32.max) },
             "e": .constant(M_E),
             "π": .constant(.pi),
@@ -73,36 +73,35 @@ final class CalculationModule {
     ]
 
     var result: Double? {
-        get {
-            return accumulator
-        }
+        return accumulator
     }
 
     func performOperation(_ symbol: String) {
-        if let operation = operations[symbol] {
-            switch operation {
-            case .constant(let value):
-                accumulator = value
-                appendAccumulator = false
-            case .unary(let function) where accumulator != nil:
-                accumulator = function(accumulator ?? 0)
-                appendAccumulator = false
-            case .binary(let function) where accumulator != nil && pendingBinaryOperation == nil:
-                pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator ?? 0)
-                appendAccumulator = true
-            case .trigonometry(let function):
-                accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0) * .pi/180)
-            case .inverseTrigonometry(let function):
-                accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0)) * 180 / .pi
-            case .equals where accumulator != nil && pendingBinaryOperation != nil:
-                accumulator = pendingBinaryOperation?.perform(with: accumulator ?? 0)
-                pendingBinaryOperation = nil
-                appendAccumulator = true
-            case .rand(let function):
-                accumulator = function()
-            default:
-                break
-            }
+        guard let operation = operations[symbol] else {
+            return
+        }
+        switch operation {
+        case .constant(let value):
+            accumulator = value
+            appendAccumulator = false
+        case .unary(let function) where accumulator != nil:
+            accumulator = function(accumulator ?? 0)
+            appendAccumulator = false
+        case .binary(let function) where accumulator != nil && pendingBinaryOperation == nil:
+            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator ?? 0)
+            appendAccumulator = true
+        case .trigonometry(let function):
+            accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0) * .pi/180)
+        case .inverseTrigonometry(let function):
+            accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0)) * 180 / .pi
+        case .equals where accumulator != nil && pendingBinaryOperation != nil:
+            accumulator = pendingBinaryOperation?.perform(with: accumulator ?? 0)
+            pendingBinaryOperation = nil
+            appendAccumulator = true
+        case .rand(let function):
+            accumulator = function()
+        default:
+            break
         }
     }
 

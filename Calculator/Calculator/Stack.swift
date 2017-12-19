@@ -22,9 +22,13 @@ struct Stack<Element> {
     }
 
     mutating func unPop() -> Element? {
-        if (writeIndex + 1) <= array.count {
+        if array.count == 0 {
+            return nil
+        }
+        if (writeIndex + 1) <= array.count{
             writeIndex += 1
         }
+        
         return array[writeIndex-1]
     }
 
