@@ -2,7 +2,7 @@ import Foundation
 
 final class Film {
     let name: String
-    let year: Int
+    let year: Int?
     private static let dateFormatter = DateFormatter()
 
     init(filmName name: String, filmedIn year: String) {
@@ -11,14 +11,14 @@ final class Film {
         self.year = intYear
     }
 
-    private static func getYearFromString(_ stringYear: String) -> Int {
+    private static func getYearFromString(_ stringYear: String) -> Int? {
         let dateFormatter: DateFormatter = {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-mm-dd"
             return formatter
         }()
         guard let year = dateFormatter.date(from: stringYear) else {
-            return -1
+            return nil
         }
         return Calendar.current.component(.year, from: year)
     }

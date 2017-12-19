@@ -2,11 +2,7 @@ import UIKit
 
 final class StarWarsViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
-    @IBOutlet weak private var searchTextField: UITextField! {
-        didSet {
-            searchTextField.delegate = self
-        }
-    }
+    @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var spinner: UIActivityIndicatorView!
 
     private let networkService = NetworkService()
@@ -58,7 +54,7 @@ extension StarWarsViewController: UITableViewDelegate, UITableViewDataSource {
         let date = personageArray[indexPath.section].films[indexPath.row].year
         tableView.deselectRow(at: indexPath, animated: true)
         let alert = UIAlertController(title: "",
-                                      message: "Этот фильм вышел в \(date) году.",
+                                      message: "Этот фильм вышел в \(date ?? 0) году.",
                                       preferredStyle: UIAlertControllerStyle.alert)
         let alertAction = UIAlertAction(title: "Окей", style: .cancel, handler: nil)
         alert.addAction(alertAction)
