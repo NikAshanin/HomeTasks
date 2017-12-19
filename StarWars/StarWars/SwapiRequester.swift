@@ -74,7 +74,7 @@ final class SwapiRequester {
 
     private func loadFilm(_ filmURL: String = "") {
         guard let response = request(strURL: filmURL) as? [String: Any] else {
-                return
+            return
         }
         if let title = response["title"] as? String,
             let date = response["release_date"] as? String {

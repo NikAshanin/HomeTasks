@@ -6,10 +6,10 @@ final class ViewController: UIViewController, UITextFieldDelegate {
      @IBOutlet private weak var tableView: UITableView!
      @IBOutlet private weak var textField: UITextField!
 
-    let group = DispatchGroup()
-    var isFilms = false
+    private let group = DispatchGroup()
+    private var isFilms = false
 
-    let swRequester = SwapiRequester()
+    private let swRequester = SwapiRequester()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ final class ViewController: UIViewController, UITextFieldDelegate {
     private func displayFilms(index: Int) {
         if isFilms {
             isFilms = !isFilms
-            self.tableView.reloadData()
+            tableView.reloadData()
         } else {
             let character = swData.getCharacter(index: index)
             let queue = DispatchQueue.global(qos: .userInitiated)
@@ -68,16 +68,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = UIColor(white: w, alpha: 1)
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFilms {
-            return swData.filmCount()
-        } else {
-            return swData.characterCount()
-        }
+        return isFilms ? swData.filmCount() : swData.characterCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,15 +101,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "First"
-        } else {
-            return "Not first"
-        }
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        return section == 0 ? "First" : "Not first"
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
