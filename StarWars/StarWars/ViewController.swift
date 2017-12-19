@@ -16,8 +16,8 @@ final class ViewController: UIViewController, UITextFieldDelegate {
 
         swRequester.dataReceieverDelegate = self
         let queue = DispatchQueue.global(qos: .userInitiated)
-        queue.sync {
-            swRequester.loadData()
+        queue.async { [weak self] in
+            self?.swRequester.loadData()
         }
         textField.delegate = self
     }
@@ -55,18 +55,9 @@ final class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let w = 1 - scrollView.contentOffset.y / scrollView.contentSize.height
-        view.backgroundColor = UIColor(white: w, alpha: 1)
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return isFilms ? swData.filmCount() : swData.characterCount()
@@ -92,7 +83,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isFilms {
             isFilms = !isFilms
-            self.tableView.reloadData()
+            tableView.reloadData()
         } else {
             displayFilms(index: indexPath.row)
         }
@@ -117,10 +108,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 extension ViewController: SwapiDataRecieverDelegate {
     func dataIsReady(isFilms: Bool) {
-        DispatchQueue.main.async {
-            self.isFilms = isFilms
-            self.swData = self.swRequester.swData
-            self.tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.isFilms = isFilms
+            guard let data = self?.swRequester.swData else {
+                return
+            }
+            self?.swData = data
+            self?.tableView.reloadData()
         }
     }
 }

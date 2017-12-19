@@ -11,8 +11,8 @@ final class SwapiRequester {
     private var films: [String] = []
 
     func loadData() {
-        queue.async {
-            self.loadCharacters()
+        queue.async { [weak self] in
+            self?.loadCharacters()
         }
     }
 
