@@ -37,13 +37,12 @@ final class OLetterRecognizer: UIGestureRecognizer {
             return
         }
 
-        guard let superview = view?.superview,
-            let currentPoint = touches.first?.location(in: superview),
+        guard let gestureView = view?.superview,
+            let currentPoint = touches.first?.location(in: gestureView),
             let firstTap = firstTap else {
                 return
         }
-        circleCenter = CGPoint(x: superview.center.x, y: superview.center.y)
-
+        circleCenter = CGPoint(x: gestureView.center.x, y: gestureView.center.y)
         if strokePart == 0 && !isPointOnCircle(currentPoint) &&
             circleCenter.x + circleRadius - currentPoint.x <= strokePrecision {
             strokePart = 1
@@ -64,6 +63,7 @@ final class OLetterRecognizer: UIGestureRecognizer {
 
 extension OLetterRecognizer {
     func isPointOnCircle(_ currentPoint: CGPoint) -> Bool {
-        return pow(currentPoint.x - circleCenter.x, 2) + pow(currentPoint.y - currentPoint.y, 2) == pow(circleRadius, 2)
+        return pow(currentPoint.x - circleCenter.x, 2) +
+            pow(currentPoint.y - circleCenter.y, 2) <= pow(circleRadius, 2) - pow(circleRadius, 2) * 0.2
     }
 }
