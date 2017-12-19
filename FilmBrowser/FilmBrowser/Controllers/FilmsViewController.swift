@@ -20,13 +20,13 @@ extension FilmsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.reuseId,
-                                                 for: indexPath) as? FilmTableViewCell
-        guard let filmCell = cell else {
+                                                 for: indexPath)
+        if let filmCell = cell as? FilmTableViewCell {
+            filmCell.configure(filmsSource.films[indexPath.row])
+            return filmCell
+        } else {
             return UITableViewCell()
         }
-        filmCell.configure(filmsSource.films[indexPath.row])
-
-        return filmCell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
