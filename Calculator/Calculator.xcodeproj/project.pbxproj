@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FEF42831FE8957500F710F8 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF42821FE8957500F710F8 /* Calculator.swift */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
 		7FF582571FBDA7E90009B9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582551FBDA7E90009B9BD /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6FEF42821FE8957500F710F8 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
 				7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */,
 				7FF5825D1FBDA7E90009B9BD /* Info.plist */,
+				6FEF42821FE8957500F710F8 /* Calculator.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -159,7 +162,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -170,6 +173,7 @@
 			files = (
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
+				6FEF42831FE8957500F710F8 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +313,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = epam.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -324,7 +328,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = epam.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -347,6 +351,7 @@
 				7FF582621FBDA7E90009B9BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
