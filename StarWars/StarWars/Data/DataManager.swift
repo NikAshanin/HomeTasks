@@ -4,16 +4,14 @@ final class DataManager {
 
     // MARK: - Properties
 
-    private let dataManagementQueue: OperationQueue
     private let networkClient: NetworkManagement
     private let parser: ParserProtocol
     private var searchModel: SearchResultModel?
     var films = [FilmsModel]()
 
     init() {
-        self.dataManagementQueue = OperationQueue()
-        self.networkClient = NetworkClient()
-        self.parser = Parser()
+        networkClient = NetworkClient()
+        parser = Parser()
     }
 
     func loadFilmData(with character: String, completion: @escaping ([FilmsModel]) -> Void) {
@@ -67,14 +65,14 @@ final class DataManager {
 
     private func getData<Data: JSONInitializable>(from url: URL, completion: @escaping (Data) -> Void) {
 
-        self.networkClient.fetch(from: url) { [weak self] response in
+        networkClient.fetch(from: url) { [weak self] response in
 
             do {
                 if let models: Data = try self?.parser.parseArray(response) {
                     completion(models)
                 }
             } catch {
-                assertionFailure()
+                assertionFailure("Unable to parse")
             }
         }
     }

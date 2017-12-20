@@ -47,11 +47,13 @@ extension ViewController: UITextFieldDelegate {
 
         clearTableView()
 
-        dataManager.loadFilmData(with: text) { films in
-            self.dataManager.films = films
-            self.updateUI()
-        }
+        dataManager.loadFilmData(with: text) { [weak self] films in
+            self?.dataManager.films = films
 
+            DispatchQueue.main.async {
+                self?.updateUI()
+            }
+        }
         return true
     }
 }
@@ -66,14 +68,14 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let film = dataManager.films[indexPath.row]
-        if let cell = filmsTableView.dequeueReusableCell(withIdentifier: FilmTitleCell.reuseId) as? FilmTitleCell {
 
-            cell.configure(film)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FilmTitleCell.reuseId, for: indexPath)
 
-            return cell
+        if let filmCell = cell as? FilmTitleCell {
+            filmCell.configure(film)
         }
 
-        return UITableViewCell()
+        return cell
     }
 }
 
