@@ -1,8 +1,11 @@
 import Foundation
 
-class Stack {
+final class Stack {
     var arrayNumber: [String] = []
     var currentIndex = 0
+    var currentElement: String {
+        return arrayNumber[currentIndex]
+    }
 
     func insert <T>(_ element: T) {
         arrayNumber.append(String(describing: element))
@@ -15,15 +18,17 @@ class Stack {
             arrayNumber.removeSubrange(downRangeForDelete...upRangeForDelete)
         }
     }
-    func currentElement() -> String {
-        return arrayNumber[currentIndex]
-    }
+
     func returnDigitFromArray() -> Double {
-        let elementForCheck = currentElement()
+        let elementForCheck = currentElement
         return elementForCheck.isNumber() ? (Double(elementForCheck) ?? 0): 0
     }
-    func returnPreviousElement() -> Double {
-        let previousElement = arrayNumber[(currentIndex ) - 1]
-        return previousElement.isNumber() ? (Double(previousElement) ?? 0): 0
+    func returnPreviousElement() -> Double? {
+        if currentIndex > 0 {
+            let previousElement = arrayNumber[(currentIndex ) - 1]
+            return previousElement.isNumber() ? (Double(previousElement) ?? 0): 0
+        } else {
+            return nil
+        }
     }
 }

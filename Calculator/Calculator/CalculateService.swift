@@ -56,32 +56,33 @@ final class CalculatorService {
     var appendAccumulator = true
 
     func performOperation(_ symbol: String) {
-        if let operation = operations[symbol] {
-            switch operation {
-            case .constant(let value):
-                accumulator = value
-                appendAccumulator = false
-            case .unary(let function) where accumulator != nil:
-                accumulator = function(accumulator ?? 0)
-                appendAccumulator = false
-            case .binary(let function) where accumulator != nil && pendingBinaryOperation == nil:
-                flagForStack = false
-                pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator ?? 0)
-                appendAccumulator = true
-            case .trigonometry(let function):
-                accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0) * .pi/180)
-            case .inverseTrigonometry(let function):
-                accumulator = isRadian ? function(accumulator ?? 0) : function(accumulator ?? 0) * 180 / .pi
-            case .equals where accumulator != nil && pendingBinaryOperation != nil:
-                accumulator = pendingBinaryOperation?.perform(with: accumulator ?? 0)
-                pendingBinaryOperation = nil
-                appendAccumulator = true
-                flagForStack = true
-            case .rand(let function):
-                accumulator = function()
-            default:
-                break
-            }
+        guard let operation = operations[symbol] else {
+            return
+        }
+        switch operation {
+        case .constant(let value):
+            accumulator = value
+            appendAccumulator = false
+        case .unary(let function) where accumulator != nil:
+            accumulator = function(accumulator ?? 0)
+            appendAccumulator = false
+        case .binary(let function) where accumulator != nil && pendingBinaryOperation == nil:
+            flagForStack = false
+            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator ?? 0)
+            appendAccumulator = true
+        case .trigonometry(let function):
+            accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0) * .pi/180)
+        case .inverseTrigonometry(let function):
+            accumulator = isRadian ? function(accumulator ?? 0) : function(accumulator ?? 0) * 180 / .pi
+        case .equals where accumulator != nil && pendingBinaryOperation != nil:
+            accumulator = pendingBinaryOperation?.perform(with: accumulator ?? 0)
+            pendingBinaryOperation = nil
+            appendAccumulator = true
+            flagForStack = true
+        case .rand(let function):
+            accumulator = function()
+        default:
+            break
         }
     }
     func reset() {
@@ -91,7 +92,6 @@ final class CalculatorService {
     func setOperand(_ operand: Double) {
         accumulator = operand
     }
-
 }
 extension CalculatorService {
     private enum Operation {

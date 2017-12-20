@@ -79,7 +79,7 @@ final class CalculatorViewController: UIViewController {
             displayValue = stack.returnDigitFromArray()
             let operand = displayValue
             if operand == 0 {
-                symbol = stack.currentElement()
+                symbol = stack.currentElement
                 delete = true
             }
         }
@@ -96,7 +96,7 @@ final class CalculatorViewController: UIViewController {
             displayValue = stack.returnDigitFromArray()
             let operand = displayValue
             if operand == 0 {
-                symbol = stack.currentElement()
+                symbol = stack.currentElement
                 delete = true
             }
         }

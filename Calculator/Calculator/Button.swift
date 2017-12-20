@@ -1,6 +1,5 @@
 import Foundation
 
-
 typealias ButtonTitle = String
 
 extension ButtonTitle {
