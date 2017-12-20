@@ -50,10 +50,9 @@ extension ViewController: UITextFieldDelegate {
         network.getJsonFromUrl(searchNameCharacter: text) { [weak self] films, name in
             self?.films = films
             self?.name.text = name
+            DispatchQueue.main.sync {
             self?.tableView.reloadData()
-        }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+            }
         }
         textField.text = ""
         view.endEditing(true)
