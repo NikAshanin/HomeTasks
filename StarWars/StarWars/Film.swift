@@ -15,7 +15,7 @@ final class Film {
         self.url = url
     }
 
-    private static func getYearFromDateString(_ dateString: String) -> Int? {
+    private class func getYearFromDateString(_ dateString: String) -> Int? {
         let dateFormatter: DateFormatter = {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-mm-dd"
