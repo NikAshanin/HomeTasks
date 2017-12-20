@@ -12,7 +12,6 @@ final class APIService {
                 let filmsURL = characterJSON["films"] as? [String] else {
                     continue
             }
-
             var films = [Film]()
             for filmURL in filmsURL {
                 guard let url = URL(string: filmURL) else {
@@ -31,16 +30,17 @@ final class APIService {
                 completion([])
                 return
         }
-        let task = session.dataTask(with: url, completionHandler: {[weak self] (data, _, _) in
+        let task = session.dataTask(with: url) { [weak self] (data, _, _) in
             guard let data = data,
                 let characterJSON = (try? JSONSerialization.jsonObject(with: data, options: [])) as? JSONDictionary,
                 let charactersJSON = characterJSON["results"] as? [JSONDictionary] else {
                     return
             }
-            DispatchQueue.global().async {
-                completion(self?.parseCharacters(from: charactersJSON) ?? [])
+            let characters = self?.parseCharacters(from: charactersJSON) ?? []
+            DispatchQueue.main.async {
+                completion(characters)
             }
-        })
+        }
         task.resume()
     }
 
