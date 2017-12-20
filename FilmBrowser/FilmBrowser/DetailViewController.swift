@@ -6,23 +6,28 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var filmLabel: UILabel!
     @IBOutlet private weak var filmDescriptionLabel: UILabel!
     weak var delegate: LikesChangeProtocol?
-    var likesCount = 0
-    var photoName = ""
-    var filmTitle = ""
-    var filmIndex = 0
+    var filmInCell: Film?
+    var cellIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadFilmData()
     }
     
-    @IBAction func submitLike(_ sender: Any) {
+    @IBAction private func submitLike(_ sender: Any) {
+        guard var likesCount = filmInCell?.likesCount else {
+            return
+        }
         likesCount += 1
         likeButton.setTitle(String(likesCount), for: UIControlState.normal)
-        delegate?.likesChange(String(likesCount))
+        delegate?.likesChangeAt(cellIndex)
     }
     
-    func downloadFilmData() {
+    private func downloadFilmData() {
+        guard let likesCount =  filmInCell?.likesCount, let photoName = filmInCell?.photo,
+            let filmTitle = filmInCell?.name  else {
+            return
+        }
         likeButton.setTitle(String(likesCount), for: UIControlState.normal)
         filmImageView.image =  UIImage(named: photoName)
         filmLabel.text = filmTitle
@@ -31,10 +36,10 @@ final class DetailViewController: UIViewController {
         }
         let descriptions = try? String(contentsOfFile: fileURLProject, encoding: String.Encoding.utf8)
         let arrayOfDescriptions = descriptions?.components(separatedBy: "//") ?? [""]
-        filmDescriptionLabel.text = arrayOfDescriptions[filmIndex]
+        filmDescriptionLabel.text = arrayOfDescriptions[cellIndex]
     }
 }
 
 protocol LikesChangeProtocol: class {
-    func likesChange(_ value: String)
+    func likesChangeAt(_ selectedCell: Int)
 }

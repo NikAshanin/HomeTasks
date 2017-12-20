@@ -3,7 +3,6 @@ import UIKit
 final class FilmViewControler: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     fileprivate let viewModel = FilmViewModel()
-    private var selectedCell = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,18 +37,15 @@ extension FilmViewControler: UITableViewDelegate, UITableViewDataSource {
             return
         }
         detailViewController.delegate = self
-        selectedCell = indexPath.row
-        detailViewController.likesCount = viewModel.film[selectedCell].likesCount
-        detailViewController.photoName = viewModel.film[selectedCell].photo
-        detailViewController.filmTitle = viewModel.film[selectedCell].name
-        detailViewController.filmIndex = selectedCell
+        detailViewController.filmInCell  = viewModel.film[indexPath.row]
+        detailViewController.cellIndex = indexPath.row
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 extension FilmViewControler: LikesChangeProtocol {
-    func likesChange(_ value: String) {
+    func likesChangeAt(_ selectedCell: Int) {
         viewModel.film[selectedCell].likesCount += 1
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 }
