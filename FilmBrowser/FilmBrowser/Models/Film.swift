@@ -15,17 +15,17 @@ final class Film {
         self.liked = liked
     }
 
-    func addLike() {
-        if !liked {
+    private func addLike() {
             likesCount+=1
             liked = true
-        }
     }
 
-    func removeLike() {
-        if liked {
+    private func removeLike() {
             likesCount-=1
             liked = false
-        }
+    }
+    
+    func changeLikeState() {
+        liked ? removeLike() : addLike()
     }
 }

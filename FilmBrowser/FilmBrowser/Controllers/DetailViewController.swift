@@ -18,11 +18,7 @@ final class DetailViewController: UIViewController {
     @IBAction private func likeButtonClicked(_ sender: Any) {
         guard let film  = film else {
             return }
-        if film.liked {
-            film.removeLike()
-        } else {
-            film.addLike()
-        }
+        film.changeLikeState()
         updateLikeStatus()
         likesCountLabel.text = String(film.likesCount)
         delegate?.likeButtonPressed(film)
