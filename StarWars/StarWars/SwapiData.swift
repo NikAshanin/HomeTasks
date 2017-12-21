@@ -1,8 +1,8 @@
 import Foundation
 
 final class SwapiData {
-    let name: String, year: Int?
-    private static let dateFormatter = DateFormatter()
+    let name: String
+    let year: Int?
 
     init(filmName name: String, filmDate year: String) {
         self.name = name
@@ -11,11 +11,8 @@ final class SwapiData {
     }
 
     private static func getYearFromString(_ stringYear: String) -> Int? {
-        let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-mm-dd"
-            return formatter
-        }()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
         guard let year = dateFormatter.date(from: stringYear) else {
             return nil
         }
