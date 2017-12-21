@@ -9,10 +9,19 @@ final class FilmViewControler: UIViewController {
         registerCells()
         tableView.rowHeight = UITableViewAutomaticDimension
     }
-    
+
     private func registerCells() {
         let nib = UINib(nibName: "FilmTableViewCell", bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: FilmTableViewCell.reuseId)
+    }
+
+    private func getFilmDiscription(_ filmIndex: Int) -> String {
+        guard let fileURLProject = Bundle.main.path(forResource: "FilmsDescriptions", ofType: "txt") else {
+            return "error"
+        }
+        let descriptions = try? String(contentsOfFile: fileURLProject, encoding: String.Encoding.utf8)
+        let arrayOfDescriptions = descriptions?.components(separatedBy: "//") ?? [""]
+        return arrayOfDescriptions[filmIndex]
     }
 }
 
@@ -20,7 +29,7 @@ extension FilmViewControler: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.film.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilmTableViewCell",
                                                  for: indexPath)
@@ -30,22 +39,21 @@ extension FilmViewControler: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let detailViewController = storyboard?.instantiateViewController(
             withIdentifier: "DetailViewController") as? DetailViewController else {
             return
         }
         detailViewController.delegate = self
-        detailViewController.filmInCell  = viewModel.film[indexPath.row]
-        detailViewController.cellIndex = indexPath.row
+        detailViewController.currentFilm  = viewModel.film[indexPath.row]
+        detailViewController.filmDiscription = getFilmDiscription(indexPath.row)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 extension FilmViewControler: LikesChangeProtocol {
-    func likesChangeAt(_ selectedCell: Int) {
-        viewModel.film[selectedCell].likesCount += 1
+    func likesChange() {
         tableView.reloadData()
     }
 }

@@ -6,40 +6,40 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var filmLabel: UILabel!
     @IBOutlet private weak var filmDescriptionLabel: UILabel!
     weak var delegate: LikesChangeProtocol?
-    var filmInCell: Film?
-    var cellIndex: Int = 0
-    
+    var currentFilm: Film?
+    var filmDiscription: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadFilmData()
     }
-    
+
     @IBAction private func submitLike(_ sender: Any) {
-        guard var likesCount = filmInCell?.likesCount else {
+        currentFilm?.likesCount += 1
+        guard let likesCount = currentFilm?.likesCount else {
             return
         }
-        likesCount += 1
-        likeButton.setTitle(String(likesCount), for: UIControlState.normal)
-        delegate?.likesChangeAt(cellIndex)
+        setButtonTitle(with: likesCount)
+        delegate?.likesChange()
     }
-    
+
     private func downloadFilmData() {
-        guard let likesCount =  filmInCell?.likesCount, let photoName = filmInCell?.photo,
-            let filmTitle = filmInCell?.name  else {
+        guard let likesCount =  currentFilm?.likesCount,
+            let photoName = currentFilm?.photo,
+            let filmTitle = currentFilm?.name  else {
             return
         }
-        likeButton.setTitle(String(likesCount), for: UIControlState.normal)
+        setButtonTitle(with: likesCount)
         filmImageView.image =  UIImage(named: photoName)
         filmLabel.text = filmTitle
-        guard let fileURLProject = Bundle.main.path(forResource: "FilmsDescriptions", ofType: "txt") else {
-            return
-        }
-        let descriptions = try? String(contentsOfFile: fileURLProject, encoding: String.Encoding.utf8)
-        let arrayOfDescriptions = descriptions?.components(separatedBy: "//") ?? [""]
-        filmDescriptionLabel.text = arrayOfDescriptions[cellIndex]
+        filmDescriptionLabel.text = filmDiscription
+    }
+
+    private func setButtonTitle(with amountOfLikes: Int) {
+        likeButton.setTitle(String(amountOfLikes), for: UIControlState.normal)
     }
 }
 
 protocol LikesChangeProtocol: class {
-    func likesChangeAt(_ selectedCell: Int)
+    func likesChange()
 }
