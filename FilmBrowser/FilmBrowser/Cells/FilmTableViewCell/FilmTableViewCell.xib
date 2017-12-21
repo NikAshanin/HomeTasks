@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FilmTableViewCell" rowHeight="149" id="kyz-N1-w7V" customClass="FilmTableViewCell" customModule="FilmBrowser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kyz-N1-w7V" id="5pJ-88-oam">
+                <rect key="frame" x="0.0" y="0.0" width="341" height="148.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XFM-jF-1cd">
+                        <rect key="frame" x="20" y="17.5" width="140" height="114"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="Bgz-RM-HTw"/>
+                            <constraint firstAttribute="height" constant="114" id="sxs-FJ-Hg7"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Film title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrT-Ol-l9f">
+                        <rect key="frame" x="168" y="20" width="153" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes: 0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZV-po-I8E">
+                        <rect key="frame" x="168" y="114" width="153" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XFM-jF-1cd" firstAttribute="leading" secondItem="5pJ-88-oam" secondAttribute="leading" constant="20" symbolic="YES" id="8Pn-Xn-pCl"/>
+                    <constraint firstItem="nrT-Ol-l9f" firstAttribute="top" secondItem="5pJ-88-oam" secondAttribute="top" constant="20" symbolic="YES" id="9XB-Zh-eu6"/>
+                    <constraint firstItem="XFM-jF-1cd" firstAttribute="centerY" secondItem="5pJ-88-oam" secondAttribute="centerY" id="CIe-Js-1t4"/>
+                    <constraint firstItem="nrT-Ol-l9f" firstAttribute="top" secondItem="5pJ-88-oam" secondAttribute="top" constant="20" symbolic="YES" id="Ouc-hO-bPR"/>
+                    <constraint firstAttribute="trailing" secondItem="eZV-po-I8E" secondAttribute="trailing" constant="20" symbolic="YES" id="SNy-Ep-FuC"/>
+                    <constraint firstItem="eZV-po-I8E" firstAttribute="leading" secondItem="XFM-jF-1cd" secondAttribute="trailing" constant="8" symbolic="YES" id="Scm-0C-qKB"/>
+                    <constraint firstAttribute="bottom" secondItem="eZV-po-I8E" secondAttribute="bottom" constant="20" symbolic="YES" id="alx-m7-vKv"/>
+                    <constraint firstAttribute="trailing" secondItem="nrT-Ol-l9f" secondAttribute="trailing" constant="20" symbolic="YES" id="c7B-gW-Fok"/>
+                    <constraint firstItem="nrT-Ol-l9f" firstAttribute="leading" secondItem="XFM-jF-1cd" secondAttribute="trailing" constant="8" symbolic="YES" id="dQJ-Kq-auN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="filmImageView" destination="XFM-jF-1cd" id="4oB-1y-KxE"/>
+                <outlet property="filmTitleLabel" destination="nrT-Ol-l9f" id="voz-la-RPX"/>
+                <outlet property="likesLabel" destination="eZV-po-I8E" id="t1G-ua-vYu"/>
+            </connections>
+            <point key="canvasLocation" x="30.5" y="138.5"/>
+        </tableViewCell>
+    </objects>
+</document>
