@@ -49,7 +49,7 @@ final class NetworkService {
             group.enter()
             let dataTask = self.session.dataTask(with: url, completionHandler: { (data, _, error) in
                 guard let data = data else {
-                    callback([], error.debugDescription)
+                    print("empty data error")
                     group.leave()
                     return
                 }
@@ -57,12 +57,13 @@ final class NetworkService {
                 do {
                     filmJson = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 } catch let error as NSError {
-                    callback([], error.localizedDescription)
+                    print(error.localizedDescription)
+                    group.leave()
                     return
                 }
                 guard let json = filmJson, let filmName = json["title"] as? String,
                     let filmDate = json["release_date"] as? String else {
-                        callback([], "empty data error")
+                        print("empty data error")
                         group.leave()
                         return
                 }
