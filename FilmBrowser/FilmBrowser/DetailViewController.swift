@@ -7,7 +7,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var filmDescriptionLabel: UILabel!
     weak var delegate: LikesChangeProtocol?
     var currentFilm: Film?
-    var filmDiscription: String?
+    var filmDescription: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ final class DetailViewController: UIViewController {
         setButtonTitle(with: likesCount)
         filmImageView.image =  UIImage(named: photoName)
         filmLabel.text = filmTitle
-        filmDescriptionLabel.text = filmDiscription
+        filmDescriptionLabel.text = filmDescription
     }
 
     private func setButtonTitle(with amountOfLikes: Int) {

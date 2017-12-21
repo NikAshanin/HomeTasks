@@ -15,7 +15,7 @@ final class FilmViewControler: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: FilmTableViewCell.reuseId)
     }
 
-    private func getFilmDiscription(_ filmIndex: Int) -> String {
+    private func getFilmDescription(_ filmIndex: Int) -> String {
         guard let fileURLProject = Bundle.main.path(forResource: "FilmsDescriptions", ofType: "txt") else {
             return "error"
         }
@@ -47,7 +47,7 @@ extension FilmViewControler: UITableViewDelegate, UITableViewDataSource {
         }
         detailViewController.delegate = self
         detailViewController.currentFilm  = viewModel.film[indexPath.row]
-        detailViewController.filmDiscription = getFilmDiscription(indexPath.row)
+        detailViewController.filmDescription = getFilmDescription(indexPath.row)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
