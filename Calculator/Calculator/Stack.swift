@@ -7,8 +7,8 @@ final class Stack {
         return arrayNumber[currentIndex]
     }
 
-    func insert <T>(_ element: T) {
-        arrayNumber.append(String(describing: element))
+    func insert(_ element: String) {
+        arrayNumber.append(element)
         currentIndex += 1
     }
     func remove(from index: Int ) {

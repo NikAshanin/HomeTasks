@@ -39,7 +39,7 @@ final class CalculatorService {
             "sin^-1": .inverseTrigonometry(asin),
             "cos^-1¹": .inverseTrigonometry(acos),
             "tan^-1": .inverseTrigonometry(atan),
-            .plus: .binary { $0 + $1 },
+            "+": .binary { $0 + $1 },
             "-": .binary { $0 - $1 },
             "X": .binary { $0 * $1 },
             "/": .binary { $0 / $1 },
@@ -116,12 +116,6 @@ extension CalculatorService {
 }
 extension Double {
     func factorial() -> Double {
-        var factorial: Double = 0
-        if (fmod(self, floor(self)) == 0) {
-            factorial = Darwin.round(exp(lgamma(self + 1)))
-        } else {
-            factorial = exp(lgamma(self + 1))
-        }
-        return factorial
+     return (fmod(self, floor(self)) == 0) ? Darwin.round(exp(lgamma(self + 1))) : exp(lgamma(self + 1))
     }
 }

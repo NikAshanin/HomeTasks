@@ -2,29 +2,33 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var resultLabel: UILabel!
-    public var stack = Stack()
-    public var symbol = ""
-    public var delete = false
-    public var blockAppendingToStack = false
-    public var beginWork = false
-    public var calculatorService = CalculatorService()
-    public var flagSecondMode = false
-    var displayValue: Double {
+    private var stack = Stack()
+    private var symbol = ""
+    private var delete = false
+    private var blockAppendingToStack = false
+    private var beginWork = false
+    private var calculatorService = CalculatorService()
+    private var flagSecondMode = false
+    private var displayValue: Double {
         get {
             return Double(resultLabel.text ?? "") ?? 0
         }
         set {
             resultLabel.text = String(newValue)
             if calculatorService.flagForStack, !blockAppendingToStack {
-                stack.insert(newValue)
+                stack.insert(String(newValue))
             }
         }
     }
 
     @IBAction private func buttonPressed(_ sender: UIButton) {
-        let digit = sender.currentTitle ?? ""
+        guard let digit = sender.currentTitle else {
+            return
+        }
         if beginWork {
-            let textOnDisplay = resultLabel.text ?? ""
+            guard let textOnDisplay = resultLabel.text else {
+                return
+            }
             resultLabel.text = textOnDisplay + digit
         } else {
             resultLabel.text = digit
@@ -52,7 +56,7 @@ final class CalculatorViewController: UIViewController {
             }
             beginWork = false
             if blockAppendingToStack == false {
-                stack.insert(displayValue)
+                stack.insert(String(displayValue))
             }
         }
         if delete {
@@ -102,9 +106,6 @@ final class CalculatorViewController: UIViewController {
         }
         blockAppendingToStack = false
         symbol = ""
-    }
-    @IBAction private func showStack(_ sender: Any) {
-        print(stack.arrayNumber)
     }
 
     @IBOutlet private weak var radianStatusLabel: UILabel!
