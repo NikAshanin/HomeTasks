@@ -11,6 +11,6 @@ final class FilmTableViewCell: UITableViewCell {
     func updateUI(film: Film) {
         filmImageView.image = UIImage(named: film.imageName)
         filmTitleLabel.text = film.title
-        likesLabel.text = "Likes: " + String(film.getLikes())
+        likesLabel.text = "Likes: " + String(film.getLikes)
     }
 }

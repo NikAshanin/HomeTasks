@@ -29,7 +29,7 @@ final class FilmInfoViewController: UIViewController {
         guard let film = film else {
             return
         }
-        likesButton.setTitle(String(describing: film.getLikes()), for: .normal)
+        likesButton.setTitle(String(describing: film.getLikes), for: .normal)
     }
 
     @IBAction private func likesButtonPressed(_ sender: UIButton) {

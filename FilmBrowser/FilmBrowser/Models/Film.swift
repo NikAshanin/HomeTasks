@@ -1,9 +1,9 @@
 import Foundation
 
 final class Film: Decodable {
-    public let title: String
-    public let description: String
-    public let imageName: String
+    let title: String
+    let description: String
+    let imageName: String
     private var likes: Int
 
     init(title: String,
@@ -17,11 +17,11 @@ final class Film: Decodable {
         self.likes = likes
     }
 
-    public func addLike() {
+    func addLike() {
         likes += 1
     }
 
-    public func getLikes() -> Int {
+    var getLikes: Int {
         return likes
     }
 }
