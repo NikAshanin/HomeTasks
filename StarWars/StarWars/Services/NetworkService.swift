@@ -46,6 +46,7 @@ final class NetworkService {
         let group = DispatchGroup()
         var filmJson: JSON?
         guard let filmsUrls = json["films"] as? [String] else {
+            completion(films)
             return
         }
         for filmUrl in filmsUrls {

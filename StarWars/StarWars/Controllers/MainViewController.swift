@@ -11,16 +11,6 @@ final class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        filmsTableView.delegate = self
-        filmsTableView.dataSource = self
-        searchTextField.delegate = self
-        loaderActivityIndicator.stopAnimating()
-        clearFilmYearLabel()
-    }
-
-    private func clearFilmYearLabel() {
-        filmYearLabel.text = ""
     }
 }
 
@@ -47,7 +37,7 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         films.removeAll()
-        clearFilmYearLabel()
+        filmYearLabel.text = ""
         filmsTableView.reloadData()
         guard let searchString = searchTextField.text, !searchString.isEmpty else {
             return false
@@ -57,13 +47,15 @@ extension MainViewController: UITextFieldDelegate {
             if let errorString = errorString {
                 print(errorString)
             }
-            if !films.isEmpty {
-                self?.films = films
+            if films.isEmpty {
+                print("No films for this search request")
             } else {
-
+                self?.films = films
             }
-            self?.filmsTableView.reloadData()
-            self?.loaderActivityIndicator.stopAnimating()
+            DispatchQueue.main.async {
+                self?.filmsTableView.reloadData()
+                self?.loaderActivityIndicator.stopAnimating()
+            }
         }
         view.endEditing(true)
         return true
