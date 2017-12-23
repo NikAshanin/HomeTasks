@@ -2,7 +2,6 @@ import UIKit.UIGestureRecognizerSubclass
 
 final class CircleGestureRecognizer: UIGestureRecognizer {
 
-    //private var circleView: CircleView
     private let center: CGPoint
     private let innerRadius: CGFloat
     private let outerRadius: CGFloat

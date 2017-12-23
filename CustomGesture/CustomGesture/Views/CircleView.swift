@@ -2,11 +2,12 @@ import UIKit
 
 final class CircleView: UIView {
 
-    public let innerRadius: CGFloat = 100
-    public let outerRadius: CGFloat = 140
-    public let lineWidth: CGFloat = 3.0
+    let innerRadius: CGFloat = 100
+    let outerRadius: CGFloat = 140
+    let lineWidth: CGFloat = 3.0
 
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
         drawCircle(with: innerRadius)
         drawCircle(with: outerRadius)
     }
