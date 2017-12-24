@@ -9,7 +9,7 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
     private var startAngle: CGFloat?
     private var isClockwiseRotation: Bool?
     private var halfPathCheck = false
-    private let halfPathDistance: CGFloat = 0.5 // in radians
+    private let halfPathArea: CGFloat = 0.5 // in radians
 
     init(center: CGPoint,
          innerRadius: CGFloat,
@@ -61,7 +61,7 @@ final class CircleGestureRecognizer: UIGestureRecognizer {
             return
         }
         let currentValue = MathHelper.convertAngle(angle: currentAngle, by: startAngle, with: clockwiseRotation)
-        if abs(currentValue - .pi) < halfPathDistance {
+        if abs(currentValue - .pi) < halfPathArea {
             halfPathCheck = true
         }
         if currentValue < .pi {
