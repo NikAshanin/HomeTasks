@@ -1,7 +1,7 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
-    @IBOutlet private weak var imageFilm: UIImageView!
+    @IBOutlet private weak var filmImageView: UIImageView!
     @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var countLikesLabel: UILabel!
@@ -11,14 +11,14 @@ final class DetailViewController: UIViewController {
     var currentIndex = Int()
 
     @IBAction private func submit(_ sender: Any) {
-        film.countLikes += 1
+        film.increaseLikes()
         delegate?.likeChange(currentIndex)
         countLikesLabel.text = "Всего лайков:\(String(film.countLikes))"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionLabel.text = film.description
-        imageFilm.image = UIImage(named: film.urlImage)
+        filmImageView.image = UIImage(named: film.urlImage)
         nameOfFilmLabel.text = film.name
         countLikesLabel.text = "Всего лайков:\(String(film.countLikes))"
     }

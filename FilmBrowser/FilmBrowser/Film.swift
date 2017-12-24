@@ -5,6 +5,10 @@ struct Film {
     var description = ""
     var countLikes = 0
     var urlImage = ""
+
+    mutating func increaseLikes() {
+        countLikes += 1
+    }
 }
 final class ArrayFilms {
     private var films: [Film] = []
