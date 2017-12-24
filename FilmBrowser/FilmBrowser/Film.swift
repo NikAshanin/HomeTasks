@@ -27,7 +27,9 @@ final class ArrayFilms {
     func count() -> Int {
         return films.count
     }
-    func changeLikes(_ index: Int) {
-        films[index].countLikes += 1
+    func changeLikes(_ nameFilm: String) {
+        for var film in films where film.name == nameFilm {
+            film.increaseLikes()
+        }
     }
 }

@@ -12,7 +12,7 @@ final class DetailViewController: UIViewController {
 
     @IBAction private func submit(_ sender: Any) {
         film.increaseLikes()
-        delegate?.likeChange(currentIndex)
+        delegate?.likeChange(film.name)
         countLikesLabel.text = "Всего лайков:\(String(film.countLikes))"
     }
     override func viewDidLoad() {
@@ -25,5 +25,5 @@ final class DetailViewController: UIViewController {
 }
 
 protocol LikeChangeProtocol: class {
-    func likeChange(_ index: Int)
+    func likeChange(_ nameFilm: String)
 }

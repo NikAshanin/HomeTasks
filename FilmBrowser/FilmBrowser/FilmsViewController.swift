@@ -12,8 +12,8 @@ final class InfoViewController: UIViewController {
     }
 }
 extension InfoViewController: LikeChangeProtocol {
-    func likeChange(_ index: Int) {
-        films.changeLikes(index)
+    func likeChange(_ filmName: String) {
+        films.changeLikes(filmName)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
