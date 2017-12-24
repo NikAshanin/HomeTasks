@@ -39,11 +39,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard staff.arrayFilm[indexPath.row].date != "Error" else {
-            return
-        }
         dateOfFilmLabel.isHidden = false
-        let year = String(describing: ModifyDate.cutYear(date: staff.arrayFilm[indexPath.row].date))
+        let year = String(describing: ModifyDate.getYear(date: staff.arrayFilm[indexPath.row].date))
         dateOfFilmLabel.text = "Фильм вышел: \(year)"
     }
 }

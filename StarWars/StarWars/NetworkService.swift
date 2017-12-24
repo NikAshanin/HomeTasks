@@ -16,31 +16,27 @@ final class NetworkService {
                 let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
                     return
             }
-            if let failUpload = json["count"], let countFromServer = failUpload as? Int, countFromServer == 0 {
-                let film = Film("Error", "Ничего не найдено")
-                self?.staff.name = ":("
-                self?.staff.arrayFilm.append(film)
+            if let nothingToUpload = json["count"], let countFromServer = nothingToUpload as? Int, countFromServer == 0 {
                 callback((self?.staff) ?? PersonOfFilm())
-            } else {
-                guard let jsonCheck = json["results"] as? [[String: Any]] else {
-                    return
-                }
+            } else if let jsonCheck = json["results"] as? [[String: Any]] {
                 self?.parseJSON(json: jsonCheck)
                 let downloadGroup = DispatchGroup()
                 for i in (self?.staff.filmsURL) ?? [] {
                     downloadGroup.enter()
-                    self?.uploadInfoFilms(i, callback: {
+                    self?.download(i, callback: {
                         downloadGroup.leave()
                     })
                 }
                 downloadGroup.notify(queue: .main, execute: {
                     callback((self?.staff) ?? PersonOfFilm())
                 })
+            } else {
+                return
             }
         })
         dataTask?.resume()
     }
-    private func uploadInfoFilms(_ url: String, callback: @escaping () -> Void) {
+    private func download(_ url: String, callback: @escaping () -> Void) {
         guard let url = URL(string: url) else {
             return
         }
@@ -51,7 +47,8 @@ final class NetworkService {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? ["": 0]
                 if let title = json["title"], let date = json["release_date"] {
-                    let film = Film(date as? String ?? "", title as? String ?? "")
+                    let year = ModifyDate.performStringToDate(date: date as? String ?? "")
+                    let film = Film(year ?? Date(), title as? String ?? "")
                     self?.staff.arrayFilm.append(film)
                 }
                 callback()
