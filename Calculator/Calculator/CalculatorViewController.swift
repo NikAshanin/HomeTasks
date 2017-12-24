@@ -69,9 +69,7 @@ final class CalculatorViewController: UIViewController {
                 stack.remove(from: stack.currentIndex)
             }
         }
-        if let result = calculatorService.result {
-            displayValue = result
-        }
+        displayValue = calculatorService.result
     }
     @IBAction private func backButton(_ sender: Any) {
         delete = false

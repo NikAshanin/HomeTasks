@@ -50,8 +50,8 @@ final class CalculatorService {
             "logx": .binary { log($0) / log($1) },
             "=": .equals
     ]
-    var result: Double? {
-        return accumulator
+    var result: Double {
+        return accumulator ?? 0
     }
     var appendAccumulator = true
 
@@ -64,18 +64,18 @@ final class CalculatorService {
             accumulator = value
             appendAccumulator = false
         case .unary(let function) where accumulator != nil:
-            accumulator = function(accumulator ?? Double())
+            accumulator = function(accumulator ?? 0)
             appendAccumulator = false
         case .binary(let function) where accumulator != nil && pendingBinaryOperation == nil:
             flagForStack = false
-            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator ?? Double())
+            pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator ?? 0)
             appendAccumulator = true
         case .trigonometry(let function):
-            accumulator = isRadian ? function(accumulator ?? Double()) : function((accumulator ?? Double()) * .pi/180)
+            accumulator = isRadian ? function(accumulator ?? 0) : function((accumulator ?? 0) * .pi/180)
         case .inverseTrigonometry(let function):
-            accumulator = isRadian ? function(accumulator ?? Double()) : function(accumulator ?? Double()) * 180 / .pi
+            accumulator = isRadian ? function(accumulator ?? 0) : function(accumulator ?? 0) * 180 / .pi
         case .equals where accumulator != nil && pendingBinaryOperation != nil:
-            accumulator = pendingBinaryOperation?.perform(with: accumulator ?? Double())
+            accumulator = pendingBinaryOperation?.perform(with: accumulator ?? 0)
             pendingBinaryOperation = nil
             appendAccumulator = true
             flagForStack = true
