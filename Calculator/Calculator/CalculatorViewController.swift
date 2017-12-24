@@ -37,7 +37,7 @@ final class CalculatorViewController: UIViewController {
     }
     @IBAction private func clearDisplay(_ sender: UIButton) {
         calculatorService.reset()
-        resultLabel.text? = "0"
+        resultLabel.text = "0"
         beginWork = false
     }
     @IBAction private func decimal(_ sender: UIButton) {
@@ -55,7 +55,7 @@ final class CalculatorViewController: UIViewController {
                 calculatorService.performOperation(symbol)
             }
             beginWork = false
-            if blockAppendingToStack == false {
+            if !blockAppendingToStack {
                 stack.insert(String(displayValue))
             }
         }
@@ -109,16 +109,16 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBOutlet private weak var radianStatusLabel: UILabel!
-    @IBOutlet private weak var radianDegreeLabel: UIButton!
+    @IBOutlet private weak var radianDegreeButton: UIButton!
 
     @IBAction private func setRadian(_ sender: Any) {
-        if radianStatusLabel.isHidden == true {
+        if radianStatusLabel.isHidden {
             radianStatusLabel.isHidden = false
-            radianDegreeLabel.setTitle("Deg", for: .normal)
+            radianDegreeButton.setTitle("Deg", for: .normal)
             calculatorService.isRadian = true
         } else {
             radianStatusLabel.isHidden = true
-            radianDegreeLabel.setTitle("Rad", for: .normal)
+            radianDegreeButton.setTitle("Rad", for: .normal)
             calculatorService.isRadian = false
         }
     }
