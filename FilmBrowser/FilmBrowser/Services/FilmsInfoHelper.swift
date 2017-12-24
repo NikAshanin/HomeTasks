@@ -1,8 +1,6 @@
 import Foundation
 
 final class FilmsInfoHelper {
-    static let films = FilmsInfoHelper.getFilms()
-
     static func getFilms() -> [Film] {
         guard let file = Bundle.main.url(forResource: "Films", withExtension: "json")  else {
             return []

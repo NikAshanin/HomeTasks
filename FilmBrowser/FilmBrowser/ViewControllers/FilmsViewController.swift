@@ -4,6 +4,8 @@ final class FilmsViewController: UIViewController {
 
     @IBOutlet fileprivate weak var filmsTableView: UITableView!
 
+    private let films = FilmsInfoHelper.getFilms()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
@@ -17,14 +19,14 @@ final class FilmsViewController: UIViewController {
 
 extension FilmsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FilmsInfoHelper.films.count
+        return films.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.reuseId, for: indexPath)
 
         if let filmCell = cell as? FilmTableViewCell {
-            filmCell.updateUI(film: FilmsInfoHelper.films[indexPath.row])
+            filmCell.updateUI(film: films[indexPath.row])
         }
         return cell
     }
@@ -38,7 +40,7 @@ extension FilmsViewController: UITableViewDelegate {
             return
         }
         filmInfoViewController.likeDelegate = self
-        filmInfoViewController.film = FilmsInfoHelper.films[indexPath.row]
+        filmInfoViewController.film = films[indexPath.row]
         navigationController?.pushViewController(filmInfoViewController, animated: true)
     }
 }
