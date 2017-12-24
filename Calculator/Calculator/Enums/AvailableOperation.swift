@@ -1,5 +1,5 @@
 import Foundation
-public enum AvailableOperations: String {
+public enum AvailableOperation: String {
     case sqrt
     case plus = "+"
     case minus = "-"

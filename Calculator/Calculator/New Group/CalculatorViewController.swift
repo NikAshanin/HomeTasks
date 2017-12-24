@@ -3,7 +3,7 @@ import UIKit
 final class CalculatorViewController: UIViewController {
 
     @IBOutlet private var collectionOfButtons: [UIButton]!
-    @IBOutlet private var numField: UITextField!
+    @IBOutlet private weak var numLabel: UILabel!
     private var userInput = "" // Вводимое пользователем число
     private let calculator = Calculator()
 
@@ -12,27 +12,28 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func numberButtonPressed(_ sender: UIButton) {
-        guard let label = sender.titleLabel,
-              let text = label.text else {
+        guard let labelText = sender.currentTitle else {
             return
         }
-        handleInput(text)
+        handleInput(labelText)
     }
 
     @IBAction func actionButtonPressed(_ sender: UIButton) {
         if userInput != "" {
             calculator.addInHistory(input: userInput)
         }
-        guard let label = sender.titleLabel,
-              let text = label.text else {
+        guard let text = sender.currentTitle else {
             return
         }
 
         switch text {
         case ".":
-            if hasIndex(stringToSearch: userInput, characterToFind: ".") == false {
+            if !userInput.contains(".") {
                 handleInput(".")
             }
+//            if hasIndex(stringToSearch: userInput, characterToFind: ".") == false {
+//                handleInput(".")
+//            }
         case "C":
             cleanDisplay()
         case "e":
@@ -59,20 +60,19 @@ fileprivate extension CalculatorViewController {
 
     func switchMode() {
         for button in collectionOfButtons {
-            guard let label = button.titleLabel,
-                  let text = label.text else {
+            guard let labelText = button.currentTitle else {
                 return
             }
-            button.setTitle(States.switchStateForButton(withTitle: text), for: .normal)
+            button.setTitle(OperationTitles.switchStateForButton(withTitle: labelText), for: .normal)
         }
     }
 
-    func hasIndex(stringToSearch str: String, characterToFind chr: Character) -> Bool {
-        for c in str where c == chr {
-            return true
-        }
-        return false
-    }
+//    func hasIndex(stringToSearch str: String, characterToFind chr: Character) -> Bool {
+//        for c in str where c == chr {
+//            return true
+//        }
+//        return false
+//    }
 
     func handleInput(_ str: String) {
         if str == "-" {
@@ -84,7 +84,10 @@ fileprivate extension CalculatorViewController {
         } else {
             userInput += str
         }
-        calculator.currentResult = Double((userInput as NSString).doubleValue)
+        guard let currentResult = Double(userInput) else {
+            return
+        }
+        calculator.currentResult = currentResult
         updateDisplay()
     }
 
@@ -93,12 +96,12 @@ fileprivate extension CalculatorViewController {
             let iAcc = Int(calculator.currentResult)
 
             if calculator.currentResult - Double(iAcc) == 0 {
-                numField.text = "\(iAcc)"
+                numLabel.text = "\(iAcc)"
             } else {
-                numField.text = "\(calculator.currentResult)"
+                numLabel.text = "\(calculator.currentResult)"
             }
         } else {
-            numField.text = "Error"
+            numLabel.text = "Error"
             userInput = ""
         }
     }

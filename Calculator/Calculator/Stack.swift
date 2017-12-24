@@ -2,40 +2,44 @@ import Foundation
 
 // Не final т.к. нам в будущем может пригодиться расширить
 class Stack {
+    private enum StackElement {
+        case number(Double)
+        case operation(Double, AvailableOperation)
+    }
+
     private var stackPointer = -1
-    private var values: [KindOfOperation] = []
+    private var values: [StackElement] = []
+    var isEmpty: Bool {
+        return values.isEmpty
+    }
+    var size: Int {
+        return values.count
+    }
 
     func push(num: Double) {
         values.append(.number(num))
         stackPointer += 1
     }
 
-    func pop() -> (Double, AvailableOperations?)? {
-        if stackPointer >= 0 {
-            switch values[stackPointer] {
-            case .number(let number):
-                return (number, nil)
-            case .operation(let number, let oper):
-                return (number, oper)
-            }
+    func pop() -> (Double, AvailableOperation?)? {
+        guard stackPointer >= 0 else {
+            return nil }
+        switch values[stackPointer] {
+        case .number(let number):
+            stackPointer -= 1
+            return (number, nil)
+        case .operation(let number, let oper):
+            stackPointer -= 1
+            return (number, oper)
         }
-        return nil
     }
 
-    func push(num: Double, oper: AvailableOperations?) {
+    func push(num: Double, oper: AvailableOperation?) {
         guard let oper = oper else {
             push(num: num)
             return
         }
         values.append(.operation(num, oper))
-    }
-
-    func isEmpty() -> Bool {
-        return values.isEmpty
-    }
-
-    func size() -> Int {
-        return values.count
     }
 
     func next() {

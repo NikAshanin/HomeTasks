@@ -1,6 +1,6 @@
 import Foundation
 
-final class States {
+final class OperationTitles {
     private static let availableStates: [(String, String)] = [
         ("e^x", "yˣ"),
         ("10^x", "2^x"),

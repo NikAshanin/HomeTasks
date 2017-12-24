@@ -10,7 +10,7 @@ final class Calculator {
         if name == "=" {
             solve()
         }
-        guard let oper = AvailableOperations(rawValue: name),
+        guard let oper = AvailableOperation(rawValue: name),
               let operation = calcBrain.ops[oper] else {
             return
         }
@@ -80,8 +80,8 @@ final class Calculator {
         }
     }
 
-    private func doMath(userInput: String, _ newOp: AvailableOperations) {
-        if userInput != "" && !history.isEmpty() {
+    private func doMath(userInput: String, _ newOp: AvailableOperation) {
+        if userInput != "" && !history.isEmpty {
             guard let (secondNumber, lastOp) = history.pop() else {
                 return
             }

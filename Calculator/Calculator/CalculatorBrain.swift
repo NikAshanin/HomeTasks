@@ -1,9 +1,10 @@
 import Foundation
 
 final class CalculatorBrain {
+
     typealias Operation = (Double, Double) -> Double
 
-    let ops: [AvailableOperations: Operation] = [.plus: plus, .minus: minus, .multiply: multiply, .divide: divide,
+    let ops: [AvailableOperation: Operation] = [.plus: plus, .minus: minus, .multiply: multiply, .divide: divide,
                                                  .sqrt: sqrt, .pow: numberPow,
                                                  .fact: fact, .log: log, .sin: sin, .cos: cos, .tan: tan,
                                                  .sinh: sinh, .cosh: cosh, .tanh: tanh, .arcsin: arcsin,
