@@ -1,7 +1,7 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
-    @IBOutlet weak private var poster: UIImageView!
+    @IBOutlet weak private var posterImageView: UIImageView!
     @IBOutlet weak private var descriptionLabel: UILabel!
     @IBOutlet weak private var likesButton: UIButton!
 
@@ -13,10 +13,10 @@ final class DetailViewController: UIViewController {
         guard let film = film else {
             return
         }
-        poster.image = UIImage(named: film.image)
+        posterImageView.image = UIImage(named: film.image)
         descriptionLabel.text = film.description
         title = film.title
-        likesButton.setTitle("(\(film.likes)): Like", for: .normal)
+        updateLikesButton(film: film)
     }
 
     @IBAction func touchLike(_ sender: UIButton) {
@@ -24,6 +24,10 @@ final class DetailViewController: UIViewController {
             return
         }
         delegate?.addLike(film: film)
+        updateLikesButton(film: film)
+    }
+
+    private func updateLikesButton(film: Film) {
         likesButton.setTitle("(\(film.likes)): Like", for: .normal)
     }
 

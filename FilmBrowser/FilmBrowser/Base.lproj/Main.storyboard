@@ -120,7 +120,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="dqL-54-fUY" id="VlP-GA-o4m"/>
                         <outlet property="likesButton" destination="9vW-lD-9rl" id="u5h-fo-6hK"/>
-                        <outlet property="poster" destination="VbB-9C-Qiw" id="VsM-MY-5j3"/>
+                        <outlet property="posterImageView" destination="VbB-9C-Qiw" id="VsM-MY-5j3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3EE-H3-mCB" userLabel="First Responder" sceneMemberID="firstResponder"/>

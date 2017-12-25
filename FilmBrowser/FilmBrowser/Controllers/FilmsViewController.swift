@@ -21,12 +21,10 @@ extension FilmsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmTableViewCell.reuseId,
                                                  for: indexPath)
-        if let filmCell = cell as? FilmTableViewCell {
-            filmCell.configure(filmsSource.films[indexPath.row])
-            return filmCell
-        } else {
-            return UITableViewCell()
+        if let cell = cell as? FilmTableViewCell {
+            cell.configure(filmsSource.films[indexPath.row])
         }
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
