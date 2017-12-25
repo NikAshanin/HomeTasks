@@ -20,7 +20,7 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction func actionButtonPressed(_ sender: UIButton) {
         if userInput != "" {
-            calculator.addInHistory(input: userInput)
+            calculator.setNumber(input: userInput)
         }
         guard let text = sender.currentTitle else {
             return
@@ -31,26 +31,15 @@ final class CalculatorViewController: UIViewController {
             if !userInput.contains(".") {
                 handleInput(".")
             }
-//            if hasIndex(stringToSearch: userInput, characterToFind: ".") == false {
-//                handleInput(".")
-//            }
         case "C":
             cleanDisplay()
-        case "e":
-            calculator.currentResult = M_E
-            updateDisplay()
-            userInput = ""
-        case "п":
-            calculator.currentResult = Double(Float.pi)
-            updateDisplay()
-            userInput = ""
         case "2^nd":
             switchMode()
         case "Rad":
-            calculator.radianMode = !calculator.radianMode
+            calculator.switchRadianMode()
         default:
             calculator.performOperationByName(name: text)
-            updateDisplay()
+            updateDisplay(with: calculator.result)
             userInput = ""
         }
     }
@@ -58,7 +47,7 @@ final class CalculatorViewController: UIViewController {
 
 fileprivate extension CalculatorViewController {
 
-    func switchMode() {
+    private func switchMode() {
         for button in collectionOfButtons {
             guard let labelText = button.currentTitle else {
                 return
@@ -67,14 +56,7 @@ fileprivate extension CalculatorViewController {
         }
     }
 
-//    func hasIndex(stringToSearch str: String, characterToFind chr: Character) -> Bool {
-//        for c in str where c == chr {
-//            return true
-//        }
-//        return false
-//    }
-
-    func handleInput(_ str: String) {
+    private func handleInput(_ str: String) {
         if str == "-" {
             if userInput.hasPrefix(str) {
                 userInput = String(userInput[userInput.index(after: userInput.startIndex)...])
@@ -84,32 +66,31 @@ fileprivate extension CalculatorViewController {
         } else {
             userInput += str
         }
-        guard let currentResult = Double(userInput) else {
-            return
-        }
-        calculator.currentResult = currentResult
-        updateDisplay()
+        updateDisplay(with: userInput)
     }
 
-    func updateDisplay() {
-        if calculator.currentResult < Double(Int.max) && calculator.currentResult > Double(Int.min) {
-            let iAcc = Int(calculator.currentResult)
+    private func updateDisplay(with numValue: Double) {
+        if numValue < Double(Int.max) && numValue > Double(Int.min) {
+            let iAcc = Int(numValue)
 
-            if calculator.currentResult - Double(iAcc) == 0 {
-                numLabel.text = "\(iAcc)"
+            if numValue - Double(iAcc) == 0 {
+                updateDisplay(with: "\(iAcc)")
             } else {
-                numLabel.text = "\(calculator.currentResult)"
+                updateDisplay(with: "\(numValue)")
             }
         } else {
-            numLabel.text = "Error"
+            updateDisplay(with: "Error")
             userInput = ""
         }
     }
 
-    func cleanDisplay() {
+    private func updateDisplay(with rawValue: String) {
+        numLabel.text = rawValue
+    }
+
+    private func cleanDisplay() {
         userInput = ""
-        calculator.currentResult = 0
-        updateDisplay()
-        calculator.clearHistory()
+        calculator.clear()
+        updateDisplay(with: userInput)
     }
 }

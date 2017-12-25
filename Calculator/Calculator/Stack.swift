@@ -34,17 +34,38 @@ class Stack {
         }
     }
 
+    func push(num: Double, oper: String?) {
+        guard let oper = oper,
+            let operType = AvailableOperation(rawValue: oper) else {
+                push(num: num)
+                return
+        }
+        values.append(.operation(num, operType))
+        stackPointer+=1
+    }
+
     func push(num: Double, oper: AvailableOperation?) {
         guard let oper = oper else {
             push(num: num)
             return
         }
         values.append(.operation(num, oper))
+        stackPointer+=1
     }
 
-    func next() {
+    func next() -> (Double, AvailableOperation?)? {
         if stackPointer < values.count - 1 {
             stackPointer += 1
+            switch values[stackPointer] {
+            case .number(let number):
+                stackPointer -= 1
+                return (number, nil)
+            case .operation(let number, let oper):
+                stackPointer -= 1
+                return (number, oper)
+            }
+        } else {
+            return nil
         }
     }
 

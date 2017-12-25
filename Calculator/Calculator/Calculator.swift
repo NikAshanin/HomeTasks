@@ -1,105 +1,120 @@
 import Foundation
 
 final class Calculator {
+    private var pendingBinaryOperation: PendingBinaryOperation?
     private var history = Stack()
-    var currentResult: Double = 0
+    private var currentResult: Double = 0
+    var result: Double {
+        return currentResult
+    }
     private let calcBrain = CalculatorBrain()
-    var radianMode = false
+    private var radianMode = false
+    private var recoveringFromHistory = false
+    private var pendingOperationWasPerformed = false
 
     func performOperationByName(name: String) {
-        if name == "=" {
-            solve()
-        }
-        guard let oper = AvailableOperation(rawValue: name),
-              let operation = calcBrain.ops[oper] else {
+        guard let operation = calcBrain.operations[name] else {
             return
         }
+        switch operation {
+        case .constant(let value):
+            currentResult = value
+        case .unaryOperation (let function):
+            currentResult = function(currentResult)
+        case .geomOperation(let function):
+            currentResult = function(currentResult)
+            if radianMode {
+                currentResult = currentResult * 180 / .pi
+            }
+        case .binaryOperation (let function):
+            performPendingBinaryOperation()
+            pendingBinaryOperation = PendingBinaryOperation(function: function, firstValue: currentResult, oper: name)
+            saveResult(value: currentResult, oper: name)
+        case .equals:
+            guard let pbo = pendingBinaryOperation else {
+                return
+            }
+            currentResult = pbo.perform(with: currentResult)
+            pendingBinaryOperation = nil
+            pendingOperationWasPerformed = true
 
-        switch name {
-        case "sqrt", "3sqrt":
-            name == "sqrt" ? sqrt(pow: 2, operation) : sqrt(pow: 3, operation)
-        case "x^2", "x^3", "e^x", "10^x":
-            pow(action: name, operation)
-        case "1/x":
-            currentResult = operation(1, currentResult)
-        case "x!":
-            currentResult = operation(currentResult, currentResult)
-        case "ln", "log10":
-            name == "ln" ? log(pow: M_E, operation) : log(pow: 10, operation)
-        case "sin", "cos", "tan", "sinh", "cosh", "tanh", "sin^-1", "cos^-1", "tan^-1", "sinh^-1", "cosh^-1", "tanh^-1":
-            radianMode ? (currentResult = operation(currentResult, currentResult) * 180 / Double.pi) :
-                    (currentResult = operation(currentResult, currentResult))
-        case "<-", "->":
-            name == "<-" ? history.past() : history.next()
-        default:
-            doMath(userInput: name, oper)
+        case .redo:
+            redo()
+        case .undo:
+            undo()
         }
     }
+    private func performPendingBinaryOperation() {
+        guard pendingBinaryOperation != nil,
+            let value = (pendingBinaryOperation?.perform(with: currentResult)) else {
+                return
+        }
+        currentResult = value
+        pendingBinaryOperation = nil
+    }
 
-    func clearHistory() {
+    func clear() {
+        currentResult = 0
         history.removeAll()
     }
 
-    func addInHistory(input: String) {
+    func setNumber(input: String) {
         guard let num = Double(input) else {
             return
         }
-        history.push(num: num)
+        currentResult = num
+        saveResult(value: num, oper: nil)
     }
 
-    private func solve() {
-            guard let (secondNumber, operation) = history.pop()
-                else {
-                    return
-            }
-            guard let oper = operation,
-                let res = calcBrain.ops[oper] else {
-                    return
-            }
-            currentResult = res(secondNumber, currentResult)
-            history.push(num: currentResult)
+    func switchRadianMode() {
+        radianMode = !radianMode
     }
 
-    private func sqrt(pow: Double, _ operation: ((Double, Double) -> Double)) {
-        currentResult = operation(currentResult, pow)
-    }
-
-    private func pow(action: String, _ operation: ((Double, Double) -> Double)) {
-        switch action {
-        case "x^2":
-            currentResult = operation(currentResult, 2)
-        case "x^3":
-            currentResult = operation(currentResult, 3)
-        case "e^x":
-            currentResult = operation(M_E, currentResult)
-        case "10^x":
-            currentResult = operation(10, currentResult)
-        case "2^x":
-            currentResult = operation(2, currentResult)
-        default: break
+    private func undo() {
+        if let (value, function) = history.pop() {
+            recoverOperation(value, function)
         }
     }
 
-    private func doMath(userInput: String, _ newOp: AvailableOperation) {
-        if userInput != "" && !history.isEmpty {
-            guard let (secondNumber, lastOp) = history.pop() else {
+    private func redo() {
+        if let (value, function) = history.next() {
+            recoverOperation(value, function)
+        }
+    }
+
+    private func recoverOperation(_ value: Double, _ operation: AvailableOperation?) {
+        recoveringFromHistory = true
+        currentResult = value
+        if let symbol = operation {
+            performOperationByName(name: symbol.rawValue)
+        } else {
+            pendingBinaryOperation = nil
+        }
+        currentResult = value
+        recoveringFromHistory = false
+    }
+
+    private func saveResult(value: Double, oper: String?) {
+        guard let oper = oper,
+            !recoveringFromHistory else {
                 return
-            }
-            if !((lastOp == .plus || lastOp == .minus) &&
-                (newOp == .multiply || newOp == .divide || newOp == .numberPow || newOp == .sqrt)) {
-                guard let op = lastOp,
-                    let oper = calcBrain.ops[op] else {
-                        return
-                }
-                currentResult = oper(secondNumber, currentResult)
-                history.push(num: currentResult)
-                self.solve()
-            }
         }
-        history.push(num: currentResult, oper: newOp)
+        guard let operType = AvailableOperation(rawValue: oper) else {
+            history.push(num: value)
+            return
+        }
+        history.push(num: value, oper: operType)
     }
+}
 
-    private func log(pow: Double, _ operation: ((Double, Double) -> Double)) {
-        currentResult = operation(pow, currentResult)
+fileprivate extension Calculator {
+     struct PendingBinaryOperation {
+        let function: (Double, Double) -> Double
+        let firstValue: Double
+        let oper: String
+
+        func perform (with secondValue: Double) -> Double {
+            return (function(firstValue, secondValue))
+        }
     }
 }
