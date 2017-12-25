@@ -10,7 +10,6 @@ final class Calculator {
     private let calcBrain = CalculatorBrain()
     private var radianMode = false
     private var recoveringFromHistory = false
-    private var pendingOperationWasPerformed = false
 
     func performOperationByName(name: String) {
         guard let operation = calcBrain.operations[name] else {
@@ -36,7 +35,6 @@ final class Calculator {
             }
             currentResult = pbo.perform(with: currentResult)
             pendingBinaryOperation = nil
-            pendingOperationWasPerformed = true
 
         case .redo:
             redo()
