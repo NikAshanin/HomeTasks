@@ -4,65 +4,67 @@ final class NetworkService {
     private let blankURL = "https://swapi.co/api/people/?search="
     private let session = URLSession.shared
 
-    func searchFilmsLinks(searchText: String, resultArray: @escaping (([Personage]) -> Void)) {
-        let group = DispatchGroup()
-        var variableJson = [[String: Any]]()
+    func searchFilmsLinks(searchText: String, completionBlock: @escaping (([Personage]) -> Void)) {
         guard let validSearchText = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: blankURL + validSearchText) else {
-                resultArray([])
+                completionBlock([])
                 return
         }
-        group.enter()
-        let task = session.dataTask(with: url) { (data, _, _) in
+        let task = session.dataTask(with: url) { [weak self] (data, _, _) in
             guard let data = data,
                 let personageJson = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
                 let personages = personageJson["results"] as? [[String: Any]] else {
+                    completionBlock([])
                     return
             }
-            variableJson = personages
-            group.leave()
+            var personageArray = [Personage]()
+            for personage in personages {
+                guard let name = personage["name"] as? String,
+                    let filmsURL = personage["films"] as? [String] else {
+                        completionBlock([])
+                        return
+                }
+                self?.fetchFilms(filmsURL: filmsURL) { films in
+                    personageArray.append(Personage(personage: name, starredInFilms: films))
+                    completionBlock(personageArray)
+                }
+            }
         }
         task.resume()
-        group.notify(queue: .global()) { [weak self] in
-                self?.fetchFilms(personages: variableJson, resultArray: resultArray)
-        }
     }
 
-    private func fetchFilms(personages: [[String: Any]], resultArray: @escaping (([Personage]) -> Void)) {
-        var personageArray = [Personage]()
-        var personageName: String = ""
+    private func fetchFilms(filmsURL: [String], completionBlock: @escaping (([Film]) -> Void)) {
         var films = [Film]()
         let group = DispatchGroup()
-        for personage in personages {
-            guard let name = personage["name"] as? String,
-                let filmsURL = personage["films"] as? [String] else {
-                    resultArray([])
-                    return
+        for filmURL in filmsURL {
+            var filmJson: [String: Any]?
+            guard let url = URL(string: filmURL) else {
+                continue
             }
-            personageName = name
-            for filmURL in filmsURL {
-                guard let url = URL(string: filmURL) else {
-                    continue
-                }
-                group.enter()
-                let task = self.session.dataTask(with: url) { (data, _, _) in
-                    guard let data = data,
-                        let filmJson = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
-                        let name = filmJson["title"] as? String,
-                        let year = filmJson["release_date"] as? String else {
-                            return
-                    }
-                    films.append(Film(filmName: name, filmedIn: year))
+            group.enter()
+            session.dataTask(with: url) { (data, _, error) in
+                guard let data = data else {
                     group.leave()
+                    return
                 }
-                task.resume()
-            }
-            group.wait()
-            personageArray.append(Personage(personage: personageName, starredInFilms: films))
-            films.removeAll()
+                do {
+                    filmJson = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                } catch let error as NSError {
+                    group.leave()
+                    print(error.localizedDescription)
+                }
+                guard let jsonObject = filmJson,
+                    let name = jsonObject["title"] as? String,
+                    let year = jsonObject["release_date"] as? String else {
+                        group.leave()
+                        return
+                }
+                films.append(Film(filmName: name, filmedIn: year))
+                group.leave()
+            }.resume()
         }
         group.notify(queue: DispatchQueue.main) {
-            resultArray(personageArray)
+            completionBlock(films)
         }
     }
 }

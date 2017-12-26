@@ -15,15 +15,16 @@ extension StarWarsViewController: UITextFieldDelegate {
             return false
         }
         spinner.startAnimating()
-        searchTextField?.text = text
         searchTextField?.resignFirstResponder()
         personageArray.removeAll()
         tableView.reloadData()
         title = text
         networkService.searchFilmsLinks(searchText: text) { [weak self] personageArray in
             self?.personageArray = personageArray
-            self?.tableView.reloadData()
-            self?.spinner.stopAnimating()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.spinner.stopAnimating()
+            }
         }
         return true
     }
@@ -51,10 +52,12 @@ extension StarWarsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let date = personageArray[indexPath.section].films[indexPath.row].year
+        guard let date = personageArray[indexPath.section].films[indexPath.row].year else {
+            return
+        }
         tableView.deselectRow(at: indexPath, animated: true)
         let alert = UIAlertController(title: "",
-                                      message: "Этот фильм вышел в \(date ?? 0) году.",
+                                      message: "Этот фильм вышел в \(date) году.",
                                       preferredStyle: UIAlertControllerStyle.alert)
         let alertAction = UIAlertAction(title: "Окей", style: .cancel, handler: nil)
         alert.addAction(alertAction)

@@ -3,7 +3,7 @@ import Foundation
 final class Film {
     let name: String
     let year: Int?
-    private static let dateFormatter = DateFormatter()
+    private static var dateFormatter = DateFormatter()
 
     init(filmName name: String, filmedIn year: String) {
         self.name = name
@@ -12,7 +12,7 @@ final class Film {
     }
 
     private static func getYearFromString(_ stringYear: String) -> Int? {
-        let dateFormatter: DateFormatter = {
+        dateFormatter = {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-mm-dd"
             return formatter
