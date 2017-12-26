@@ -19,7 +19,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func actionButtonPressed(_ sender: UIButton) {
-        if userInput != "" {
+        if !userInput.isEmpty {
             calculator.setNumber(input: userInput)
         }
         guard let text = sender.currentTitle else {

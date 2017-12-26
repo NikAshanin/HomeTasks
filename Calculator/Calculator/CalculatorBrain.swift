@@ -9,6 +9,7 @@ final class CalculatorBrain {
         case equals
         case redo
         case undo
+        case random(()->Double)
     }
 
     var operations =
@@ -40,6 +41,7 @@ final class CalculatorBrain {
             "ln": Operation.unaryOperation(log),
             "10^x": Operation.unaryOperation({ pow(10, $0) }),
             "1/x": Operation.unaryOperation({ 1 / $0 }),
+            "Rand": Operation.random({ Double(arc4random()) / Double(UInt32.max) }),
             "=": Operation.equals,
             "<-": Operation.undo,
             "->": Operation.redo

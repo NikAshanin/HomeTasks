@@ -9,7 +9,7 @@ final class Calculator {
     }
     private let calcBrain = CalculatorBrain()
     private var radianMode = false
-    private var recoveringFromHistory = false
+//    private var recoveringFromHistory = false
 
     func performOperationByName(name: String) {
         guard let operation = calcBrain.operations[name] else {
@@ -21,9 +21,10 @@ final class Calculator {
         case .unaryOperation (let function):
             currentResult = function(currentResult)
         case .geomOperation(let function):
-            currentResult = function(currentResult)
             if radianMode {
-                currentResult = currentResult * 180 / .pi
+                currentResult = function(currentResult * 180 / .pi)
+            } else {
+                currentResult = function(currentResult)
             }
         case .binaryOperation (let function):
             performPendingBinaryOperation()
@@ -40,6 +41,8 @@ final class Calculator {
             redo()
         case .undo:
             undo()
+        case .random(let function):
+            currentResult = function()
         }
     }
     private func performPendingBinaryOperation() {
@@ -81,7 +84,7 @@ final class Calculator {
     }
 
     private func recoverOperation(_ value: Double, _ operation: AvailableOperation?) {
-        recoveringFromHistory = true
+//        recoveringFromHistory = true
         currentResult = value
         if let symbol = operation {
             performOperationByName(name: symbol.rawValue)
@@ -89,7 +92,7 @@ final class Calculator {
             pendingBinaryOperation = nil
         }
         currentResult = value
-        recoveringFromHistory = false
+//        recoveringFromHistory = false
     }
 
     private func saveResult(value: Double, oper: String?) {

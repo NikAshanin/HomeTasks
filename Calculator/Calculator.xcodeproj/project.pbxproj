@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		492B98BA1FF1C56D00113E1B /* Double+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492B98B91FF1C56D00113E1B /* Double+ToString.swift */; };
-		492DC8161FF049020092A7BD /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DC8151FF049020092A7BD /* Operation.swift */; };
 		49F387A61FDD810F00646E4F /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F387A51FDD810F00646E4F /* CalculatorBrain.swift */; };
 		49F387A81FDD95CD00646E4F /* AvailableOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F387A71FDD95CD00646E4F /* AvailableOperation.swift */; };
 		49F387AB1FE5C83300646E4F /* OperationTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F387AA1FE5C83300646E4F /* OperationTitles.swift */; };
@@ -23,7 +22,6 @@
 
 /* Begin PBXFileReference section */
 		492B98B91FF1C56D00113E1B /* Double+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToString.swift"; sourceTree = "<group>"; };
-		492DC8151FF049020092A7BD /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		49F387A51FDD810F00646E4F /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		49F387A71FDD95CD00646E4F /* AvailableOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOperation.swift; sourceTree = "<group>"; };
 		49F387AA1FE5C83300646E4F /* OperationTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationTitles.swift; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				49F387A71FDD95CD00646E4F /* AvailableOperation.swift */,
-				492DC8151FF049020092A7BD /* Operation.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -217,7 +214,6 @@
 				49F387AB1FE5C83300646E4F /* OperationTitles.swift in Sources */,
 				49F387A61FDD810F00646E4F /* CalculatorBrain.swift in Sources */,
 				49F387A81FDD95CD00646E4F /* AvailableOperation.swift in Sources */,
-				492DC8161FF049020092A7BD /* Operation.swift in Sources */,
 				492B98BA1FF1C56D00113E1B /* Double+ToString.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				49F387B81FE8700700646E4F /* Calculator.swift in Sources */,

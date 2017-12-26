@@ -4,11 +4,15 @@ extension Formatter {
 }
 
 extension Double {
+    static let number = {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 5
+        formatter.number.roundingMode = .halfEven
+        formatter.number.numberStyle = .decimal
+        return formatter
+    }()
+
     func toString() -> String {
-        Formatter.number.minimumFractionDigits = 0
-        Formatter.number.maximumFractionDigits = 5
-        Formatter.number.roundingMode = .halfEven
-        Formatter.number.numberStyle = .decimal
         return Formatter.number.string(for: self) ?? ""
     }
 }

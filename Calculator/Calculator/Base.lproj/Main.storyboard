@@ -678,6 +678,9 @@
                                         <state key="normal" title="Rand">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="actionButtonPressed:" destination="Po6-u3-oLp" eventType="touchUpInside" id="cwH-kZ-u6A"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItO-bD-vTn">
                                         <rect key="frame" x="400.5" y="0.0" width="132.5" height="60"/>
