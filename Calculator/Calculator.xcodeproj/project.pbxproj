@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492B98BA1FF1C56D00113E1B /* Double+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492B98B91FF1C56D00113E1B /* Double+ToString.swift */; };
 		492DC8161FF049020092A7BD /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492DC8151FF049020092A7BD /* Operation.swift */; };
 		49F387A61FDD810F00646E4F /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F387A51FDD810F00646E4F /* CalculatorBrain.swift */; };
 		49F387A81FDD95CD00646E4F /* AvailableOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F387A71FDD95CD00646E4F /* AvailableOperation.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		492B98B91FF1C56D00113E1B /* Double+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToString.swift"; sourceTree = "<group>"; };
 		492DC8151FF049020092A7BD /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		49F387A51FDD810F00646E4F /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		49F387A71FDD95CD00646E4F /* AvailableOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableOperation.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		492B98B81FF1C55700113E1B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				492B98B91FF1C56D00113E1B /* Double+ToString.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		49F387B01FE84AFF00646E4F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +94,7 @@
 		7FF582501FBDA7E90009B9BD /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				492B98B81FF1C55700113E1B /* Extensions */,
 				49F387B41FE84BDF00646E4F /* Controllers */,
 				49F387B01FE84AFF00646E4F /* Enums */,
 				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
@@ -207,6 +218,7 @@
 				49F387A61FDD810F00646E4F /* CalculatorBrain.swift in Sources */,
 				49F387A81FDD95CD00646E4F /* AvailableOperation.swift in Sources */,
 				492DC8161FF049020092A7BD /* Operation.swift in Sources */,
+				492B98BA1FF1C56D00113E1B /* Double+ToString.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				49F387B81FE8700700646E4F /* Calculator.swift in Sources */,
 				49F387AD1FE84AE300646E4F /* Stack.swift in Sources */,

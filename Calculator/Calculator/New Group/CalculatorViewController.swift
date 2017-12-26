@@ -71,13 +71,7 @@ fileprivate extension CalculatorViewController {
 
     private func updateDisplay(with numValue: Double) {
         if numValue < Double(Int.max) && numValue > Double(Int.min) {
-            let iAcc = Int(numValue)
-
-            if numValue - Double(iAcc) == 0 {
-                updateDisplay(with: "\(iAcc)")
-            } else {
-                updateDisplay(with: "\(numValue)")
-            }
+            updateDisplay(with: numValue.toString())
         } else {
             updateDisplay(with: "Error")
             userInput = ""
