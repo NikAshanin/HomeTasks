@@ -26,41 +26,23 @@ final class CalculatorViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private let trigOperations: Set = ["sin-1", "sinh-1", "cos-1",
-                                       "cosh-1", "tan-1", "tanh-1",
-                                       "sinh", "sin", "cos",
-                                       "cosh", "tan", "tanh"]
-
     private let formatter = NumberFormatterConfigurator()
     private let processor = CalculatorProcessor()
     private var userBeganTyping = false
-    private var numberOfCharacterGreaterThan16: Bool {
+    private var isLimitReached: Bool {
         return (displayLabel.text?.count)! >= 16
     }
     private var displayValue: Double {
         get {
             let displayText = displayLabel.text ?? "0"
 
-            let displayTextWithoutCommas = displayText.replacingOccurrences(of: ",", with: ".")
-            let displayTextWithoutCommasAndSpaces = displayTextWithoutCommas.replacingOccurrences(of: " ", with: "")
-
-            return Double(displayTextWithoutCommasAndSpaces) ?? 0
+            return Double(displayText) ?? 0
         }
         set {
             if let result = formatter.string(from: newValue as NSNumber) {
-                let displayTextWithCommas = result.replacingOccurrences(of: ".", with: ",")
-                displayLabel.text = displayTextWithCommas
+                displayLabel.text = result
             }
         }
-    }
-
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        sequanceOfOperationsLabel.text = nil
-        memoryLabel.text = nil
     }
 
     // MARK: - Actions
@@ -72,7 +54,7 @@ final class CalculatorViewController: UIViewController {
         }
 
         switch character {
-        case ",": decimalPointTapped()
+        case ".": decimalPointTapped()
         case "C", "AC": cleanDisplay()
         case "Rad", "Deg": radToDeg(currentState: character)
         default: performDigitTapping(digit: character)
@@ -91,7 +73,8 @@ final class CalculatorViewController: UIViewController {
             userBeganTyping ? deleteTapped() : handleUndoRedo(operation: .undo)
         } else {
             if userBeganTyping {
-                processor.setOperand(formatToDergeeOrRad(number: displayValue, operation))
+                processor.setOperand(degreeToRadianButton.currentTitle == "Deg" ?
+                    displayValue.formatToDergeeOrRad(operation: operation) : displayValue)
 
                 userBeganTyping = false
             } else if processor.resultIsPending {
@@ -132,15 +115,6 @@ final class CalculatorViewController: UIViewController {
     }
 
     // MARK: - Private
-
-    private func formatToDergeeOrRad(number: Double, _ operation: String) -> Double {
-        var newNumber = number
-        if trigOperations.contains(operation) && degreeToRadianButton.currentTitle == "Deg" {
-            newNumber = number.degreesToRadians
-            return newNumber
-        }
-        return number
-    }
 
     private func handleUndoRedo(operation: UndoRedo) {
         switch operation {
@@ -210,7 +184,7 @@ final class CalculatorViewController: UIViewController {
     private func decimalPointTapped() {
         userBeganTyping == false ? processor.setOperand(0) : ()
         if let text = displayLabel.text {
-            text.contains(",") ? print("No dots allowed") : displayLabel.text?.append(",")
+            text.contains(".") ? print("No dots allowed") : displayLabel.text?.append(".")
         }
         userBeganTyping = true
     }
@@ -229,7 +203,7 @@ final class CalculatorViewController: UIViewController {
                 return
             }
 
-            if !numberOfCharacterGreaterThan16 {
+            if !isLimitReached {
                 displayLabel.text = displayText + digit
             }
         } else {
