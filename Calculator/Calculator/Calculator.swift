@@ -20,11 +20,7 @@ final class Calculator {
         case .unaryOperation (let function):
             currentResult = function(currentResult)
         case .geomOperation(let function):
-            if radianMode {
-                currentResult = function(currentResult * 180 / .pi)
-            } else {
-                currentResult = function(currentResult)
-            }
+            currentResult =  radianMode ? function(currentResult * 180 / .pi) : function(currentResult)
         case .binaryOperation (let function):
             performPendingBinaryOperation()
             pendingBinaryOperation = PendingBinaryOperation(function: function, firstValue: currentResult, oper: name)
