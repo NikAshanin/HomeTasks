@@ -18,16 +18,24 @@ final class NetworkService {
                     return
             }
             var personageArray = [Personage]()
+            let group = DispatchGroup()
             for personage in personages {
-                guard let name = personage["name"] as? String,
-                    let filmsURL = personage["films"] as? [String] else {
-                        completionBlock([])
-                        return
+                group.enter()
+                DispatchQueue.global().async {
+                    guard let name = personage["name"] as? String,
+                        let filmsURL = personage["films"] as? [String] else {
+                            group.leave()
+                            completionBlock([])
+                            return
+                    }
+                    self?.fetchFilms(filmsURL: filmsURL) { films in
+                        personageArray.append(Personage(personage: name, starredInFilms: films))
+                    }
+                    group.leave()
                 }
-                self?.fetchFilms(filmsURL: filmsURL) { films in
-                    personageArray.append(Personage(personage: name, starredInFilms: films))
-                    completionBlock(personageArray)
-                }
+            }
+            group.notify(queue: DispatchQueue.main) {
+                completionBlock(personageArray)
             }
         }
         task.resume()
@@ -63,6 +71,7 @@ final class NetworkService {
                 group.leave()
             }.resume()
         }
+        group.wait()
         group.notify(queue: DispatchQueue.main) {
             completionBlock(films)
         }
