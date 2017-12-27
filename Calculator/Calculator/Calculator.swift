@@ -9,7 +9,6 @@ final class Calculator {
     }
     private let calcBrain = CalculatorBrain()
     private var radianMode = false
-//    private var recoveringFromHistory = false
 
     func performOperationByName(name: String) {
         guard let operation = calcBrain.operations[name] else {
@@ -84,7 +83,6 @@ final class Calculator {
     }
 
     private func recoverOperation(_ value: Double, _ operation: AvailableOperation?) {
-//        recoveringFromHistory = true
         currentResult = value
         if let symbol = operation {
             performOperationByName(name: symbol.rawValue)
@@ -92,12 +90,10 @@ final class Calculator {
             pendingBinaryOperation = nil
         }
         currentResult = value
-//        recoveringFromHistory = false
     }
 
     private func saveResult(value: Double, oper: String?) {
-        guard let oper = oper,
-            !recoveringFromHistory else {
+        guard let oper = oper else {
                 return
         }
         guard let operType = AvailableOperation(rawValue: oper) else {
