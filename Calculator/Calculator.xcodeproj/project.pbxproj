@@ -10,6 +10,7 @@
 		27306F951FC859F8003732EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27306F941FC859F7003732EE /* Main.storyboard */; };
 		27306F971FC85A0B003732EE /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27306F961FC85A0B003732EE /* RoundButton.swift */; };
 		27306F991FC85A95003732EE /* MathOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27306F981FC85A95003732EE /* MathOperation.swift */; };
+		279EEF691FF4FE2800B722AF /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279EEF681FF4FE2800B722AF /* Formatter.swift */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
 		7FF582591FBDA7E90009B9BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582581FBDA7E90009B9BD /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		27306F941FC859F7003732EE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		27306F961FC85A0B003732EE /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		27306F981FC85A95003732EE /* MathOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathOperation.swift; sourceTree = "<group>"; };
+		279EEF681FF4FE2800B722AF /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
 				27306F941FC859F7003732EE /* Main.storyboard */,
 				27306F981FC85A95003732EE /* MathOperation.swift */,
+				279EEF681FF4FE2800B722AF /* Formatter.swift */,
 				27306F961FC85A0B003732EE /* RoundButton.swift */,
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
 				7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */,
@@ -176,6 +179,7 @@
 			files = (
 				27306F971FC85A0B003732EE /* RoundButton.swift in Sources */,
 				27306F991FC85A95003732EE /* MathOperation.swift in Sources */,
+				279EEF691FF4FE2800B722AF /* Formatter.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
 			);

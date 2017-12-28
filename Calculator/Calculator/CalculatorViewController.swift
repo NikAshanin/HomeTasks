@@ -10,11 +10,7 @@ final class CalculatorViewController: UIViewController {
             return Double(display.text ?? "0") ?? 0
         }
         set {
-            if  floor(newValue) == newValue && newValue < Double(Int.max) && newValue > Double(Int.min) {
-                display.text = String(Int(newValue))
-            } else {
-                display.text = String(newValue)
-            }
+            display.text = formatter.string(from: NSNumber(value: newValue))
         }
     }
     @IBOutlet private var sinButton: RoundButton!
@@ -32,12 +28,11 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private var clearAC: RoundButton!
     @IBOutlet private var display: UILabel!
     @IBOutlet private var radDisplay: UILabel!
-    
+
     @IBAction private func dotSet(_ sender: UIButton) {
         let dot = "."
         let textCurrentlyInDisplay = display.text ?? "0"
-        if !dotAlreadySet &&  floor(Double(display.text ?? "0") ?? 0) == Double(display.text ?? "0")
-            && display.text != nil {
+        if floor(Double(display.text ?? "0") ?? 0) == Double(display.text ?? "0") && display.text != nil {
             display.text = textCurrentlyInDisplay + dot
             dotAlreadySet = true
         }
@@ -96,7 +91,6 @@ final class CalculatorViewController: UIViewController {
         brain.doUndoFunction()
         if let result = brain.result {
             displayValue = result
-            dotAlreadySet = false
         }
         isTyping = false
         if brain.buttonPressed {
@@ -139,11 +133,11 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func touchRadButton(_ sender: RoundButton) {
         if sender.currentTitle == "Rad" {
             brain.inDeg = false
-            sender.setTitle("Deg", for: UIControlState())
+            sender.setTitle("Deg", for: UIControlState.normal)
             radDisplay.text = ""
         } else {
             brain.inDeg = true
-            sender.setTitle("Rad", for: UIControlState())
+            sender.setTitle("Rad", for: UIControlState.normal)
             radDisplay.text = "Deg"
         }
     }
