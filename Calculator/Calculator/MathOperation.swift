@@ -1,8 +1,8 @@
 import Foundation
 
 extension Double {
-    static func factorialFunc(_ number: Double) -> Double {
-        return number == 0 ? 1 : number * factorialFunc(number-1)
+    func factorialFunc() -> Double {
+        return self == 0.0 ? 1 : self * (self - 1).factorialFunc()
     }
 }
 
@@ -45,7 +45,7 @@ final class CalculatorBrain {
             "tanh⁻¹": Operation.geomOperation(atanh),
             "±": Operation.changeOperation ({ -$0 }),
             "Rand": Operation.constant (Double(arc4random())),
-            "x!": Operation.unaryOperation(Double.factorialFunc, { $0 < 0 || $0 > 20 ? true : nil }),
+            "x!": Operation.unaryOperation({ $0.factorialFunc() }, { $0 < 0 || $0 > 20 ? true : nil }),
             "×": Operation.binaryOperation ({ $0 * $1 }),
             "÷": Operation.binaryOperation ({ $0 / $1 }),
             "+": Operation.binaryOperation ({ $0 + $1 }),

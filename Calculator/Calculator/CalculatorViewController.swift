@@ -7,7 +7,10 @@ final class CalculatorViewController: UIViewController {
     private var brain = CalculatorBrain()
     private var displayValue: Double {
         get {
-            return Double(display.text ?? "0") ?? 0
+            guard let text = display.text, let value = formatter.number(from: text) as? Double else {
+                return 0
+            }
+            return value
         }
         set {
             display.text = formatter.string(from: NSNumber(value: newValue))
@@ -91,6 +94,9 @@ final class CalculatorViewController: UIViewController {
         brain.doUndoFunction()
         if let result = brain.result {
             displayValue = result
+            if floor(displayValue) == displayValue {
+                dotAlreadySet = false
+            }
         }
         isTyping = false
         if brain.buttonPressed {
