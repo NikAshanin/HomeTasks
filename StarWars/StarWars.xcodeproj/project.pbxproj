@@ -12,6 +12,8 @@
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		2A1EACFF1FC889B500185EF8 /* CreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EACFD1FC889B400185EF8 /* CreateTableViewCell.swift */; };
+		2A1EAD001FC889B500185EF8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EACFE1FC889B400185EF8 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A1EACFD1FC889B400185EF8 /* CreateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTableViewCell.swift; sourceTree = "<group>"; };
+		2A1EACFE1FC889B400185EF8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
+				2A1EACFD1FC889B400185EF8 /* CreateTableViewCell.swift */,
+				2A1EACFE1FC889B400185EF8 /* NetworkService.swift */,
 				11396C671FBDB6D2008C570F /* ViewController.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
@@ -160,7 +166,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\n#pmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\n#php ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,8 +175,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A1EACFF1FC889B500185EF8 /* CreateTableViewCell.swift in Sources */,
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
+				2A1EAD001FC889B500185EF8 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
