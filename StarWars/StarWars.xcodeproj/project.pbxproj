@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00C8F20A1FC1A0B00010CEBC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F2091FC1A0B00010CEBC /* Networking.swift */; };
+		00C8F20C1FC21BB20010CEBC /* EmptyTableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F20B1FC21BB20010CEBC /* EmptyTableViewHelper.swift */; };
+		00C8F20E1FC224D40010CEBC /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F20D1FC224D40010CEBC /* Film.swift */; };
+		00D8589A1FD02AEF005B52F6 /* BaseDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D858991FD02AEF005B52F6 /* BaseDateFormatter.swift */; };
 		11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C651FBDB6D2008C570F /* AppDelegate.swift */; };
 		11396C681FBDB6D2008C570F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* ViewController.swift */; };
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00C8F2091FC1A0B00010CEBC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		00C8F20B1FC21BB20010CEBC /* EmptyTableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewHelper.swift; sourceTree = "<group>"; };
+		00C8F20D1FC224D40010CEBC /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		00D858991FD02AEF005B52F6 /* BaseDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDateFormatter.swift; sourceTree = "<group>"; };
 		11396C621FBDB6D2008C570F /* StarWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11396C651FBDB6D2008C570F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11396C671FBDB6D2008C570F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,10 +64,14 @@
 			children = (
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
 				11396C671FBDB6D2008C570F /* ViewController.swift */,
+				00C8F2091FC1A0B00010CEBC /* Networking.swift */,
+				00C8F20B1FC21BB20010CEBC /* EmptyTableViewHelper.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
+				00C8F20D1FC224D40010CEBC /* Film.swift */,
+				00D858991FD02AEF005B52F6 /* BaseDateFormatter.swift */,
 			);
 			path = StarWars;
 			sourceTree = "<group>";
@@ -136,7 +148,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		11396C771FBDB8FA008C570F /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -150,7 +162,7 @@
 		};
 		11396C781FBDB916008C570F /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -160,7 +172,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,8 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C8F20E1FC224D40010CEBC /* Film.swift in Sources */,
+				00C8F20A1FC1A0B00010CEBC /* Networking.swift in Sources */,
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				00D8589A1FD02AEF005B52F6 /* BaseDateFormatter.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
+				00C8F20C1FC21BB20010CEBC /* EmptyTableViewHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +324,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				DEVELOPMENT_TEAM = F8V3W9KHRA;
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -324,7 +340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				DEVELOPMENT_TEAM = F8V3W9KHRA;
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
