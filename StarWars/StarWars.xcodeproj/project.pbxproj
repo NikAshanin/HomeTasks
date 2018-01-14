@@ -12,6 +12,14 @@
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		3A52ED8B1FC98B5A006FDA27 /* DateFormatterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A52ED8A1FC98B5A006FDA27 /* DateFormatterConfigurator.swift */; };
+		3A53227D1FC8A01A003F1F6B /* FilmTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53227B1FC8A01A003F1F6B /* FilmTitleCell.swift */; };
+		3A53227E1FC8A01A003F1F6B /* FilmTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A53227C1FC8A01A003F1F6B /* FilmTitleCell.xib */; };
+		3A5A768A1FC303D4001B63E2 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A76891FC303D4001B63E2 /* Entities.swift */; };
+		3A5A768C1FC32AD5001B63E2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A768B1FC32AD5001B63E2 /* Parser.swift */; };
+		3A5BD7321FC1A7C40039ADC6 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BD7311FC1A7C40039ADC6 /* NetworkClient.swift */; };
+		3A5BD7361FC1BD6B0039ADC6 /* NetworkEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BD7351FC1BD6B0039ADC6 /* NetworkEntities.swift */; };
+		3ADE0EA01FC089F700A55AD2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE0E9F1FC089F700A55AD2 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A52ED8A1FC98B5A006FDA27 /* DateFormatterConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterConfigurator.swift; sourceTree = "<group>"; };
+		3A53227B1FC8A01A003F1F6B /* FilmTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmTitleCell.swift; sourceTree = "<group>"; };
+		3A53227C1FC8A01A003F1F6B /* FilmTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilmTitleCell.xib; sourceTree = "<group>"; };
+		3A5A76891FC303D4001B63E2 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		3A5A768B1FC32AD5001B63E2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		3A5BD7311FC1A7C40039ADC6 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		3A5BD7351FC1BD6B0039ADC6 /* NetworkEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEntities.swift; sourceTree = "<group>"; };
+		3ADE0E9F1FC089F700A55AD2 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +70,54 @@
 		11396C641FBDB6D2008C570F /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
-				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
-				11396C671FBDB6D2008C570F /* ViewController.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
+				3A7B4D411FC9B097003D4E3E /* Controller */,
+				3A5BD7381FC1C0620039ADC6 /* Data */,
+				3A5BD7371FC1BD780039ADC6 /* Networking */,
+				3A7B4D421FC9B0CA003D4E3E /* Cells */,
+				3A52ED8A1FC98B5A006FDA27 /* DateFormatterConfigurator.swift */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
+				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
 			);
 			path = StarWars;
+			sourceTree = "<group>";
+		};
+		3A5BD7371FC1BD780039ADC6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3A5BD7311FC1A7C40039ADC6 /* NetworkClient.swift */,
+				3A5BD7351FC1BD6B0039ADC6 /* NetworkEntities.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3A5BD7381FC1C0620039ADC6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE0E9F1FC089F700A55AD2 /* DataManager.swift */,
+				3A5A76891FC303D4001B63E2 /* Entities.swift */,
+				3A5A768B1FC32AD5001B63E2 /* Parser.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3A7B4D411FC9B097003D4E3E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				11396C671FBDB6D2008C570F /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3A7B4D421FC9B0CA003D4E3E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3A53227B1FC8A01A003F1F6B /* FilmTitleCell.swift */,
+				3A53227C1FC8A01A003F1F6B /* FilmTitleCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */,
+				3A53227E1FC8A01A003F1F6B /* FilmTitleCell.xib in Resources */,
 				11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */,
 				11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */,
 			);
@@ -136,7 +193,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		11396C771FBDB8FA008C570F /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -160,7 +217,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,8 +226,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ADE0EA01FC089F700A55AD2 /* DataManager.swift in Sources */,
+				3A52ED8B1FC98B5A006FDA27 /* DateFormatterConfigurator.swift in Sources */,
+				3A53227D1FC8A01A003F1F6B /* FilmTitleCell.swift in Sources */,
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
+				3A5A768C1FC32AD5001B63E2 /* Parser.swift in Sources */,
+				3A5BD7321FC1A7C40039ADC6 /* NetworkClient.swift in Sources */,
+				3A5A768A1FC303D4001B63E2 /* Entities.swift in Sources */,
+				3A5BD7361FC1BD6B0039ADC6 /* NetworkEntities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +372,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				DEVELOPMENT_TEAM = YJ66LV4LL7;
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -324,7 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				DEVELOPMENT_TEAM = YJ66LV4LL7;
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
