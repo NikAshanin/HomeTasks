@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A3FED9C1FC6FFEC003084E2 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3FED9A1FC6FFEB003084E2 /* Stack.swift */; };
+		2A3FED9D1FC6FFEC003084E2 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3FED9B1FC6FFEC003084E2 /* Calculator.swift */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
 		7FF582571FBDA7E90009B9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582551FBDA7E90009B9BD /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A3FED9A1FC6FFEB003084E2 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		2A3FED9B1FC6FFEC003084E2 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
+				2A3FED9B1FC6FFEC003084E2 /* Calculator.swift */,
+				2A3FED9A1FC6FFEB003084E2 /* Stack.swift */,
 				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
 				7FF582551FBDA7E90009B9BD /* Main.storyboard */,
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
@@ -75,7 +81,6 @@
 				7FF5824B1FBDA7E90009B9BD /* Frameworks */,
 				7FF5824C1FBDA7E90009B9BD /* Resources */,
 				7FF582631FBDA8070009B9BD /* Swiftlint */,
-				7FF582641FBDA80D0009B9BD /* CPD */,
 			);
 			buildRules = (
 			);
@@ -147,20 +152,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		7FF582641FBDA80D0009B9BD /* CPD */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = CPD;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -169,6 +160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
+				2A3FED9D1FC6FFEC003084E2 /* Calculator.swift in Sources */,
+				2A3FED9C1FC6FFEC003084E2 /* Stack.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +340,7 @@
 				7FF582621FBDA7E90009B9BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
