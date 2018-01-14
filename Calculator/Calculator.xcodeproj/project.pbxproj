@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A5322731FC8092F003F1F6B /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5322721FC8092F003F1F6B /* Operations.swift */; };
+		3A5322751FC839FB003F1F6B /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5322741FC839FB003F1F6B /* Formatter.swift */; };
+		3A5322771FC84F92003F1F6B /* PendingBinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5322761FC84F92003F1F6B /* PendingBinaryOperation.swift */; };
+		3A6149831FC0614F0017F812 /* DescriptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6149811FC0614E0017F812 /* DescriptionHandler.swift */; };
+		3A6149841FC0614F0017F812 /* CalculatorProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6149821FC0614E0017F812 /* CalculatorProcessor.swift */; };
+		3A6149861FC061580017F812 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6149851FC061580017F812 /* RoundedButton.swift */; };
+		3A6149881FC061600017F812 /* Double+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6149871FC061600017F812 /* Double+Helpers.swift */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
 		7FF582571FBDA7E90009B9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582551FBDA7E90009B9BD /* Main.storyboard */; };
@@ -15,6 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A5322721FC8092F003F1F6B /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		3A5322741FC839FB003F1F6B /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		3A5322761FC84F92003F1F6B /* PendingBinaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingBinaryOperation.swift; sourceTree = "<group>"; };
+		3A6149811FC0614E0017F812 /* DescriptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionHandler.swift; sourceTree = "<group>"; };
+		3A6149821FC0614E0017F812 /* CalculatorProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorProcessor.swift; sourceTree = "<group>"; };
+		3A6149851FC061580017F812 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		3A6149871FC061600017F812 /* Double+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Helpers.swift"; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +49,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A5322711FC7FF68003F1F6B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3ADE0E961FC064A400A55AD2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A6149821FC0614E0017F812 /* CalculatorProcessor.swift */,
+				3A6149811FC0614E0017F812 /* DescriptionHandler.swift */,
+				3A5322741FC839FB003F1F6B /* Formatter.swift */,
+				3A5322721FC8092F003F1F6B /* Operations.swift */,
+				3A5322761FC84F92003F1F6B /* PendingBinaryOperation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3ADE0E971FC064B500A55AD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A6149851FC061580017F812 /* RoundedButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3ADE0E981FC064BE00A55AD2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A6149871FC061600017F812 /* Double+Helpers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7FF582451FBDA7E90009B9BD = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +104,15 @@
 		7FF582501FBDA7E90009B9BD /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
-				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
 				7FF582551FBDA7E90009B9BD /* Main.storyboard */,
+				3A5322711FC7FF68003F1F6B /* Controllers */,
+				3ADE0E961FC064A400A55AD2 /* Model */,
+				3ADE0E971FC064B500A55AD2 /* View */,
+				3ADE0E981FC064BE00A55AD2 /* Extensions */,
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
 				7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */,
 				7FF5825D1FBDA7E90009B9BD /* Info.plist */,
+				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -159,7 +212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,6 +222,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
+				3A6149861FC061580017F812 /* RoundedButton.swift in Sources */,
+				3A6149881FC061600017F812 /* Double+Helpers.swift in Sources */,
+				3A5322731FC8092F003F1F6B /* Operations.swift in Sources */,
+				3A6149831FC0614F0017F812 /* DescriptionHandler.swift in Sources */,
+				3A6149841FC0614F0017F812 /* CalculatorProcessor.swift in Sources */,
+				3A5322771FC84F92003F1F6B /* PendingBinaryOperation.swift in Sources */,
+				3A5322751FC839FB003F1F6B /* Formatter.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,11 +362,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = YJ66LV4LL7;
 				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = epam.Calculator;
+				PRODUCT_BUNDLE_IDENTIFIER = epam.Calculator.antonkliukin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -317,11 +377,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = YJ66LV4LL7;
 				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = epam.Calculator;
+				PRODUCT_BUNDLE_IDENTIFIER = epam.Calculator.antonkliukin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -347,6 +407,7 @@
 				7FF582621FBDA7E90009B9BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
