@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		673631F41FDF1A4800F1E7E4 /* CalculateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673631F31FDF1A4800F1E7E4 /* CalculateService.swift */; };
+		6736A1681FE50D6B001143A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6736A1661FE50D6B001143A9 /* Main.storyboard */; };
+		673975CE1FC6E70A00872C80 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673975CD1FC6E70A00872C80 /* Stack.swift */; };
 		7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582511FBDA7E90009B9BD /* AppDelegate.swift */; };
 		7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */; };
-		7FF582571FBDA7E90009B9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582551FBDA7E90009B9BD /* Main.storyboard */; };
 		7FF582591FBDA7E90009B9BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF582581FBDA7E90009B9BD /* Assets.xcassets */; };
 		7FF5825C1FBDA7E90009B9BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		673631F31FDF1A4800F1E7E4 /* CalculateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = CalculateService.swift; path = calculator/CalculateService.swift; sourceTree = SOURCE_ROOT; tabWidth = 4; };
+		6736A1671FE50D6B001143A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../../EPAM-hw/calculator 2/calculator/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		673975CD1FC6E70A00872C80 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		7FF5824E1FBDA7E90009B9BD /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF582511FBDA7E90009B9BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
-		7FF582561FBDA7E90009B9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		7FF582581FBDA7E90009B9BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FF5825B1FBDA7E90009B9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FF5825D1FBDA7E90009B9BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,9 +58,11 @@
 		7FF582501FBDA7E90009B9BD /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				673975CD1FC6E70A00872C80 /* Stack.swift */,
 				7FF582511FBDA7E90009B9BD /* AppDelegate.swift */,
 				7FF582531FBDA7E90009B9BD /* CalculatorViewController.swift */,
-				7FF582551FBDA7E90009B9BD /* Main.storyboard */,
+				673631F31FDF1A4800F1E7E4 /* CalculateService.swift */,
+				6736A1661FE50D6B001143A9 /* Main.storyboard */,
 				7FF582581FBDA7E90009B9BD /* Assets.xcassets */,
 				7FF5825A1FBDA7E90009B9BD /* LaunchScreen.storyboard */,
 				7FF5825D1FBDA7E90009B9BD /* Info.plist */,
@@ -93,7 +99,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = epam;
 				TargetAttributes = {
 					7FF5824D1FBDA7E90009B9BD = {
@@ -101,7 +107,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7FF582491FBDA7E90009B9BD /* Build configuration list for PBXProject "Calculator" */;
+			buildConfigurationList = 7FF582491FBDA7E90009B9BD /* Build configuration list for PBXProject "calculator" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -124,9 +130,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6736A1681FE50D6B001143A9 /* Main.storyboard in Resources */,
 				7FF5825C1FBDA7E90009B9BD /* LaunchScreen.storyboard in Resources */,
 				7FF582591FBDA7E90009B9BD /* Assets.xcassets in Resources */,
-				7FF582571FBDA7E90009B9BD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +141,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		7FF582631FBDA8070009B9BD /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -149,7 +155,7 @@
 		};
 		7FF582641FBDA80D0009B9BD /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -159,7 +165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -168,6 +174,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				673975CE1FC6E70A00872C80 /* Stack.swift in Sources */,
+				673631F41FDF1A4800F1E7E4 /* CalculateService.swift in Sources */,
 				7FF582541FBDA7E90009B9BD /* CalculatorViewController.swift in Sources */,
 				7FF582521FBDA7E90009B9BD /* AppDelegate.swift in Sources */,
 			);
@@ -176,10 +184,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7FF582551FBDA7E90009B9BD /* Main.storyboard */ = {
+		6736A1661FE50D6B001143A9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7FF582561FBDA7E90009B9BD /* Base */,
+				6736A1671FE50D6B001143A9 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -215,6 +223,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -270,6 +280,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -302,7 +314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = 5FN5QZGXTM;
 				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -317,7 +329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = 5FN5QZGXTM;
 				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -331,7 +343,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7FF582491FBDA7E90009B9BD /* Build configuration list for PBXProject "Calculator" */ = {
+		7FF582491FBDA7E90009B9BD /* Build configuration list for PBXProject "calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7FF5825E1FBDA7E90009B9BD /* Debug */,
@@ -347,6 +359,7 @@
 				7FF582621FBDA7E90009B9BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
