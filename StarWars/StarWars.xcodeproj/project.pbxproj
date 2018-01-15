@@ -12,6 +12,10 @@
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		5250F16E1FE02CD1009BEBBA /* SwapiDataReciever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5250F16D1FE02CD1009BEBBA /* SwapiDataReciever.swift */; };
+		52674C331FC42F5B0088C415 /* WebsiteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52674C301FC42F5B0088C415 /* WebsiteTableViewCell.swift */; };
+		52674C341FC42F5B0088C415 /* SwapiRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52674C311FC42F5B0088C415 /* SwapiRequester.swift */; };
+		52674C351FC42F5B0088C415 /* SwapiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52674C321FC42F5B0088C415 /* SwapiData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5250F16D1FE02CD1009BEBBA /* SwapiDataReciever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapiDataReciever.swift; sourceTree = "<group>"; };
+		52674C301FC42F5B0088C415 /* WebsiteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebsiteTableViewCell.swift; sourceTree = "<group>"; };
+		52674C311FC42F5B0088C415 /* SwapiRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwapiRequester.swift; sourceTree = "<group>"; };
+		52674C321FC42F5B0088C415 /* SwapiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwapiData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +62,12 @@
 		11396C641FBDB6D2008C570F /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
+				52674C321FC42F5B0088C415 /* SwapiData.swift */,
+				52674C311FC42F5B0088C415 /* SwapiRequester.swift */,
+				52674C301FC42F5B0088C415 /* WebsiteTableViewCell.swift */,
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
 				11396C671FBDB6D2008C570F /* ViewController.swift */,
+				5250F16D1FE02CD1009BEBBA /* SwapiDataReciever.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
@@ -160,7 +172,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nif [[ -f ./common_strings/cpd_script.php ]] ; then\n php ./common_strings/cpd_script.php -cpd-xml cpd-output.xml ;\nelse\n php ./cpd_script.php -cpd-xml cpd-output.xml ;\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -170,7 +182,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				5250F16E1FE02CD1009BEBBA /* SwapiDataReciever.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
+				52674C351FC42F5B0088C415 /* SwapiData.swift in Sources */,
+				52674C331FC42F5B0088C415 /* WebsiteTableViewCell.swift in Sources */,
+				52674C341FC42F5B0088C415 /* SwapiRequester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
