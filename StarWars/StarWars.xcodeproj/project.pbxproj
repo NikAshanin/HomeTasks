@@ -12,6 +12,8 @@
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		270B4FA11FE7E04000B1C4B6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B4FA01FE7E04000B1C4B6 /* NetworkService.swift */; };
+		2784833A1FCC44A1005C652F /* SwapiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278483391FCC44A1005C652F /* SwapiData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		270B4FA01FE7E04000B1C4B6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		278483391FCC44A1005C652F /* SwapiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapiData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
+				270B4FA01FE7E04000B1C4B6 /* NetworkService.swift */,
+				278483391FCC44A1005C652F /* SwapiData.swift */,
 				11396C671FBDB6D2008C570F /* ViewController.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
@@ -74,8 +80,8 @@
 				11396C5E1FBDB6D2008C570F /* Sources */,
 				11396C5F1FBDB6D2008C570F /* Frameworks */,
 				11396C601FBDB6D2008C570F /* Resources */,
-				11396C771FBDB8FA008C570F /* Swiftlint */,
 				11396C781FBDB916008C570F /* CPD */,
+				2784833B1FCC4F1E005C652F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -134,23 +140,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11396C771FBDB8FA008C570F /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
 		11396C781FBDB916008C570F /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -160,7 +152,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = " # Running script\n\nif [[ -f ./common_strings/cpd_script.php ]] ; then\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml ;\nelse\nphp ./cpd_script.php -cpd-xml cpd-output.xml ;\nfi\n\n";
+		};
+		2784833B1FCC4F1E005C652F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -170,6 +175,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				2784833A1FCC44A1005C652F /* SwapiData.swift in Sources */,
+				270B4FA11FE7E04000B1C4B6 /* NetworkService.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,11 +315,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				DEVELOPMENT_TEAM = 7LT752HSAG;
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.StarWars;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucky.StarWars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -324,11 +331,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				DEVELOPMENT_TEAM = 7LT752HSAG;
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.StarWars;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucky.StarWars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
