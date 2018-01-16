@@ -8,20 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C651FBDB6D2008C570F /* AppDelegate.swift */; };
-		11396C681FBDB6D2008C570F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* ViewController.swift */; };
+		11396C681FBDB6D2008C570F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11396C671FBDB6D2008C570F /* SearchViewController.swift */; };
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		491207081FCCB1410069EA5D /* UIColor+ErrorColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491207071FCCB1410069EA5D /* UIColor+ErrorColors.swift */; };
+		4934ADB31FCCA87400625E42 /* BaseDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934ADB21FCCA87400625E42 /* BaseDateFormatter.swift */; };
+		4934BDE91FC1C61200D22471 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934BDE81FC1C61200D22471 /* Film.swift */; };
+		498789851FC33D4E00E7A0C9 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498789841FC33D4E00E7A0C9 /* Character.swift */; };
+		7FC805C61FC86B6C00C526B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC805C51FC86B6C00C526B7 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		11396C621FBDB6D2008C570F /* StarWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11396C651FBDB6D2008C570F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11396C671FBDB6D2008C570F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		11396C671FBDB6D2008C570F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		11396C6A1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		491207071FCCB1410069EA5D /* UIColor+ErrorColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ErrorColors.swift"; sourceTree = "<group>"; };
+		4934ADB21FCCA87400625E42 /* BaseDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDateFormatter.swift; sourceTree = "<group>"; };
+		4934BDE81FC1C61200D22471 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		498789841FC33D4E00E7A0C9 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		7FC805C51FC86B6C00C526B7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +64,43 @@
 		11396C641FBDB6D2008C570F /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
+				491207061FCCB1270069EA5D /* Extensions */,
+				7FC805C81FC8787800C526B7 /* Models */,
+				7FC805C71FC86B6F00C526B7 /* Services */,
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
-				11396C671FBDB6D2008C570F /* ViewController.swift */,
+				11396C671FBDB6D2008C570F /* SearchViewController.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
+				4934ADB21FCCA87400625E42 /* BaseDateFormatter.swift */,
 			);
 			path = StarWars;
+			sourceTree = "<group>";
+		};
+		491207061FCCB1270069EA5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				491207071FCCB1410069EA5D /* UIColor+ErrorColors.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7FC805C71FC86B6F00C526B7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7FC805C51FC86B6C00C526B7 /* NetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7FC805C81FC8787800C526B7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4934BDE81FC1C61200D22471 /* Film.swift */,
+				498789841FC33D4E00E7A0C9 /* Character.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,7 +114,7 @@
 				11396C5F1FBDB6D2008C570F /* Frameworks */,
 				11396C601FBDB6D2008C570F /* Resources */,
 				11396C771FBDB8FA008C570F /* Swiftlint */,
-				11396C781FBDB916008C570F /* CPD */,
+				491207091FCCB8900069EA5D /* CPD */,
 			);
 			buildRules = (
 			);
@@ -148,7 +187,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		11396C781FBDB916008C570F /* CPD */ = {
+		491207091FCCB8900069EA5D /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -160,7 +199,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,8 +208,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				491207081FCCB1410069EA5D /* UIColor+ErrorColors.swift in Sources */,
+				4934BDE91FC1C61200D22471 /* Film.swift in Sources */,
+				498789851FC33D4E00E7A0C9 /* Character.swift in Sources */,
+				7FC805C61FC86B6C00C526B7 /* NetworkService.swift in Sources */,
+				11396C681FBDB6D2008C570F /* SearchViewController.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
+				4934ADB31FCCA87400625E42 /* BaseDateFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +359,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.StarWars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -331,7 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.StarWars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
