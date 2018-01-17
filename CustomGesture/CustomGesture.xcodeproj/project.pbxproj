@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F357CBB1FBE0C04008E93A0 /* OLetterRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F357CB81FBE0C04008E93A0 /* OLetterRecognizer.swift */; };
+		5FAF78B01FEAA1DB00AE6C53 /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF78AF1FEAA1DA00AE6C53 /* Ellipse.swift */; };
+		5FAF78B21FEAED4800AE6C53 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF78B11FEAED4800AE6C53 /* Direction.swift */; };
+		5FAF78B41FEB0C5900AE6C53 /* ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FAF78B31FEB0C5900AE6C53 /* ellipse.png */; };
 		7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26801FBB3669008A981B /* AppDelegate.swift */; };
 		7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C26821FBB3669008A981B /* GestureViewController.swift */; };
 		7F6C26861FBB3669008A981B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6C26841FBB3669008A981B /* Main.storyboard */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F357CB81FBE0C04008E93A0 /* OLetterRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLetterRecognizer.swift; sourceTree = "<group>"; };
+		5FAF78AF1FEAA1DA00AE6C53 /* Ellipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ellipse.swift; sourceTree = "<group>"; };
+		5FAF78B11FEAED4800AE6C53 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		5FAF78B31FEB0C5900AE6C53 /* ellipse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ellipse.png; sourceTree = "<group>"; };
 		7F6C267D1FBB3669008A981B /* CustomGesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomGesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6C26801FBB3669008A981B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F6C26821FBB3669008A981B /* GestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
@@ -54,12 +62,16 @@
 		7F6C267F1FBB3669008A981B /* CustomGesture */ = {
 			isa = PBXGroup;
 			children = (
-				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26821FBB3669008A981B /* GestureViewController.swift */,
+				5F357CB81FBE0C04008E93A0 /* OLetterRecognizer.swift */,
+				7F6C26801FBB3669008A981B /* AppDelegate.swift */,
 				7F6C26841FBB3669008A981B /* Main.storyboard */,
+				5FAF78B31FEB0C5900AE6C53 /* ellipse.png */,
 				7F6C26871FBB3669008A981B /* Assets.xcassets */,
 				7F6C26891FBB3669008A981B /* LaunchScreen.storyboard */,
 				7F6C268C1FBB3669008A981B /* Info.plist */,
+				5FAF78AF1FEAA1DA00AE6C53 /* Ellipse.swift */,
+				5FAF78B11FEAED4800AE6C53 /* Direction.swift */,
 			);
 			path = CustomGesture;
 			sourceTree = "<group>";
@@ -93,12 +105,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = epam;
 				TargetAttributes = {
 					7F6C267C1FBB3668008A981B = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -125,6 +137,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FAF78B41FEB0C5900AE6C53 /* ellipse.png in Resources */,
 				7F6C268B1FBB3669008A981B /* LaunchScreen.storyboard in Resources */,
 				7F6C26881FBB3669008A981B /* Assets.xcassets in Resources */,
 				7F6C26861FBB3669008A981B /* Main.storyboard in Resources */,
@@ -160,7 +173,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./cpd_script.php -cpd-xml cpd-output.xml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,7 +182,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F357CBB1FBE0C04008E93A0 /* OLetterRecognizer.swift in Sources */,
 				7F6C26831FBB3669008A981B /* GestureViewController.swift in Sources */,
+				5FAF78B01FEAA1DB00AE6C53 /* Ellipse.swift in Sources */,
+				5FAF78B21FEAED4800AE6C53 /* Direction.swift in Sources */,
 				7F6C26811FBB3669008A981B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +232,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -271,6 +289,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -303,15 +323,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = YYYXHQZUCC;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2Q4W4464ZT;
 				INFOPLIST_FILE = CustomGesture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.source.faces;
+				PRODUCT_BUNDLE_IDENTIFIER = epam.Gesture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dc581df0-975c-4f6e-82f6-8e1002ed793d";
-				PROVISIONING_PROFILE_SPECIFIER = "Faces Development Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -321,12 +342,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2Q4W4464ZT;
 				INFOPLIST_FILE = CustomGesture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.source.faces;
+				PRODUCT_BUNDLE_IDENTIFIER = epam.Gesture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
