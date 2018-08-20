@@ -12,6 +12,15 @@
 		11396C6B1FBDB6D2008C570F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C691FBDB6D2008C570F /* Main.storyboard */; };
 		11396C6D1FBDB6D2008C570F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6C1FBDB6D2008C570F /* Assets.xcassets */; };
 		11396C701FBDB6D2008C570F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */; };
+		7813CA051FDF08F7009C3CEE /* StarwarsPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813CA041FDF08F7009C3CEE /* StarwarsPresentation.swift */; };
+		7813CA0B1FDF0923009C3CEE /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813CA071FDF0922009C3CEE /* RxCocoa.framework */; };
+		7813CA0D1FDF0923009C3CEE /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813CA091FDF0922009C3CEE /* RxSwift.framework */; };
+		7813CA141FDF0B23009C3CEE /* StarwarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813CA131FDF0B23009C3CEE /* StarwarsPresenter.swift */; };
+		7813CA181FDF11CD009C3CEE /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813CA171FDF11CD009C3CEE /* Film.swift */; };
+		7813CA1A1FDF1357009C3CEE /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813CA191FDF1357009C3CEE /* RxAlamofire.framework */; };
+		7813CA1C1FDF143C009C3CEE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7813CA1B1FDF143C009C3CEE /* Constant.swift */; };
+		7813CA1E1FDF23A0009C3CEE /* RxOptional.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813CA1D1FDF23A0009C3CEE /* RxOptional.framework */; };
+		78DB74E81FDF54CF00F32B52 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813CA081FDF0922009C3CEE /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +31,15 @@
 		11396C6C1FBDB6D2008C570F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11396C6F1FBDB6D2008C570F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11396C711FBDB6D2008C570F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7813CA041FDF08F7009C3CEE /* StarwarsPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsPresentation.swift; sourceTree = "<group>"; };
+		7813CA071FDF0922009C3CEE /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		7813CA081FDF0922009C3CEE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		7813CA091FDF0922009C3CEE /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		7813CA131FDF0B23009C3CEE /* StarwarsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsPresenter.swift; sourceTree = "<group>"; };
+		7813CA171FDF11CD009C3CEE /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		7813CA191FDF1357009C3CEE /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
+		7813CA1B1FDF143C009C3CEE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		7813CA1D1FDF23A0009C3CEE /* RxOptional.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxOptional.framework; path = Carthage/Build/iOS/RxOptional.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +47,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78DB74E81FDF54CF00F32B52 /* Alamofire.framework in Frameworks */,
+				7813CA1E1FDF23A0009C3CEE /* RxOptional.framework in Frameworks */,
+				7813CA1A1FDF1357009C3CEE /* RxAlamofire.framework in Frameworks */,
+				7813CA0B1FDF0923009C3CEE /* RxCocoa.framework in Frameworks */,
+				7813CA0D1FDF0923009C3CEE /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +63,7 @@
 			children = (
 				11396C641FBDB6D2008C570F /* StarWars */,
 				11396C631FBDB6D2008C570F /* Products */,
+				7813CA061FDF0922009C3CEE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +78,86 @@
 		11396C641FBDB6D2008C570F /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
+				78DB74E71FDF53D400F32B52 /* Constant */,
+				78DB74E51FDF53BF00F32B52 /* Model */,
+				7813CA111FDF0ACC009C3CEE /* Module */,
 				11396C651FBDB6D2008C570F /* AppDelegate.swift */,
-				11396C671FBDB6D2008C570F /* ViewController.swift */,
 				11396C691FBDB6D2008C570F /* Main.storyboard */,
 				11396C6C1FBDB6D2008C570F /* Assets.xcassets */,
 				11396C6E1FBDB6D2008C570F /* LaunchScreen.storyboard */,
 				11396C711FBDB6D2008C570F /* Info.plist */,
 			);
 			path = StarWars;
+			sourceTree = "<group>";
+		};
+		7813CA061FDF0922009C3CEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA1D1FDF23A0009C3CEE /* RxOptional.framework */,
+				7813CA191FDF1357009C3CEE /* RxAlamofire.framework */,
+				7813CA081FDF0922009C3CEE /* Alamofire.framework */,
+				7813CA071FDF0922009C3CEE /* RxCocoa.framework */,
+				7813CA091FDF0922009C3CEE /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7813CA101FDF0AC0009C3CEE /* Starwars */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA161FDF119C009C3CEE /* View */,
+				7813CA121FDF0B02009C3CEE /* Contract */,
+				7813CA151FDF1191009C3CEE /* Presenter */,
+			);
+			path = Starwars;
+			sourceTree = "<group>";
+		};
+		7813CA111FDF0ACC009C3CEE /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA101FDF0AC0009C3CEE /* Starwars */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		7813CA121FDF0B02009C3CEE /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA041FDF08F7009C3CEE /* StarwarsPresentation.swift */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		7813CA151FDF1191009C3CEE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA131FDF0B23009C3CEE /* StarwarsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7813CA161FDF119C009C3CEE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11396C671FBDB6D2008C570F /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		78DB74E51FDF53BF00F32B52 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA171FDF11CD009C3CEE /* Film.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		78DB74E71FDF53D400F32B52 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				7813CA1B1FDF143C009C3CEE /* Constant.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -76,6 +172,7 @@
 				11396C601FBDB6D2008C570F /* Resources */,
 				11396C771FBDB8FA008C570F /* Swiftlint */,
 				11396C781FBDB916008C570F /* CPD */,
+				7813CA201FDF24B0009C3CEE /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,7 +233,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		11396C771FBDB8FA008C570F /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -150,7 +247,7 @@
 		};
 		11396C781FBDB916008C570F /* CPD */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -158,9 +255,28 @@
 			name = CPD;
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Running CPD\npmd cpd --files ${EXECUTABLE_NAME} --minimum-tokens 50 --language swift --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer > cpd-output.xml --failOnViolation true\n\n# Running script\nphp ./common_strings/cpd_script.php -cpd-xml cpd-output.xml";
+		};
+		7813CA201FDF24B0009C3CEE /* Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxOptional.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxAlamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			name = "Copy Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -169,8 +285,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7813CA181FDF11CD009C3CEE /* Film.swift in Sources */,
 				11396C681FBDB6D2008C570F /* ViewController.swift in Sources */,
+				7813CA141FDF0B23009C3CEE /* StarwarsPresenter.swift in Sources */,
+				7813CA051FDF08F7009C3CEE /* StarwarsPresentation.swift in Sources */,
 				11396C661FBDB6D2008C570F /* AppDelegate.swift in Sources */,
+				7813CA1C1FDF143C009C3CEE /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +429,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -325,6 +449,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NRJ5W5TPS;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = StarWars/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
